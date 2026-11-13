@@ -461,6 +461,55 @@ body.locked .fab,body.locked #btimer,body.locked #btMenu{display:none!important}
 .btmenu b{grid-column:1/-1;font-weight:800}
 @media (max-width:640px){.bdf{grid-template-columns:1fr 70px 110px}.wheel3d{width:260px;height:260px}.lever{display:none}.nav button{flex:1;padding:10px 8px;font-size:13px}}
 
+
+/* ================= AI-АССИСТЕНТ ================= */
+#aiFab{position:fixed;right:18px;bottom:18px;z-index:47;width:60px;height:60px;border-radius:50%;border:0;cursor:pointer;font-size:26px;color:#fff;padding:0;
+ background:none;box-shadow:0 12px 30px -6px rgba(139,92,246,.7);transition:transform .2s;isolation:isolate}
+#aiFab:before{content:"";position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,#ff3d8b,#8b5cf6,#21e6c1,#ffc94a,#ff3d8b);animation:aiSpin 4s linear infinite;z-index:-1}
+#aiFab span{display:grid;place-items:center;width:52px;height:52px;margin:4px;border-radius:50%;background:var(--sticky)}
+#aiFab:hover{transform:scale(1.08)}#aiFab.on{transform:scale(.92)}
+@keyframes aiSpin{to{transform:rotate(360deg)}}
+body.locked #aiFab,body.locked #aiPanel{display:none!important}
+#aiPanel{position:fixed;right:18px;bottom:90px;z-index:48;width:min(420px,calc(100vw - 24px));height:min(620px,calc(100vh - 120px));display:flex;flex-direction:column;border-radius:24px;background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow),0 0 40px rgba(139,92,246,.25);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);overflow:hidden;animation:aiIn .45s cubic-bezier(.2,1.2,.4,1);transform-origin:100% 100%}
+@keyframes aiIn{from{opacity:0;transform:perspective(900px) rotateX(20deg) scale(.85)}to{opacity:1;transform:none}}
+.ai-h{display:flex;align-items:center;gap:10px;padding:14px 14px 12px;border-bottom:1px solid var(--line);background:linear-gradient(135deg,color-mix(in srgb,var(--acc) 18%,transparent),color-mix(in srgb,#8b5cf6 18%,transparent))}
+.ai-h b{font-family:Unbounded;font-size:15px;display:block}
+.ai-h small{color:var(--mut);font-weight:700;font-size:11px}
+.ai-h .sp{flex:1}
+.ai-h button{border:0;background:var(--card2);color:var(--txt);border-radius:10px;width:32px;height:32px;cursor:pointer;font-size:14px}
+.ai-dot{width:34px;height:34px;border-radius:12px;display:grid;place-items:center;font-size:18px;background:conic-gradient(#ff3d8b,#8b5cf6,#21e6c1,#ffc94a,#ff3d8b)}
+#aiChat,#aiSetup{flex:1;display:flex;flex-direction:column;min-height:0}
+#aiMsgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+.aim{position:relative;max-width:88%;padding:10px 13px;border-radius:16px;font-weight:600;font-size:14px;line-height:1.5;word-wrap:break-word;animation:noteIn .35s both}
+.aim.u{align-self:flex-end;background:linear-gradient(135deg,var(--acc),#8b5cf6);color:#fff;border-bottom-right-radius:5px}
+.aim.a{align-self:flex-start;background:var(--card2);border:1px solid var(--line);border-bottom-left-radius:5px;padding-right:30px}
+.aim.e{align-self:stretch;background:color-mix(in srgb,#ff4d6d 15%,transparent);border:1px solid color-mix(in srgb,#ff4d6d 40%,transparent);font-size:13px}
+.aim code{background:rgba(0,0,0,.2);padding:1px 5px;border-radius:5px;font-size:12.5px}
+.aim pre{background:rgba(0,0,0,.25);padding:8px;border-radius:8px;white-space:pre-wrap;font-size:12.5px;margin:6px 0}
+.aicp{position:absolute;top:6px;right:5px;border:0;background:none;cursor:pointer;font-size:12px;opacity:.55}
+.aicp:hover{opacity:1}
+.aim.typing{display:flex;gap:5px;padding:14px 16px}
+.aim.typing i{width:8px;height:8px;border-radius:50%;background:var(--mut);animation:tdot 1s ease-in-out infinite}
+.aim.typing i:nth-child(2){animation-delay:.15s}.aim.typing i:nth-child(3){animation-delay:.3s}
+@keyframes tdot{0%,100%{transform:translateY(0);opacity:.4}50%{transform:translateY(-5px);opacity:1}}
+.ai-hi{margin:auto 0;text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--mut);font-weight:700;font-size:13px;padding:10px}
+.ai-hi b{color:var(--txt);font-size:16px}
+.ai-orb{width:74px;height:74px;border-radius:50%;margin-bottom:8px;background:radial-gradient(circle at 35% 30%,#fff 0,#ff9cd0 18%,#8b5cf6 50%,#21e6c1 85%);box-shadow:0 0 40px rgba(139,92,246,.6);animation:orb 4s ease-in-out infinite}
+@keyframes orb{50%{transform:scale(1.08) rotate(20deg);filter:hue-rotate(40deg)}}
+#aiQuick{display:flex;gap:6px;overflow-x:auto;padding:0 12px 8px;scrollbar-width:none}
+#aiQuick button{flex:none;border:1px solid var(--line);background:var(--card2);border-radius:20px;padding:7px 11px;font-weight:800;font-size:12px;cursor:pointer;white-space:nowrap}
+#aiQuick button:hover{border-color:var(--acc)}
+#aiForm{display:flex;gap:8px;padding:10px 12px 12px;border-top:1px solid var(--line)}
+#aiIn{flex:1;resize:none;height:44px;max-height:120px;font-size:14px}
+#aiSend{width:44px;height:44px;border-radius:14px;border:0;cursor:pointer;font-size:18px;color:#fff;background:linear-gradient(135deg,var(--acc),#8b5cf6)}
+#aiSend:disabled{opacity:.5}
+#aiSetup{padding:16px;overflow-y:auto;gap:10px;font-size:13.5px;font-weight:600;line-height:1.5}
+#aiSetup ol{margin:0;padding-left:20px}#aiSetup li{margin:4px 0}
+#aiSetup a{color:var(--acc);font-weight:800}
+#aiKeyForm{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+#aiKeyMsg{color:#ff4d6d;font-weight:800;font-size:12.5px;min-height:16px}
+@media (max-width:640px){#aiPanel{right:12px;bottom:84px;height:calc(100vh - 110px)}#aiFab{right:12px;bottom:12px}}
+
 /* ================= ВХОД ================= */
 body.locked .wrap,body.locked footer,body.locked #toasts{display:none}
 #login{position:fixed;inset:0;z-index:40;display:none;align-items:center;justify-content:center;padding:20px}
@@ -684,6 +733,33 @@ footer{position:relative;z-index:1;text-align:center;color:var(--mut);font-size:
  </div>
 </div>
 <div id="toasts"></div>
+<button id="aiFab" title="AI-ассистент"><span>🤖</span></button>
+<div id="aiPanel" hidden>
+ <div class="ai-h"><div class="ai-dot">✨</div><div><b>AI-ассистент</b><small id="aiModel">Gemini</small></div><span class="sp"></span><button id="aiClear" title="Новый чат">🧹</button><button id="aiGear" title="Настройки">⚙️</button><button id="aiClose" title="Закрыть">✕</button></div>
+ <div id="aiChat" hidden>
+  <div id="aiMsgs"></div>
+  <div id="aiQuick">
+   <button data-q="Кто сейчас на перерыве и кто следующий?">☕ Кто на перерыве?</button>
+   <button data-q="Подскажи свободное время для моего обеда в текущей смене, чтобы ни с кем не пересечься.">🍽️ Когда мне обед?</button>
+   <button data-q="Составь вежливый ответ клиенту: вывод средств задерживается, мы проверяем.">💸 Ответ про вывод</button>
+   <button data-q="Кратко перескажи важные заметки смены.">📌 Что важного?</button>
+   <button data-q="Переведи мой следующий текст на английский и турецкий.">🌐 Перевод</button>
+  </div>
+  <form id="aiForm"><textarea class="in" id="aiIn" placeholder="Спроси что-нибудь… (Enter — отправить)" maxlength="4000"></textarea><button id="aiSend" title="Отправить">➤</button></form>
+ </div>
+ <div id="aiSetup" hidden>
+  <div style="font-size:15px;font-weight:800">🔑 Подключи бесплатный Gemini</div>
+  <div>Нужно один раз — потом ассистент заработает у всей команды.</div>
+  <ol>
+   <li>Открой <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a> и войди через Google.</li>
+   <li>Нажми <b>Create API key</b> (если спросит проект — выбери <b>smena</b> или создай новый).</li>
+   <li>Скопируй ключ (начинается на <code>AIza…</code>) и вставь ниже.</li>
+  </ol>
+  <div class="muted" style="font-size:12px">Ключ хранится в вашей закрытой базе — его видят только вошедшие по паролю. Бесплатный тариф: без карты, но с лимитом запросов в минуту/день.</div>
+  <form id="aiKeyForm"><input class="in" id="aiKeyIn" placeholder="AIza…" autocomplete="off"><button class="btn pri">Подключить</button><div id="aiKeyMsg"></div></form>
+  <button class="btn" id="aiKeyDel" style="margin-top:auto">Отключить ассистента</button>
+ </div>
+</div>
 <canvas id="confetti"></canvas>
 <div id="btimer" hidden><div class="bt-ring"><svg viewBox="0 0 120 120"><defs><linearGradient id="btGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff3d8b"/><stop offset="1" stop-color="#ffc94a"/></linearGradient></defs><circle class="bg" cx="60" cy="60" r="52"/><circle class="fg" id="btFg" cx="60" cy="60" r="52"/></svg><div class="bt-in"><div class="bt-e" id="btE">☕</div><b id="btT">0:00</b></div></div><div class="bt-info"><b id="btL">Перерыв</b><small id="btS">до конца</small><div><button class="link" id="btStop" hidden>Остановить</button></div></div></div>
 <button id="btFab" class="fab" title="Таймер перерыва">⏱</button>
@@ -1668,6 +1744,118 @@ $('logoutBtn').addEventListener('click',function(){
  var b=this;b.setAttribute('data-sure','1');b.textContent='Точно выйти?';setTimeout(function(){b.removeAttribute('data-sure');b.textContent='🚪 Выйти'},3000);
 });
 
+/* ---------- AI-ассистент (Google Gemini) ---------- */
+var AI={msgs:[],busy:false,models:null,model:lsGet('shifthub-ai-model',''),open:false};
+var GAPI='https://generativelanguage.googleapis.com/v1beta/';
+function aiKey(){return (raw&&raw.cfg&&raw.cfg.aiKey)||''}
+function aiEl(id){return document.getElementById(id)}
+function aiMd(t){
+ var h=esc(t);
+ h=h.replace(/```([\s\S]*?)```/g,function(_,c){return '<pre>'+c.replace(/^\w*\n/,'')+'</pre>'});
+ h=h.replace(/`([^`\n]+)`/g,'<code>$1</code>').replace(/\*\*([^*\n]+)\*\*/g,'<b>$1</b>').replace(/(^|\n)#{1,4} ?([^\n]+)/g,'$1<b>$2</b>');
+ h=h.replace(/(^|\n)\s*[\*\-•] /g,'$1• ');
+ return h.replace(/\n/g,'<br>');
+}
+function aiContext(){
+ var n=now(),dn=dispNow(),k=curShift(n),L=[];
+ L.push('Сейчас: время команды '+p2(n.h)+':'+p2(n.m)+' (GMT+3), дата '+bakuDate(0)+'. У пользователя выбран пояс '+offTxt(DISP_OFF)+' ('+p2(dn.h)+':'+p2(dn.m)+'). Все времена ниже даны в поясе пользователя.');
+ L.push('Пользователь: '+(meName()||'не указан')+'. Текущая смена: '+SHIFTS[k].name+' ('+fmt(SHIFTS[k].start,0)+'–'+fmt(SHIFTS[k].start,SLOTS)+').');
+ ['day','night'].forEach(function(s){
+  var d=shiftData(s),S=SHIFTS[s],names={};d.people.forEach(function(p){names[p.id]=p.name});
+  L.push('\n'+S.name+' смена '+fmt(S.start,0)+'–'+fmt(S.start,SLOTS)+'. Люди: '+(d.people.map(function(p){return p.name}).join(', ')||'нет')+'.');
+  var it=d.items.slice().sort(function(a,b){return a.s-b.s});
+  L.push(it.length?it.map(function(x){return '- '+(names[x.p]||'?')+': '+TYPES[x.t].name+' '+fmt(S.start,x.s)+'–'+fmt(S.start,x.s+x.l)}).join('\n'):'- перерывы ещё не расставлены');
+ });
+ var d0=shiftData(k),f=frac(k,n),nm={};d0.people.forEach(function(p){nm[p.id]=p.name});
+ var off=d0.items.filter(function(it){return f>=it.s&&f<it.s+it.l}).map(function(it){return (nm[it.p]||'?')+' ('+TYPES[it.t].name+')'});
+ L.push('\nПрямо сейчас на перерыве/задаче: '+(off.join(', ')||'никого')+'.');
+ L.push('Правило команды: два человека не должны быть на перерыве (обед/перерыв) одновременно; Outbound и 1RedBet Transactions — тоже по одному.');
+ var r=raw&&raw.roster,M=r&&r.text?rosterModel(r):null;
+ if(M&&M.startOk){var col=-1;for(var c=M.ds;c<M.w;c++)if(M.dates[c]&&M.dates[c].iso===bakuDate(0))col=c;
+  if(col>0)L.push('\nРасписание смен на сегодня ('+bakuDate(0)+'): '+M.people.map(function(rw){var v=rw[col]||'',cl=cellCls(v);return rw[0]+' — '+(cl==='c-day'?'день':cl==='c-night'?'ночь':(!v||cl==='c-off')?'выходной':v)}).join('; ')+'.');}
+ var ns=(raw&&raw.notes)||{},nl=Object.keys(ns).map(function(id){return ns[id]}).filter(function(x){return x&&x.text}).sort(function(a,b){return (b.ts||0)-(a.ts||0)}).slice(0,15);
+ if(nl.length)L.push('\nПоследние заметки команды:\n'+nl.map(function(x){return '- ['+((TAGS[x.tag]||TAGS.info).n)+(x.pin?', закреплено':'')+'] '+(x.by||'')+': '+String(x.text).slice(0,300).replace(/\n/g,' ')}).join('\n'));
+ var tl=tplList().slice(0,25);
+ if(tl.length)L.push('\nШаблоны ответов клиентам (используй их стиль):\n'+tl.map(function(x){return '- «'+x.title+'» ('+TPL_CATS[x.cat][0]+'): '+x.text.slice(0,350).replace(/\n/g,' ')}).join('\n'));
+ var bl=bdList().slice(0,4);if(bl.length)L.push('\nБлижайшие дни рождения: '+bl.map(function(x){return x.name+' — '+x.d+' '+MON[x.m-1]+(x.left===0?' (сегодня!)':' (через '+x.left+' дн.)')}).join('; ')+'.');
+ return L.join('\n');
+}
+var AI_SYS='Ты — дружелюбный AI-ассистент команды поддержки iGaming-проекта на сайте «Shift Hub». Помогаешь сотрудникам смены: график перерывов, кто где, заметки, ответы клиентам (депозиты, выводы, верификация, бонусы), переводы, короткие тексты. '
+ +'Отвечай кратко и по делу, на языке вопроса (по умолчанию по-русски). Для ответов клиентам пиши вежливо и профессионально, без обещаний сроков и сумм, которых нет в данных, и без призывов играть больше. '
+ +'Используй данные сайта ниже; если чего-то в них нет — честно скажи, не выдумывай. Не используй таблицы markdown.';
+function aiPickModels(list){
+ var c=(list||[]).filter(function(m){return (m.supportedGenerationMethods||[]).indexOf('generateContent')>=0}).map(function(m){return m.name.replace(/^models\//,'')})
+  .filter(function(n){return /^gemini-/.test(n)&&!/(image|live|tts|audio|embed|vision|learnlm|robotics|computer|native)/.test(n)});
+ function ver(n){var m=n.match(/gemini-(\d+(?:\.\d+)?)/);return m?parseFloat(m[1]):0}
+ function score(n){var s=ver(n)*10;if(/flash/.test(n))s+=5;if(/lite/.test(n))s-=3;if(/pro/.test(n))s-=2;if(/(preview|exp)/.test(n))s-=8;if(/-\d{3}$|-\d{2}-\d{4}$/.test(n))s-=1;return s}
+ return c.sort(function(a,b){return score(b)-score(a)});
+}
+function aiApi(path,body,key){
+ return fetch(GAPI+path+(path.indexOf('?')>=0?'&':'?')+'key='+encodeURIComponent(key),body?{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}:{})
+  .then(function(r){return r.json().then(function(j){return {ok:r.ok,status:r.status,j:j}},function(){return {ok:r.ok,status:r.status,j:{}}})});
+}
+function aiLoadModels(key){
+ if(AI.models)return Promise.resolve(AI.models);
+ return aiApi('models?pageSize=200',null,key).then(function(x){
+  if(!x.ok)throw x;AI.models=aiPickModels(x.j.models);
+  if(AI.model&&AI.models.indexOf(AI.model)>0){AI.models.splice(AI.models.indexOf(AI.model),1);AI.models.unshift(AI.model)}
+  if(!AI.models.length)throw {status:404,j:{error:{message:'no models'}}};return AI.models});
+}
+function aiErrText(x){
+ var m=(x&&x.j&&x.j.error&&x.j.error.message)||'',s=x&&x.status;
+ if(s===429)return '⏳ Бесплатный лимит запросов на минуту исчерпан. Подожди немного и спроси ещё раз.';
+ if(/API key not valid|API_KEY_INVALID/i.test(m)||s===400&&/key/i.test(m))return '🔑 Ключ не подходит. Проверь его в ⚙️ настройках ассистента.';
+ if(s===403)return '⛔ Доступ запрещён: '+m.slice(0,160)+(/location|region|country/i.test(m)?' (возможно, сервис недоступен в регионе)':'');
+ if(!s)return '📡 Нет связи с Gemini. Проверь интернет и попробуй ещё раз.';
+ return '⚠️ Ошибка '+s+': '+m.slice(0,200);
+}
+function aiGenerate(key,idx){
+ var models=AI.models,model=models[idx];
+ var contents=AI.msgs.filter(function(m){return m.role==='user'||m.role==='model'}).slice(-16).map(function(m){return {role:m.role,parts:[{text:m.text}]}});
+ return aiApi('models/'+model+':generateContent',{systemInstruction:{parts:[{text:AI_SYS+'\n\n=== ДАННЫЕ САЙТА ===\n'+aiContext()}]},contents:contents,generationConfig:{temperature:.6,maxOutputTokens:2048}},key)
+  .then(function(x){
+   if(!x.ok){if((x.status===404||x.status===400&&!/key/i.test(JSON.stringify(x.j)))&&idx+1<models.length)return aiGenerate(key,idx+1);throw x}
+   var c=x.j.candidates&&x.j.candidates[0],t=c&&c.content&&c.content.parts?c.content.parts.filter(function(p){return p.text&&!p.thought}).map(function(p){return p.text}).join(''):'';
+   if(!t&&idx+1<models.length&&!(c&&c.finishReason==='SAFETY'))return aiGenerate(key,idx+1);
+   if(AI.model!==model){AI.model=model;lsSet('shifthub-ai-model',model)}
+   return t||(c&&c.finishReason==='SAFETY'?'Не могу ответить на это 🙅':'Пустой ответ, попробуй переформулировать.');
+  });
+}
+function aiRender(){
+ var box=aiEl('aiMsgs');if(!box)return;var key=aiKey();
+ aiEl('aiSetup').hidden=!!key&&!AI.showSetup;aiEl('aiKeyDel').hidden=!key;aiEl('aiChat').hidden=!key||!!AI.showSetup;
+ aiEl('aiModel').textContent=key?(AI.model?AI.model.replace(/^gemini-/,'Gemini '):'Gemini'):'не подключён';
+ if(!key||AI.showSetup)return;
+ var h=AI.msgs.length?'':'<div class="ai-hi"><div class="ai-orb"></div><b>Привет'+(meName()?', '+esc(meName()):'')+'! 👋</b><span>Я вижу график, заметки, шаблоны и расписание смен. Спрашивай!</span></div>';
+ h+=AI.msgs.map(function(m,i){return '<div class="aim '+(m.role==='user'?'u':m.role==='err'?'e':'a')+'">'+(m.role==='user'?esc(m.text).replace(/\n/g,'<br>'):aiMd(m.text))+(m.role==='model'?'<button class="aicp" data-ai="copy" data-i="'+i+'" title="Скопировать">📋</button>':'')+'</div>'}).join('');
+ if(AI.busy)h+='<div class="aim a typing"><i></i><i></i><i></i></div>';
+ box.innerHTML=h;box.scrollTop=box.scrollHeight;
+ aiEl('aiSend').disabled=AI.busy;
+}
+function aiAsk(q){
+ q=String(q||'').trim();var key=aiKey();if(!q||AI.busy||!key)return;
+ AI.msgs.push({role:'user',text:q.slice(0,4000)});AI.busy=true;aiRender();
+ aiLoadModels(key).then(function(){return aiGenerate(key,0)})
+  .then(function(t){AI.msgs.push({role:'model',text:t})})
+  .catch(function(x){AI.models=null;AI.msgs.push({role:'err',text:aiErrText(x)});AI.msgs=AI.msgs.filter(function(m,i,a){return !(m.role==='user'&&a[i+1]&&a[i+1].role==='err'&&i<a.length-2)})})
+  .then(function(){AI.busy=false;aiRender()});
+}
+aiEl('aiFab').addEventListener('click',function(){AI.open=!AI.open;aiEl('aiPanel').hidden=!AI.open;aiEl('aiFab').classList.toggle('on',AI.open);if(AI.open){aiRender();setTimeout(function(){var i=aiEl(aiKey()?'aiIn':'aiKeyIn');if(i)i.focus()},60)}});
+aiEl('aiClose').addEventListener('click',function(){AI.open=false;aiEl('aiPanel').hidden=true;aiEl('aiFab').classList.remove('on')});
+aiEl('aiGear').addEventListener('click',function(){AI.showSetup=!AI.showSetup;aiEl('aiKeyIn').value='';aiRender()});
+aiEl('aiClear').addEventListener('click',function(){AI.msgs=[];aiRender()});
+aiEl('aiForm').addEventListener('submit',function(e){e.preventDefault();var v=aiEl('aiIn').value;aiEl('aiIn').value='';aiAsk(v)});
+aiEl('aiIn').addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();aiEl('aiForm').requestSubmit()}});
+aiEl('aiQuick').addEventListener('click',function(e){var b=e.target.closest('[data-q]');if(b)aiAsk(b.getAttribute('data-q'))});
+aiEl('aiMsgs').addEventListener('click',function(e){var b=e.target.closest('[data-ai=copy]');if(!b)return;var m=AI.msgs[+b.getAttribute('data-i')];if(m)copyText(m.text).then(function(){b.textContent='✅';setTimeout(function(){b.textContent='📋'},1400)})});
+aiEl('aiKeyForm').addEventListener('submit',function(e){
+ e.preventDefault();var k=aiEl('aiKeyIn').value.trim();if(!k)return;
+ aiEl('aiKeyMsg').textContent='Проверяю ключ…';AI.models=null;
+ aiLoadModels(k).then(function(ms){aiEl('aiKeyMsg').textContent='';AI.showSetup=false;AI.model=ms[0];lsSet('shifthub-ai-model',ms[0]);patch({'cfg/aiKey':k});toast('🤖 Ассистент подключён','Модель: '+ms[0]+'. Работает у всей команды')})
+  .catch(function(x){AI.models=null;aiEl('aiKeyMsg').textContent=aiErrText(x)});
+});
+aiEl('aiKeyDel').addEventListener('click',function(){if(this.getAttribute('data-s')){patch({'cfg/aiKey':null});AI.models=null;AI.showSetup=false;this.removeAttribute('data-s');this.textContent='Отключить ассистента';aiRender()}else{this.setAttribute('data-s','1');this.textContent='Точно отключить?'}});
+
 /* ---------- Часовой пояс ---------- */
 (function(){
  var opts=TZ_LIST.slice();if(!TZ_LIST.some(function(x){return x[0]===DISP_OFF}))opts.push([DISP_OFF,'']);
@@ -1677,7 +1865,7 @@ $('logoutBtn').addEventListener('click',function(){
 })();
 
 /* ---------- запуск ---------- */
-function renderAll(){renderTop();renderTabs();if(!ui.adding&&!drag)renderSched();renderVideo();renderNotes();renderRoster();fillMe();renderExtras();checkChanges()}
+function renderAll(){renderTop();renderTabs();if(!ui.adding&&!drag)renderSched();renderVideo();renderNotes();renderRoster();fillMe();renderExtras();checkChanges();if(typeof AI!=='undefined'&&AI.open&&!AI.busy)aiRender()}
 applyTheme();
 build3D(document.body.classList.contains('theme-day')?'day':'night');
 renderVideo();
