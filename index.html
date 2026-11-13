@@ -125,7 +125,11 @@ h2{font-family:Unbounded,sans-serif;font-size:18px;margin:0;font-weight:700}
 .tchip.on{background:var(--c);color:#141414;border-color:transparent;box-shadow:0 10px 26px -8px var(--c)}
 .hint{color:var(--mut);font-size:13px;font-weight:600;flex-basis:100%}
 .tl-wrap{overflow-x:auto;margin:0 -6px;padding:0 6px 4px}
-.tl{position:relative;min-width:calc(var(--name) + 24*36px)}
+.tl{position:relative;min-width:calc(var(--name) + 24*48px)}
+.hcell.half{color:var(--mut);font-size:10.5px;font-weight:700;border-left-color:var(--line)}
+.tzsel{margin-left:4px;background:var(--card2);color:var(--txt);border:1px solid var(--line);border-radius:8px;font:inherit;font-size:11px;font-weight:800;padding:2px 4px;text-transform:none;letter-spacing:0;cursor:pointer;max-width:150px}
+.tzsel option{color:#111}
+.tzlab{grid-row:1;grid-column:1;align-self:end;padding:0 0 8px 6px;font-size:11px;font-weight:800;color:var(--acc)}
 .row{display:grid;grid-template-columns:var(--name) repeat(24,1fr);position:relative}
 .row.head{height:40px;align-items:end}
 .row.person{height:60px;border-top:1px solid var(--line)}
@@ -213,6 +217,14 @@ tr:last-child td{border-bottom:0}
 .rs td.c-off{color:var(--mut);opacity:.6}
 .rs td.c-oth{background:color-mix(in srgb,#3ea8ff 35%,transparent)}
 .rs .today{box-shadow:inset 0 0 0 2px var(--acc)}
+.rs th.dh{line-height:1.1;min-width:44px}
+.rs th.dh b{display:block;font-family:Unbounded;font-size:14px;color:var(--txt)}
+.rs th.dh small{display:block;font-size:9.5px;font-weight:800;color:var(--mut);margin-top:2px;white-space:nowrap}
+.rs th.we small,.rs th.we b{color:var(--acc)}
+.rs th.today b,.rs th.today small{color:#fff}
+.rs td.we{background:color-mix(in srgb,var(--acc) 6%,transparent)}
+.rs td.info{font-size:12px;color:var(--mut);font-weight:700;text-align:left}
+.rs-pick{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:800;color:var(--mut)}
 .rs th.today{background:var(--acc);color:#fff}
 .rs tr.me td{border-top:2px solid var(--acc2);border-bottom:2px solid var(--acc2)}
 .rs tr.me td:first-child{color:var(--acc2)}
@@ -481,7 +493,7 @@ footer{position:relative;z-index:1;text-align:center;color:var(--mut);font-size:
    <div><h1>SHIFT HUB</h1><div class="sub" id="sub">iGaming Support</div></div>
   </div>
   <div class="stats">
-   <div class="stat tilt"><small>Время · Баку</small><b id="clock">--:--</b><span class="muted" id="left"></span></div>
+   <div class="stat"><small>🌍 Моё время <select class="tzsel" id="tzSel" title="Выбери свой часовой пояс"></select></small><b id="clock">--:--</b><span class="muted" id="left"></span></div>
    <div class="stat tilt"><small>Сейчас на перерыве</small><div id="offnow" class="muted">—</div></div>
    <div class="stat"><small>Тема</small>
     <div class="seg" id="themeSeg"><button data-m="auto">Авто</button><button data-m="day">☀️ День</button><button data-m="night">🌙 Ночь</button></div>
@@ -533,9 +545,10 @@ footer{position:relative;z-index:1;text-align:center;color:var(--mut);font-size:
  </main>
 
  <section class="panel roster" id="rosterPanel">
-  <div class="ph"><h2>🗓 Расписание смен</h2><span class="rs-me" id="rsMe" hidden></span><button class="btn" id="rsEditBtn">✏️ Вставить / обновить</button></div>
+  <div class="ph"><h2>🗓 Расписание смен</h2><label class="rs-pick" id="rsPick" hidden>Это я: <select class="tzsel" id="rsMeSel"></select></label><span class="rs-me" id="rsMe" hidden></span><button class="btn" id="rsEditBtn">✏️ Вставить / обновить</button></div>
   <div class="rs-edit" id="rsEdit" hidden>
-   <div class="muted" style="font-size:13px;font-weight:600;margin-bottom:8px">Выдели таблицу в Excel или Google Таблицах (с заголовками дней), скопируй и вставь сюда. Первая строка — даты, первый столбец — имена. Значения: <b>Д</b>/день, <b>Н</b>/ночь, <b>В</b>/выходной или любой текст.</div>
+   <div class="muted" style="font-size:13px;font-weight:600;margin-bottom:8px">Выдели таблицу в Excel или Google Таблицах, скопируй и вставь сюда. Первый столбец — имена, можно с почтой. Значения: <b>D/Д</b> — день, <b>N/Н</b> — ночь, <b>O/В</b> или пусто — выходной.</div>
+   <div class="r" style="margin-bottom:8px;align-items:center"><span style="font-weight:800;font-size:13px">📅 Первый день смен в таблице:</span><input type="date" class="in" id="rsStart" style="padding:7px 10px"><span class="muted" style="font-size:12px">— по нему посчитаются числа и месяцы</span></div>
    <textarea class="in" id="rsText" maxlength="30000" placeholder="Имя&#9;1&#9;2&#9;3&#10;Хаям&#9;Д&#9;Н&#9;В"></textarea>
    <div class="r"><button class="btn pri" id="rsSave">Сохранить</button><button class="btn" id="rsCancel">Отмена</button><span class="muted" style="font-size:12px" id="rsInfo"></span></div>
   </div>
@@ -560,7 +573,7 @@ footer{position:relative;z-index:1;text-align:center;color:var(--mut);font-size:
    </div>
    <div class="col">
     <section class="panel">
-     <div class="ph"><h2>🌍 Мировые часы</h2><span class="count">относительно Баку</span></div>
+     <div class="ph"><h2>🌍 Мировые часы</h2><span class="count" id="ckRel">относительно твоего времени</span></div>
      <div id="clocks" class="clocks"></div>
     </section>
     <section class="panel">
@@ -664,7 +677,7 @@ footer{position:relative;z-index:1;text-align:center;color:var(--mut);font-size:
  <button class="btn sm" data-bt="5" data-l="Перерыв" data-e="☕">5 мин</button><button class="btn sm" data-bt="10" data-l="Перерыв" data-e="☕">10 мин</button><button class="btn sm" data-bt="15" data-l="Перерыв" data-e="☕">15 мин</button>
  <button class="btn sm" data-bt="30" data-l="Перерыв" data-e="☕">30 мин</button><button class="btn sm" data-bt="60" data-l="Обед" data-e="🍽️">60 мин</button><button class="btn sm" data-bt="x">✕</button>
 </div>
-<footer>Shift Hub · дневная тема 09:00–21:00, ночная 21:00–09:00 (время Баку)</footer>
+<footer>Shift Hub · дневная тема 09:00–21:00, ночная 21:00–09:00 (время команды: GMT+3)</footer>
 
 <script>
 (function(){
@@ -706,14 +719,15 @@ if(location.hash==='#day'||location.hash==='#night')themeMode=location.hash.slic
 function $(id){return document.getElementById(id)}
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
 function p2(n){return ('0'+n).slice(-2)}
-function fmt(start,i){var m=(start+i*30)%1440;return p2(Math.floor(m/60))+':'+p2(m%60)}
+var BASE_OFF=3; // основное время команды: GMT+3
+var TZ_LIST=[[-8,'Лос-Анджелес'],[-5,'Нью-Йорк'],[-4,'Сантьяго'],[-3,'Сан-Паулу, Буэнос-Айрес'],[-1,'Азоры'],[0,'Лондон, Лиссабон'],[1,'Берлин, Париж, Варшава'],[2,'Киев, Афины'],[3,'Москва, Стамбул — команда'],[3.5,'Тегеран'],[4,'Баку, Дубай, Тбилиси'],[4.5,'Кабул'],[5,'Ташкент, Карачи'],[5.5,'Дели'],[6,'Алматы, Бишкек'],[7,'Бангкок'],[8,'Пекин, Сингапур'],[9,'Токио, Сеул'],[10,'Сидней']];
+var DISP_OFF=parseFloat(lsGet('shifthub-gmt','3'));if(isNaN(DISP_OFF))DISP_OFF=3;
+function offTxt(o){var a=Math.abs(o),h=Math.floor(a),m=Math.round((a-h)*60);return 'GMT'+(o<0?'−':'+')+h+(m?':'+p2(m):'')}
+function tParts(off){var d=new Date(Date.now()+off*3600000);return {h:d.getUTCHours(),m:d.getUTCMinutes(),s:d.getUTCSeconds(),mins:d.getUTCHours()*60+d.getUTCMinutes(),wd:d.getUTCDay(),d:d.getUTCDate()}}
+function dispNow(){return tParts(DISP_OFF)}
+function fmt(start,i){var m=(((start+i*30+Math.round((DISP_OFF-BASE_OFF)*60))%1440)+1440)%1440;return p2(Math.floor(m/60))+':'+p2(m%60)}
 function durTxt(n){return n===1?'30 мин':n===2?'1 час':'1.5 часа'}
-function now(){
- var h,m,s;
- try{new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Baku',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).formatToParts(new Date()).forEach(function(x){if(x.type==='hour')h=+x.value%24;if(x.type==='minute')m=+x.value;if(x.type==='second')s=+x.value})}
- catch(e){var d=new Date();h=d.getHours();m=d.getMinutes();s=d.getSeconds()}
- return {h:h,m:m,s:s,mins:h*60+m};
-}
+function now(){return tParts(BASE_OFF)}
 function curShift(n){return (n.mins>=540&&n.mins<1260)?'day':'night'}
 function frac(k,n){return ((n.mins+n.s/60-SHIFTS[k].start+1440)%1440)/30}
 function shiftData(k){
@@ -813,8 +827,8 @@ document.querySelectorAll('.tilt').forEach(function(el){
 
 /* ---------- шапка ---------- */
 function renderTop(){
- var n=now(),k=curShift(n),S=SHIFTS[k];
- $('clock').textContent=p2(n.h)+':'+p2(n.m)+':'+p2(n.s);
+ var n=now(),k=curShift(n),S=SHIFTS[k],dn=dispNow();
+ $('clock').textContent=p2(dn.h)+':'+p2(dn.m)+':'+p2(dn.s);
  var left=(S.start+720-n.mins-1+1440)%1440, ls=59-n.s;
  $('left').textContent=S.icon+' '+S.name+' смена · до конца '+Math.floor(left/60)+'ч '+p2(left%60)+'м';
  $('sub').textContent='iGaming Support · '+S.icon+' '+S.name+' смена';
@@ -842,8 +856,8 @@ function renderSched(){
  if(ui.tool!=='erase'){h+='<span class="lbl">Длительность</span><div class="seg">';[1,2,3].forEach(function(x){h+='<button class="'+(ui.dur===x?'on':'')+'" data-act="dur" data-k="'+x+'">'+durTxt(x)+'</button>'});h+='</div>'}
  h+='<div class="hint">'+(ui.tool==='erase'?'Нажми на блок, чтобы убрать его.':'Нажми на клетку в строке человека: там начнётся «'+TYPES[ui.tool].name+'» на '+durTxt(ui.dur)+'. Если такой слот уже есть, он переедет.')+'</div></div>';
  var cur=ui.tool==='erase'?'#e8ecff':TYPES[ui.tool].c;
- h+='<div class="tl-wrap"><div class="tl" style="--c:'+cur+'"><div class="row head"><div></div>';
- for(i=0;i<SLOTS;i++){var full=i%2===0;h+='<div class="hcell'+(full?' full':'')+'" style="grid-column:'+(i+2)+'">'+(cnt[i]>1?'<span class="cnt">'+cnt[i]+'👥</span>':'')+(full?fmt(S.start,i):'')+'</div>'}
+ h+='<div class="tl-wrap"><div class="tl" style="--c:'+cur+'"><div class="row head"><div class="tzlab">'+offTxt(DISP_OFF)+'</div>';
+ for(i=0;i<SLOTS;i++){var tl=fmt(S.start,i),full=/:00$/.test(tl);h+='<div class="hcell'+(full?' full':' half')+'" style="grid-column:'+(i+2)+'">'+(cnt[i]>1?'<span class="cnt">'+cnt[i]+'👥</span>':'')+tl+'</div>'}
  h+='</div>';
  d.people.forEach(function(p,pi){
   h+='<div class="row person"><div class="pname"><div class="ava" style="background:'+AVA[pi%AVA.length]+'">'+esc(p.name.charAt(0).toUpperCase())+'</div><span>'+esc(p.name)+'</span><button class="rm'+(ui.sureDel===p.id?' sure':'')+'" data-act="rmp" data-k="'+esc(p.id)+'">'+(ui.sureDel===p.id?'удалить?':'✕')+'</button></div>';
@@ -859,7 +873,7 @@ function renderSched(){
  if(k===curShift(n)){var f=frac(k,n);h+='<div class="now" style="left:calc(var(--name) + (100% - var(--name)) * '+(f/SLOTS)+')"></div>'}
  h+='</div></div>';
  h+=ui.adding?'<div class="addrow"><input class="in" id="newname" maxlength="24" placeholder="Имя сотрудника"><button class="btn pri" data-act="addsave">Добавить</button><button class="btn" data-act="addcancel">Отмена</button></div>'
-  :'<div class="addrow"><button class="btn" data-act="add">＋ Сотрудник в '+(k==='day'?'дневную':'ночную')+' смену</button>'+(!d.items.length&&raw[k]&&raw[k].prev?'<button class="btn pri" data-act="prev">↻ Как вчера</button>':'')+'<span class="reset-note">🔄 График очищается сам '+(k==='day'?'в 21:00':'в 09:00')+'</span></div>';
+  :'<div class="addrow"><button class="btn" data-act="add">＋ Сотрудник в '+(k==='day'?'дневную':'ночную')+' смену</button>'+(!d.items.length&&raw[k]&&raw[k].prev?'<button class="btn pri" data-act="prev">↻ Как вчера</button>':'')+'<span class="reset-note">🔄 График очищается сам в '+fmt(S.start,SLOTS)+'</span></div>';
  h+='<div class="sum"><table><tr><th></th>';
  d.people.forEach(function(p){h+='<th>'+esc(p.name)+'</th>'});
  h+='</tr>';
@@ -973,45 +987,73 @@ function parseRoster(text){
  var sep=text.indexOf('\t')>=0?'\t':(text.indexOf(';')>=0?';':',');
  return lines.slice(0,80).map(function(l){return l.split(sep).slice(0,64).map(function(c){return c.trim()})});
 }
+var MSH=['янв','фев','мар','апр','мая','июн','июл','авг','сен','окт','ноя','дек'],WDS=['вс','пн','вт','ср','чт','пт','сб'];
+function rosterModel(r){
+ var rows=parseRoster(r.text);if(!rows.length)return null;
+ var w=0;rows.forEach(function(rw){w=Math.max(w,rw.length)});
+ function isCode(v){var c=cellCls(v);return c==='c-day'||c==='c-night'||c==='c-off'}
+ var first=rows[0],codes=first.slice(1).filter(isCode).length,hasHead=codes<2;
+ var people=hasHead?rows.slice(1):rows;
+ var info={},ds=1;
+ for(var c=1;c<w;c++){var vals=people.map(function(rw){return rw[c]||''}).filter(Boolean);
+  var isInfo=vals.some(function(v){return v.indexOf('@')>=0})||(vals.length&&vals.filter(function(v){return !isCode(v)&&v.length>4}).length>vals.length/2);
+  if(isInfo&&c===ds){info[c]=1;ds=c+1}else break}
+ var dates={},startOk=r.start&&/^\d{4}-\d{2}-\d{2}$/.test(r.start);
+ if(startOk){var p=r.start.split('-'),t0=Date.UTC(+p[0],+p[1]-1,+p[2]);for(c=ds;c<w;c++){var d=new Date(t0+(c-ds)*864e5);dates[c]={d:d.getUTCDate(),m:d.getUTCMonth(),wd:d.getUTCDay(),iso:d.toISOString().slice(0,10)}}}
+ return {w:w,head:hasHead?first:null,people:people,info:info,ds:ds,dates:dates,startOk:startOk};
+}
 function cellCls(v){
  var x=v.toLowerCase().replace(/\s+/g,'');
  if(!x)return '';
  if(/^(д|дн|день|дневная|day|d|у|утро)$/.test(x)||/^0?9[:.]?(00)?[-–]21/.test(x))return 'c-day';
  if(/^(н|нч|ночь|ночная|night|n)$/.test(x)||/^21[:.]?(00)?[-–]0?9/.test(x))return 'c-night';
- if(/^(в|вых|выходной|off|о|отп|отпуск|б|больн|-|—|x|х)$/.test(x))return 'c-off';
+ if(/^(в|вых|выходной|off|о|o|отп|отпуск|б|больн|v|vac|-|—|x|х)$/.test(x))return 'c-off';
  return 'c-oth';
 }
 function renderRoster(){
  if(rsEditing)return;
- var r=(raw&&raw.roster)||null,rows=r?parseRoster(r.text):[];
+ var r=(raw&&raw.roster)||null,M=r&&r.text?rosterModel(r):null;
  $('rsEdit').hidden=true;
- if(!rows.length){$('rsView').innerHTML='<div class="muted" style="text-align:center;padding:24px;font-weight:700">Здесь будет ваше расписание смен.<br>Нажми «✏️ Вставить / обновить» и вставь таблицу из Excel или Google Таблиц 📋</div>';$('rsMe').hidden=true;return}
- var n=now(),dt=new Date(),today=dt.getDate(),todayCol=-1,me=(NS.me||'').toLowerCase(),meRow=-1;
- try{today=+new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Baku',day:'numeric'}).format(dt)}catch(e){}
- var head=rows[0],w=0;rows.forEach(function(rw){w=Math.max(w,rw.length)});
- for(var c=1;c<head.length;c++){var m=String(head[c]).match(/\d+/);if(m&&+m[0]===today){todayCol=c;break}}
- var h='<div class="rs-wrap"><table class="rs"><tr>';
- for(c=0;c<w;c++)h+='<th'+(c===todayCol?' class="today"':'')+'>'+esc(head[c]||'')+'</th>';
- h+='</tr>';
- for(var i=1;i<rows.length;i++){
-  var rw=rows[i],isMe=me&&String(rw[0]||'').toLowerCase().indexOf(me)>=0;
-  if(isMe&&meRow<0)meRow=i;
-  h+='<tr'+(isMe?' class="me"':'')+'>';
-  for(c=0;c<w;c++){var v=rw[c]||'',cl=c===0?'':cellCls(v);h+='<td class="'+cl+(c===todayCol&&c>0?' today':'')+'">'+esc(v)+'</td>'}
-  h+='</tr>';
+ if(!M){$('rsView').innerHTML='<div class="muted" style="text-align:center;padding:24px;font-weight:700">Здесь будет ваше расписание смен.<br>Нажми «✏️ Вставить / обновить» и вставь таблицу из Excel или Google Таблиц 📋</div>';$('rsMe').hidden=true;$('rsPick').hidden=true;return}
+ var todayIso=bakuDate(0),todayCol=-1,c,i,h='';
+ for(c=M.ds;c<M.w;c++)if(M.dates[c]&&M.dates[c].iso===todayIso)todayCol=c;
+ if(!M.startOk&&M.head){var td=bakuYMD().d;for(c=M.ds;c<M.head.length;c++){var mm=String(M.head[c]).match(/\d+/);if(mm&&+mm[0]===td){todayCol=c;break}}}
+ // кто я
+ var names=M.people.map(function(rw){return rw[0]||''}),mine2=lsGet('shifthub-rsme',''),me=(NS.me||'').toLowerCase(),meRow=-1;
+ names.forEach(function(nm,ix){if(meRow<0&&mine2&&nm===mine2)meRow=ix});
+ if(meRow<0&&me)names.forEach(function(nm,ix){if(meRow<0&&nm.toLowerCase().indexOf(me)>=0)meRow=ix});
+ var opt='<option value="">—</option>'+names.map(function(nm,ix){return '<option'+(ix===meRow?' selected':'')+'>'+esc(nm)+'</option>'}).join('');
+ if($('rsMeSel').getAttribute('data-h')!==opt){$('rsMeSel').innerHTML=opt;$('rsMeSel').setAttribute('data-h',opt)}
+ $('rsPick').hidden=false;
+ h+='<div class="rs-wrap"><table class="rs"><tr>';
+ for(c=0;c<M.w;c++){
+  var D=M.dates[c],cls=[];if(c===todayCol)cls.push('today');
+  if(D){if(D.wd===0||D.wd===6)cls.push('we');h+='<th class="dh '+cls.join(' ')+'"><b>'+D.d+'</b><small>'+MSH[D.m]+' · '+WDS[D.wd]+'</small></th>'}
+  else h+='<th'+(cls.length?' class="'+cls.join(' ')+'"':'')+'>'+esc(M.head?(M.head[c]||''):(c===0?'Имя':M.info[c]?'Почта':''))+'</th>';
  }
- h+='</table></div><div class="rs-legend"><span><i style="background:#ffb547"></i>День</span><span><i style="background:#8b5cf6"></i>Ночь</span><span><i style="background:var(--line)"></i>Выходной</span><span><i style="background:#3ea8ff"></i>Другое</span><span style="margin-left:auto">Обновил(а): '+esc(r.by||'—')+' · '+ago(+r.ts||0)+'</span></div>';
+ h+='</tr>';
+ M.people.forEach(function(rw,ix){
+  h+='<tr'+(ix===meRow?' class="me"':'')+'>';
+  for(c=0;c<M.w;c++){var v=rw[c]||'',cl=c===0?'':M.info[c]?'info':cellCls(v),we=M.dates[c]&&(M.dates[c].wd===0||M.dates[c].wd===6)&&!v?' we':'';
+   h+='<td class="'+cl+we+(c===todayCol&&c>0?' today':'')+'">'+esc(v)+'</td>'}
+  h+='</tr>';
+ });
+ h+='</table></div><div class="rs-legend"><span><i style="background:#ffb547"></i>День</span><span><i style="background:#8b5cf6"></i>Ночь</span><span><i style="background:var(--line)"></i>Выходной</span><span><i style="background:#3ea8ff"></i>Другое</span>'
+  +(M.startOk?'':'<span style="color:var(--acc)">📅 Укажи первый день в «Вставить / обновить», чтобы увидеть числа</span>')
+  +'<span style="margin-left:auto">Обновил(а): '+esc(r.by||'—')+' · '+ago(+r.ts||0)+'</span></div>';
  $('rsView').innerHTML=h;
- if(meRow>0&&todayCol>0){var v=rows[meRow][todayCol]||'—',cl=cellCls(v);$('rsMe').hidden=false;$('rsMe').textContent='Ты сегодня: '+(cl==='c-day'?'☀️ ':cl==='c-night'?'🌙 ':cl==='c-off'?'🏖 ':'')+v}
+ if(todayCol>0){var tc=$('rsView').querySelector('th.today');if(tc&&!$('rsView').getAttribute('data-sc')){$('rsView').setAttribute('data-sc','1');var wr=$('rsView').querySelector('.rs-wrap');wr.scrollLeft=Math.max(0,tc.offsetLeft-wr.clientWidth/2)}}
+ if(meRow>=0&&todayCol>0){var v2=M.people[meRow][todayCol]||'',cl2=cellCls(v2);$('rsMe').hidden=false;$('rsMe').textContent='Ты сегодня: '+(cl2==='c-day'?'☀️ День':cl2==='c-night'?'🌙 Ночь':cl2==='c-off'||!v2?'🏖 Выходной':v2)}
  else $('rsMe').hidden=true;
 }
-$('rsEditBtn').addEventListener('click',function(){rsEditing=true;$('rsEdit').hidden=false;$('rsText').value=(raw&&raw.roster&&raw.roster.text)||'';$('rsInfo').textContent='';$('rsText').focus()});
+$('rsMeSel').addEventListener('change',function(){lsSet('shifthub-rsme',this.value);renderRoster()});
+$('rsEditBtn').addEventListener('click',function(){rsEditing=true;$('rsEdit').hidden=false;$('rsText').value=(raw&&raw.roster&&raw.roster.text)||'';$('rsStart').value=(raw&&raw.roster&&raw.roster.start)||bakuDate(0);$('rsInfo').textContent='';$('rsText').focus()});
 $('rsCancel').addEventListener('click',function(){rsEditing=false;renderRoster()});
-$('rsText').addEventListener('input',function(){var rows=parseRoster(this.value);$('rsInfo').textContent=rows.length?('Строк: '+rows.length+', столбцов: '+rows[0].length):''});
+$('rsText').addEventListener('input',function(){var rows=parseRoster(this.value);$('rsInfo').textContent=rows.length?('Строк: '+rows.length+', столбцов: '+rows.reduce(function(a,x){return Math.max(a,x.length)},0)):''});
 $('rsSave').addEventListener('click',function(){
  var t=$('rsText').value.replace(/\r/g,'').trim().slice(0,30000);rsEditing=false;
  var ts=Date.now();mine.roster=ts;
- patch({roster:t?{text:t,by:$('nAuthor').value.trim()||lsGet('shifthub-name','')||'Кто-то',ts:ts}:null});
+ patch({roster:t?{text:t,start:$('rsStart').value||'',by:$('nAuthor').value.trim()||lsGet('shifthub-name','')||'Кто-то',ts:ts}:null});
 });
 
 /* ---------- Уведомления ---------- */
@@ -1115,6 +1157,7 @@ syncNSUI();
 
 /* ================= ОБЩИЕ ПОМОЩНИКИ ================= */
 function bakuDate(off){
+ return new Date(Date.now()+(off||0)*864e5+BASE_OFF*3600000).toISOString().slice(0,10);
  var d=new Date(Date.now()+(off||0)*864e5);
  try{return new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Baku',year:'numeric',month:'2-digit',day:'2-digit'}).format(d)}catch(e){return d.toISOString().slice(0,10)}
 }
@@ -1238,11 +1281,11 @@ function zoneParts(tz){var o={};try{new Intl.DateTimeFormat('en-GB',{timeZone:tz
  var wk={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6};return {h:(+o.hour||0)%24,m:+o.minute||0,wd:wk[o.weekday],d:+o.day||0}}
 function renderClocks(){
  if(document.body.getAttribute('data-view')!=='work')return;
- var b=zoneParts('Asia/Baku'),bm=b.h*60+b.m;
+ var b=dispNow(),bm=b.h*60+b.m;$('ckRel').textContent='относительно '+offTxt(DISP_OFF);
  $('clocks').innerHTML=ZONES.map(function(z){var p=zoneParts(z[2]),zm=p.h*60+p.m,diff=zm-bm;
   if(p.d!==b.d){diff+=(p.wd===(b.wd+1)%7?1440:-1440)}
-  var day=p.h>=7&&p.h<19,dh=diff/60,dt=diff===0?'как в Баку':(dh>0?'+':'−')+Math.abs(dh)+' ч';
-  return '<div class="ck '+(day?'d':'n')+(z[2]==='Asia/Baku'?' me':'')+'"><span class="ci">'+(day?'☀️':'🌙')+'</span><div class="cf">'+z[0]+' '+z[1]+'</div><div class="ct">'+p2(p.h)+':'+p2(p.m)+'</div><div class="cs">'+(WD[p.wd]||'')+' · '+dt+'</div></div>'}).join('');
+  var day=p.h>=7&&p.h<19,dh=diff/60,dt=diff===0?'как у тебя':(dh>0?'+':'−')+Math.abs(dh)+' ч';
+  return '<div class="ck '+(day?'d':'n')+''+'"><span class="ci">'+(day?'☀️':'🌙')+'</span><div class="cf">'+z[0]+' '+z[1]+'</div><div class="ct">'+p2(p.h)+':'+p2(p.m)+'</div><div class="cs">'+(WD[p.wd]||'')+' · '+dt+'</div></div>'}).join('');
 }
 
 /* ================= РАДИО ================= */
@@ -1546,6 +1589,14 @@ $('logoutBtn').addEventListener('click',function(){
  if(this.getAttribute('data-sure')){this.removeAttribute('data-sure');this.textContent='🚪 Выйти';lock('');return}
  var b=this;b.setAttribute('data-sure','1');b.textContent='Точно выйти?';setTimeout(function(){b.removeAttribute('data-sure');b.textContent='🚪 Выйти'},3000);
 });
+
+/* ---------- Часовой пояс ---------- */
+(function(){
+ var opts=TZ_LIST.slice();if(!TZ_LIST.some(function(x){return x[0]===DISP_OFF}))opts.push([DISP_OFF,'']);
+ opts.sort(function(a,b){return a[0]-b[0]});
+ $('tzSel').innerHTML=opts.map(function(x){return '<option value="'+x[0]+'"'+(x[0]===DISP_OFF?' selected':'')+'>'+offTxt(x[0])+(x[1]?' · '+x[1]:'')+'</option>'}).join('');
+ $('tzSel').addEventListener('change',function(){DISP_OFF=parseFloat(this.value);lsSet('shifthub-gmt',String(DISP_OFF));renderTop();renderAll();renderClocks();toast('🌍 Время: '+offTxt(DISP_OFF),'Все часы и график теперь в твоём поясе')});
+})();
 
 /* ---------- запуск ---------- */
 function renderAll(){renderTop();renderTabs();if(!ui.adding)renderSched();renderVideo();renderNotes();renderRoster();fillMe();renderExtras();checkChanges()}
