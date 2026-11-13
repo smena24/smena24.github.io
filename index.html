@@ -564,6 +564,19 @@ body.locked #aiFab,body.locked #aiPanel{display:none!important}
 .lg-r b{font-weight:800}.lg-r small{display:block;color:var(--mut);font-weight:700;font-size:11px;margin-top:2px}
 .lg-r.me{border-color:color-mix(in srgb,var(--acc2) 45%,transparent)}
 .ronly{opacity:.75;cursor:default}
+/* ================= РОЛИ ================= */
+.rsel{font-size:12px;padding:5px 8px;border-radius:10px}
+.rsel.r-admin{border-color:var(--gold)}.rsel.r-guest{border-color:var(--acc2)}
+body.guest #sched .rm,body.guest #sched .addrow .btn,body.guest #noteForm,body.guest .note .ic,
+body.guest #tplNew,body.guest .tpl [data-tp=edit],body.guest .tpl [data-tp=del],body.guest #lnNew,body.guest .lx,body.guest #rsEditBtn,
+body.guest #ytForm,body.guest #ytMeta .link,body.guest #bdForm,body.guest .bd .ic,body.guest #aiGear{display:none!important}
+body.guest .row.person:not(.mine) .cell{pointer-events:none;cursor:default}
+body.guest .row.person:not(.mine) .blk{cursor:default}
+body.guest .row.person:not(.mine) .blk .x,body.guest .row.person:not(.mine) .blk .rz{display:none!important}
+.row.person.mine .pname span{color:var(--acc2)}
+.row.person.mine{background:color-mix(in srgb,var(--acc2) 6%,transparent)}
+.guest-note{display:none}
+body.guest .guest-note{display:flex;align-items:center;gap:8px;margin:0 0 14px;padding:10px 14px;border-radius:14px;border:1px dashed var(--acc2);background:color-mix(in srgb,var(--acc2) 10%,transparent);font-weight:800;font-size:13px}
 /* ================= ВХОД ================= */
 body.locked .wrap,body.locked footer,body.locked #toasts{display:none}
 #login{position:fixed;inset:0;z-index:40;display:none;align-items:center;justify-content:center;padding:20px}
@@ -620,6 +633,7 @@ footer{position:relative;z-index:1;text-align:center;color:var(--mut);font-size:
  </header>
 
  <nav class="nav" id="nav"><button data-view="home">🏠 Главная</button><button data-view="work">🧰 Работа</button><button data-view="fun">🎉 Отдых</button><button data-view="team" id="navTeam" hidden>👥 Команда</button></nav>
+ <div class="guest-note">👀 Ты гость: отмечай перерывы и обед в своей строке графика и пользуйся функциями. Чужое менять нельзя.<span id="guestRow"></span></div>
  <div class="online" id="online" hidden></div>
  <div id="bdayBanner" hidden></div>
 
@@ -721,6 +735,7 @@ footer{position:relative;z-index:1;text-align:center;color:var(--mut);font-size:
       <input class="in" id="tmName" maxlength="24" placeholder="Имя — как в графике (например, Хаям)" required>
       <input class="in" id="tmEmail" type="email" placeholder="Email (можно рабочий)" required>
       <div class="r"><input class="in" id="tmPass" maxlength="40" placeholder="Временный пароль (мин. 6)" minlength="6" required style="flex:1"><button type="button" class="btn" id="tmGen" title="Придумать пароль">🎲</button></div>
+      <select class="in" id="tmRole"><option value="member">👤 Сотрудник — может всё, кроме «Команды»</option><option value="admin">👑 Админ — может всё, включая «Команду»</option><option value="guest">👀 Гость — только смотрит</option></select>
       <button class="btn pri">Создать аккаунт</button>
       <div class="pwmsg" id="tmMsg"></div>
      </form>
@@ -875,7 +890,8 @@ var DB_URL='https://smena-e22d4-default-rtdb.europe-west1.firebasedatabase.app/'
 var API_KEY='AIzaSyCxMz_4nt27p4SxR85zMR8_UgZFIcd-3Z8';
 var TEAM_EMAIL='obed@gmail.com';
 var ADMIN_EMAIL='obed@gmail.com'; // админ: может добавлять и удалять людей
-var ME={uid:'',email:'',name:'',admin:false},TEAM={};
+var ME={uid:'',email:'',name:'',admin:false,sup:false,role:''},TEAM={};
+var ROLES={admin:['👑','Админ'],member:['👤','Сотрудник'],guest:['👀','Гость']};
 // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 
 DB_URL=DB_URL.trim().replace(/\/+$/,'');
@@ -938,6 +954,13 @@ function setAt(path,val){
  if(val===null)delete o[parts[parts.length-1]];else o[parts[parts.length-1]]=val;
 }
 function patch(upd){
+ if(ME.role==='guest'){
+  if(maintBusy)return;
+  var bad=Object.keys(upd).filter(function(k){var m=k.match(/^(day|night)\/items\/(.+)_(lunch|brk|out|rb)$/);
+   if(m)return m[2]!==myPid(m[1]);
+   return !/^((day|night)\/date|log\/[^\/]+|slots\/[^\/]+\/[^\/]+|bj\/[^\/]+\/[^\/]+|wheel|aistat\/(up|down))$/.test(k)});
+  if(bad.length){toast('👀 Режим гостя','Ты можешь менять только свою строку в графике. Остальное — только смотреть.');return}
+ }
  if(!maintBusy){var lt=describe(upd);if(lt)upd['log/l'+Date.now().toString(36)+Math.random().toString(36).slice(2,5)]={by:meName()||'Кто-то',uid:ME.uid||'',txt:lt,ts:Date.now()}}
  Object.keys(upd).forEach(function(k){setAt(k,JSON.parse(JSON.stringify(upd[k])))});
  renderAll();
@@ -1055,7 +1078,8 @@ function renderSched(){
  for(i=0;i<SLOTS;i++){var tl=fmt(S.start,i),full=/:00$/.test(tl);h+='<div class="hcell'+(full?' full':' half')+'" style="grid-column:'+(i+2)+'">'+(cnt[i]>1?'<span class="cnt">'+cnt[i]+'👥</span>':'')+tl+'</div>'}
  h+='</div>';
  d.people.forEach(function(p,pi){
-  h+='<div class="row person"><div class="pname"><div class="ava" style="background:'+AVA[pi%AVA.length]+'">'+esc(p.name.charAt(0).toUpperCase())+'</div><span>'+esc(p.name)+'</span><button class="rm'+(ui.sureDel===p.id?' sure':'')+'" data-act="rmp" data-k="'+esc(p.id)+'">'+(ui.sureDel===p.id?'удалить?':'✕')+'</button></div>';
+  var mineRow=!!ME.name&&p.name.toLowerCase()===ME.name.toLowerCase();
+  h+='<div class="row person'+(mineRow?' mine':'')+'"><div class="pname"><div class="ava" style="background:'+AVA[pi%AVA.length]+'">'+esc(p.name.charAt(0).toUpperCase())+'</div><span>'+esc(p.name)+'</span><button class="rm'+(ui.sureDel===p.id?' sure':'')+'" data-act="rmp" data-k="'+esc(p.id)+'">'+(ui.sureDel===p.id?'удалить?':'✕')+'</button></div>';
   for(var s=0;s<SLOTS;s++)h+='<button class="cell'+(cnt[s]>1?' busy':'')+'" style="grid-column:'+(s+2)+'" data-act="cell" data-p="'+esc(p.id)+'" data-s="'+s+'" aria-label="'+esc(p.name)+' '+fmt(S.start,s)+'"></button>';
   d.items.forEach(function(it){
    if(it.p!==p.id)return;var T=TYPES[it.t],r=fmt(S.start,it.s)+'–'+fmt(S.start,it.s+it.l);
@@ -1079,9 +1103,11 @@ function renderSched(){
   h+='</tr>'});
  h+='</table></div>';
  $('sched').innerHTML=h;seenBlk=nowBlk;
+ if(ME.role==='guest'&&$('guestRow'))$('guestRow').textContent=myPid(k)?'':' ⚠️ В этой смене нет строки с именем «'+ME.name+'» — попроси админа добавить.';
  if(ui.adding){var inp=$('newname');if(inp){inp.focus();inp.onkeydown=function(e){if(e.key==='Enter')addPerson();if(e.key==='Escape'){ui.adding=false;renderSched()}}}}
 }
 var seenBlk={},nowBlk={};
+function myPid(k){var id=null,me=(ME.name||'').toLowerCase();if(!me)return null;shiftData(k).people.forEach(function(p){if(p.name.toLowerCase()===me)id=p.id});return id}
 function sk(){return ui.shift||curShift(now())}
 function grp(t){return (t==='lunch'||t==='brk')?'break':t}
 function conflicts(k,pid,t,s,l){return shiftData(k).items.filter(function(it){return it.p!==pid&&grp(it.t)===grp(t)&&it.s<s+l&&s<it.s+it.l})}
@@ -1125,7 +1151,7 @@ function place(pid,s){
 /* перетаскивание и растягивание блоков */
 var drag=null;
 $('sched').addEventListener('pointerdown',function(e){
- var blk=e.target.closest('.blk');if(!blk||e.target.closest('.x')||ui.tool==='erase'||e.button>0)return;
+ var blk=e.target.closest('.blk');if(!blk||e.target.closest('.x')||ui.tool==='erase'||e.button>0||(ME.role==='guest'&&blk.getAttribute('data-p')!==myPid(sk())))return;
  var p=blk.getAttribute('data-p'),t=blk.getAttribute('data-t'),it=null;
  shiftData(sk()).items.forEach(function(x){if(x.p===p&&x.t===t)it=x});if(!it)return;
  var cell=blk.parentNode.querySelector('.cell');if(!cell)return;
@@ -1464,7 +1490,7 @@ var TPL_SEED={
 };
 var maintBusy=false;
 function maintain(){
- if(!raw||maintBusy||(status!=='online'&&status!=='local'))return;
+ if(!raw||maintBusy||ME.role==='guest'||(status!=='online'&&status!=='local'))return;
  var u={},any=false;
  ['day','night'].forEach(function(k){var r=raw[k];if(!r)return;var sd=shiftDate(k);
   if(!r.date){u[k+'/date']=sd;any=true}
@@ -1805,7 +1831,7 @@ function lock(msg){
  tok=null;refTok=null;clearTimeout(refTimer);if(es){es.close();es=null}
  raw=null;seen=null;lsSet('shifthub-auth','');
  document.body.classList.add('locked');$('lgErr').textContent=msg||'';
- ME={uid:'',email:'',name:'',admin:false};TEAM={};applyMe();$('userMenu').hidden=true;
+ ME={uid:'',email:'',name:'',admin:false,sup:false,role:''};TEAM={};applyMe();$('userMenu').hidden=true;
  $('lgEmail').value=lsGet('shifthub-email','');
  setTimeout(function(){($('lgEmail').value?$('lgPass'):$('lgEmail')).focus()},50);
 }
@@ -1813,7 +1839,7 @@ function unlock(){setTimeout(function(){try{beat()}catch(e){}},300);document.bod
 function jwt(t){try{var p=t.split('.')[1].replace(/-/g,'+').replace(/_/g,'/');while(p.length%4)p+='=';return JSON.parse(decodeURIComponent(escape(atob(p))))}catch(e){return {}}}
 function gotTokens(id,ref,exp){
  tok=id;refTok=ref;lsSet('shifthub-auth',ref);
- var j=jwt(id);ME.uid=j.user_id||j.sub||'';ME.email=String(j.email||'').toLowerCase();ME.admin=ME.email===ADMIN_EMAIL.toLowerCase();
+ var j=jwt(id);ME.uid=j.user_id||j.sub||'';ME.email=String(j.email||'').toLowerCase();ME.sup=ME.email===ADMIN_EMAIL.toLowerCase();if(ME.sup)ME.admin=true;
  clearTimeout(refTimer);refTimer=setTimeout(function(){refreshToken(true)},Math.max(60,(+exp||3600)-300)*1000);
 }
 var refreshing=false;
@@ -1855,7 +1881,8 @@ function afterAuth(){
  fetch(DB_URL+'/team/'+encodeURIComponent(ME.uid)+'.json?auth='+encodeURIComponent(tok))
   .then(function(r){if(r.status===401||r.status===403)return {denied:true};if(!r.ok)throw r;return r.json()})
   .then(function(m){
-   if(m&&!m.denied&&m.name){ME.name=String(m.name);ME.role=m.role||''}
+   if(m&&!m.denied&&m.name){ME.name=String(m.name);ME.role=ME.sup?'admin':(m.role||'member');ME.admin=ME.sup||ME.role==='admin'}
+   else if(ME.sup){ME.role='admin';ME.admin=true}
    else if(!ME.admin){lock(m&&m.denied?'⛔ Нет доступа. Попроси админа добавить тебя в команду.':'⛔ Тебя нет в команде. Попроси админа добавить тебя.');return}
    else ME.name=ME.name||'';
    applyMe();unlock();setStatus('loading');connect();loadTeam();
@@ -1866,11 +1893,16 @@ function applyMe(){
  var nm=ME.name||(ME.admin?'Админ':'');
  $('userName').textContent=nm||'…';$('umName').textContent=nm||'—';$('umEmail').textContent=ME.email+(ME.admin?' · 👑 админ':'');
  $('umAva').textContent=(nm||'?').charAt(0).toUpperCase();
+ var rl=ROLES[ME.role]||(ME.admin?ROLES.admin:null);
+ $('umEmail').textContent=ME.email+(rl?' · '+rl[0]+' '+rl[1]+(ME.sup?' (главный)':''):'');
+ $('userName').textContent=(ME.role==='guest'?'👀 ':'')+(nm||'…');
+ document.body.classList.toggle('guest',ME.role==='guest');
+ if($('guestRow'))$('guestRow').textContent='';
  $('navTeam').hidden=!ME.admin;
  if(ME.name){$('nAuthor').value=ME.name;$('nAuthor').readOnly=true;$('nAuthor').classList.add('ronly');$('nAuthor').title='Заметка будет от твоего имени';
   var f=$('ns_me').closest('.field');if(f)f.hidden=true;if(!$('bdName').value)$('bdName').value=ME.name}
  else{$('nAuthor').readOnly=false;$('nAuthor').classList.remove('ronly');var f2=$('ns_me').closest('.field');if(f2)f2.hidden=false}
- $('tmSelfBox').hidden=!(ME.admin&&!ME.name);
+ $('tmSelfBox').hidden=!(ME.sup&&!ME.name);
  if(!ME.admin&&document.body.getAttribute('data-view')==='team')setView('home');
 }
 function loadTeam(){
@@ -1878,13 +1910,23 @@ function loadTeam(){
  fetch(DB_URL+'/team.json?auth='+encodeURIComponent(tok)).then(function(r){return r.ok?r.json():{}}).then(function(t){TEAM=t||{};renderTeam()}).catch(function(){});
 }
 function renderTeam(){
- var L=Object.keys(TEAM).map(function(uid){var x=TEAM[uid]||{};return {uid:uid,name:x.name||'?',email:x.email||'',role:x.role||''}}).sort(function(a,b){return a.name.localeCompare(b.name)});
+ var L=Object.keys(TEAM).map(function(uid){var x=TEAM[uid]||{};return {uid:uid,name:x.name||'?',email:String(x.email||'').toLowerCase(),role:x.role||''}}).sort(function(a,b){return a.name.localeCompare(b.name)});
  $('tmCount').textContent=L.length?L.length+' чел.':'';
  $('tmList').innerHTML=L.length?L.map(function(x){var col=AVA[Math.abs(x.name.split('').reduce(function(a,c){return a+c.charCodeAt(0)},0))%AVA.length];
-  return '<div class="tmr"><div class="oa" style="background:'+col+'">'+esc(x.name.charAt(0).toUpperCase())+'</div><div><b>'+esc(x.name)+(x.uid===ME.uid?' (ты)':'')+'</b><small>'+esc(x.email)+'</small></div><span class="sp"></span>'+(x.role==='admin'?'<span class="badge">👑 админ</span>':'')
-   +(x.uid!==ME.uid?'<button class="ic" data-tm="'+esc(x.uid)+'">🗑</button>':'')+'</div>'}).join(''):'<div class="muted" style="text-align:center;padding:16px;font-weight:700">Пока никого. Добавь сотрудников слева 👈</div>';
+  var isSup=x.email===ADMIN_EMAIL.toLowerCase(),r=isSup?'admin':(x.role||'member');
+  var sel=isSup?'<span class="badge">👑 главный админ</span>':'<select class="tzsel rsel r-'+r+'" data-role="'+esc(x.uid)+'">'+Object.keys(ROLES).map(function(k){return '<option value="'+k+'"'+(k===r?' selected':'')+'>'+ROLES[k][0]+' '+ROLES[k][1]+'</option>'}).join('')+'</select>';
+  return '<div class="tmr"><div class="oa" style="background:'+col+'">'+esc(x.name.charAt(0).toUpperCase())+'</div><div><b>'+esc(x.name)+(x.uid===ME.uid?' (ты)':'')+'</b><small>'+esc(x.email)+'</small></div><span class="sp"></span>'+sel
+   +(x.uid!==ME.uid&&!isSup?'<button class="ic" data-tm="'+esc(x.uid)+'">🗑</button>':'')+'</div>'}).join(''):'<div class="muted" style="text-align:center;padding:16px;font-weight:700">Пока никого. Добавь сотрудников слева 👈</div>';
 }
 var tmSure=null;
+$('tmList').addEventListener('change',function(e){var sl=e.target.closest('[data-role]');if(!sl)return;var uid=sl.getAttribute('data-role'),r=sl.value,nm=(TEAM[uid]||{}).name||'';
+ if(uid===ME.uid&&r!=='admin'&&!ME.sup&&!confirmSelfDemote(sl))return;
+ fetch(DB_URL+'/team/'+encodeURIComponent(uid)+'/role.json?auth='+encodeURIComponent(tok),{method:'PUT',body:JSON.stringify(r)})
+  .then(function(x){if(!x.ok)throw x;TEAM[uid].role=r;renderTeam();toast(ROLES[r][0]+' '+nm+' — теперь '+ROLES[r][1].toLowerCase(),'');patch(logOnly(ROLES[r][0]+' роль: '+nm+' → '+ROLES[r][1]));
+   if(uid===ME.uid){ME.role=r;ME.admin=ME.sup||r==='admin';applyMe()}})
+  .catch(function(){toast('⚠️ Не получилось сменить роль','Проверь правила базы (Rules)');renderTeam()});
+});
+function confirmSelfDemote(sl){if(sl.getAttribute('data-sure')){return true}sl.setAttribute('data-sure','1');toast('⚠️ Ты снимешь с себя админа','Выбери роль ещё раз, если уверен(а)');renderTeam();return false}
 $('tmList').addEventListener('click',function(e){var b=e.target.closest('[data-tm]');if(!b)return;var uid=b.getAttribute('data-tm');
  if(tmSure!==uid){tmSure=uid;b.textContent='удалить?';b.classList.add('sure');setTimeout(function(){if(tmSure===uid){tmSure=null;renderTeam()}},3000);return}
  tmSure=null;var nm=(TEAM[uid]||{}).name||'';
@@ -1902,14 +1944,14 @@ $('tmForm').addEventListener('submit',function(e){
    if(!x.ok||!x.j.localId){var m=(x.j&&x.j.error&&x.j.error.message)||'';
     throw (/EMAIL_EXISTS/.test(m)?'Такой email уже зарегистрирован. Удали его в Firebase → Authentication → Users и создай заново.':/WEAK_PASSWORD/.test(m)?'Пароль слишком простой (мин. 6 символов)':/INVALID_EMAIL/.test(m)?'Проверь email':/OPERATION_NOT_ALLOWED|ADMIN_ONLY/.test(m)?'В Firebase выключена регистрация по Email/Password':'Ошибка: '+m)}
    var uid=x.j.localId;
-   return fetch(DB_URL+'/team/'+encodeURIComponent(uid)+'.json?auth='+encodeURIComponent(tok),{method:'PUT',body:JSON.stringify({name:nm,email:em,ts:Date.now(),by:meName()||'Админ'})})
-    .then(function(r){if(!r.ok)throw 'Аккаунт создан, но не добавлен в команду — проверь правила базы (Rules)';TEAM[uid]={name:nm,email:em};renderTeam();
+   return fetch(DB_URL+'/team/'+encodeURIComponent(uid)+'.json?auth='+encodeURIComponent(tok),{method:'PUT',body:JSON.stringify({name:nm,email:em,role:$('tmRole').value,ts:Date.now(),by:meName()||'Админ'})})
+    .then(function(r){if(!r.ok)throw 'Аккаунт создан, но не добавлен в команду — проверь правила базы (Rules)';var rr=$('tmRole').value;TEAM[uid]={name:nm,email:em,role:rr};renderTeam();
      $('tmMsg').className='pwmsg ok';$('tmMsg').textContent='✅ Готово!';
      var site=location.origin+location.pathname;
-     $('tmDone').hidden=false;$('tmDone').innerHTML=esc('Отправь '+nm+':\n🌐 '+site+'\n📧 '+em+'\n🔑 '+pw+'\nПосле входа: 👤 → «Сменить пароль».')+'<div style="margin-top:8px"><button class="btn sm pri" id="tmCopy">📋 Скопировать</button></div>';
+     $('tmDone').hidden=false;$('tmDone').innerHTML=esc(ROLES[rr][0]+' '+ROLES[rr][1]+'\nОтправь '+nm+':\n🌐 '+site+'\n📧 '+em+'\n🔑 '+pw+'\nПосле входа: 👤 → «Сменить пароль».')+'<div style="margin-top:8px"><button class="btn sm pri" id="tmCopy">📋 Скопировать</button></div>';
      $('tmCopy').onclick=function(){copyText('Shift Hub — твой вход\n🌐 '+site+'\n📧 '+em+'\n🔑 '+pw+'\nПосле входа нажми 👤 → «Сменить пароль».').then(function(){$('tmCopy').textContent='✅ Скопировано'})};
      $('tmName').value='';$('tmEmail').value='';$('tmPass').value='';
-     patch(logOnly('➕ добавил(а) в команду: '+nm));
+     patch(logOnly('➕ добавил(а) в команду: '+nm+' ('+ROLES[rr][1].toLowerCase()+')'));$('tmRole').value='member';
     });
   })
   .catch(function(m){$('tmMsg').className='pwmsg';$('tmMsg').textContent=typeof m==='string'?m:'Нет связи, попробуй ещё раз'});
