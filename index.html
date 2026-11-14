@@ -200,6 +200,31 @@ tr:last-child td{border-bottom:0}
 .ytmeta{display:flex;justify-content:space-between;align-items:center;margin-top:8px;color:var(--mut);font-size:12.5px;font-weight:700;gap:8px}
 .link{background:none;border:0;color:var(--acc);font-weight:800;cursor:pointer;padding:0;text-decoration:none;font-size:inherit}
 .ytbtns{display:inline-flex;gap:12px;align-items:center}
+.ytbox{position:relative}
+.yttitle{font-size:12.5px;font-weight:800;margin:0 0 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--txt)}
+.ytbar{display:flex;align-items:center;gap:6px;margin-top:10px;padding:8px 10px;border-radius:14px;background:var(--card2);border:1px solid var(--line);flex-wrap:wrap}
+.ytbar button{border:0;background:none;cursor:pointer;font-size:17px;width:32px;height:32px;border-radius:10px;display:grid;place-items:center;color:var(--txt);transition:background .15s,transform .12s;flex:none}
+.ytbar button:hover{background:color-mix(in srgb,var(--acc) 20%,transparent);transform:scale(1.08)}
+.ytbar .ytplay{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--acc),var(--gold));color:#fff;font-size:16px;box-shadow:var(--glow)}
+.ytt{font-size:11.5px;font-weight:800;color:var(--mut);min-width:34px;text-align:center;font-variant-numeric:tabular-nums}
+.ytbar input[type=range]{-webkit-appearance:none;appearance:none;height:6px;border-radius:6px;cursor:pointer;background:linear-gradient(90deg,var(--acc) 0 var(--pct,0%),var(--line) var(--pct,0%) 100%);outline:none}
+.ytbar input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:#fff;box-shadow:0 0 0 3px var(--acc);cursor:pointer}
+.ytbar input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:#fff;border:3px solid var(--acc);cursor:pointer}
+.ytseek{flex:1;min-width:90px}
+.ytvolw{display:inline-flex;align-items:center;gap:2px}.ytvol{width:80px}
+.player iframe{position:absolute;inset:0;width:100%!important;height:100%!important;border:0}
+.ytbox.big{position:fixed;inset:0;margin:auto;height:max-content;max-height:96vh;overflow:auto;width:min(1100px,94vw);z-index:66;padding:14px;border-radius:22px;background:var(--card);border:1px solid var(--line);box-shadow:0 30px 80px rgba(0,0,0,.6);animation:aiIn .35s both}
+.theme-night .ytbox.big{background:rgba(22,14,48,.97)}.theme-day .ytbox.big{background:rgba(255,255,255,.97)}
+.ytbox.big .player{transform:none;max-height:72vh}
+#ytBackdrop{display:none!important}
+body.ytbig .wrap{z-index:70}
+body.ytbig .panel,body.ytbig .side,body.ytbig .grid,body.ytbig .view{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;transform:none!important;animation:none!important;filter:none!important}
+.ytbox.big{box-shadow:0 0 0 100vmax rgba(5,3,20,.78),0 30px 80px rgba(0,0,0,.6)!important}
+.ytbox:fullscreen{background:#000;padding:0;display:flex;flex-direction:column;justify-content:center}
+.ytbox:fullscreen .player{flex:1;aspect-ratio:auto;border-radius:0;transform:none}
+.ytbox:fullscreen .ytbar{margin:0;border-radius:0;background:rgba(20,20,30,.9)}
+.ytbox:fullscreen .yttitle{display:none}
+@media (max-width:640px){.ytvol{width:60px}.ytbar{gap:4px}.ytbar button{width:30px;height:30px}}
 .ythelp{font-size:12px;color:var(--mut);font-weight:700;margin-top:6px;line-height:1.4}
 
 /* ================= ЗАМЕТКИ ================= */
@@ -758,13 +783,13 @@ footer{position:relative;z-index:1;text-align:center;color:var(--mut);font-size:
     <div class="ph"><h2>🎬 YouTube</h2><div class="seg" id="ytTabs" style="margin-left:auto"><button data-yt="shared" class="on">Общее</button><button data-yt="radio">📻 Lo-fi</button></div></div>
     <div id="ytShared">
      <form class="ytf" id="ytForm"><input class="in" id="ytIn" placeholder="Ссылка на видео или плейлист" autocomplete="off"><button class="btn pri">▶</button></form>
-     <div class="player" id="player"></div>
+     <div class="ytbox" id="playerBox"><div class="yttitle" id="playerTitle" hidden></div><div class="player" id="player"></div><div class="ytbar" id="playerBar" hidden></div></div>
      <div class="ytmeta" id="ytMeta"></div>
      <div class="ythelp">Если YouTube просит «войти, чтобы подтвердить, что вы не бот»: войди в YouTube в этом же браузере и нажми 🔄. Не помогает — выключи VPN или нажми «↗ YouTube».</div>
     </div>
     <div id="ytRadio" hidden>
      <div class="stations" id="stations"></div>
-     <div class="player" id="radioPlayer"></div>
+     <div class="ytbox" id="radioPlayerBox"><div class="yttitle" id="radioPlayerTitle" hidden></div><div class="player" id="radioPlayer"></div><div class="ytbar" id="radioPlayerBar" hidden></div></div>
      <form class="ytf" id="radioForm" style="margin:12px 0 0"><input class="in" id="radioIn" placeholder="Своя станция: ссылка YouTube" autocomplete="off"><button class="btn">▶</button></form>
      <div class="ytmeta"><span>Радио играет только у тебя 🎧</span><span class="ytbtns" id="radioLinks"></span></div>
     </div>
@@ -980,6 +1005,7 @@ footer{position:relative;z-index:1;text-align:center;color:var(--mut);font-size:
 <div id="avModal" hidden></div>
 <div id="pModal" hidden></div>
 <div id="welcome" hidden></div>
+<div id="ytBackdrop" hidden></div>
 <div id="toasts"></div>
 <button id="aiFab" title="AI-ассистент"><span>🤖</span></button>
 <div id="aiPanel" hidden>
@@ -1352,14 +1378,92 @@ function ytFrame(id,list,auto){
  return '<iframe src="'+src+'" title="YouTube" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
 }
 function ytWatch(id,list){return id?'https://www.youtube.com/watch?v='+encodeURIComponent(id)+(list?'&list='+encodeURIComponent(list):''):'https://www.youtube.com/playlist?list='+encodeURIComponent(list)}
-document.addEventListener('click',function(e){var b=e.target.closest('[data-ytr]');if(!b)return;var box=$(b.getAttribute('data-ytr')),f=box&&box.querySelector('iframe');if(f){var s=f.src;f.src='about:blank';setTimeout(function(){f.src=s},60)}});
+document.addEventListener('click',function(e){var b=e.target.closest('[data-ytr]');if(!b)return;var k=b.getAttribute('data-ytr'),P=YTP[k];if(P)ytMount(k,P.id,P.list,true);else{var f=$(k)&&$(k).querySelector('iframe');if(f){var s0=f.src;f.src='about:blank';setTimeout(function(){f.src=s0},60)}}});
+/* ---- свой плеер YouTube (IFrame API) ---- */
+var YTP={},ytApi=null;
+function ytReady(){
+ if(ytApi)return ytApi;
+ ytApi=new Promise(function(res,rej){
+  if(window.YT&&YT.Player)return res();
+  var prev=window.onYouTubeIframeAPIReady;window.onYouTubeIframeAPIReady=function(){try{prev&&prev()}catch(e){}res()};
+  var sc=document.createElement('script');sc.src='https://www.youtube.com/iframe_api';sc.onerror=function(){rej('load')};document.head.appendChild(sc);
+  setTimeout(function(){if(!(window.YT&&YT.Player))rej('timeout')},12000);
+ });
+ ytApi.catch(function(){ytApi=null});
+ return ytApi;
+}
+function tfmt(x){x=Math.max(0,Math.floor(x||0));var h=Math.floor(x/3600),m=Math.floor(x%3600/60),s2=x%60;return (h?h+':'+p2(m):m)+':'+p2(s2)}
+function ytBarHTML(k){
+ return '<button data-yc="prev" data-k="'+k+'" title="Предыдущее">⏮</button><button data-yc="play" data-k="'+k+'" class="ytplay" title="Играть / пауза">▶</button><button data-yc="next" data-k="'+k+'" title="Следующее">⏭</button>'
+  +'<span class="ytt" id="'+k+'T">0:00</span><input type="range" class="ytseek" data-yc="seek" data-k="'+k+'" min="0" max="1000" value="0" aria-label="Перемотка"><span class="ytt" id="'+k+'D">0:00</span>'
+  +'<span class="ytvolw"><button data-yc="mute" data-k="'+k+'" title="Звук">🔊</button><input type="range" class="ytvol" data-yc="vol" data-k="'+k+'" min="0" max="100" value="'+(+lsGet('yt-vol-'+k,'70'))+'" aria-label="Громкость"></span>'
+  +'<button data-yc="big" data-k="'+k+'" title="Крупнее">🔳</button><button data-yc="fs" data-k="'+k+'" title="На весь экран">⛶</button>';
+}
+function ytUnmount(k){var P=YTP[k];if(P&&P.p&&P.p.destroy){try{P.p.destroy()}catch(e){}}delete YTP[k];var bar=$(k+'Bar');if(bar)bar.hidden=true;var t=$(k+'Title');if(t)t.hidden=true;ytBig(k,false)}
+function ytMount(k,id,list,auto){
+ ytUnmount(k);
+ $(k).innerHTML='<div id="'+k+'_f"></div>';
+ var bar=$(k+'Bar');bar.innerHTML=ytBarHTML(k);bar.hidden=false;
+ YTP[k]={p:null,id:id,list:list,seeking:false};
+ ytReady().then(function(){
+  if(!YTP[k]||YTP[k].id!==id||YTP[k].list!==list)return;
+  var vars={rel:0,playsinline:1,modestbranding:1,controls:0,iv_load_policy:3,fs:0,autoplay:auto?1:0,origin:location.origin};
+  if(list){vars.listType='playlist';vars.list=list}
+  var p=new YT.Player(k+'_f',{width:'100%',height:'100%',videoId:id||undefined,playerVars:vars,events:{
+   onReady:function(){try{p.setVolume(+lsGet('yt-vol-'+k,'70'));if(lsGet('yt-mute-'+k,''))p.mute()}catch(e){}ytSync(k)},
+   onStateChange:function(){ytSync(k)},
+   onError:function(e){var t=$(k+'Title');if(t){t.hidden=false;t.innerHTML='⚠️ Это видео нельзя проиграть на сайте ('+e.data+'). Нажми «↗ YouTube» или 🔄.'}}
+  }});
+  YTP[k].p=p;
+ }).catch(function(){$(k).innerHTML=ytFrame(id,list,auto);bar.hidden=true});
+}
+function ytSync(k){
+ var P=YTP[k];if(!P||!P.p||!P.p.getPlayerState)return;var p=P.p;
+ try{
+  var st=p.getPlayerState(),cur=p.getCurrentTime()||0,dur=p.getDuration()||0,muted=p.isMuted(),d=p.getVideoData?p.getVideoData():{};
+  var pb=document.querySelector('[data-yc=play][data-k="'+k+'"]');if(pb)pb.textContent=(st===1||st===3)?'⏸':'▶';
+  if(!P.seeking){var sk=document.querySelector('[data-yc=seek][data-k="'+k+'"]');if(sk){sk.value=dur?Math.round(cur/dur*1000):0;sk.style.setProperty('--pct',(dur?cur/dur*100:0)+'%')}}
+  $(k+'T').textContent=tfmt(cur);$(k+'D').textContent=dur?tfmt(dur):'—';
+  var mb=document.querySelector('[data-yc=mute][data-k="'+k+'"]');if(mb)mb.textContent=muted||p.getVolume()===0?'🔇':(p.getVolume()<40?'🔉':'🔊');
+  var vs=document.querySelector('[data-yc=vol][data-k="'+k+'"]');if(vs)vs.style.setProperty('--pct',(muted?0:p.getVolume())+'%');
+  var t=$(k+'Title');if(t&&d&&d.title&&!/⚠️/.test(t.textContent)){t.hidden=false;t.textContent='🎵 '+d.title+(d.author?' — '+d.author:'')}
+ }catch(e){}
+}
+setInterval(function(){Object.keys(YTP).forEach(ytSync)},500);
+function ytBig(k,on){
+ var box=$(k+'Box');if(!box)return;if(on===undefined)on=!box.classList.contains('big');
+ box.classList.toggle('big',on);document.body.classList.toggle('ytbig',!!document.querySelector('.ytbox.big'));
+ var b=document.querySelector('[data-yc=big][data-k="'+k+'"]');if(b){b.textContent=on?'🔲':'🔳';b.title=on?'Свернуть':'Крупнее'}
+}
+document.addEventListener('mousedown',function(e){if(document.body.classList.contains('ytbig')&&!e.target.closest('.ytbox.big'))['player','radioPlayer'].forEach(function(k){ytBig(k,false)})});
+addEventListener('keydown',function(e){if(e.key==='Escape'&&document.querySelector('.ytbox.big'))['player','radioPlayer'].forEach(function(k){ytBig(k,false)})});
+document.addEventListener('click',function(e){
+ var b=e.target.closest('[data-yc]');if(!b||b.tagName==='INPUT')return;var k=b.getAttribute('data-k'),P=YTP[k],p=P&&P.p,a=b.getAttribute('data-yc');
+ if(a==='big'){ytBig(k);return}
+ if(a==='fs'){var bx=$(k+'Box');try{if(document.fullscreenElement)document.exitFullscreen();else(bx.requestFullscreen||bx.webkitRequestFullscreen).call(bx)}catch(x){ytBig(k,true)}return}
+ if(!p||!p.getPlayerState)return;
+ try{
+  if(a==='play'){var st=p.getPlayerState();if(st===1||st===3)p.pauseVideo();else p.playVideo()}
+  else if(a==='prev'){if(P.list&&p.getCurrentTime()<4)p.previousVideo();else p.seekTo(0,true)}
+  else if(a==='next'){if(P.list)p.nextVideo();else p.seekTo(Math.max(0,p.getDuration()-1),true)}
+  else if(a==='mute'){if(p.isMuted()||p.getVolume()===0){p.unMute();if(p.getVolume()===0)p.setVolume(50);lsSet('yt-mute-'+k,'')}else{p.mute();lsSet('yt-mute-'+k,'1')}}
+ }catch(x){}
+ setTimeout(function(){ytSync(k)},120);
+});
+document.addEventListener('input',function(e){
+ var r=e.target.closest('[data-yc]');if(!r)return;var k=r.getAttribute('data-k'),P=YTP[k],p=P&&P.p;if(!p||!p.getDuration)return;
+ try{
+  if(r.getAttribute('data-yc')==='seek'){P.seeking=true;var dur=p.getDuration()||0;r.style.setProperty('--pct',(r.value/10)+'%');$(k+'T').textContent=tfmt(dur*r.value/1000);clearTimeout(P.st);P.st=setTimeout(function(){p.seekTo(dur*r.value/1000,true);P.seeking=false},120)}
+  else{var v=+r.value;p.setVolume(v);if(v>0&&p.isMuted())p.unMute();lsSet('yt-vol-'+k,String(v));lsSet('yt-mute-'+k,v===0?'1':'');r.style.setProperty('--pct',v+'%')}
+ }catch(x){}
+});
 function renderVideo(){
  var v=(raw&&raw.video)||{},key=(v.id||'')+'|'+(v.list||'');
  if(key!==ui.lastVideo){
   ui.lastVideo=key;
   if(v.id||v.list){
-   $('player').innerHTML=ytFrame(v.id,v.list,false);
-  } else $('player').innerHTML='<div class="empty"><div><div class="big">🎰</div><div style="font-weight:800;margin-top:8px">Вставь ссылку на YouTube</div><div style="opacity:.7;font-size:13px;margin-top:4px">Видео увидит вся смена</div></div></div>';
+   ytMount('player',v.id,v.list,false);
+  } else {ytUnmount('player');$('player').innerHTML='<div class="empty"><div><div class="big">🎰</div><div style="font-weight:800;margin-top:8px">Вставь ссылку на YouTube</div><div style="opacity:.7;font-size:13px;margin-top:4px">Видео увидит вся смена</div></div></div>'}
  }
  $('ytMeta').innerHTML=(v.id||v.list)?'<span>Поставил(а): '+esc(v.by||'—')+'</span><span class="ytbtns"><button class="link" data-ytr="player" title="Перезапустить плеер (после входа в YouTube)">🔄</button><a class="link" href="'+esc(ytWatch(v.id,v.list))+'" target="_blank" rel="noopener" title="Открыть на YouTube">↗ YouTube</a><button class="link" id="ytClear">Убрать</button></span>':'<span>Музыка, обучение, трансляции — что угодно</span>';
 }
@@ -1724,12 +1828,12 @@ function renderRadio(){
 }
 function playRadio(id,list){
  radioOn=id||('list:'+list);lsSet('shifthub-radio',radioOn);
- $('radioPlayer').innerHTML=ytFrame(id,list,true);
+ ytMount('radioPlayer',id,list,true);
  $('radioLinks').innerHTML='<button class="link" data-ytr="radioPlayer">🔄 Перезапустить</button><a class="link" href="'+esc(ytWatch(id,list))+'" target="_blank" rel="noopener">↗ Открыть на YouTube</a>';
  renderRadio();
 }
 $('stations').addEventListener('click',function(e){var b=e.target.closest('[data-st]');if(!b)return;var id=b.getAttribute('data-st');
- if(radioOn===id){radioOn='';lsSet('shifthub-radio','');$('radioPlayer').innerHTML='<div class="empty"><div><div class="big">📻</div><div style="font-weight:800;margin-top:8px">Радио выключено</div></div></div>';renderRadio()}else playRadio(id)});
+ if(radioOn===id){radioOn='';lsSet('shifthub-radio','');ytUnmount('radioPlayer');$('radioPlayer').innerHTML='<div class="empty"><div><div class="big">📻</div><div style="font-weight:800;margin-top:8px">Радио выключено</div></div></div>';renderRadio()}else playRadio(id)});
 $('radioForm').addEventListener('submit',function(e){e.preventDefault();var r=parseYT($('radioIn').value);$('radioIn').value='';if(!r){$('radioIn').placeholder='Не похоже на ссылку YouTube 🙈';return}playRadio(r.id,r.list)});
 $('ytTabs').addEventListener('click',function(e){var b=e.target.closest('[data-yt]');if(!b)return;var r=b.getAttribute('data-yt')==='radio';
  $('ytShared').hidden=r;$('ytRadio').hidden=!r;[].forEach.call(this.children,function(x){x.classList.toggle('on',x===b)})});
