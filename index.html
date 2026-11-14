@@ -198,7 +198,9 @@ tr:last-child td{border-bottom:0}
 .empty .big{font-size:46px;animation:bob 2.4s ease-in-out infinite}
 @keyframes bob{50%{transform:translateY(-6px) rotate(-6deg)}}
 .ytmeta{display:flex;justify-content:space-between;align-items:center;margin-top:8px;color:var(--mut);font-size:12.5px;font-weight:700;gap:8px}
-.link{background:none;border:0;color:var(--acc);font-weight:800;cursor:pointer;padding:0}
+.link{background:none;border:0;color:var(--acc);font-weight:800;cursor:pointer;padding:0;text-decoration:none;font-size:inherit}
+.ytbtns{display:inline-flex;gap:12px;align-items:center}
+.ythelp{font-size:12px;color:var(--mut);font-weight:700;margin-top:6px;line-height:1.4}
 
 /* ================= ЗАМЕТКИ ================= */
 .nform{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
@@ -758,12 +760,13 @@ footer{position:relative;z-index:1;text-align:center;color:var(--mut);font-size:
      <form class="ytf" id="ytForm"><input class="in" id="ytIn" placeholder="Ссылка на видео или плейлист" autocomplete="off"><button class="btn pri">▶</button></form>
      <div class="player" id="player"></div>
      <div class="ytmeta" id="ytMeta"></div>
+     <div class="ythelp">Если YouTube просит «войти, чтобы подтвердить, что вы не бот»: войди в YouTube в этом же браузере и нажми 🔄. Не помогает — выключи VPN или нажми «↗ YouTube».</div>
     </div>
     <div id="ytRadio" hidden>
      <div class="stations" id="stations"></div>
      <div class="player" id="radioPlayer"></div>
      <form class="ytf" id="radioForm" style="margin:12px 0 0"><input class="in" id="radioIn" placeholder="Своя станция: ссылка YouTube" autocomplete="off"><button class="btn">▶</button></form>
-     <div class="ytmeta"><span>Радио играет только у тебя 🎧</span></div>
+     <div class="ytmeta"><span>Радио играет только у тебя 🎧</span><span class="ytbtns" id="radioLinks"></span></div>
     </div>
    </section>
 
@@ -1343,16 +1346,22 @@ function parseYT(u){
  }catch(e){}
  return null;
 }
+function ytFrame(id,list,auto){
+ var q='rel=0&playsinline=1&modestbranding=1'+(auto?'&autoplay=1':'')+'&origin='+encodeURIComponent(location.origin);
+ var src='https://www.youtube.com/embed/'+(id?encodeURIComponent(id)+'?'+q+(list?'&list='+encodeURIComponent(list):''):'videoseries?list='+encodeURIComponent(list)+'&'+q);
+ return '<iframe src="'+src+'" title="YouTube" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
+}
+function ytWatch(id,list){return id?'https://www.youtube.com/watch?v='+encodeURIComponent(id)+(list?'&list='+encodeURIComponent(list):''):'https://www.youtube.com/playlist?list='+encodeURIComponent(list)}
+document.addEventListener('click',function(e){var b=e.target.closest('[data-ytr]');if(!b)return;var box=$(b.getAttribute('data-ytr')),f=box&&box.querySelector('iframe');if(f){var s=f.src;f.src='about:blank';setTimeout(function(){f.src=s},60)}});
 function renderVideo(){
  var v=(raw&&raw.video)||{},key=(v.id||'')+'|'+(v.list||'');
  if(key!==ui.lastVideo){
   ui.lastVideo=key;
   if(v.id||v.list){
-   var src='https://www.youtube-nocookie.com/embed/'+(v.id?encodeURIComponent(v.id)+'?rel=0&playsinline=1'+(v.list?'&list='+encodeURIComponent(v.list):''):'videoseries?list='+encodeURIComponent(v.list)+'&rel=0&playsinline=1');
-   $('player').innerHTML='<iframe src="'+src+'" title="YouTube" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
+   $('player').innerHTML=ytFrame(v.id,v.list,false);
   } else $('player').innerHTML='<div class="empty"><div><div class="big">🎰</div><div style="font-weight:800;margin-top:8px">Вставь ссылку на YouTube</div><div style="opacity:.7;font-size:13px;margin-top:4px">Видео увидит вся смена</div></div></div>';
  }
- $('ytMeta').innerHTML=(v.id||v.list)?'<span>Поставил(а): '+esc(v.by||'—')+'</span><button class="link" id="ytClear">Убрать видео</button>':'<span>Музыка, обучение, трансляции — что угодно</span>';
+ $('ytMeta').innerHTML=(v.id||v.list)?'<span>Поставил(а): '+esc(v.by||'—')+'</span><span class="ytbtns"><button class="link" data-ytr="player" title="Перезапустить плеер (после входа в YouTube)">🔄</button><a class="link" href="'+esc(ytWatch(v.id,v.list))+'" target="_blank" rel="noopener" title="Открыть на YouTube">↗ YouTube</a><button class="link" id="ytClear">Убрать</button></span>':'<span>Музыка, обучение, трансляции — что угодно</span>';
 }
 $('ytForm').addEventListener('submit',function(e){
  e.preventDefault();var r=parseYT($('ytIn').value);
@@ -1715,8 +1724,8 @@ function renderRadio(){
 }
 function playRadio(id,list){
  radioOn=id||('list:'+list);lsSet('shifthub-radio',radioOn);
- var src='https://www.youtube-nocookie.com/embed/'+(id?encodeURIComponent(id)+'?autoplay=1&playsinline=1&rel=0':'videoseries?list='+encodeURIComponent(list)+'&autoplay=1&playsinline=1');
- $('radioPlayer').innerHTML='<iframe src="'+src+'" title="Радио" allow="autoplay; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
+ $('radioPlayer').innerHTML=ytFrame(id,list,true);
+ $('radioLinks').innerHTML='<button class="link" data-ytr="radioPlayer">🔄 Перезапустить</button><a class="link" href="'+esc(ytWatch(id,list))+'" target="_blank" rel="noopener">↗ Открыть на YouTube</a>';
  renderRadio();
 }
 $('stations').addEventListener('click',function(e){var b=e.target.closest('[data-st]');if(!b)return;var id=b.getAttribute('data-st');
