@@ -498,7 +498,49 @@ body.locked .fab,body.locked #btimer,body.locked #btMenu{display:none!important}
 #aiFab span{display:grid;place-items:center;width:52px;height:52px;margin:4px;border-radius:50%;background:var(--sticky)}
 #aiFab:hover{transform:scale(1.08)}#aiFab.on{transform:scale(.92)}
 @keyframes aiSpin{to{transform:rotate(360deg)}}
-body.locked #aiFab,body.locked #aiPanel{display:none!important}
+body.noslack .ss-set,body.noslack .ss-tok,body.noslack #slWinBtn,body.noslack #slackBox{display:none!important}
+body.locked #aiFab,body.locked #aiPanel,body.locked #tcFab,body.locked #tcPanel{display:none!important}
+#tcFab{position:fixed;right:90px;bottom:22px;z-index:47;width:52px;height:52px;border-radius:50%;border:0;cursor:pointer;font-size:23px;padding:0;background:linear-gradient(135deg,#21e6c1,#3b82f6);box-shadow:0 12px 28px -6px rgba(33,180,230,.7);transition:transform .2s}
+#tcFab span{display:grid;place-items:center;width:100%;height:100%}#tcFab:hover{transform:scale(1.08)}#tcFab.on{transform:scale(.92)}
+#tcBadge{position:absolute;top:-4px;right:-4px;min-width:22px;height:22px;padding:0 6px;border-radius:11px;background:#ff3d6e;color:#fff;font:800 12px/22px Manrope,sans-serif;animation:tcPop .4s cubic-bezier(.2,1.6,.4,1)}
+@keyframes tcPop{from{transform:scale(0)}}
+#tcFab.ring{animation:tcRing .6s}@keyframes tcRing{20%{transform:rotate(-14deg)}40%{transform:rotate(12deg)}60%{transform:rotate(-8deg)}80%{transform:rotate(5deg)}}
+#tcPanel{position:fixed;right:18px;bottom:90px;z-index:48;width:min(420px,calc(100vw - 24px));height:min(620px,calc(100vh - 120px));display:flex;flex-direction:column;border-radius:24px;background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow),0 0 40px rgba(33,200,230,.22);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);overflow:hidden;animation:aiIn .45s cubic-bezier(.2,1.2,.4,1);transform-origin:100% 100%}
+.tc-h{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line)}.tc-h small{display:block;font-size:11.5px;opacity:.7;font-weight:700}.tc-h .sp{flex:1}
+.tc-h button{border:0;background:none;font-size:16px;cursor:pointer;color:inherit;padding:6px;border-radius:10px}.tc-h button:hover{background:var(--line)}
+#tcMsgs{flex:1;overflow-y:auto;padding:16px 12px 4px;display:flex;flex-direction:column;gap:2px}
+.tc-empty{margin:auto;opacity:.6;font-weight:700;text-align:center}
+.tc-day{align-self:center;margin:10px 0 6px;font-size:11px;font-weight:800;padding:3px 10px;border-radius:10px;background:var(--line)}
+.tc-m{display:flex;gap:8px;align-items:flex-end;max-width:88%;position:relative;margin-top:8px;animation:tcIn .3s ease-out}
+.tc-m.cont{margin-top:2px}.tc-m.cont .tc-av{visibility:hidden}.tc-m.cont .tc-n{display:none}
+@keyframes tcIn{from{opacity:0;transform:translateY(8px)}}
+.tc-m.me{align-self:flex-end;flex-direction:row-reverse}
+.tc-av{cursor:pointer}
+.tc-b{padding:7px 11px 6px;border-radius:16px 16px 16px 5px;background:var(--line);font-size:14px;line-height:1.4;overflow-wrap:anywhere;min-width:60px}
+.tc-m.me .tc-b{border-radius:16px 16px 5px 16px;background:linear-gradient(135deg,rgba(33,230,193,.32),rgba(59,130,246,.32))}
+.tc-m.ment .tc-b{box-shadow:0 0 0 2px #ffc94a}
+.tc-n{font-size:11.5px;font-weight:800;margin-bottom:2px}
+.tc-t{font-size:10.5px;opacity:.6;margin-left:8px;float:right;margin-top:5px;font-weight:700}
+.tc-b a{color:var(--acc);font-weight:700}.tc-b .men{color:#ffb000;font-weight:800}
+.tc-q{font-size:12px;border-left:3px solid var(--acc);padding:2px 7px;margin-bottom:4px;opacity:.85;background:rgba(0,0,0,.08)}
+.tc-big{font-size:34px;line-height:1.15}
+.tc-acts{position:absolute;top:-16px;display:none;gap:2px;background:var(--sticky);border:1px solid var(--line);border-radius:12px;padding:2px;z-index:2;box-shadow:var(--shadow)}
+.tc-m:not(.me) .tc-acts{right:-10px}.tc-m.me .tc-acts{left:-10px}
+.tc-m:hover .tc-acts,.tc-m.act .tc-acts{display:flex}
+.tc-acts button{border:0;background:none;cursor:pointer;font-size:14px;padding:3px 5px;border-radius:8px;color:inherit;transition:transform .15s}.tc-acts button:hover{background:var(--line);transform:scale(1.2)}
+.tc-rx{display:flex;gap:4px;flex-wrap:wrap;margin-top:3px}
+.tc-rx button{border:1px solid var(--line);background:var(--card);border-radius:12px;padding:1px 7px;font-size:12px;cursor:pointer;font-weight:800;color:inherit}
+.tc-rx button.mine{border-color:var(--acc);background:rgba(139,92,246,.18)}
+#tcTyping{min-height:18px;padding:0 16px;font-size:11.5px;font-weight:700;opacity:.7}
+#tcReply{display:flex;align-items:center;gap:8px;margin:0 12px 6px;padding:6px 10px;border-left:3px solid var(--acc);background:var(--line);font-size:12.5px}
+#tcReply span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}#tcReply button{border:0;background:none;cursor:pointer;color:inherit}
+#tcEmo{display:flex;flex-wrap:wrap;gap:2px;padding:6px 10px;margin:0 12px 6px;border-radius:14px;background:var(--line)}
+#tcEmo button{border:0;background:none;font-size:20px;cursor:pointer;padding:3px;border-radius:8px;transition:transform .15s}#tcEmo button:hover{transform:scale(1.25)}
+#tcForm{display:flex;gap:6px;align-items:flex-end;padding:8px 10px 12px;border-top:1px solid var(--line)}
+#tcIn{flex:1;resize:none;max-height:110px;min-height:40px;padding:9px 12px;font-size:14px;border-radius:14px}
+#tcForm>button{border:0;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:18px;flex:none}
+#tcEmoBtn{background:var(--line)}#tcSend{background:linear-gradient(135deg,#21e6c1,#3b82f6);color:#fff}
+@media (max-width:640px){#tcPanel{right:12px;bottom:84px;height:calc(100vh - 110px)}#tcFab{right:78px;bottom:16px}}
 #aiPanel{position:fixed;right:18px;bottom:90px;z-index:48;width:min(420px,calc(100vw - 24px));height:min(620px,calc(100vh - 120px));display:flex;flex-direction:column;border-radius:24px;background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow),0 0 40px rgba(139,92,246,.25);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);overflow:hidden;animation:aiIn .45s cubic-bezier(.2,1.2,.4,1);transform-origin:100% 100%}
 @keyframes aiIn{from{opacity:0;transform:perspective(900px) rotateX(20deg) scale(.85)}to{opacity:1;transform:none}}
 .ai-h{display:flex;align-items:center;gap:10px;padding:14px 14px 12px;border-bottom:1px solid var(--line);background:linear-gradient(135deg,color-mix(in srgb,var(--acc) 18%,transparent),color-mix(in srgb,#8b5cf6 18%,transparent))}
@@ -711,6 +753,29 @@ body.guest .guest-note{display:flex;align-items:center;gap:8px;margin:0 0 14px;p
 .wl-acts{display:flex;gap:8px;justify-content:center;margin-top:12px}
 @media (max-width:640px){.wl-av{width:130px;height:130px;font-size:72px}.pc-av{width:110px;height:110px;font-size:60px}.pc-avw{width:110px;height:110px;margin-top:-55px}}
 
+/* ================= СТАТУС СМЕНЫ ================= */
+.ssw{display:flex;align-items:center;gap:14px 18px;flex-wrap:wrap;margin-bottom:18px;padding:14px 18px;border-left:6px solid #7a7a90}
+.ssw[data-s="on"]{border-left-color:#21e6a1}.ssw[data-s="lunch"]{border-left-color:#ffb547}.ssw[data-s="break"]{border-left-color:#3ee0c5}.ssw[data-s="off"]{border-left-color:#ff4d6d}
+.ss-l{min-width:180px}
+.ss-now{font-family:Unbounded;font-weight:700;font-size:18px}
+.ss-sub{color:var(--mut);font-weight:700;font-size:12px;margin-top:3px}
+.ss-btns{display:flex;gap:8px;flex-wrap:wrap;flex:1}
+.ssb{border:0;border-radius:14px;padding:11px 16px;font-weight:800;font-size:14px;cursor:pointer;color:#141414;transition:transform .15s,box-shadow .15s;box-shadow:0 8px 18px -8px rgba(0,0,0,.4)}
+.ssb:hover{transform:translateY(-2px) perspective(400px) rotateX(10deg)}
+.ssb:active{transform:scale(.95)}
+.ssb.on{background:linear-gradient(135deg,#7ef0c0,#21e6a1)}.ssb.lunch{background:linear-gradient(135deg,#ffd27a,#ffb547)}.ssb.brk{background:linear-gradient(135deg,#9ff3e3,#3ee0c5)}
+.ssb.back{background:linear-gradient(135deg,#c3b4ff,#8b5cf6);color:#fff}.ssb.off{background:linear-gradient(135deg,#ff8aa3,#ff4d6d);color:#fff}
+.ss-set{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ss-set .in{width:170px;padding:8px 10px;font-size:13px}
+.nav .nav-slack{margin-left:auto;background:linear-gradient(135deg,#611f69,#4a154b);color:#fff;border-color:transparent}.nav .nav-slack:hover{filter:brightness(1.2)}
+.ss-hook{font-size:11.5px;font-weight:800;color:#ffb547}.ss-hook.ok{color:#21e6a1}
+#ssMode{width:auto;padding:8px 10px;font-size:13px}
+.ss-tok{flex-basis:100%;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.ss-tok .in{flex:1;min-width:200px;padding:8px 10px;font-size:13px}
+.ss-tok details{flex-basis:100%;font-size:13px;font-weight:600;line-height:1.5}.ss-tok summary{cursor:pointer;font-weight:800;color:var(--acc)}
+.ss-tok ol{margin:6px 0;padding-left:20px}.ss-tok a{color:var(--acc);font-weight:800}
+body.guest #slackBox{display:none}
+@media (max-width:640px){.ssb{flex:1 1 45%;padding:12px 10px}.ss-set .in{flex:1}}
 /* ================= ВХОД ================= */
 body.locked .wrap,body.locked footer,body.locked #toasts{display:none}
 #login{position:fixed;inset:0;z-index:40;display:none;align-items:center;justify-content:center;padding:20px}
@@ -766,12 +831,36 @@ footer{position:relative;z-index:1;text-align:center;color:var(--mut);font-size:
   </div>
  </header>
 
- <nav class="nav" id="nav"><button data-view="home">🏠 Главная</button><button data-view="work">🧰 Работа</button><button data-view="fun">🎉 Отдых</button><button data-view="profile">📸 Профиль</button><button data-view="team" id="navTeam" hidden>👥 Команда</button></nav>
+ <nav class="nav" id="nav"><button data-view="home">🏠 Главная</button><button data-view="work">🧰 Работа</button><button data-view="fun">🎉 Отдых</button><button data-view="profile">📸 Профиль</button><button data-view="team" id="navTeam" hidden>👥 Команда</button><button class="nav-slack" id="slWinBtn" title="Открыть Slack окном сбоку">💬 Slack</button></nav>
  <div class="guest-note">👀 Ты гость: отмечай перерывы и обед в своей строке графика и пользуйся функциями. Чужое менять нельзя.<span id="guestRow"></span></div>
  <div class="online" id="online" hidden></div>
  <div id="bdayBanner" hidden></div>
 
  <div class="view" id="v-home">
+ <section class="panel ssw" id="ssw">
+  <div class="ss-l"><div class="ss-now" id="ssNow">⚪ Статус не выбран</div><div class="ss-sub" id="ssSub"></div></div>
+  <div class="ss-btns">
+   <button class="ssb on" data-ss="on">🟢 On shift</button>
+   <button class="ssb lunch" data-ss="lunch">🍽️ Lunch</button>
+   <button class="ssb brk" data-ss="break">☕ Break</button>
+   <button class="ssb back" data-ss="back">↩️ Back</button>
+   <button class="ssb off" data-ss="off">🔴 Off shift</button>
+  </div>
+  <div class="ss-set"><div class="seg" id="ssLang"><button data-sl="en">EN</button><button data-sl="ru">RU</button></div>
+   <select class="in" id="ssMode" title="Как отправлять в Slack"><option value="copy">📋 Скопировать и открыть Slack</option><option value="token">👤 Сразу от моего имени</option><option value="bot">🤖 От бота (вебхук)</option></select>
+   <button class="btn sm" id="slWinBtn2" type="button">💬 Открыть Slack сбоку</button>
+   <input class="in" id="ssName" maxlength="30" placeholder="Имя для Slack"><span class="ss-hook" id="ssHook"></span></div>
+  <div class="ss-tok" id="ssTok" hidden>
+   <input class="in" id="ssToken" type="password" placeholder="Личный Slack User Token (xoxp-…)" autocomplete="off">
+   <button class="btn sm pri" id="ssTokSave">Сохранить</button><button class="btn sm" id="ssTokDel">Удалить</button>
+   <details><summary>Как получить личный токен (5 минут)</summary><ol>
+    <li>Открой <a href="https://api.slack.com/apps" target="_blank" rel="noopener">api.slack.com/apps</a> → <b>Create New App</b> → <b>From scratch</b>, имя любое (например «Shift Hub — Хаям»), выбери ваш рабочий Slack.</li>
+    <li>Слева <b>OAuth &amp; Permissions</b> → блок <b>User Token Scopes</b> → <b>Add an OAuth Scope</b> → <code>chat:write</code>.</li>
+    <li>Вверху <b>Install to Workspace</b> → <b>Allow</b> (если нужен админ — Slack попросит его одобрить).</li>
+    <li>Скопируй <b>User OAuth Token</b> (начинается с <code>xoxp-</code>) и вставь сюда.</li>
+   </ol><div class="muted">Токен хранится только в этом браузере и не попадает в базу сайта. Никому его не показывай.</div></details>
+  </div>
+ </section>
  <main class="grid">
   <section class="panel">
    <div class="ph"><h2>📋 График смены</h2><div class="tabs" id="tabs"></div></div>
@@ -894,6 +983,13 @@ footer{position:relative;z-index:1;text-align:center;color:var(--mut);font-size:
      </form>
      <div id="tmDone" hidden></div>
     </section>
+    <section class="panel" id="slackBox">
+     <div class="ph"><h2>💬 Slack-канал смены</h2><span class="count" id="slState"></span></div>
+     <div class="muted" style="font-size:13px;font-weight:600;line-height:1.5;margin-bottom:8px">Сюда уходят «On shift / Lunch / Break / Back / Off shift». Нужен <b>Incoming Webhook</b> для вашего канала: Slack → Apps → «Incoming WebHooks» → Add to Slack → выбрать канал → скопировать Webhook URL (начинается с <code>https://hooks.slack.com/services/</code>). Если приложения ставит только админ Slack — попроси его.</div>
+     <form id="slChForm" class="pwf" style="margin-bottom:10px"><span class="lbl">🔗 Ссылка на канал (для «Скопировать и открыть» и личных токенов)</span><input class="in" id="slChan" placeholder="https://ваша-компания.slack.com/archives/C0123ABCD" autocomplete="off"><div class="muted" style="font-size:12px;font-weight:600">В Slack: правый клик по каналу → <b>Copy</b> → <b>Copy link</b>.</div><button class="btn pri">Сохранить ссылку</button><div class="pwmsg" id="slChMsg"></div></form>
+     <span class="lbl">🤖 Вебхук бота (необязательно)</span>
+     <form id="slForm" class="pwf"><input class="in" id="slUrl" type="password" placeholder="https://hooks.slack.com/services/…" autocomplete="off"><div class="r" style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn pri">Сохранить</button><button type="button" class="btn" id="slTest">📨 Тест</button><button type="button" class="btn" id="slOff">Отключить</button></div><div class="pwmsg" id="slMsg"></div></form>
+    </section>
     <section class="panel" id="tmSelfBox" hidden>
      <div class="ph"><h2>👑 Твоё имя на сайте</h2></div>
      <div class="muted" style="font-size:13px;font-weight:600;margin-bottom:8px">Ты админ. Укажи своё имя — как в графике, — чтобы действия были от твоего имени.</div>
@@ -1007,6 +1103,15 @@ footer{position:relative;z-index:1;text-align:center;color:var(--mut);font-size:
 <div id="welcome" hidden></div>
 <div id="ytBackdrop" hidden></div>
 <div id="toasts"></div>
+<button id="tcFab" title="Чат команды"><span>💬</span><b id="tcBadge" hidden>0</b></button>
+<div id="tcPanel" hidden>
+ <div class="tc-h"><div class="ai-dot">💬</div><div><b>Чат команды</b><small id="tcSub">только для своих</small></div><span class="sp"></span><button id="tcClose" title="Закрыть">✕</button></div>
+ <div id="tcMsgs"><div class="tc-empty">Тут пока тихо… Напиши первым 👋</div></div>
+ <div id="tcTyping"></div>
+ <div id="tcReply" hidden><span id="tcReplyT"></span><button id="tcReplyX" title="Отменить">✕</button></div>
+ <div id="tcEmo" hidden></div>
+ <form id="tcForm"><button type="button" id="tcEmoBtn" title="Смайлы">😊</button><textarea class="in" id="tcIn" placeholder="Сообщение команде… (@имя — упомянуть)" maxlength="1000" rows="1"></textarea><button id="tcSend" title="Отправить">➤</button></form>
+</div>
 <button id="aiFab" title="AI-ассистент"><span>🤖</span></button>
 <div id="aiPanel" hidden>
  <div class="ai-h"><div class="ai-dot">✨</div><div><b>AI-ассистент</b><small id="aiModel">Gemini</small></div><span class="sp"></span><button id="aiClear" title="Новый чат">🧹</button><button id="aiGear" title="Настройки">⚙️</button><button id="aiClose" title="Закрыть">✕</button></div>
@@ -1086,7 +1191,10 @@ if(location.hash==='#day'||location.hash==='#night')themeMode=location.hash.slic
 function $(id){return document.getElementById(id)}
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
 function p2(n){return ('0'+n).slice(-2)}
-var BASE_OFF=3; // основное время команды: GMT+3
+var BASE_OFF=3;
+var SLACK_ON=false; // Slack отложен: поставь true, чтобы вернуть отправку в Slack
+if(!SLACK_ON)document.body.classList.add('noslack');
+ // основное время команды: GMT+3
 var TZ_LIST=[[-8,'Лос-Анджелес'],[-5,'Нью-Йорк'],[-4,'Сантьяго'],[-3,'Сан-Паулу, Буэнос-Айрес'],[-1,'Азоры'],[0,'Лондон, Лиссабон'],[1,'Берлин, Париж, Варшава'],[2,'Киев, Афины'],[3,'Москва, Стамбул — команда'],[3.5,'Тегеран'],[4,'Баку, Дубай, Тбилиси'],[4.5,'Кабул'],[5,'Ташкент, Карачи'],[5.5,'Дели'],[6,'Алматы, Бишкек'],[7,'Бангкок'],[8,'Пекин, Сингапур'],[9,'Токио, Сеул'],[10,'Сидней']];
 var DISP_OFF=parseFloat(lsGet('shifthub-gmt','3'));if(isNaN(DISP_OFF))DISP_OFF=3;
 function offTxt(o){var a=Math.abs(o),h=Math.floor(a),m=Math.round((a-h)*60);return 'GMT'+(o<0?'−':'+')+h+(m?':'+p2(m):'')}
@@ -1157,6 +1265,7 @@ function connect(){
  es.addEventListener('auth_revoked',function(){refreshToken(true)});
  es.onerror=function(){setStatus('offline')};
  es.onopen=function(){if(status==='offline')setStatus('online')};
+ try{tcConnect()}catch(x){}
 }
 function setStatus(s){
  status=s;
@@ -2073,7 +2182,7 @@ var tok=null,refTok=null,refTimer=null;
 function dbu(){return DB_URL+'/smena.json'+(tok?'?auth='+encodeURIComponent(tok):'')}
 function lock(msg){
  try{presenceLeave()}catch(x){}
- tok=null;refTok=null;clearTimeout(refTimer);if(es){es.close();es=null}
+ tok=null;refTok=null;clearTimeout(refTimer);if(es){es.close();es=null}try{tcStop()}catch(x){}
  raw=null;seen=null;lsSet('shifthub-auth','');
  document.body.classList.add('locked');$('lgErr').textContent=msg||'';
  ME={uid:'',email:'',name:'',admin:false,sup:false,role:''};TEAM={};applyMe();$('userMenu').hidden=true;
@@ -2257,6 +2366,8 @@ function describe(u){
   else if(k==='wheel'&&v)out.push('🎡 колесо: '+(v.purpose||'')+' → '+((v.names||[])[v.winner]||'?'));
   else if((m=k.match(/^bdays\/.+$/)))out.push(v?'🎂 день рождения: '+v.name+' — '+v.d+' '+MON[v.m-1]:'🗑 удалил(а) день рождения');
   else if(k==='cfg/aiKey')out.push(v?'🤖 подключил(а) AI-ассистента':'🤖 отключил(а) AI-ассистента');
+  else if(k==='cfg/slackHook')out.push(v?'💬 подключил(а) Slack-бота':'💬 отключил(а) Slack-бота');
+  else if(k==='cfg/slackChan')out.push('💬 обновил(а) ссылку на Slack-канал');
   else if((m=k.match(/^slots\/[^\/]+\/.+$/))&&v&&v.r)out.push('🎰 слоты: '+v.r.join(' '));
  });
  return out.join(' · ').slice(0,300);
@@ -2438,7 +2549,7 @@ function aiRun(){
   .then(function(){AI.busy=false;AI.partial='';AI.note='';clearInterval(aiTick);aiSave();aiRender()});
 }
 function aiStop(){if(AI.busy&&AI.ctrl){AI.stopped=true;AI.ctrl.abort()}}
-aiEl('aiFab').addEventListener('click',function(){AI.open=!AI.open;setTimeout(function(){try{beat()}catch(e){}},50);aiEl('aiPanel').hidden=!AI.open;aiEl('aiFab').classList.toggle('on',AI.open);if(AI.open){aiRender();setTimeout(function(){var i=aiEl(aiKey()?'aiIn':'aiKeyIn');if(i)i.focus()},60)}});
+aiEl('aiFab').addEventListener('click',function(){AI.open=!AI.open;if(AI.open&&TC.open)tcToggle(false);setTimeout(function(){try{beat()}catch(e){}},50);aiEl('aiPanel').hidden=!AI.open;aiEl('aiFab').classList.toggle('on',AI.open);if(AI.open){aiRender();setTimeout(function(){var i=aiEl(aiKey()?'aiIn':'aiKeyIn');if(i)i.focus()},60)}});
 aiEl('aiClose').addEventListener('click',function(){AI.open=false;setTimeout(function(){try{beat()}catch(e){}},50);aiEl('aiPanel').hidden=true;aiEl('aiFab').classList.remove('on')});
 aiEl('aiGear').addEventListener('click',function(){AI.showSetup=!AI.showSetup;aiEl('aiKeyIn').value='';aiRender()});
 aiEl('aiClear').addEventListener('click',function(){aiStop();AI.msgs=[];aiSave();aiRender()});
@@ -2472,7 +2583,7 @@ function myState(){return document.hidden?'bg':(Date.now()-lastAct>IDLE_MS?'idle
 function beat(){
  if(!ONLINE||!tok||document.body.classList.contains('locked'))return;
  var v=(typeof AI!=='undefined'&&AI.open)?'ai':(document.body.getAttribute('data-view')||'home');
- var val={n:(meName()||'Гость').slice(0,24),v:v,st:myState(),d:/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)?'m':'d',ts:{'.sv':'timestamp'}};
+ var val={n:(meName()||'Гость').slice(0,24),v:v,st:myState(),ss:ssCur(),d:/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)?'m':'d',ts:{'.sv':'timestamp'}};
  beatAt=Date.now();
  fetch(presUrl(),{method:'PUT',body:JSON.stringify(val)}).then(function(r){return r.ok?r.json():null}).then(function(j){if(j&&typeof j.ts==='number'){srvOff=j.ts-Date.now();setAt('presence/'+CID,j);renderPresence()}}).catch(function(){});
 }
@@ -2494,7 +2605,7 @@ function renderPresence(){
  Object.keys(P).forEach(function(id){var x=P[id];if(!x||typeof x.ts!=='number')return;
   var age=t-x.ts,on=age<ONLINE_MS,key=String(x.n||'Гость').toLowerCase(),me=id===CID,c=G[key];
   if(me){on=true;age=0}
-  var rec={n:x.n||'Гость',on:on,age:age,st:me?myState():x.st,v:me?((typeof AI!=='undefined'&&AI.open)?'ai':document.body.getAttribute('data-view')):x.v,dev:{},me:me};
+  var rec={n:x.n||'Гость',on:on,age:age,st:me?myState():x.st,v:me?((typeof AI!=='undefined'&&AI.open)?'ai':document.body.getAttribute('data-view')):x.v,dev:{},me:me,ss:me?ssCur():x.ss};
   if(c){if(on)c.dev[x.d||'d']=1;if(rec.on&&!c.on||rec.on===c.on&&age<c.age){rec.dev=c.dev;rec.me=c.me||me;G[key]=rec}else c.me=c.me||me}
   else{if(on)rec.dev[x.d||'d']=1;G[key]=rec}
  });
@@ -2507,6 +2618,7 @@ function renderPresence(){
  presSeen=names;
  function act(x){
   var br=onBreakNow(x.n);
+  var sl={lunch:'🍽️ обед',break:'☕ перерыв',off:'🔴 не на смене'}[x.ss];if(sl)return sl;
   if(x.st==='idle')return '💤 отошёл(ла)'+(br?' · '+br:'');
   if(x.st==='bg')return '🌙 в фоне'+(br?' · '+br:'');
   return (br?br+' · ':'')+(VIEWN[x.v]||'🏠 Главная');
@@ -2541,6 +2653,127 @@ function avData(k,nameFallback){
 function avS(k,n){return avData(k,n).s}
 function avT(k,n){return avData(k,n).t}
 function avEl(k,n,size,extra){var d=avData(k,n);return '<span class="oa'+(d.e?' emo':'')+(extra?' '+extra:'')+'" style="'+d.s+(size?';width:'+size+'px;height:'+size+'px;font-size:'+Math.round(size*.55)+'px':'')+'">'+d.t+'</span>'}
+
+/* ================= ЧАТ КОМАНДЫ ================= */
+var TC={open:false,msgs:{},es:null,tes:null,typ:{},reply:null,init:false,lastTyp:0,seenIds:{},rendered:false};
+var TC_EMO=['😀','😂','🤣','😅','😍','🥳','😎','🤔','😴','😭','😡','🤯','👍','👎','👏','🙏','💪','🔥','❤️','💯','🎉','☕','🍕','🍔','🎰','💸','🚀','👀','✅','❌'];
+var TC_RX=['👍','😂','❤️','🔥'];
+function tcSeen(){return +lsGet('shifthub-tcseen','0')||0}
+function tcConnect(){
+ if(!ONLINE||!tok)return;tcStop();
+ TC.es=new EventSource(DB_URL+'/chat.json?auth='+encodeURIComponent(tok)+'&orderBy=%22%24key%22&limitToLast=200');TC.init=false;
+ function on(e){var m;try{m=JSON.parse(e.data)}catch(x){return}if(!m)return;
+  if(e.type==='put'){if(m.path==='/')TC.msgs=m.data||{};else tcSet(m.path,m.data)}
+  else Object.keys(m.data||{}).forEach(function(k){tcSet(m.path.replace(/\/$/,'')+'/'+k,m.data[k])});
+  tcOnData(!TC.init);TC.init=true}
+ TC.es.addEventListener('put',on);TC.es.addEventListener('patch',on);
+ TC.es.addEventListener('cancel',tcStop);TC.es.addEventListener('auth_revoked',tcStop);
+ TC.tes=new EventSource(DB_URL+'/chatty.json?auth='+encodeURIComponent(tok));
+ function onT(e){var m;try{m=JSON.parse(e.data)}catch(x){return}if(!m)return;
+  if(e.type==='put'){if(m.path==='/')TC.typ=m.data||{};else{var k=m.path.replace(/^\//,'').split('/')[0];if(m.data===null)delete TC.typ[k];else TC.typ[k]=m.data}}
+  else Object.keys(m.data||{}).forEach(function(k){TC.typ[k]=m.data[k]});
+  tcRenderTyping()}
+ TC.tes.addEventListener('put',onT);TC.tes.addEventListener('patch',onT);
+}
+function tcStop(){if(TC.es){TC.es.close();TC.es=null}if(TC.tes){TC.tes.close();TC.tes=null}}
+function tcSet(path,val){var ks=path.split('/').filter(Boolean),o=TC.msgs;if(!ks.length){TC.msgs=val||{};return}
+ for(var i=0;i<ks.length-1;i++){if(!o[ks[i]]||typeof o[ks[i]]!=='object'){if(val===null)return;o[ks[i]]={}}o=o[ks[i]]}
+ if(val===null)delete o[ks[ks.length-1]];else o[ks[ks.length-1]]=val}
+function tcRenderTyping(){
+ var now=Date.now()+(typeof srvOff==='number'?srvOff:0),who=Object.keys(TC.typ).filter(function(u){var t=TC.typ[u];return u!==ME.uid&&t&&now-(+t.ts||0)<7000}).map(function(u){return TC.typ[u].name||'Кто-то'});
+ $('tcTyping').textContent=who.length?('✍️ '+who.slice(0,3).join(', ')+(who.length>1?' печатают':' печатает')+'…'):'';
+}
+setInterval(function(){if(TC.open)tcRenderTyping()},2000);
+function tcMentionsMe(t){var n=String(ME.name||'').toLowerCase();t=String(t||'').toLowerCase();return (n&&t.indexOf('@'+n)>=0)||/@(all|все)(\s|$)/.test(t)}
+function tcIds(){return Object.keys(TC.msgs).sort(function(a,b){var x=+(TC.msgs[a]||{}).ts||0,y=+(TC.msgs[b]||{}).ts||0;return x-y||(a<b?-1:a>b?1:0)})}
+function tcOnData(first){
+ var ids=tcIds(),seen=tcSeen(),unread=0,fresh=[],last=0;
+ ids.forEach(function(id){var m=TC.msgs[id];if(!m||!m.ts)return;last=Math.max(last,+m.ts||0);
+  if(m.uid!==ME.uid&&m.ts>seen)unread++;
+  if(!first&&!TC.seenIds[id]&&m.uid!==ME.uid)fresh.push(m);
+  TC.seenIds[id]=1});
+ var looking=TC.open&&!document.hidden;
+ if(looking){if(last)lsSet('shifthub-tcseen',String(last));unread=0}
+ var b=$('tcBadge');b.hidden=!unread;b.textContent=unread>99?'99+':unread;
+ fresh.forEach(function(m){
+  var men=tcMentionsMe(m.text),txt=String(m.text||'').slice(0,120);
+  if(looking){if(men)beep();return}
+  $('tcFab').classList.remove('ring');void $('tcFab').offsetWidth;$('tcFab').classList.add('ring');
+  if(men){toast('📣 '+(m.name||'Кто-то')+' упомянул(а) тебя',txt);beep();sysNotify('📣 '+(m.name||'')+' в чате',txt)}
+  else{toast('💬 '+(m.name||'Кто-то'),txt);if(NS.on&&NS.sound)beep();if(NS.on&&document.hidden)sysNotify('💬 '+(m.name||''),txt)}
+ });
+ if(TC.open)tcRender();
+}
+function tcD(ts){return new Date(+ts+DISP_OFF*3600000)}
+function tcTime(ts){var d=tcD(ts);return p2(d.getUTCHours())+':'+p2(d.getUTCMinutes())}
+function tcDay(ts){var d=tcD(ts),n=tcD(Date.now()),k=function(x){return x.getUTCFullYear()+'-'+x.getUTCMonth()+'-'+x.getUTCDate()};
+ if(k(d)===k(n))return 'Сегодня';if(k(d)===k(new Date(n.getTime()-864e5)))return 'Вчера';
+ return p2(d.getUTCDate())+'.'+p2(d.getUTCMonth()+1)+'.'+d.getUTCFullYear()}
+function tcText(t){
+ t=String(t||'');var big=t.trim().length<=12&&/^(\p{Extended_Pictographic}|‍|️|\s)+$/u.test(t);
+ var s=esc(t).replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" rel="noopener">$1</a>')
+  .replace(/(^|\s)(@[\wА-Яа-яЁё]+)/g,'$1<span class="men">$2</span>').replace(/\n/g,'<br>');
+ return big?'<span class="tc-big">'+s+'</span>':s}
+function tcRender(){
+ var box=$('tcMsgs'),ids=tcIds().filter(function(id){var m=TC.msgs[id];return m&&m.ts&&m.text});
+ var atBottom=box.scrollHeight-box.scrollTop-box.clientHeight<90;
+ if(!ids.length){box.innerHTML='<div class="tc-empty">Тут пока тихо…<br>Напиши первым 👋</div>';return}
+ var h='',prev=null,pday='';
+ ids.forEach(function(id){var m=TC.msgs[id],me=m.uid===ME.uid,day=tcDay(m.ts);
+  if(day!==pday){h+='<div class="tc-day">'+day+'</div>';pday=day;prev=null}
+  var cont=prev&&prev.uid===m.uid&&(m.ts-prev.ts)<5*60000&&!m.re;
+  var rx={},mine={};Object.keys(m.r||{}).forEach(function(u){var e=m.r[u];rx[e]=(rx[e]||0)+1;if(u===ME.uid)mine[e]=1});
+  h+='<div class="tc-m'+(me?' me':'')+(cont?' cont':'')+(!me&&tcMentionsMe(m.text)?' ment':'')+'" data-id="'+esc(id)+'">'
+   +'<span class="tc-av" data-prof="'+esc(m.uid)+'" title="'+esc(m.name||'')+'">'+avEl(m.uid,m.name,30)+'</span><div>'
+   +'<div class="tc-b">'+(me?'':'<div class="tc-n" style="color:'+AVA[hashStr(m.name||'')%AVA.length]+'">'+esc(m.name||'?')+'</div>')
+   +(m.re?'<div class="tc-q"><b>'+esc(m.re.n||'')+'</b>: '+esc(String(m.re.t||'').slice(0,80))+'</div>':'')
+   +tcText(m.text)+'<span class="tc-t">'+tcTime(m.ts)+'</span></div>'
+   +(Object.keys(rx).length?'<div class="tc-rx">'+Object.keys(rx).map(function(e){return '<button data-rx="'+esc(e)+'"'+(mine[e]?' class="mine"':'')+'>'+esc(e)+' '+rx[e]+'</button>'}).join('')+'</div>':'')
+   +'</div><div class="tc-acts">'+TC_RX.map(function(e){return '<button data-rx="'+e+'" title="Реакция">'+e+'</button>'}).join('')
+   +'<button data-tcre title="Ответить">↩️</button>'+((me||ME.admin)?'<button data-tcdel title="Удалить">🗑</button>':'')+'</div></div>';
+  prev=m});
+ box.innerHTML=h;
+ if(atBottom||!TC.rendered){box.scrollTop=box.scrollHeight;TC.rendered=true}
+}
+function tcOnlineTxt(){var P=(raw&&raw.presence)||{},t=Date.now()+(typeof srvOff==='number'?srvOff:0),n={};Object.keys(P).forEach(function(id){var x=P[id];if(x&&typeof x.ts==='number'&&t-x.ts<ONLINE_MS)n[String(x.n||id).toLowerCase()]=1});var c=Object.keys(n).length;return c?('🟢 сейчас на сайте: '+c):'только для своих'}
+function tcToggle(on){
+ TC.open=on===undefined?!TC.open:on;$('tcPanel').hidden=!TC.open;$('tcFab').classList.toggle('on',TC.open);
+ if(TC.open){
+  if(typeof AI!=='undefined'&&AI.open){AI.open=false;$('aiPanel').hidden=true;$('aiFab').classList.remove('on')}
+  if(!tok&&ONLINE){toast('⚠️ Нет связи','Войди заново');}
+  else if(!TC.es&&ONLINE)tcConnect();
+  TC.rendered=false;tcRender();tcOnData(false);try{$('tcSub').textContent=tcOnlineTxt()}catch(e){}
+  setTimeout(function(){$('tcIn').focus()},60)}
+}
+function tcSend(){
+ var t=$('tcIn').value.trim();if(!t)return;
+ if(!ONLINE||!tok){toast('⚠️ Чат работает только онлайн','Войди на сайт под своим аккаунтом');return}
+ var msg={uid:ME.uid,name:ME.name||ME.email,text:t.slice(0,1000),ts:{'.sv':'timestamp'}};
+ if(TC.reply)msg.re={n:String(TC.reply.n).slice(0,40),t:String(TC.reply.t).slice(0,120)};
+ $('tcIn').value='';tcAutoH();tcSetReply(null);$('tcEmo').hidden=true;TC.lastTyp=0;
+ fbReq('chat','POST',msg).then(function(){fbReq('chatty/'+ME.uid,'DELETE').catch(function(){})},
+  function(){$('tcIn').value=t;tcAutoH();toast('⚠️ Не отправилось',ME.admin?'Обнови правила базы (Rules) — я добавил туда чат':'Попроси админа обновить правила базы')});
+}
+function tcSetReply(r){TC.reply=r;$('tcReply').hidden=!r;if(r)$('tcReplyT').innerHTML='↩️ <b>'+esc(r.n)+'</b>: '+esc(String(r.t).slice(0,80))}
+function tcAutoH(){var i=$('tcIn');i.style.height='auto';i.style.height=Math.min(110,i.scrollHeight)+'px'}
+$('tcFab').addEventListener('click',function(){tcToggle()});
+$('tcClose').addEventListener('click',function(){tcToggle(false)});
+$('tcForm').addEventListener('submit',function(e){e.preventDefault();tcSend()});
+$('tcIn').addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();tcSend()}else if(e.key==='Escape')tcSetReply(null)});
+$('tcIn').addEventListener('input',function(){tcAutoH();var n=Date.now();if(ONLINE&&tok&&this.value.trim()&&n-TC.lastTyp>3000){TC.lastTyp=n;fbReq('chatty/'+ME.uid,'PUT',{name:ME.name||'',ts:{'.sv':'timestamp'}}).catch(function(){})}});
+$('tcReplyX').addEventListener('click',function(){tcSetReply(null)});
+$('tcEmo').innerHTML=TC_EMO.map(function(e){return '<button type="button">'+e+'</button>'}).join('');
+$('tcEmoBtn').addEventListener('click',function(){$('tcEmo').hidden=!$('tcEmo').hidden});
+$('tcEmo').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;var i=$('tcIn'),p=i.selectionStart==null?i.value.length:i.selectionStart;i.value=i.value.slice(0,p)+b.textContent+i.value.slice(p);i.focus();i.selectionStart=i.selectionEnd=p+b.textContent.length;tcAutoH()});
+$('tcMsgs').addEventListener('click',function(e){
+ var row=e.target.closest('.tc-m');if(!row)return;var id=row.getAttribute('data-id'),m=TC.msgs[id];if(!m)return;
+ var rb=e.target.closest('[data-rx]');
+ if(rb){var em=rb.getAttribute('data-rx'),cur=m.r&&m.r[ME.uid];fbReq('chat/'+id+'/r/'+ME.uid,cur===em?'DELETE':'PUT',cur===em?undefined:em).catch(function(){toast('⚠️ Не получилось','Обнови правила базы')});return}
+ if(e.target.closest('[data-tcre]')){tcSetReply({n:m.name||'',t:m.text||''});$('tcIn').focus();return}
+ if(e.target.closest('[data-tcdel]')){toastAct('🗑 Удалить сообщение?',String(m.text).slice(0,60),'Удалить',function(){fbReq('chat/'+id,'DELETE').catch(function(){toast('⚠️ Не удалилось','')})});return}
+ if(!e.target.closest('[data-prof]')){document.querySelectorAll('.tc-m.act').forEach(function(x){if(x!==row)x.classList.remove('act')});row.classList.toggle('act')}
+});
+document.addEventListener('visibilitychange',function(){if(!document.hidden&&TC.open)tcOnData(false)});
 
 /* ================= ПРОФИЛЬ ================= */
 var prof={uid:'',tab:'all',editBio:false};
@@ -2772,6 +3005,107 @@ function showWelcome(force){
 }
 
 $('umProfile').addEventListener('click',function(){$('userMenu').hidden=true;openProfile(ME.uid)});
+/* ---------- Статус смены → Slack ---------- */
+var SS_TXT={
+ en:{on:'🟢 *{n}* — on shift',lunch:'🍽️ *{n}* — lunch{u}',break:'☕ *{n}* — break{u}',back:'↩️ *{n}* — back',off:'🔴 *{n}* — off shift',until:' (until {t})'},
+ ru:{on:'🟢 *{n}* — на смене',lunch:'🍽️ *{n}* — обед{u}',break:'☕ *{n}* — перерыв{u}',back:'↩️ *{n}* — вернулся(лась)',off:'🔴 *{n}* — ушёл(ла) со смены',until:' (до {t})'}};
+var SS_SELF={
+ en:{on:'🟢 on shift',lunch:'🍽️ lunch{u}',break:'☕ break{u}',back:'↩️ back',off:'🔴 off shift',until:' (until {t})'},
+ ru:{on:'🟢 на смене',lunch:'🍽️ обед{u}',break:'☕ перерыв{u}',back:'↩️ вернулся(лась)',off:'🔴 ушёл(ла) со смены',until:' (до {t})'}};
+function ssMode(){var m=lsGet('shifthub-ssmode','');if(m)return m;return lsGet('shifthub-sltoken','')?'token':'copy'}
+function slChan(){return (raw&&raw.cfg&&raw.cfg.slackChan)||''}
+function slChanId(){var m=slChan().match(/archives\/([A-Z0-9]+)/i);return m?m[1]:''}
+function slackSendSelf(text){
+ var tk=lsGet('shifthub-sltoken',''),ch=slChanId();
+ if(!tk)return Promise.reject('notoken');if(!ch)return Promise.reject('nochan');
+ var body=new URLSearchParams({token:tk,channel:ch,text:text});
+ return fetch('https://slack.com/api/chat.postMessage',{method:'POST',body:body}).then(function(r){return r.json()}).then(function(j){if(!j.ok)throw 'api:'+j.error;return j},function(e){if(typeof e==='string')throw e;return {ok:true,unverified:true}});
+}
+var SS_NOW={on:'🟢 На смене',lunch:'🍽️ На обеде',break:'☕ На перерыве',off:'🔴 Не на смене'};
+function ssGet(){try{var x=JSON.parse(lsGet('shifthub-ss','null'));if(x&&Date.now()-x.ts<14*3600000)return x}catch(e){}return null}
+function ssCur(){var x=ssGet();return x?x.s:''}
+function slHook(){return (raw&&raw.cfg&&raw.cfg.slackHook)||''}
+function ssLang(){return lsGet('shifthub-sslang','')||'en'}
+function ssName(){return (lsGet('shifthub-ssname','')||meName()||'?').trim()}
+function slackSend(text){
+ var u=slHook();if(!/^https:\/\/hooks\.slack\.com\/services\//.test(u))return Promise.reject('nohook');
+ return fetch(u,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'payload='+encodeURIComponent(JSON.stringify({text:text}))});
+}
+function myUntil(t){ // ищем мой обед/перерыв в графике, идущий сейчас или скоро
+ var n=now(),k=curShift(n),pid=null,f=frac(k,n),best=null;
+ shiftData(k).people.forEach(function(p){if(ME.name&&p.name.toLowerCase()===ME.name.toLowerCase())pid=p.id});
+ if(!pid)return null;
+ shiftData(k).items.forEach(function(it){if(it.p!==pid||it.t!==t)return;if(f>=it.s-1&&f<it.s+it.l)best=it});
+ if(!best)return null;
+ var m=(SHIFTS[k].start+(best.s+best.l)*30)%1440;return {txt:p2(Math.floor(m/60))+':'+p2(m%60),mins:Math.max(1,Math.round((best.s+best.l-f)*30))};
+}
+var ssLock=0;
+function ssPress(s){
+ if(Date.now()-ssLock<4000){toast('⏳ Секунду…','Уже отправляю');return}
+ var lang=ssLang(),mode=ssMode(),T=(mode==='bot'?SS_TXT:SS_SELF)[lang],nm=ssName(),t2=s==='break'?'brk':s,un=(s==='lunch'||s==='break')?myUntil(t2):null;
+ var text=T[s].replace('{n}',nm).replace('{u}',un?T.until.replace('{t}',un.txt):'');
+ var st=s==='back'?'on':s;
+ lsSet('shifthub-ss',JSON.stringify({s:st,ts:Date.now(),at:s}));
+ ssLock=Date.now();
+ if(s==='lunch'||s==='break'){var mins=un?un.mins:(s==='lunch'?60:15),n0=Date.now();lsSet('shifthub-btimer',JSON.stringify({start:n0,end:n0+mins*60000,label:s==='lunch'?'Обед':'Перерыв',emoji:s==='lunch'?'🍽️':'☕'}));try{tickTimer()}catch(e){}}
+ if(s==='back'||s==='off'||s==='on'){lsSet('shifthub-btimer','');try{tickTimer()}catch(e){}}
+ renderSS();try{beat()}catch(e){}
+ var lt={on:'🟢 на смене',lunch:'🍽️ ушёл(ла) на обед',break:'☕ ушёл(ла) на перерыв',back:'↩️ вернулся(лась)',off:'🔴 ушёл(ла) со смены'}[s]+(un?' до '+un.txt:'');
+ if(ME.role!=='guest')patch(logOnly(lt));
+ if(!SLACK_ON){toast(lt,'Статус отмечен на сайте');return}
+ if(mode==='copy'){
+  copyText(text).then(function(){
+   if(slChan()){try{window.open(slChan(),'_blank','noopener')}catch(e){}toast('📋 Скопировано: '+text,'Slack открывается — вставь (Ctrl+V) и нажми Enter')}
+   else toast('📋 Скопировано: '+text,ME.admin?'Добавь ссылку на канал в «👥 Команда», чтобы Slack открывался сам':'Вставь в канал Slack (Ctrl+V). Попроси админа добавить ссылку на канал');
+  });
+ } else if(mode==='token'){
+  slackSendSelf(text).then(function(j){toast('✅ Отправлено от твоего имени',text+(j.unverified?' (без подтверждения от Slack)':''))},function(e){
+   var m={notoken:'Вставь свой личный токен ниже (👤 Сразу от моего имени)',nochan:'Админ ещё не добавил ссылку на канал в «👥 Команда»','api:invalid_auth':'Токен не подходит — проверь его','api:not_in_channel':'Ты не состоишь в этом канале','api:channel_not_found':'Канал не найден — проверь ссылку на канал','api:missing_scope':'У токена нет права chat:write','api:token_revoked':'Токен отозван — создай новый'}[e]||('Ошибка: '+e);
+   toast('⚠️ Не отправилось в Slack',m);copyText(text);});
+ } else slackSend(text).then(function(){toast('✅ Отправлено в Slack (бот)',text.replace(/\*/g,''))},function(e){
+  toast(e==='nohook'?'💬 Вебхук не подключён':'⚠️ Не отправилось в Slack',e==='nohook'?(ME.admin?'Вставь Webhook в «👥 Команда» или выбери «📋 Скопировать и открыть»':'Выбери «📋 Скопировать и открыть Slack»'):'Проверь интернет и попробуй ещё раз')});
+}
+function renderSS(){
+ var x=ssGet(),s=x?x.s:'',lang=ssLang();
+ $('ssNow').textContent=s?SS_NOW[s]:'⚪ Статус не выбран';
+ $('ssSub').textContent=x?('с '+(function(d){return p2(d.getUTCHours())+':'+p2(d.getUTCMinutes())})(new Date(x.ts+DISP_OFF*3600000))+(SLACK_ON?' · пишем в Slack как «'+ssName()+'»':'')):(SLACK_ON?'Нажми, когда заходишь на смену — сообщение уйдёт в Slack':'Отмечай, когда заходишь на смену, обед и перерыв — таймер запустится сам');
+ $('ssw').setAttribute('data-s',s||'none');
+ [].forEach.call(document.querySelectorAll('.ssb'),function(b){var a=b.getAttribute('data-ss');b.classList.toggle('cur',a===s);
+  b.textContent={on:'🟢 ',lunch:'🍽️ ',break:'☕ ',back:'↩️ ',off:'🔴 '}[a]+(lang==='ru'?{on:'На смене',lunch:'Обед',break:'Перерыв',back:'Вернулся',off:'Ушёл со смены'}:{on:'On shift',lunch:'Lunch',break:'Break',back:'Back',off:'Off shift'})[a];
+  b.hidden=(a==='back'&&!(s==='lunch'||s==='break'))||((a==='lunch'||a==='break')&&(s==='lunch'||s==='break'||s==='off'||!s))||(a==='on'&&s&&s!=='off')||(a==='off'&&(!s||s==='off'))});
+ [].forEach.call($('ssLang').children,function(b){b.classList.toggle('on',b.getAttribute('data-sl')===lang)});
+ if(document.activeElement!==$('ssName'))$('ssName').value=lsGet('shifthub-ssname','')||'';
+ $('ssName').placeholder='Имя для Slack ('+(meName()||'—')+')';
+ var md=ssMode();$('ssMode').value=md;$('ssTok').hidden=md!=='token';$('ssName').hidden=md!=='bot';
+ var okc=md==='bot'?!!slHook():md==='token'?!!(lsGet('shifthub-sltoken','')&&slChanId()):true;
+ $('ssHook').textContent=md==='bot'?(slHook()?'🤖 бот подключён':'⚠️ вебхук не подключён'):md==='token'?(lsGet('shifthub-sltoken','')?(slChanId()?'👤 токен сохранён':'⚠️ нет ссылки на канал'):'⚠️ вставь токен'):(slChan()?'📋 канал подключён':'📋 без ссылки на канал');
+ $('ssHook').className='ss-hook'+(okc?' ok':'');
+ if($('slChan')&&document.activeElement!==$('slChan'))$('slChan').value=slChan();
+ if($('slState'))$('slState').textContent=slHook()?'✅ подключён':'не подключён';
+}
+$('ssw').addEventListener('click',function(e){var b=e.target.closest('[data-ss]');if(b){unlockAudio();ssPress(b.getAttribute('data-ss'));return}
+ var l=e.target.closest('[data-sl]');if(l){lsSet('shifthub-sslang',l.getAttribute('data-sl'));renderSS()}});
+function openSlackWin(){
+ var u=slChan()||'https://app.slack.com/client',W=Math.min(460,Math.round(screen.availWidth*0.33)),H=screen.availHeight,L=(screen.availLeft||0)+screen.availWidth-W,T=screen.availTop||0;
+ var w=null;try{w=window.open(u,'shifthub-slack','popup=yes,width='+W+',height='+H+',left='+L+',top='+T)}catch(e){}
+ if(w){try{w.focus()}catch(e){}toast('💬 Slack открыт сбоку','Войди один раз своим логином — дальше окно будет открываться сразу')}
+ else toast('⚠️ Браузер заблокировал окно','Разреши всплывающие окна для этого сайта (значок справа в адресной строке)');
+}
+$('slWinBtn').addEventListener('click',openSlackWin);$('slWinBtn2').addEventListener('click',openSlackWin);
+$('ssMode').addEventListener('change',function(){lsSet('shifthub-ssmode',this.value);renderSS()});
+$('ssTokSave').addEventListener('click',function(){var v=$('ssToken').value.trim();if(!/^xox[pe]-/.test(v)){toast('⚠️ Это не похоже на User Token','Он начинается с xoxp-');return}lsSet('shifthub-sltoken',v);$('ssToken').value='';toast('👤 Токен сохранён','Только в этом браузере');renderSS()});
+$('ssTokDel').addEventListener('click',function(){lsSet('shifthub-sltoken','');renderSS();toast('🗑 Токен удалён','')});
+$('slChForm').addEventListener('submit',function(e){e.preventDefault();var u=$('slChan').value.trim();
+ if(!/^https:\/\/[a-z0-9-]+\.(enterprise\.)?slack\.com\/archives\/[A-Z0-9]+/i.test(u)&&!/^https:\/\/app\.slack\.com\/client\/[A-Z0-9]+\/[A-Z0-9]+/i.test(u)){$('slChMsg').className='pwmsg';$('slChMsg').textContent='Нужна ссылка вида https://компания.slack.com/archives/C…';return}
+ if(/app\.slack\.com\/client/.test(u)){var mm=u.match(/client\/([A-Z0-9]+)\/([A-Z0-9]+)/i);u='https://app.slack.com/client/'+mm[1]+'/'+mm[2]+'#/archives/'+mm[2]}
+ patch({'cfg/slackChan':u});$('slChMsg').className='pwmsg ok';$('slChMsg').textContent='✅ Сохранено';renderSS()});
+$('ssName').addEventListener('change',function(){lsSet('shifthub-ssname',this.value.trim().slice(0,30));renderSS()});
+$('slForm').addEventListener('submit',function(e){e.preventDefault();var u=$('slUrl').value.trim();
+ if(!/^https:\/\/hooks\.slack\.com\/services\/[A-Za-z0-9\/_-]+$/.test(u)){$('slMsg').className='pwmsg';$('slMsg').textContent='Нужна ссылка вида https://hooks.slack.com/services/…';return}
+ patch({'cfg/slackHook':u});$('slUrl').value='';$('slMsg').className='pwmsg ok';$('slMsg').textContent='✅ Сохранено. Нажми «Тест»';renderSS()});
+$('slTest').addEventListener('click',function(){slackSend('✅ Shift Hub подключён к каналу ('+(meName()||'admin')+')').then(function(){$('slMsg').className='pwmsg ok';$('slMsg').textContent='📨 Отправлено — проверь канал в Slack'},function(){$('slMsg').className='pwmsg';$('slMsg').textContent='Сначала сохрани Webhook'})});
+$('slOff').addEventListener('click',function(){if(this.getAttribute('data-s')){patch({'cfg/slackHook':null});this.removeAttribute('data-s');this.textContent='Отключить';renderSS()}else{this.setAttribute('data-s','1');this.textContent='Точно отключить?'}});
+
 /* ---------- Часовой пояс ---------- */
 (function(){
  var opts=TZ_LIST.slice();if(!TZ_LIST.some(function(x){return x[0]===DISP_OFF}))opts.push([DISP_OFF,'']);
@@ -2781,7 +3115,7 @@ $('umProfile').addEventListener('click',function(){$('userMenu').hidden=true;ope
 })();
 
 /* ---------- запуск ---------- */
-function renderAll(){renderTop();renderTabs();if(!ui.adding&&!drag)renderSched();renderVideo();renderNotes();renderRoster();fillMe();renderExtras();renderPresence();renderLog();checkChanges();if(typeof AI!=='undefined'&&AI.open&&!AI.busy)aiRender()}
+function renderAll(){renderTop();renderTabs();if(!ui.adding&&!drag)renderSched();renderVideo();renderNotes();renderRoster();fillMe();renderExtras();renderPresence();renderLog();if(typeof renderSS==='function')renderSS();checkChanges();if(typeof AI!=='undefined'&&AI.open&&!AI.busy)aiRender()}
 applyTheme();
 build3D(document.body.classList.contains('theme-day')?'day':'night');
 renderVideo();
