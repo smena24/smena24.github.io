@@ -1,0 +1,69 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#05030a">
+<title>KHAYYAM ORIGINALS · 5 оригинальных игр (DEMO)</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}html,body{margin:0;background:#05030a;color:#f3eadb;font-family:Montserrat,system-ui,sans-serif;min-height:100%}
+#sky{position:fixed;inset:0;width:100%;height:100%;z-index:0}
+main{position:relative;z-index:1;max-width:1240px;margin:0 auto;padding:34px 18px 60px}
+header{text-align:center;margin-bottom:26px}
+.pre{letter-spacing:.35em;font-size:12px;font-weight:700;color:#d9b77a;opacity:.85}
+h1{font-family:Cinzel,serif;font-weight:900;font-size:clamp(34px,6vw,72px);letter-spacing:.1em;margin:8px 0 6px;background:linear-gradient(180deg,#fffbe8,#ffd27a 45%,#ff6a2a 85%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 24px rgba(255,140,60,.35))}
+.tag{opacity:.75;font-size:15px;margin:0}
+.bal{display:inline-flex;gap:10px;align-items:center;margin-top:16px;padding:8px 18px;border-radius:30px;border:1px solid rgba(255,210,140,.25);background:rgba(20,12,20,.7);font-weight:700;font-size:14px}
+.bal b{font-size:18px;color:#ffd27a}
+.grid{display:grid;grid-template-columns:repeat(6,1fr);gap:20px}.card{grid-column:span 2}.card:nth-child(n+4){grid-column:span 3}@media(max-width:980px){.grid{grid-template-columns:1fr 1fr}.card,.card:nth-child(n+4){grid-column:span 1}.card:last-child{grid-column:span 2}}@media(max-width:620px){.grid{grid-template-columns:1fr}.card,.card:nth-child(n+4),.card:last-child{grid-column:span 1}}
+.card{position:relative;border-radius:22px;overflow:hidden;min-height:400px;display:flex;flex-direction:column;justify-content:flex-end;padding:22px;text-decoration:none;color:inherit;border:1px solid rgba(255,255,255,.08);box-shadow:0 18px 50px rgba(0,0,0,.55);transform:translateY(0);transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s;isolation:isolate}
+.card:hover{transform:translateY(-6px) scale(1.015);box-shadow:0 26px 70px rgba(0,0,0,.7),0 0 0 1px var(--a),0 0 40px -6px var(--a)}
+.card canvas{position:absolute;inset:0;width:100%;height:100%;z-index:-1}
+.card::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,transparent 18%,rgba(5,3,10,.88) 48%,rgba(5,3,10,.97) 75%)}
+.num{position:absolute;top:16px;left:18px;font-family:Cinzel,serif;font-weight:900;font-size:13px;letter-spacing:.2em;color:var(--a);opacity:.9}
+.badge{position:absolute;top:14px;right:14px;font-size:10px;font-weight:800;letter-spacing:.12em;padding:5px 9px;border-radius:12px;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.15)}
+.card h2{font-family:Cinzel,serif;font-weight:900;font-size:24px;margin:0 0 6px;letter-spacing:.05em;color:#fff;text-shadow:0 0 18px var(--a)}
+.card p{margin:0 0 14px;font-size:13.5px;line-height:1.45;opacity:.85}
+.feat{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}.feat span{font-size:10.5px;font-weight:700;letter-spacing:.04em;padding:4px 8px;border-radius:10px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1)}
+.play{align-self:flex-start;font-weight:800;letter-spacing:.14em;font-size:13px;padding:11px 22px;border-radius:24px;background:linear-gradient(135deg,var(--a),var(--b));color:#140a06;box-shadow:0 6px 22px -6px var(--a)}
+footer{text-align:center;margin-top:34px;font-size:12px;opacity:.6;line-height:1.7}
+</style></head><body>
+<canvas id="sky"></canvas>
+<main>
+<header><div class="pre">ОРИГИНАЛЬНЫЕ ИГРЫ · DEMO</div><h1>KHAYYAM ORIGINALS</h1><p class="tag">Пять игр, которых раньше не было: не слоты, не краш, не «перейди дорогу»</p>
+<div class="bal">Общий DEMO-баланс <b id="bal">10 000</b></div></header>
+<div class="grid" id="grid"></div>
+<footer>Только DEMO-кредиты: без реальных денег, без вывода, баланс обновляется каждый день до 10 000.<br>Генератор случайных чисел — криптографический RNG браузера, не сертифицирован. RTP ≈ 95% по симуляциям.<br>Идея, игровой дизайн и разработка: <b>Khayyam</b> · музыка синтезируется в браузере, без чужих записей</footer>
+</main>
+<script>
+const GAMES=[
+ {id:'mugam',n:'Мугам-машина',d:'Шар падает сквозь струны и сочиняет мелодию в ладу мугама. Каждая игра звучит по-своему.',f:['Пачинко-струны','Бонус «Оркестр»','Экстра «Настроить лад»','3 лада риска'],a:'#ffcf6a',b:'#ff7a2a'},
+ {id:'city',n:'Ночь, когда зажёгся город',d:'Молния бьёт в ночной Баку, и свет бежит по проводам. Чем больше вспыхнуло зданий, тем крупнее выигрыш.',f:['Цепная реакция','Бонус «Гроза над Каспием»','Новруз ×5','Экстра «Вторая искра»'],a:'#ffd27a',b:'#ff6a2a'},
+ {id:'alchemy',n:'Алхимия',d:'Выбери 3 колбы из 5 и брось их в котёл. Стихии смешиваются в рецепт, а Философский камень зажигает бонус.',f:['Котёл и зелья','Бонус «Философский камень»','Книга рецептов','Экстра «Редкий ингредиент»'],a:'#c9a0ff',b:'#ffb34a'},
+ {id:'gravity',n:'Гравитация',d:'Комета летит сквозь кольца, планеты и червоточины, пока её не поймает чёрная дыра. Долетела — взрывается сверхновая.',f:['3 орбиты','Бонус «Сверхновая»','Червоточина ×3','Экстра «Гравитационный щит»'],a:'#8fd8ff',b:'#b98cff'},
+ {id:'loom',n:'Ткацкий станок судьбы',d:'Челнок ткёт азербайджанский ковёр ряд за рядом. Узоры платят, а ковёр-самолёт уносит в полёт над Баку.',f:['Живой ковёр','Бонус «Ковёр-самолёт»','Мастер-ткач ×2','Экстра «Золотая нить»'],a:'#ffd76a',b:'#d6334a'},
+];
+const grid=document.getElementById('grid');
+GAMES.forEach((g,i)=>{const a=document.createElement('a');a.className='card';a.href=g.id+'.html';a.style.setProperty('--a',g.a);a.style.setProperty('--b',g.b);
+ a.innerHTML=`<canvas></canvas><div class="num">0${i+1}</div><div class="badge">DEMO</div><h2>${g.n}</h2><p>${g.d}</p><div class="feat">${g.f.map(x=>`<span>${x}</span>`).join('')}</div><span class="play">ИГРАТЬ →</span>`;grid.appendChild(a);g.cv=a.querySelector('canvas');});
+try{const d=new Date().toDateString();let b=+localStorage.getItem('kho-bal');if(localStorage.getItem('kho-day')!==d||!isFinite(b)){b=10000;}document.getElementById('bal').textContent=Math.round(b).toLocaleString('ru-RU');}catch(e){}
+// живые обложки
+function art(g,t){const c=g.cv,x=c.getContext('2d'),w=c.clientWidth*1.5,h=c.clientHeight*1.5;if(c.width!==w)c.width=w;if(c.height!==h)c.height=h;x.setTransform(1.5,0,0,1.5,0,0);const W=w/1.5,Hh=h/1.5;
+ const bg=x.createLinearGradient(0,0,0,Hh);
+ if(g.id==='mugam'){bg.addColorStop(0,'#2a1206');bg.addColorStop(1,'#0a0503');x.fillStyle=bg;x.fillRect(0,0,W,Hh);for(let r=0;r<7;r++)for(let k=0;k<=r;k++){const px=W/2+(k-r/2)*30,py=40+r*24;x.fillStyle=(r*3+k)%7===0?'#ffd06a':'#8a5a2a';x.beginPath();x.arc(px,py,3.5,0,7);x.fill();}
+  const bt=(t*.6)%1,bx=W/2+Math.sin(t*3)*40*bt,by=30+bt*170;const gg=x.createRadialGradient(bx,by,0,bx,by,24);gg.addColorStop(0,'rgba(255,230,160,1)');gg.addColorStop(1,'rgba(255,150,40,0)');x.fillStyle=gg;x.beginPath();x.arc(bx,by,24,0,7);x.fill();
+  x.strokeStyle='rgba(255,200,120,.35)';for(let k=0;k<6;k++){x.beginPath();x.moveTo(0,52+k*24);for(let X=0;X<W;X+=8)x.lineTo(X,52+k*24+Math.sin(X*.05+t*8+k)*2*Math.max(0,1-Math.abs(by-(52+k*24))/30));x.stroke();}}
+ if(g.id==='city'){bg.addColorStop(0,'#050512');bg.addColorStop(1,'#1d0c10');x.fillStyle=bg;x.fillRect(0,0,W,Hh);for(let k=0;k<14;k++){const bh=40+((k*53)%90),bx=k*W/14,lit=((t*1.5)%8)>k*.5;x.fillStyle=lit?'#3a1e14':'#0c1222';x.fillRect(bx+2,200-bh,W/14-4,bh+40);for(let r=0;r<bh/12;r++)for(let cc=0;cc<2;cc++){x.fillStyle=lit&&((k+r+cc)%3)?'rgba(255,210,120,.9)':'rgba(120,150,210,.2)';x.fillRect(bx+6+cc*8,200-bh+6+r*12,4,6);}}
+  if(((t*1.5)%8)<.3){x.strokeStyle='#dff';x.lineWidth=2;x.beginPath();let lx=40,ly=0;x.moveTo(lx,ly);for(let k=0;k<8;k++){lx+=(Math.random()-.4)*20;ly+=22;x.lineTo(lx,ly);}x.stroke();}}
+ if(g.id==='alchemy'){bg.addColorStop(0,'#160a22');bg.addColorStop(1,'#07040a');x.fillStyle=bg;x.fillRect(0,0,W,Hh);x.strokeStyle='rgba(200,150,255,.4)';x.beginPath();x.arc(W/2,130,90,0,7);x.stroke();x.save();x.translate(W/2,130);x.rotate(t*.1);x.beginPath();for(let k=0;k<7;k++){const a=k*Math.PI*4/6;x.lineTo(Math.cos(a)*80,Math.sin(a)*80);}x.stroke();x.restore();
+  x.fillStyle='#1d1820';x.beginPath();x.ellipse(W/2,150,60,46,0,0,Math.PI);x.fill();const hue=(t*40)%360;x.fillStyle=`hsl(${hue},80%,60%)`;x.beginPath();x.ellipse(W/2,150,54,12,0,0,7);x.fill();for(let k=0;k<6;k++){const ph=(t*.7+k/6)%1;x.fillStyle=`hsla(${hue},90%,75%,${1-ph})`;x.beginPath();x.arc(W/2+Math.sin(k*3)*30,150-ph*90,4+ph*6,0,7);x.fill();}}
+ if(g.id==='gravity'){bg.addColorStop(0,'#03030c');bg.addColorStop(1,'#0c0418');x.fillStyle=bg;x.fillRect(0,0,W,Hh);for(let k=0;k<70;k++){x.fillStyle=`rgba(255,255,255,${(k*37%10)/12})`;x.fillRect((k*97)%W,(k*53)%Hh,1.5,1.5);}
+  const hx=W*.72,hy=110;for(let k=0;k<12;k++){x.strokeStyle=`rgba(255,${130+k*8},70,.35)`;x.beginPath();x.ellipse(hx,hy,60+k*3,14+k,-.2,t*2+k*.3,t*2+k*.3+1.4);x.stroke();}x.fillStyle='#000';x.beginPath();x.arc(hx,hy,22,0,7);x.fill();x.strokeStyle='#ffd9a0';x.beginPath();x.arc(hx,hy,24,0,7);x.stroke();
+  const cxp=(t*90)%(W+100)-50,cyp=150+Math.sin(cxp*.02)*30;for(let k=0;k<30;k++){x.fillStyle=`rgba(170,230,255,${1-k/30})`;x.beginPath();x.arc(cxp-k*4,150+Math.sin((cxp-k*4)*.02)*30,5-k*.15,0,7);x.fill();}}
+ if(g.id==='loom'){bg.addColorStop(0,'#1a0a06');bg.addColorStop(1,'#080303');x.fillStyle=bg;x.fillRect(0,0,W,Hh);const s=26,cols=Math.floor(W/s),rows=Math.min(6,Math.floor((t*3)%10));const C=['#7a1622','#1c2650'],M=['#f2c14e','#efe6cc','#73c7e3','#ff8a45','#86c06c'];
+  for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){x.fillStyle=C[(r+c)%2];x.fillRect(c*s,10+r*s,s-1,s-1);x.fillStyle=M[(r*7+c*3)%5];x.beginPath();x.moveTo(c*s+s/2,10+r*s+5);x.lineTo(c*s+s-6,10+r*s+s/2);x.lineTo(c*s+s/2,10+r*s+s-6);x.lineTo(c*s+6,10+r*s+s/2);x.fill();}
+  x.fillStyle='#8a5a2c';x.beginPath();x.ellipse((Math.sin(t*4)*.5+.5)*W,10+rows*s+s/2,16,5,0,0,7);x.fill();}
+}
+function loop(n){const t=n/1000;GAMES.forEach(g=>{if(g.cv.clientWidth)art(g,t);});requestAnimationFrame(loop);}requestAnimationFrame(loop);
+// звёздное небо
+const sk=document.getElementById('sky'),sx=sk.getContext('2d');const st=Array.from({length:160},()=>({x:Math.random(),y:Math.random(),r:Math.random()*1.4+.2,p:Math.random()*7}));
+(function f(n){if(sk.width!==innerWidth)sk.width=innerWidth;if(sk.height!==innerHeight)sk.height=innerHeight;const g=sx.createRadialGradient(innerWidth/2,0,0,innerWidth/2,0,innerHeight);g.addColorStop(0,'#2a1408');g.addColorStop(1,'#05030a');sx.fillStyle=g;sx.fillRect(0,0,sk.width,sk.height);st.forEach(s=>{sx.fillStyle=`rgba(255,235,200,${.3+.3*Math.sin(n/700+s.p)})`;sx.beginPath();sx.arc(s.x*sk.width,s.y*sk.height,s.r,0,7);sx.fill();});requestAnimationFrame(f);})(0);
+</script>
+</body></html>
