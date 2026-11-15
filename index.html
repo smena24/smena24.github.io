@@ -877,6 +877,11 @@ body.menu-open #nav.nav{opacity:1;visibility:visible;transform:none;transition:o
 .menu-veil{position:fixed;inset:0;z-index:84;background:rgba(0,0,0,.25);opacity:0;visibility:hidden;transition:opacity .22s,visibility 0s .22s}
 body.menu-open .menu-veil{opacity:1;visibility:visible;transition:opacity .22s}
 @media(max-width:760px){.menu-btn{height:44px;padding:0 12px}.menu-btn .mb-l{display:none}}
+
+#navTeam{display:none!important}
+.adm-zone{margin-top:22px;padding-top:6px}
+.adm-head{display:flex;align-items:center;gap:14px;margin:0 0 14px;padding:14px 18px;border-radius:var(--r);border:1px solid var(--line);background:linear-gradient(135deg,rgba(255,61,139,.18),rgba(255,181,71,.12));box-shadow:var(--shadow)}
+.adm-head .adm-ic{font-size:26px}.adm-head b{display:block;font-size:18px;font-weight:900}.adm-head small{display:block;font-size:12.5px;font-weight:600;opacity:.75;margin-top:2px}
 </style>
 </head>
 <body class="theme-night">
@@ -1050,8 +1055,8 @@ body.menu-open .menu-veil{opacity:1;visibility:visible;transition:opacity .22s}
     </section>
    </div>
   </div>
- </div>
- <div class="view" id="v-team">
+  <div class="adm-zone" id="adminZone" hidden>
+   <div class="adm-head"><span class="adm-ic">🛡️</span><div><b>Админ-панель</b><small>Сотрудники, роли и настройки смены · видят только админы</small></div></div>
   <div class="grid2">
    <div class="col">
     <section class="panel">
@@ -1060,7 +1065,7 @@ body.menu-open .menu-veil{opacity:1;visibility:visible;transition:opacity .22s}
       <input class="in" id="tmName" maxlength="24" placeholder="Имя — как в графике (например, Хаям)" required>
       <input class="in" id="tmEmail" type="email" placeholder="Email (можно рабочий)" required>
       <div class="r"><input class="in" id="tmPass" maxlength="40" placeholder="Временный пароль (мин. 6)" minlength="6" required style="flex:1"><button type="button" class="btn" id="tmGen" title="Придумать пароль">🎲</button></div>
-      <select class="in" id="tmRole"><option value="member">👤 Сотрудник — может всё, кроме «Команды»</option><option value="admin">👑 Админ — может всё, включая «Команду»</option><option value="guest">👀 Гость — только смотрит</option></select>
+      <select class="in" id="tmRole"><option value="member">👤 Сотрудник — может всё, кроме админ-панели</option><option value="admin">👑 Админ — может всё, включая «Команду»</option><option value="guest">👀 Гость — только смотрит</option></select>
       <button class="btn pri">Создать аккаунт</button>
       <div class="pwmsg" id="tmMsg"></div>
      </form>
@@ -1086,6 +1091,7 @@ body.menu-open .menu-veil{opacity:1;visibility:visible;transition:opacity .22s}
      <div class="muted" style="font-size:12px;margin-top:10px">Удалённый из команды теряет доступ к сайту сразу. Сам аккаунт можно окончательно стереть в Firebase → Authentication.</div>
     </section>
    </div>
+  </div>
   </div>
  </div>
  <div class="view" id="v-fun">
@@ -1936,7 +1942,9 @@ function confetti(n){
 var VIEWS=['home','work','fun','profile','team'];
 function setView(v){
  setTimeout(function(){try{beat()}catch(e){}},50);
- if(VIEWS.indexOf(v)<0||(v==='team'&&!ME.admin))v='home';
+ var toAdm=false;if(v==='team'){v=ME.admin?'profile':'home';toAdm=ME.admin}
+ if(VIEWS.indexOf(v)<0)v='home';
+ if(toAdm)setTimeout(function(){var z=$('adminZone');z&&z.scrollIntoView({behavior:'smooth',block:'start'})},120);
  document.body.setAttribute('data-view',v);
  [].forEach.call(document.querySelectorAll('#nav [data-view]'),function(b){b.classList.toggle('on',b.getAttribute('data-view')===v)});
  lsSet('shifthub-view',v);
@@ -2366,12 +2374,11 @@ function applyMe(){
  $('userName').textContent=(ME.role==='guest'?'👀 ':'')+(nm||'…');
  document.body.classList.toggle('guest',ME.role==='guest');
  if($('guestRow'))$('guestRow').textContent='';
- $('navTeam').hidden=!ME.admin;
+ $('navTeam').hidden=true;$('adminZone').hidden=!ME.admin;
  if(ME.name){$('nAuthor').value=ME.name;$('nAuthor').readOnly=true;$('nAuthor').classList.add('ronly');$('nAuthor').title='Заметка будет от твоего имени';
   var f=$('ns_me').closest('.field');if(f)f.hidden=true;if(!$('bdName').value)$('bdName').value=ME.name}
  else{$('nAuthor').readOnly=false;$('nAuthor').classList.remove('ronly');var f2=$('ns_me').closest('.field');if(f2)f2.hidden=false}
  $('tmSelfBox').hidden=!(ME.sup&&!ME.name);
- if(!ME.admin&&document.body.getAttribute('data-view')==='team')setView('home');
 }
 setInterval(function(){if(tok&&!document.hidden)loadTeam()},90000);
 function loadTeam(){
@@ -3174,14 +3181,14 @@ function ssPress(s){
  if(mode==='copy'){
   copyText(text).then(function(){
    if(slChan()){try{window.open(slChan(),'_blank','noopener')}catch(e){}toast('📋 Скопировано: '+text,'Slack открывается — вставь (Ctrl+V) и нажми Enter')}
-   else toast('📋 Скопировано: '+text,ME.admin?'Добавь ссылку на канал в «👥 Команда», чтобы Slack открывался сам':'Вставь в канал Slack (Ctrl+V). Попроси админа добавить ссылку на канал');
+   else toast('📋 Скопировано: '+text,ME.admin?'Добавь ссылку на канал в «📸 Профиль → 🛡️ Админ-панель», чтобы Slack открывался сам':'Вставь в канал Slack (Ctrl+V). Попроси админа добавить ссылку на канал');
   });
  } else if(mode==='token'){
   slackSendSelf(text).then(function(j){toast('✅ Отправлено от твоего имени',text+(j.unverified?' (без подтверждения от Slack)':''))},function(e){
-   var m={notoken:'Вставь свой личный токен ниже (👤 Сразу от моего имени)',nochan:'Админ ещё не добавил ссылку на канал в «👥 Команда»','api:invalid_auth':'Токен не подходит — проверь его','api:not_in_channel':'Ты не состоишь в этом канале','api:channel_not_found':'Канал не найден — проверь ссылку на канал','api:missing_scope':'У токена нет права chat:write','api:token_revoked':'Токен отозван — создай новый'}[e]||('Ошибка: '+e);
+   var m={notoken:'Вставь свой личный токен ниже (👤 Сразу от моего имени)',nochan:'Админ ещё не добавил ссылку на канал в «📸 Профиль → 🛡️ Админ-панель»','api:invalid_auth':'Токен не подходит — проверь его','api:not_in_channel':'Ты не состоишь в этом канале','api:channel_not_found':'Канал не найден — проверь ссылку на канал','api:missing_scope':'У токена нет права chat:write','api:token_revoked':'Токен отозван — создай новый'}[e]||('Ошибка: '+e);
    toast('⚠️ Не отправилось в Slack',m);copyText(text);});
  } else slackSend(text).then(function(){toast('✅ Отправлено в Slack (бот)',text.replace(/\*/g,''))},function(e){
-  toast(e==='nohook'?'💬 Вебхук не подключён':'⚠️ Не отправилось в Slack',e==='nohook'?(ME.admin?'Вставь Webhook в «👥 Команда» или выбери «📋 Скопировать и открыть»':'Выбери «📋 Скопировать и открыть Slack»'):'Проверь интернет и попробуй ещё раз')});
+  toast(e==='nohook'?'💬 Вебхук не подключён':'⚠️ Не отправилось в Slack',e==='nohook'?(ME.admin?'Вставь Webhook в «📸 Профиль → 🛡️ Админ-панель» или выбери «📋 Скопировать и открыть»':'Выбери «📋 Скопировать и открыть Slack»'):'Проверь интернет и попробуй ещё раз')});
 }
 function renderSS(){
  var x=ssGet(),s=x?x.s:'',lang=ssLang();
@@ -3267,8 +3274,8 @@ document.querySelectorAll('.panel').forEach(function(p){var ph=null;for(var c=p.
  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.body.classList.contains('menu-open')){open(false);btn.focus()}});
  addEventListener('resize',function(){if(document.body.classList.contains('menu-open'))place()});
  addEventListener('scroll',function(){if(document.body.classList.contains('menu-open'))place()},{passive:true});
- function upd(){var on=nav.querySelector('button.on');lbl.textContent=on?on.textContent.trim():'Меню'}
- new MutationObserver(upd).observe(nav,{subtree:true,attributes:true,attributeFilter:['class']});upd();
+ lbl.textContent='Меню';
+ var pb=nav.querySelector('[data-view=profile]');if(pb)nav.appendChild(pb); /* Профиль всегда внизу, новые разделы встают над ним */
 })();
 </script>
 </body>
