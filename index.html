@@ -2664,12 +2664,42 @@ function aiContext(){
  if(nl.length)L.push('\nПоследние заметки команды:\n'+nl.map(function(x){return '- ['+((TAGS[x.tag]||TAGS.info).n)+(x.pin?', закреплено':'')+'] '+(x.by||'')+': '+String(x.text).slice(0,300).replace(/\n/g,' ')}).join('\n'));
  var tl=tplList().slice(0,25);
  if(tl.length)L.push('\nШаблоны ответов клиентам (используй их стиль):\n'+tl.map(function(x){return '- «'+x.title+'» ('+TPL_CATS[x.cat][0]+'): '+x.text.slice(0,350).replace(/\n/g,' ')}).join('\n'));
+ try{L.push(aiPayCtx())}catch(e){}
+ try{L.push(aiPromoCtx())}catch(e){}
  var bl=bdList().slice(0,4);if(bl.length)L.push('\nБлижайшие дни рождения: '+bl.map(function(x){return x.name+' — '+x.d+' '+MON[x.m-1]+(x.left===0?' (сегодня!)':' (через '+x.left+' дн.)')}).join('; ')+'.');
  return L.join('\n');
 }
+/* Шпаргалка по лимитам → контекст для AI */
+function aiPayCtx(){
+ if(typeof PAY_DB==='undefined')return '';
+ var L=['\n=== ЛИМИТЫ ВЫВОДА И ВЕЙДЖЕР ПО КАЗИНО (шпаргалка «Payments / Verified reference», данные внесены ответственным сотрудником; это главный источник по лимитам) ==='];
+ (typeof PAY_BRANDS!=='undefined'?PAY_BRANDS:Object.keys(PAY_DB)).forEach(function(b){var d=PAY_DB[b];
+  if(!d||!d.cashout){L.push('\n['+b+'] лимиты вывода ещё не внесены.');return}
+  var c=d.cashout,o=['\n['+b+'] Cashout / Withdrawal limits'+(c.note?' ('+c.note+')':'')+':'];
+  if(c.vip){var V=c.vip;o.push('Лимиты зависят от VIP-уровня игрока, валюта '+V.cur.join('/')+'.');V.rows.forEach(function(r){o.push('- '+r[0]+': '+V.levels.map(function(l,i){return l+' — до '+r[1][i]}).join('; '))})}
+  else if(c.rows)c.rows.forEach(function(r){o.push('- '+r[0]+': '+r[1])});
+  else{if(c.daily)o.push('- Daily: '+c.daily);if(c.weekly)o.push('- Weekly: '+c.weekly);if(c.monthly)o.push('- Monthly: '+c.monthly);if(c.wdMin)o.push('- Withdrawal limits (min): '+c.wdMin)}
+  if(c.depWager)o.push('- Dep Wager (отыгрыш депозита перед выводом): '+c.depWager);
+  if(c.hold)o.push('- Hold и особенности: '+c.hold);
+  if(d.methods&&d.methods.length&&!d.test)o.push('- Методы оплаты: '+d.methods.map(function(m){return m.name+' ('+Object.keys(m.limits).map(function(k){var x=m.limits[k];return k+' деп '+(x.dep?x.dep.join('–'):'—')+', вывод '+(x.wd?x.wd.join('–'):'нет')}).join('; ')+')'}).join(' | '));
+  else o.push('- Методы оплаты и их лимиты пока не внесены.');
+  L.push(o.join('\n'))});
+ return L.join('');
+}
+/* Промокоды → контекст для AI */
+function aiPromoCtx(){
+ if(typeof PROMOS==='undefined')return '';
+ var L=['\n\n=== ПРОМОКОДЫ И БОНУСЫ ПО КАЗИНО (раздел «Промокоды») ==='];
+ (typeof PROMO_BRANDS!=='undefined'?PROMO_BRANDS:Object.keys(PROMOS)).forEach(function(b){var d=PROMOS[b]||{};
+  [['perm','постоянные'],['temp','временные']].forEach(function(k){(d[k[0]]||[]).forEach(function(x){
+   L.push('\n['+b+', '+k[1]+'] '+x.name+' — '+x.amount+'. Промокод: '+(x.code||x.nocode||'не указан')+'. '+(x.rows||[]).map(function(r){return r[0]+': '+r[1]}).join('; ')+(x.terms?'. Условия: '+String(x.terms).replace(/\s+/g,' ').slice(0,700):''))})})});
+ return L.join('');
+}
 var AI_SYS='Ты — дружелюбный AI-ассистент команды поддержки iGaming-проекта на сайте «Shift Hub». Помогаешь сотрудникам смены: график перерывов, кто где, заметки, ответы клиентам (депозиты, выводы, верификация, бонусы), переводы, короткие тексты. '
  +'Отвечай кратко и по делу, на языке вопроса (по умолчанию по-русски). Для ответов клиентам пиши вежливо и профессионально, без обещаний сроков и сумм, которых нет в данных, и без призывов играть больше. '
- +'Используй данные сайта ниже; если чего-то в них нет — честно скажи, не выдумывай. Не используй таблицы markdown.';
+ +'Используй данные сайта ниже; если чего-то в них нет — честно скажи, не выдумывай. Не используй таблицы markdown. '
+ +'Про лимиты вывода, вейджер, промокоды и бонусы отвечай по разделам «ЛИМИТЫ ВЫВОДА» и «ПРОМОКОДЫ» ниже: называй точные цифры для нужной валюты и периода (Daily/Weekly/Monthly и т.д.). Если для валюты нет отдельной суммы, но написано «или эквивалент по курсу EUR», так и скажи. Если лимиты зависят от VIP-уровня — спроси уровень или перечисли все. '
+ +'Названия казино пользователи пишут с ошибками и транслитом (neospine, неоспин, evo, crown, crownslots, guns, 1red, ред бет, beon, slot rush) — сопоставляй их с Neospin, Evospin, Crownslot, Gunsbet, 1RedBet, Beonbet, Slotrush.';
 function aiPickModels(list){
  var c=(list||[]).filter(function(m){return (m.supportedGenerationMethods||[]).indexOf('generateContent')>=0}).map(function(m){return m.name.replace(/^models\//,'')})
   .filter(function(n){return /^gemini-/.test(n)&&!/(image|live|tts|audio|embed|vision|learnlm|robotics|computer|native)/.test(n)});
