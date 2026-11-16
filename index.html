@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<base href="/">
 <title>Shift Hub — смена</title>
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-512.png">
@@ -314,7 +315,7 @@ select.in option{color:#111}
 .nav button:hover{transform:translateY(-2px) perspective(400px) rotateX(8deg)}
 .nav button.on{background:linear-gradient(135deg,var(--acc),var(--gold));color:#fff;border-color:transparent;box-shadow:var(--glow)}
 .view{display:none}
-body[data-view="home"] #v-home,body[data-view="work"] #v-work,body[data-view="fun"] #v-fun,body[data-view="team"] #v-team,body[data-view="profile"] #v-profile{display:block;animation:viewIn .5s cubic-bezier(.2,.8,.2,1)}
+body[data-view="home"] #v-home,body[data-view="promo"] #v-promo,body[data-view="work"] #v-work,body[data-view="fun"] #v-fun,body[data-view="team"] #v-team,body[data-view="profile"] #v-profile{display:block;animation:viewIn .5s cubic-bezier(.2,.8,.2,1)}
 @keyframes viewIn{from{opacity:0;transform:perspective(1200px) rotateY(-6deg) translateX(-20px)}to{opacity:1;transform:none}}
 .grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
 .col{display:flex;flex-direction:column;gap:18px;min-width:0}
@@ -882,6 +883,36 @@ body.menu-open .menu-veil{opacity:1;visibility:visible;transition:opacity .22s}
 .adm-zone{margin-top:22px;padding-top:6px}
 .adm-head{display:flex;align-items:center;gap:14px;margin:0 0 14px;padding:14px 18px;border-radius:var(--r);border:1px solid var(--line);background:linear-gradient(135deg,rgba(255,61,139,.18),rgba(255,181,71,.12));box-shadow:var(--shadow)}
 .adm-head .adm-ic{font-size:26px}.adm-head b{display:block;font-size:18px;font-weight:900}.adm-head small{display:block;font-size:12.5px;font-weight:600;opacity:.75;margin-top:2px}
+
+/* ===== Промокоды ===== */
+.pr-top{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;justify-content:space-between;margin:4px 0 14px}
+.pr-h{margin:0;font-size:26px;font-weight:900}.pr-sub{font-size:13px;font-weight:600;margin-top:4px}
+.pr-q{max-width:320px;flex:1 1 220px}
+.pr-brands{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.pr-brands button{border:1px solid var(--line);background:var(--card);color:inherit;font:inherit;font-weight:800;font-size:13px;padding:8px 14px;border-radius:12px;cursor:pointer;transition:transform .15s}
+.pr-brands button:hover{transform:translateY(-2px)}.pr-brands button b{opacity:.6;font-weight:800;margin-left:4px}
+.pr-brand .ph h2 .pr-cnt{font-size:12px;font-weight:800;opacity:.6;margin-left:6px}
+.pr-sec{margin-top:10px}.pr-sec+.pr-sec{margin-top:18px}
+.pr-st{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;opacity:.8;margin-bottom:8px}
+.pr-st i{flex:1;height:1px;background:var(--line)}
+.pr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px;align-items:start}
+.pr-empty{font-size:13px;font-weight:600;opacity:.55;padding:12px 14px;border:1px dashed var(--line);border-radius:14px}
+.pr-card{border:1px solid var(--line);background:var(--card2);border-radius:16px;padding:14px 16px;position:relative;overflow:hidden}
+.pr-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,var(--acc),var(--gold))}
+.pr-card.tmp::before{background:linear-gradient(180deg,#3ea8ff,#a78bfa)}
+.pr-name{font-size:12px;font-weight:900;letter-spacing:.06em;opacity:.75}
+.pr-amt{font-size:20px;font-weight:900;margin:3px 0 10px;line-height:1.25}
+.pr-code{display:inline-flex;gap:6px;align-items:center;margin:-4px 0 10px;font-size:12px;font-weight:800;padding:4px 10px;border-radius:9px;border:1px dashed var(--acc);cursor:pointer}
+.pr-rows{display:grid;gap:6px;margin:0;padding:0}
+.pr-row{display:grid;grid-template-columns:150px 1fr;gap:10px;font-size:13px;line-height:1.4}
+.pr-row dt{font-weight:700;opacity:.65}.pr-row dd{margin:0;font-weight:700;white-space:pre-line;overflow-wrap:anywhere}
+.pr-code.nc{border-style:solid;border-color:var(--line);cursor:default;opacity:.8}
+.pr-act{display:flex;gap:8px;margin-top:12px}
+.pr-act button{border:1px solid var(--line);background:var(--card);color:inherit;font:inherit;font-weight:800;font-size:12.5px;padding:7px 12px;border-radius:10px;cursor:pointer}
+.pr-act button.on{background:linear-gradient(135deg,var(--acc),var(--gold));color:#fff;border-color:transparent}
+.pr-terms{display:none;margin-top:10px;font-size:12.5px;line-height:1.55;font-weight:600;opacity:.85;padding:12px;border-radius:12px;background:rgba(0,0,0,.18);white-space:pre-line}
+.pr-card.open .pr-terms{display:block}
+@media(max-width:600px){.pr-grid{grid-template-columns:1fr}.pr-row{grid-template-columns:1fr;gap:0}.pr-row dt{font-size:11.5px}}
 </style>
 </head>
 <body class="theme-night">
@@ -919,7 +950,7 @@ body.menu-open .menu-veil{opacity:1;visibility:visible;transition:opacity .22s}
   </div>
  </header>
 
- <nav class="nav" id="nav"><button data-view="home">🏠 Главная</button><button data-view="work">🧰 Работа</button><button data-view="fun">🎉 Отдых</button><button data-view="profile">📸 Профиль</button><button data-view="team" id="navTeam" hidden>👥 Команда</button><button class="nav-slack" id="slWinBtn" title="Открыть Slack окном сбоку">💬 Slack</button></nav>
+ <nav class="nav" id="nav"><button data-view="home">🏠 Главная</button><button data-view="work">🧰 Работа</button><button data-view="fun">🎉 Отдых</button><button data-view="promo">🎁 Промокоды</button><button data-view="profile">📸 Профиль</button><button data-view="team" id="navTeam" hidden>👥 Команда</button><button class="nav-slack" id="slWinBtn" title="Открыть Slack окном сбоку">💬 Slack</button></nav>
  <div class="guest-note">👀 Ты гость: отмечай перерывы и обед в своей строке графика и пользуйся функциями. Чужое менять нельзя.<span id="guestRow"></span></div>
  <div class="online" id="online" hidden></div>
  <div id="bdayBanner" hidden></div>
@@ -1038,6 +1069,14 @@ body.menu-open .menu-veil{opacity:1;visibility:visible;transition:opacity .22s}
   </div>
  </div>
 
+ <div class="view" id="v-promo">
+  <div class="pr-top">
+   <div><h1 class="pr-h">🎁 Промокоды и акции</h1><div class="muted pr-sub">Условия бонусов по каждому казино. Нажми «Info terms», чтобы увидеть полные правила.</div></div>
+   <input class="in pr-q" id="prQ" placeholder="🔍 Поиск по бонусам…" autocomplete="off">
+  </div>
+  <div class="pr-brands" id="prBrands"></div>
+  <div id="prList"></div>
+ </div>
  <div class="view" id="v-profile">
   <div class="grid2 pgrid">
    <div class="col">
@@ -1939,7 +1978,7 @@ function confetti(n){
 }
 
 /* ================= НАВИГАЦИЯ ================= */
-var VIEWS=['home','work','fun','profile','team'];
+var VIEWS=['home','work','fun','promo','profile','team'];
 function setView(v){
  setTimeout(function(){try{beat()}catch(e){}},50);
  var toAdm=false;if(v==='team'){v=ME.admin?'profile':'home';toAdm=ME.admin}
@@ -1948,11 +1987,36 @@ function setView(v){
  document.body.setAttribute('data-view',v);
  [].forEach.call(document.querySelectorAll('#nav [data-view]'),function(b){b.classList.toggle('on',b.getAttribute('data-view')===v)});
  lsSet('shifthub-view',v);
- if(v==='work')renderClocks();
+ if(v==='work'){try{renderClocks()}catch(e){setTimeout(function(){try{renderClocks()}catch(x){}},0)}}
  if(v==='profile'&&typeof prof!=='undefined'){if(!prof.uid)prof.uid=ME.uid;setTimeout(function(){renderProfile();loadFeed()},0)}
 }
-$('nav').addEventListener('click',function(e){var b=e.target.closest('[data-view]');if(!b)return;setView(b.getAttribute('data-view'));try{scrollTo({top:0,behavior:'smooth'})}catch(x){}});
-(function(){var h=location.hash.slice(1);setView(VIEWS.indexOf(h)>=0?h:lsGet('shifthub-view','home'))})();
+/* ===== Отдельные URL для каждого раздела: /, /work, /fun, /promo, /promo/<казино>, /profile, /admin ===== */
+var ROUTES={home:'/',work:'/work',fun:'/fun',promo:'/promo',profile:'/profile',team:'/admin'};
+var TITLES={home:'Главная',work:'Работа',fun:'Отдых',promo:'Промокоды',profile:'Профиль',team:'Админ-панель'};
+var routeSub='';
+function parseRoute(){
+ var p=location.pathname,q=new URLSearchParams(location.search),r=q.get('p');
+ if(r){p=r;q.delete('p');var rest=q.toString();history.replaceState(null,'',p+(rest?'?'+rest:'')+location.hash)} /* пришли через 404.html */
+ var seg=p.replace(/^\/+|\/+$/g,'').toLowerCase().split('/');
+ var v=seg[0]||'',h=location.hash.slice(1);
+ if(!v&&VIEWS.indexOf(h)>=0)v=h;               /* старые ссылки вида /#promo */
+ if(v==='admin')v='team';
+ if(v==='index.html')v='';
+ routeSub=seg[1]||'';
+ return VIEWS.indexOf(v)>=0?v:'home';
+}
+function goView(v,push){
+ setView(v);var cur=document.body.getAttribute('data-view');
+ var key=(v==='team'&&cur==='profile')?'team':cur,url=ROUTES[key]||'/';
+ if(key==='promo'&&routeSub)url+='/'+routeSub;
+ var hs=/^#(day|night)$/.test(location.hash)?location.hash:'';
+ if(location.pathname!==url||(location.hash&&!hs)){if(push===false)history.replaceState({v:key},'',url+location.search+hs);else history.pushState({v:key},'',url+hs)}
+ document.title='Shift Hub — '+(TITLES[key]||'смена');
+ if(key==='promo'&&routeSub)setTimeout(function(){var el=document.getElementById('pr-'+routeSub);if(el){el.classList.remove('cl-off');el.scrollIntoView({behavior:'smooth',block:'start'})}},250);
+}
+$('nav').addEventListener('click',function(e){var b=e.target.closest('[data-view]');if(!b)return;routeSub='';goView(b.getAttribute('data-view'));try{scrollTo({top:0,behavior:'smooth'})}catch(x){}});
+addEventListener('popstate',function(){goView(parseRoute(),false)});
+goView(parseRoute(),false);
 
 /* ================= АВТООЧИСТКА + ОБСЛУЖИВАНИЕ ================= */
 var TPL_CATS={dep:['💰 Депозиты','#21e6a1'],wd:['💸 Выводы','#3ea8ff'],kyc:['🪪 Верификация','#a78bfa'],bonus:['🎁 Бонусы','#ffb547'],acc:['👤 Аккаунт','#ff9cc0'],other:['📝 Другое','#9aa3c7']};
@@ -2426,7 +2490,7 @@ $('tmForm').addEventListener('submit',function(e){
    return fetch(DB_URL+'/team/'+encodeURIComponent(uid)+'.json?auth='+encodeURIComponent(tok),{method:'PUT',body:JSON.stringify({name:nm,email:em,role:$('tmRole').value,ts:Date.now(),by:meName()||'Админ'})})
     .then(function(r){if(!r.ok)throw 'Аккаунт создан, но не добавлен в команду — проверь правила базы (Rules)';var rr=$('tmRole').value;TEAM[uid]={name:nm,email:em,role:rr};renderTeam();
      $('tmMsg').className='pwmsg ok';$('tmMsg').textContent='✅ Готово!';
-     var site=location.origin+location.pathname;
+     var site=location.origin+'/';
      $('tmDone').hidden=false;$('tmDone').innerHTML=esc(ROLES[rr][0]+' '+ROLES[rr][1]+'\nОтправь '+nm+':\n🌐 '+site+'\n📧 '+em+'\n🔑 '+pw+'\nПосле входа: 👤 → «Сменить пароль».')+'<div style="margin-top:8px"><button class="btn sm pri" id="tmCopy">📋 Скопировать</button></div>';
      $('tmCopy').onclick=function(){copyText('Shift Hub — твой вход\n🌐 '+site+'\n📧 '+em+'\n🔑 '+pw+'\nПосле входа нажми 👤 → «Сменить пароль».').then(function(){$('tmCopy').textContent='✅ Скопировано'})};
      $('tmName').value='';$('tmEmail').value='';$('tmPass').value='';
@@ -3250,17 +3314,1124 @@ setInterval(function(){if(raw&&!ui.adding&&!drag){renderTabs();renderSched();ren
 })();
 </script>
 <script>
+/* ===== Промокоды: данные. Чтобы добавить бонус — допиши объект в нужный массив (perm — постоянные, temp — временные) ===== */
+var PROMO_BRANDS=['Neospin','Evospin','Crownslot','Gunsbet','1RedBet','Beonbet','Slotrush'];
+var PROMOS={
+"Neospin": {
+"perm": [
+{
+"name": "FIRST DEPOSIT BONUS",
+"amount": "100% up to €1,000 +100 FS",
+"rows": [
+[
+"Min deposit",
+"EUR/USD 20, AUD/CAD/NZD 30, NOK 200, BTC 0.00022, ETH 0.01, LTC 0.3, DOGE 140, TRX 85, XRP 12, ADA 40, BCH 0.05, BNB 0.036, or USDT 20"
+],
+[
+"Wager for % from dep",
+"x40"
+],
+[
+"Wager for FS win",
+"x40"
+],
+[
+"Max bet",
+"EUR/USD 5, AUD/CAD/NZD 7.5, NOK 50, BTC 0.000055, ETH 0.0023, LTC 0.065, DOGE 35, TRX 20, XRP 2.5, ADA 10, BCH 0.012, BNB 0.009, or USDT 5"
+],
+[
+"Max withdrawal from %+FS",
+"Bonus winnings capped at EUR/USD/USDT 1,500 and AUD/CAD/NZD 2,000; FS winnings capped at EUR/USD 150, AUD/CAD/NZD 225, NOK 1,500, BTC 0.0016, ETH 0.065, LTC 2, DOGE 1035, TRX 615, XRP 75, ADA 300, BCH 0.35, BNB 0.27, or USDT 150"
+]
+],
+"terms": "BONUS DETAILS\nTo claim your first deposit welcome bonus, enter the promo code NEO1 before making a deposit of at least EUR/USD 20, AUD/CAD/NZD 30, NOK 200, BTC 0.00022, ETH 0.01, LTC 0.3, DOGE 140, TRX 85, XRP 12, ADA 40, BCH 0.05, BNB 0.036, or USDT 20.\nThe maximum bonus amount is 100% of your deposit, up to a maximum of EUR/USD 1,000, AUD/CAD/NZD 1,500, NOK 10,000, BTC 0.012, ETH 0.5, LTC 13.5, DOGE 6,500, TRX 4,100, XRP 520, ADA 2,000, BCH 2.4, BNB 1.8, or USDT 1,000.\nTo complete wagering requirements, you must make bets equal to 40 times the bonus amount received (deposit bonus + winnings from free spins) × 40.\n\nT&C\nFree spins will be credited over 4 days starting from the activation date — 25 free spins on the first day and 25 per day for the following 3 days — in Snoop Dogg Dollars (Bgmng).\nThe maximum winnings from free spins are capped at EUR/USD 150, AUD/CAD/NZD 225, NOK 1,500, BTC 0.0016, ETH 0.065, LTC 2, DOGE 1035, TRX 615, XRP 75, ADA 300, BCH 0.35, BNB 0.27, or USDT 150.\nThe maximum winnings from the bonus are capped at EUR/USD/USDT 1,500 and AUD/CAD/NZD 2,000.\nThe maximum allowed bet during wagering is EUR/USD 5, AUD/CAD/NZD 7.5, NOK 50, BTC 0.000055, ETH 0.0023, LTC 0.065, DOGE 35, TRX 20, XRP 2.5, ADA 10, BCH 0.012, BNB 0.009, or USDT 5. This limit includes doubling bets after a game round has ended and bonus rounds purchased within games.\nThe bonus can be claimed only once per player on their first deposit.",
+"code": "NEO1"
+},
+{
+"name": "HIGHROLLER FIRST DEPOSIT BONUS",
+"amount": "125% up to €3,000 +10% CASHBACK",
+"rows": [
+[
+"Min deposit",
+"EUR/USD 1,000, AUD/CAD/NZD 1,500, NOK 10,000, BTC 0.012, ETH 0.5, LTC 13.5, DOGE 6,500, TRX 4,100, XRP 520, ADA 2,000, BCH 2.4, BNB 1.8, or USDT 1,000"
+],
+[
+"Wager for % from dep",
+"x40"
+],
+[
+"Wager for FS win",
+"N/A (x3 for Cashback)"
+],
+[
+"Max bet",
+"EUR/USD 25, AUD/CAD/NZD 35, NOK 250, BTC 0.00027, ETH 0.0112, LTC 0.3, DOGE 170, TRX 100, XRP 13, ADA 50, BCH 0.06, BNB 0.04, or USDT 25"
+],
+[
+"Max withdrawal from %+FS",
+"Bonus winnings capped at EUR/USD/USDT 4,000 and AUD/CAD/NZD 6,000; Max cashback €1,000, AU/CA/NZ$ 1,500, US$ 1,000, NOK 10,000, USDT 1,000, BTC 0.012, ETH 0.5, LTC 13.5, DOGE 6,500, TRX 4,100, XRP 520, ADA 2,000, BCH 2.4, or BNB 1.8"
+]
+],
+"terms": "BONUS DETAILS\nTo claim your first deposit welcome bonus, enter the promo code NEOVIP before making a deposit of at least EUR/USD 1,000, AUD/CAD/NZD 1,500, NOK 10,000, BTC 0.012, ETH 0.5, LTC 13.5, DOGE 6,500, TRX 4,100, XRP 520, ADA 2,000, BCH 2.4, BNB 1.8, or USDT 1,000.\nThe maximum bonus amount is 125% of your deposit, up to a maximum of EUR/USD 3,000, AUD/CAD/NZD 5,000, NOK 30,000, BTC 0.032, ETH 1.35, LTC 40, DOGE 20,665, TRX 12,300, XRP 1570, ADA 6,000, BCH 7.2, BNB 5.3, or USDT 3,000.\nTo complete wagering requirements, you must make bets equal to 40 times the bonus amount received (deposit bonus) × 40.\n\nT&C\nCashback will be calculated based on your net losses from any real money bets made within 7 days after your first deposit. The cashback will be credited after this 7-day period ends and will be subject to a x3 wagering requirement.\nThe maximum cashback you can receive is €1,000, AU$1,500, CA$1,500, NZ$1,500, US$1,000, NOK 10,000, USDT 1,000, BTC 0.012, ETH 0.5, LTC 13.5, DOGE 6,500, TRX 4,100, XRP 520, ADA 2,000, BCH 2.4, or BNB 1.8.\nThe maximum winnings from the bonus are capped at EUR/USD/USDT 4,000 and AUD/CAD/NZD 6,000.\nThis cashback offer can only be claimed once per player and applies exclusively to losses incurred within the specified time frame.\nThe maximum allowed bet during wagering is EUR/USD 25, AUD/CAD/NZD 35, NOK 250, BTC 0.00027, ETH 0.0112, LTC 0.3, DOGE 170, TRX 100, XRP 13, ADA 50, BCH 0.06, BNB 0.04, or USDT 25. This limit includes doubling bets after a game round has ended and bonus rounds purchased within games.\nThe bonus can be claimed only once per player on their first highroller deposit.",
+"code": "NEOVIP"
+},
+{
+"name": "SECOND DEPOSIT BONUS",
+"amount": "100% up to €1,500 +25 FS",
+"rows": [
+[
+"Min deposit",
+"EUR/USD 20, AUD/CAD/NZD 30, NOK 200, BTC 0.00022, ETH 0.01, LTC 0.3, DOGE 140, TRX 85, XRP 12, ADA 40, BCH 0.05, BNB 0.036, or USDT 20"
+],
+[
+"Wager for % from dep",
+"x40"
+],
+[
+"Wager for FS win",
+"x40"
+],
+[
+"Max bet",
+"EUR/USD 5, AUD/CAD/NZD 7.5, NOK 50, BTC 0.000055, ETH 0.0023, LTC 0.065, DOGE 35, TRX 20, XRP 2.5, ADA 10, BCH 0.012, BNB 0.009, or USDT 5"
+],
+[
+"Max withdrawal from %+FS",
+"Bonus winnings capped at EUR/USD/USDT 2,000 and AUD/CAD/NZD 2,500; FS winnings capped at EUR/USD 150, AUD/CAD/NZD 225, NOK 1,500, BTC 0.0016, ETH 0.065, LTC 2, DOGE 1035, TRX 615, XRP 75, ADA 300, BCH 0.35, BNB 0.27, or USDT 150"
+]
+],
+"terms": "BONUS DETAILS\nTo claim your second deposit welcome bonus, enter the promo code NEO2 before making a deposit of at least EUR/USD 20, AUD/CAD/NZD 30, NOK 200, BTC 0.00022, ETH 0.01, LTC 0.3, DOGE 140, TRX 85, XRP 12, ADA 40, BCH 0.05, BNB 0.036, or USDT 20.\nThe maximum bonus amount is 100% of your deposit, up to a maximum of EUR/USD 1,500, AUD/CAD/NZD 2,000, NOK 15,000, BTC 0.016, ETH 0.65, LTC 20, DOGE 10,335, TRX 6,150, XRP 1050, ADA 3,000, BCH 3.6, BNB 2.6, or USDT 1,500.\nTo complete wagering requirements, you must make bets equal to 40 times the bonus amount received (deposit bonus + winnings from free spins) × 40.\n\nT&C\n25 free spins will be credited immediately from the activation date — in Bonanza Billion Xtreme (Bgmng).\nThe maximum winnings from free spins are capped at EUR/USD 150, AUD/CAD/NZD 225, NOK 1,500, BTC 0.0016, ETH 0.065, LTC 2, DOGE 1035, TRX 615, XRP 75, ADA 300, BCH 0.35, BNB 0.27, or USDT 150.\nThe maximum winnings from the bonus are capped at EUR/USD/USDT 2,000 and AUD/CAD/NZD 2,500.\nThe maximum allowed bet during wagering is EUR/USD 5, AUD/CAD/NZD 7.5, NOK 50, BTC 0.000055, ETH 0.0023, LTC 0.065, DOGE 35, TRX 20, XRP 2.5, ADA 10, BCH 0.012, BNB 0.009, or USDT 5. This limit includes doubling bets after a game round has ended and bonus rounds purchased within games.\nThe bonus can be claimed only once per player on their second deposit.",
+"code": "NEO2"
+},
+{
+"name": "THIRD DEPOSIT BONUS",
+"amount": "75% up to €2,000 +75 FS",
+"rows": [
+[
+"Min deposit",
+"EUR/USD 20, AUD/CAD/NZD 30, NOK 200, BTC 0.00022, ETH 0.01, LTC 0.3, DOGE 140, TRX 85, XRP 12, ADA 40, BCH 0.05, BNB 0.036, or USDT 20"
+],
+[
+"Wager for % from dep",
+"x40"
+],
+[
+"Wager for FS win",
+"x40"
+],
+[
+"Max bet",
+"EUR/USD 5, AUD/CAD/NZD 7.5, NOK 50, BTC 0.000055, ETH 0.0023, LTC 0.065, DOGE 35, TRX 20, XRP 2.5, ADA 10, BCH 0.012, BNB 0.009, or USDT 5"
+],
+[
+"Max withdrawal from %+FS",
+"Bonus winnings capped at EUR/USD/USDT 2,500 and AUD/CAD/NZD 3,000; FS winnings capped at EUR/USD 150, AUD/CAD/NZD 225, NOK 1,500, BTC 0.0016, ETH 0.065, LTC 2, DOGE 1035, TRX 615, XRP 75, ADA 300, BCH 0.35, BNB 0.27, or USDT 150"
+]
+],
+"terms": "BONUS DETAILS\nTo claim your third deposit welcome bonus, enter the promo code NEO3 before making a deposit of at least EUR/USD 20, AUD/CAD/NZD 30, NOK 200, BTC 0.00022, ETH 0.01, LTC 0.3, DOGE 140, TRX 85, XRP 12, ADA 40, BCH 0.05, BNB 0.036, or USDT 20.\nThe maximum bonus amount is 75% of your deposit, up to a maximum of EUR/USD 2,000, AUD/CAD/NZD 2,500, NOK 20,000, BTC 0.022, ETH 0.9, LTC 26, DOGE 13,775, TRX 8,200, XRP 1050, ADA 4,000, BCH 4.8, BNB 3.5, or USDT 2,000.\nTo complete wagering requirements, you must make bets equal to 40 times the bonus amount received (deposit bonus + winnings from free spins) × 40.\n\nT&C\nFree spins will be credited over 3 days starting from the activation date — 25 free spins on the first day, then 25 more each day for the next 2 days — in Aloha King Elvis (Bgmng).\nThe maximum winnings from free spins are capped at EUR/USD 150, AUD/CAD/NZD 225, NOK 1,500, BTC 0.0016, ETH 0.065, LTC 2, DOGE 1035, TRX 615, XRP 75, ADA 300, BCH 0.35, BNB 0.27, or USDT 150.\nThe maximum winnings from the bonus are capped at EUR/USD/USDT 2,500 and AUD/CAD/NZD 3,000.\nThe maximum allowed bet during wagering is EUR/USD 5, AUD/CAD/NZD 7.5, NOK 50, BTC 0.000055, ETH 0.0023, LTC 0.065, DOGE 35, TRX 20, XRP 2.5, ADA 10, BCH 0.012, BNB 0.009, or USDT 5. This limit includes doubling bets after a game round has ended and bonus rounds purchased within games.\nThe bonus can be claimed only once per player on their third deposit.",
+"code": "NEO3"
+},
+{
+"name": "FOURTH DEPOSIT BONUS",
+"amount": "25% up to €2,500 +100 FS",
+"rows": [
+[
+"Min deposit",
+"EUR/USD 20, AUD/CAD/NZD 30, NOK 200, BTC 0.00022, ETH 0.01, LTC 0.3, DOGE 140, TRX 85, XRP 12, ADA 40, BCH 0.05, BNB 0.036, or USDT 20"
+],
+[
+"Wager for % from dep",
+"x40"
+],
+[
+"Wager for FS win",
+"x40"
+],
+[
+"Max bet",
+"EUR/USD 5, AUD/CAD/NZD 7.5, NOK 50, BTC 0.000055, ETH 0.0023, LTC 0.065, DOGE 35, TRX 20, XRP 2.5, ADA 10, BCH 0.012, BNB 0.009, or USDT 5"
+],
+[
+"Max withdrawal from %+FS",
+"Bonus winnings capped at EUR/USD/USDT 3,000 and AUD/CAD/NZD 4,500; FS winnings capped at EUR/USD 150, AUD/CAD/NZD 225, NOK 1,500, BTC 0.0016, ETH 0.065, LTC 2, DOGE 1035, TRX 615, XRP 75, ADA 300, BCH 0.35, BNB 0.27, or USDT 150"
+]
+],
+"terms": "BONUS DETAILS\nTo claim your fourth deposit welcome bonus, enter the promo code NEO4 before making a deposit of at least EUR/USD 20, AUD/CAD/NZD 30, NOK 200, BTC 0.00022, ETH 0.01, LTC 0.3, DOGE 140, TRX 85, XRP 12, ADA 40, BCH 0.05, BNB 0.036, or USDT 20.\nThe maximum bonus amount is 25% of your deposit, up to a maximum of EUR/USD 2,500, AUD/CAD/NZD 5,000, NOK 25,000, BTC 0.027, ETH 1.15, LTC 33, DOGE 17,200, TRX 10,250, XRP 1300, ADA 5,000, BCH 6, BNB 4.5, or USDT 2,500.\nTo complete wagering requirements, you must make bets equal to 40 times the bonus amount received (deposit bonus + winnings from free spins) × 40.\n\nT&C\nFree spins will be credited over 4 days starting from the activation date — 25 free spins on the first day, then 25 more per day for the next 3 days — in Only Coins Express (Gamzix).\nThe maximum winnings from free spins are capped at EUR/USD 150, AUD/CAD/NZD 225, NOK 1,500, BTC 0.0016, ETH 0.065, LTC 2, DOGE 1035, TRX 615, XRP 75, ADA 300, BCH 0.35, BNB 0.27, or USDT 150.\nThe maximum winnings from the bonus are capped at EUR/USD/USDT 3,000 and AUD/CAD/NZD 4,500.\nThe maximum allowed bet during wagering is EUR/USD 5, AUD/CAD/NZD 7.5, NOK 50, BTC 0.000055, ETH 0.0023, LTC 0.065, DOGE 35, TRX 20, XRP 2.5, ADA 10, BCH 0.012, BNB 0.009, or USDT 5. This limit includes doubling bets after a game round has ended and bonus rounds purchased within games.\nThe bonus can be claimed only once per player on their fourth deposit.",
+"code": "NEO4"
+},
+{
+"name": "DAILY CASHBACK",
+"amount": "UP TO 20% ON EVERY DEPOSIT",
+"rows": [
+[
+"Min deposit",
+"Min loss for 5% cashback: 50 EUR/USD, 75 AUD/NZD/CAD, 500 NOK. Min loss for 6-20% cashback: 19 EUR/USD, 29 AUD/NZD/CAD, 190 NOK"
+],
+[
+"Wager for % from dep",
+"x3 (от суммы потраченных средств за день)"
+],
+[
+"Wager for FS win",
+"N/A"
+],
+[
+"Max bet",
+"Не указано в условиях"
+],
+[
+"Max withdrawal from %+FS",
+"Без ограничений (There are no limitations on the amount of winnings obtained with the cashback bonus funds)"
+]
+],
+"terms": "BONUS DETAILS\nCashback is credited to the amount of losses for the previous day from 00:00 to 23:59 (UTC). The cashback percentage depends on the amount of loss for the previous day.\nThe total amount of received cashback cannot exceed 20% of the Player's total amount of all losses.\nCashback 5% will not be credited if the actual cash loss for the previous day was less than 50 EUR / 50 USD / 75 AUD / 75 NZD / 75 CAD / 500 NOK.\nCashback 6-20% will not be credited if the actual cash loss for the previous day was less than 19 EUR / 19 USD / 29 AUD / 29 NZD / 29 CAD / 190 NOK.\n\nT&C\nAny abuse to obtain a cashback bonus is prohibited; in particular, the use of the opposite bets strategy in table games is prohibited (e.g., simultaneous betting on both red and black in roulette, or other similar bet types).\nFor successful withdrawal of funds gained with a cashback bonus, the Player must meet the wagering requirement for the total amount spent during the day of at least three (3) times (i.e. total wager amount equals the amount spent for the day multiplied by 3) no later than 23:59 UTC of the day on which this amount was spent.\nIn the case of detection of the cashback bonus rules abuse or failure to comply with the wagering requirements specified in paragraph 7 of these rules, the Casino may cancel and seize all winnings gained with an active cashback bonus, as well as to confiscate an amount equal to the amount of cashback bonus received.\nThere are no limitations on the amount of winnings obtained with the cashback bonus funds.",
+"nocode": "Без промокода"
+},
+{
+"name": "WEDNESDAY FREE SPINS",
+"amount": "GET UP TO 100 FS (30 FS по коду WN30, 60 FS по коду WN60, 100 FS по коду WN100)",
+"rows": [
+[
+"Min deposit",
+"Для WN30: 20 EUR / 20 USD / 30 AUD / 30 CAD / 30 NZD / 0.0006 BTC / 0.01 ETH / 0.11 BCH / 200 DOGE / 0.27 LTC / 20 USDT / 40 XRP / 33 ADA / 0.05 BNB / 200 TRX\nДля WN60: 27 EUR / 27 USD / 40 AUD / 40 CAD / 40 NZD / 0.0008 BTC / 0.014 ETH / 0.15 BCH / 270 DOGE / 0.36 LTC / 27 USDT / 54 XRP / 44.6 ADA / 0.07 BNB / 270 TRX\nДля WN100: 33 EUR / 33 USD / 50 AUD / 50 CAD / 50 NZD / 0.001 BTC / 0.017 ETH / 0.18 BCH / 330 DOGE / 0.44 LTC / 33 USDT / 66 XRP / 54.5 ADA / 0.08 BNB / 330 TRX"
+],
+[
+"Wager for % from dep",
+"N/A"
+],
+[
+"Wager for FS win",
+"x30"
+],
+[
+"Max bet",
+"6.5 EUR / 7 USD / 10 AUD / 10 CAD / 10 NZD / 0.0002 BTC / 0.003 ETH / 0.04 BCH / 65 DOGE / 0.09 LTC / 7 USDT / 13 XRP / 10.7 ADA / 0.017 BNB / 65 TRX"
+],
+[
+"Max withdrawal from %+FS",
+"Не указано в условиях"
+]
+],
+"terms": "BONUS DETAILS\nThe bonus is available only on Wednesday from 00-00 to 23-59 UTC and can be claimed by the player once a week.\nTo get 30 free spins, enter the WN30 promo code before making a deposit of no less than 20 EUR / 20 USD / 30 AUD / 30 CAD / 30 NZD / 0.0006 BTC / 0.01 ETH / 0.11 BCH / 200 DOGE / 0.27 LTC / 20 USDT / 40 XRP / 33 ADA / 0.05 BNB / 200 TRX.\nTo get 60 free spins, enter the WN60 promo code before making a deposit of no less than 27 EUR / 27 USD / 40 AUD / 40 CAD / 40 NZD / 0.0008 BTC / 0.014 ETH / 0.15 BCH / 270 DOGE / 0.36 LTC / 27 USDT / 54 XRP / 44.6 ADA / 0.07 BNB / 270 TRX.\nTo get 100 free spins, enter the WN100 promo code before making a deposit of no less than 33 EUR / 33 USD / 50 AUD / 50 CAD / 50 NZD / 0.001 BTC / 0.017 ETH / 0.18 BCH / 330 DOGE / 0.44 LTC / 33 USDT / 66 XRP / 54.5 ADA / 0.08 BNB / 330 TRX.\n\nT&C\nFull wagering requires making bets for the amount 30 times the amount of the bonus received: (winnings from free spins) ×30.\nLimitation of the maximum bet while wagering is 6.5 EUR / 7 USD / 10 AUD / 10 CAD / 10 NZD / 0.0002 BTC / 0.003 ETH / 0.04 BCH / 65 DOGE / 0.09 LTC / 7 USDT / 13 XRP / 10.7 ADA / 0.017 BNB / 65 TRX includes bets doubling after a game round has been completed and bonus rounds (purchased within the game).\nFree spins will be automatically credited to your account.\nThese terms and conditions relate to this offer only. However, General Terms and Conditions and Bonus Terms and Conditions at Neospin Casino apply. By participating in this promotion, you confirm your acceptance of all Terms and Conditions.\nIt is the players’ responsibility to ensure that it is legal for them to play at Neospin Casino, in whichever jurisdiction they are gambling, and to take part in this promotion.\nIf Neospin Casino deems that a participant has acted in bad faith in relation to the promotion, they shall be excluded from the promotion.\nNeospin Casino reserves the right at any time to substitute any promotion with another one or more promotions via the website.\nThe player can only use one of three promotional codes.",
+"code": "WN30 / WN60 / WN100"
+},
+{
+"name": "WEEKEND RELOAD BONUS",
+"amount": "66% up to €650",
+"rows": [
+[
+"Min deposit",
+"EUR 40 / USD 40 / AUD 60 / CAD 60 / NZD 60 / 400 NOK / BTC 0.0012 / BCH 0.22 / DOGE 400 / ETH 0.02 / LTC 0.53 / XRP 80 / USDT 40 / ADA 66 / BNB 0.1 / TRX 400"
+],
+[
+"Wager for % from dep",
+"x40"
+],
+[
+"Wager for FS win",
+"N/A"
+],
+[
+"Max bet",
+"6.5 EUR / 7 USD / 10 AUD / 10 CAD / 10 NZD / 65 NOK / 0.0002 BTC / 0.003 ETH / 0.04 BCH / 65 DOGE / 0.09 LTC / 7 USDT / 13 XRP / 10.7 ADA / 0.017 BNB / 65 TRX"
+],
+[
+"Max withdrawal from %+FS",
+"Max win: 2,700 EUR / 2,300 USD / 3,300 AUD / 3,200 CAD / 3,900 NZD / 27,000 NOK / 0.03 BTC / 0.99 ETH / 536 BCH / 25,000 DOGE / 43 LTC / 2,300 USDT / 1,700 XRP / 9,600 ADA / 3.74 BNB / 7,100 TRX"
+]
+],
+"terms": "BONUS DETAILS\nTo get the bonus, enter the bonus code before the deposit.\nTo get the bonus, you must make a deposit of at least deposit EUR 40 / USD 40 / AUD 60 / CAD 60 / NZD 60 / 400 NOK / BTC 0.0012 / BCH 0.22 / DOGE 400 / ETH 0.02 / LTC 0.53 / XRP 80 / USDT 40 / ADA 66 / BNB 0.1 / TRX 400.\nThe maximum bonus amount is 66% of the deposit amount, but not more 650 EUR / 700 USD / 1,000 AUD / 1,000 CAD / 1,000 NZD / 6,500 NOK / 0.0195 BTC / 0.325 ETH / 3.58 BCH / 6,500 DOGE / 8.71 LTC / 700 USDT / 1,300 XRP / 1,072 ADA / 1.66 BNB / 6,500 TRX.\nMax win: 2,700 EUR / 2,300 USD / 3,300 AUD / 3,200 CAD / 3,900 NZD / 27,000 NOK / 0.03 BTC / 0.99 ETH / 536 BCH / 25,000 DOGE / 43 LTC / 2,300 USDT / 1,700 XRP / 9,600 ADA / 3.74 BNB / 7,100 TRX.\n\nT&C\nFull wagering requires making bets for the amount 40 times the amount of the bonus received: (deposit bonus) × 40.\nLimitation of the maximum bet while wagering is 6.5 EUR / 7 USD / 10 AUD / 10 CAD / 10 NZD / 65 NOK / 0.0002 BTC / 0.003 ETH / 0.04 BCH / 65 DOGE / 0.09 LTC / 7 USDT / 13 XRP / 10.7 ADA / 0.017 BNB / 65 TRX includes bets doubling after a game round has been completed and bonus rounds (purchased within the game).\nThe bonus is available for players who made at least 1 deposit, weekly, from Friday 00-00 to Sunday 23-59 and can be claimed by the player once a week. If the Player has repeatedly made deposits to the Casino with the use of the Reload bonuses, and did not make deposits or bets without an active bonus in the interval between obtaining the Reload bonuses, the Casino has the right to treat this as an abuse, and can restrict or completely prohibit the Player to obtain Bonuses at the Casino at its discretion.",
+"code": "66NEO"
+}
+],
+"temp": []
+},
+"Evospin": {
+"perm": [
+{
+"name": "SECOND DEPOSIT BONUS",
+"amount": "75% UP TO €2,500 + 75 FS IN FRUIT MILLION (BGAMING)",
+"rows": [
+[
+"Min deposit",
+"20 EUR / 20 USD / 30 CAD / 20 BGN"
+],
+[
+"Wager for % from dep",
+"x40 in all games which is not restricted for wagering"
+],
+[
+"Wager for FS win",
+"x30 in all games which is not restricted for wagering"
+],
+[
+"Max bet",
+"6.50 EUR / 7.00 USD / 10.00 CAD / 7 BGN"
+],
+[
+"Max withdrawal from %+FS",
+"2,650 EUR / 2,650 USD / 3,975 CAD / 2,150 BGN"
+]
+],
+"terms": "BONUS DETAILS\nMin dep: 20 EUR / 20 USD / 30 CAD / 20 BGN.\nMax % bonus from dep: 2,500 EUR / 2,500 USD / 3,750 CAD / 2,000 BGN.\nMax FS bonus: 150 EUR / 150 USD / 225 CAD / 150 BGN.\nWager for % from dep: x40 in all games which is not restricted for wagering.\nWager for FS win: x30 in all games which is not restricted for wagering.\nMax bet: 6.50 EUR / 7.00 USD / 10.00 CAD / 7 BGN.\nMax withdrawal from %+FS: 2,650 EUR / 2,650 USD / 3,975 CAD / 2,150 BGN.\n\nT&C\nThis bonus is available once per player and only on second deposit. With the active bonus, bets are deducted from the real money balance first. After all real money is spent, the bets are deducted from the bonus funds balance. When the balance reaches USD 0.05 / EUR 0.05 / CAD 0.05 / BGN 0.05 or less, the bonus will be canceled and the wager will be removed.\nTo withdraw funds, the bonus amount of 75% from deposit must be rolled over 40 (forty) times and the bonus amount from Free Spins must be rolled over 30 (thirty) times. In case of cancellation of bonus and not fulfilling the wagering requirements all bonus funds, as well as winnings associated with bonus funds, will be void.\nAll bets made while playing slots contribute 100% to bonus wagering. Bets made in table games, live casino games, lottery, or other available games contribute 5% to bonus wagering. Bets in games that are excluded from wagering the bonus will not be counted towards bonus wagering.",
+"code": "EVOSCND"
+},
+{
+"name": "THIRD DEPOSIT BONUS",
+"amount": "85% UP TO €2,500 + 85 FS IN BONANZA BILLION (BGAMING)",
+"rows": [
+[
+"Min deposit",
+"20 EUR / 20 USD / 30 CAD / 20 BGN"
+],
+[
+"Wager for % from dep",
+"x40 in all games which is not restricted for wagering"
+],
+[
+"Wager for FS win",
+"x30 in all games which is not restricted for wagering"
+],
+[
+"Max bet",
+"6.50 EUR / 7.00 USD / 10.00 CAD / 7 BGN"
+],
+[
+"Max withdrawal from %+FS",
+"2,650 EUR / 2,650 USD / 3,975 CAD / 2,150 BGN"
+]
+],
+"terms": "BONUS DETAILS\nMin dep: 20 EUR / 20 USD / 30 CAD / 20 BGN.\nMax % bonus from dep: 2,500 EUR / 2,500 USD / 3,750 CAD / 2,000 BGN.\nMax FS bonus: 150 EUR / 150 USD / 225 CAD / 150 BGN.\nWager for % from dep: x40 in all games which is not restricted for wagering.\nWager for FS win: x30 in all games which is not restricted for wagering.\nMax bet: 6.50 EUR / 7.00 USD / 10.00 CAD / 7 BGN.\nMax withdrawal from %+FS: 2,650 EUR / 2,650 USD / 3,975 CAD / 2,150 BGN.\n\nT&C\nThis bonus is available once per player and only on third deposit. With the active bonus, bets are deducted from the real money balance first. After all real money is spent, the bets are deducted from the bonus funds balance. When the balance reaches USD 0.05 / EUR 0.05 / CAD 0.05 / BGN 0.05 or less, the bonus will be canceled and the wager will be removed.\nTo withdraw funds, the bonus amount of 85% from deposit must be rolled over 40 (forty) times and the bonus amount from Free Spins must be rolled over 30 (thirty) times. In case of cancellation of bonus and not fulfilling the wagering requirements all bonus funds, as well as winnings associated with bonus funds, will be void.\nAll bets made while playing slots contribute 100% to bonus wagering. Bets made in table games, live casino games, lottery, or other available games contribute 5% to bonus wagering. Bets in games that are excluded from wagering the bonus will not be counted towards bonus wagering.",
+"code": "EVOTHRD"
+},
+{
+"name": "FIRST HIGHROLLER DEPOSIT BONUS",
+"amount": "150% UP TO €6,000 + 150 FS",
+"rows": [
+[
+"Min deposit",
+"250 EUR / 250 USD / 375 CAD / 300 BGN"
+],
+[
+"Wager for % from dep",
+"x40 in all games which is not restricted for wagering"
+],
+[
+"Wager for FS win",
+"x30 in all games which is not restricted for wagering"
+],
+[
+"Max bet",
+"25 EUR / 25 USD / 40 CAD / 25 BGN"
+],
+[
+"Max withdrawal from %+FS",
+"6,500 EUR / 6,500 USD / 9,750 CAD / 7,600 BGN"
+]
+],
+"terms": "BONUS DETAILS\nMin dep: 250 EUR / 250 USD / 375 CAD / 300 BGN.\nMax % bonus from dep: 6,000 EUR / 6,000 USD / 9,000 CAD / 7,000 BGN.\nMax FS bonus: 500 EUR / 500 USD / 750 CAD / 600 BGN.\nWager for % from dep: x40 in all games which is not restricted for wagering.\nWager for FS win: x30 in all games which is not restricted for wagering.\nMax bet: 25 EUR / 25 USD / 40 CAD / 25 BGN.\nMax withdrawal from %+FS: 6,500 EUR / 6,500 USD / 9,750 CAD / 7,600 BGN.\n\nT&C\nThis bonus is available once per player and only on first deposit. With the active bonus, bets are deducted from the real money balance first. After all real money is spent, the bets are deducted from the bonus funds balance. When the balance reaches USD 0.05 / EUR 0.05 / CAD 0.05 / BGN 0.05 or less, the bonus will be canceled and the wager will be removed.\nTo withdraw funds, the bonus amount of 150% from deposit must be rolled over 40 (forty) times and the bonus amount from each Free Spins pack must be rolled over 30 (thirty) times. In case of cancellation of bonus and not fulfilling the wagering requirements all bonus funds, as well as winnings associated with bonus funds, will be void.\nAll bets made while playing slots contribute 100% to bonus wagering. Bets made in table games, live casino games, lottery, or other available games contribute 5% to bonus wagering. Bets in games that are excluded from wagering the bonus will not be counted towards bonus wagering.",
+"code": "EVOHR1ST"
+},
+{
+"name": "SECOND HIGHROLLER DEPOSIT BONUS",
+"amount": "180% UP TO €6,000 + 180 FS",
+"rows": [
+[
+"Min deposit",
+"250 EUR / 250 USD / 375 CAD / 300 BGN"
+],
+[
+"Wager for % from dep",
+"x40 in all games which is not restricted for wagering"
+],
+[
+"Wager for FS win",
+"x30 in all games which is not restricted for wagering"
+],
+[
+"Max bet",
+"25 EUR / 25 USD / 40 CAD / 25 BGN"
+],
+[
+"Max withdrawal from %+FS",
+"6,500 EUR / 6,500 USD / 9,750 CAD / 7,600 BGN"
+]
+],
+"terms": "BONUS DETAILS\nMin dep: 250 EUR / 250 USD / 375 CAD / 300 BGN.\nMax % bonus from dep: 6,000 EUR / 6,000 USD / 9,000 CAD / 7,000 BGN.\nMax FS bonus: 500 EUR / 500 USD / 750 CAD / 600 BGN.\nWager for % from dep: x40 in all games which is not restricted for wagering.\nWager for FS win: x30 in all games which is not restricted for wagering.\nMax bet: 25 EUR / 25 USD / 40 CAD / 25 BGN.\nMax withdrawal from %+FS: 6,500 EUR / 6,500 USD / 9,750 CAD / 7,600 BGN.\n\nT&C\nThis bonus is available once per player and only on second deposit. With the active bonus, bets are deducted from the real money balance first. After all real money is spent, the bets are deducted from the bonus funds balance. When the balance reaches USD 0.05 / EUR 0.05 / CAD 0.05 / BGN 0.05 or less, the bonus will be canceled and the wager will be removed.\nTo withdraw funds, the bonus amount of 180% from deposit must be rolled over 40 (forty) times and the bonus amount from each Free Spins pack must be rolled over 30 (thirty) times. In case of cancellation of bonus and not fulfilling the wagering requirements all bonus funds, as well as winnings associated with bonus funds, will be void.\nAll bets made while playing slots contribute 100% to bonus wagering. Bets made in table games, live casino games, lottery, or other available games contribute 5% to bonus wagering. Bets in games that are excluded from wagering the bonus will not be counted towards bonus wagering.",
+"code": "EVOHR2ND"
+},
+{
+"name": "THIRD HIGHROLLER DEPOSIT BONUS",
+"amount": "200% UP TO €6,000 + 200 FS",
+"rows": [
+[
+"Min deposit",
+"250 EUR / 250 USD / 375 CAD / 300 BGN"
+],
+[
+"Wager for % from dep",
+"x40 in all games which is not restricted for wagering"
+],
+[
+"Wager for FS win",
+"x30 in all games which is not restricted for wagering"
+],
+[
+"Max bet",
+"25 EUR / 25 USD / 40 CAD / 25 BGN"
+],
+[
+"Max withdrawal from %+FS",
+"6,500 EUR / 6,500 USD / 9,750 CAD / 7,600 BGN"
+]
+],
+"terms": "BONUS DETAILS\nMin dep: 250 EUR / 250 USD / 375 CAD / 300 BGN.\nMax % bonus from dep: 6,000 EUR / 6,000 USD / 9,000 CAD / 7,000 BGN.\nMax FS bonus: 500 EUR / 500 USD / 750 CAD / 600 BGN.\nWager for % from dep: x40 in all games which is not restricted for wagering.\nWager for FS win: x30 in all games which is not restricted for wagering.\nMax bet: 25 EUR / 25 USD / 40 CAD / 25 BGN.\nMax withdrawal from %+FS: 6,500 EUR / 6,500 USD / 9,750 CAD / 7,600 BGN.\n\nT&C\nThis bonus is available once per player and only on third deposit. With the active bonus, bets are deducted from the real money balance first. After all real money is spent, the bets are deducted from the bonus funds balance. When the balance reaches USD 0.05 / EUR 0.05 / CAD 0.05 / BGN 0.05 or less, the bonus will be canceled and the wager will be removed.\nTo withdraw funds, the bonus amount of 200% from deposit must be rolled over 40 (forty) times and the bonus amount from each Free Spins pack must be rolled over 30 (thirty) times. In case of cancellation of bonus and not fulfilling the wagering requirements all bonus funds, as well as winnings associated with bonus funds, will be void.\nAll bets made while playing slots contribute 100% to bonus wagering. Bets made in table games, live casino games, lottery, or other available games contribute 5% to bonus wagering. Bets in games that are excluded from wagering the bonus will not be counted towards bonus wagering.",
+"code": "EVOHR3RD"
+},
+{
+"name": "DAILY CASHBACK",
+"amount": "GET UP TO 20%",
+"rows": [
+[
+"Min deposit",
+"Min actual cash loss: 50.00 EUR / 50.00 GBP / 50.00 USD / 75.00 CAD / 100.00 BGN (Available to users with 4+ deposits)"
+],
+[
+"Wager for % from dep",
+"x3"
+],
+[
+"Wager for FS win",
+"Not specified"
+],
+[
+"Max bet",
+"Not specified"
+],
+[
+"Max withdrawal from %+FS",
+"Max winnings from cashback: 10,000 EUR / 10,000 USD / 15,000 CAD / 20,000 BGN"
+]
+],
+"terms": "BONUS DETAILS\nMax cashback: 20% of total losses.\nWager requirement: x3.\nMin actual cash loss: 50.00 EUR / 50.00 GBP / 50.00 USD / 75.00 CAD / 100.00 BGN.\nMax winnings from cashback: 10,000 EUR / 10,000 USD / 15,000 CAD / 20,000 BGN.\nCredited: Daily at 00:10 AM (UTC).\nValidity: 3 days from receipt, 7 days from activation.\n\nT&C\nCashback is given on the spent amount during the previous day (00:00 to 23:59 UTC) if a deposit was made on the same day. Spent amount = all deposits - bonus balance - withdrawals - pending withdrawals.\nCashback percentage depends on the total loss for the day and the player’s loyalty status. The cashback cannot exceed 20% of the total loss.\nCashback will not be credited if losses are below: 50.00 EUR / 50.00 GBP / 50.00 USD / 75.00 CAD / 100.00 BGN.\nCashback is available to users with 4+ deposits.\nWagering requirement for cashback is x3. Cashback is valid for 3 days from receipt and must be used within 7 days after activation.\nMax winnings from cashback: 10,000 EUR / 10,000 USD / 15,000 CAD.\nAbuse of the cashback system is prohibited. Opposite betting strategies (e.g. betting on both red and black in roulette) are not allowed.\nFor a successful withdrawal, cashback winnings must be wagered 3x the amount of the day’s losses by 23:59 UTC of that day.\nIf abuse or non-compliance with these conditions is detected, the casino may cancel cashback and related winnings.",
+"nocode": "Без промокода"
+},
+{
+"name": "FRIDAY RELOAD BONUS",
+"amount": "66% UP TO €1,000",
+"rows": [
+[
+"Min deposit",
+"30 EUR / 30 USD / 45 CAD / 30 BGN"
+],
+[
+"Wager for % from dep",
+"x40 in all games which is not restricted for wagering"
+],
+[
+"Wager for FS win",
+"Not specified"
+],
+[
+"Max bet",
+"6.5 EUR / 6.5 USD / 10 CAD / 7 BGN"
+],
+[
+"Max withdrawal from %+FS",
+"1,000 EUR / 1,000 USD / 1,500 CAD / 1,000 BGN"
+]
+],
+"terms": "BONUS DETAILS\nMin dep: 30 EUR / 30 USD / 45 CAD / 30 BGN.\nMax % bonus from dep: 1,000 EUR / 1,000 USD / 1,500 CAD / 1,000 BGN.\nWager for % from dep: x40 in all games which is not restricted for wagering.\nMax bet for % bonus: 6.5 EUR / 6.5 USD / 10 CAD / 7 BGN.\nMax withdrawal from % bonus: 1,000 EUR / 1,000 USD / 1,500 CAD / 1,000 BGN.\n\nT&C\nThis bonus is only available on Weekend (Friday, Saturday, Sunday) and can be claimed by the player once a week. With the active bonus, bets are deducted from the real money balance first. After all real money is spent, the bets are deducted from the bonus funds balance.\nWhen the balance reaches USD 0.05 / EUR 0.05 / CAD 0.05 / BGN 0.05 or less, the bonus will be canceled and the wager will be removed.\nTo withdraw funds, the bonus amount of 66% from deposit must be rolled over 40 (forty) times. In case of cancellation of bonus and not fulfilling the wagering requirements all bonus funds, as well as winnings associated with bonus funds, will be void.\nAll bets made while playing slots contribute 100% to bonus wagering. Bets made in table games, live casino games, lottery, or other available games contribute 5% to bonus wagering. Bets in games that are excluded from wagering the bonus will not be counted towards bonus wagering.",
+"code": "FRDMBN"
+},
+{
+"name": "BONUS CANCELLATION",
+"amount": "100%",
+"rows": [
+[
+"Min deposit",
+"Min withdrawal: 200 EUR / 200 USD / 300 CAD / 200 BGN"
+],
+[
+"Wager for % from dep",
+"x40 in all games which is not restricted for wagering"
+],
+[
+"Wager for FS win",
+"Not specified"
+],
+[
+"Max bet",
+"Not specified"
+],
+[
+"Max withdrawal from %+FS",
+"1,500 EUR / 1,500 USD / 2,250 CAD / 1,500 BGN"
+]
+],
+"terms": "BONUS DETAILS\nMin withdrawal: 200 EUR / 200 USD / 300 CAD / 200 BGN.\nMax % bonus: 1,500 EUR / 1,500 USD / 2,250 CAD / 1,500 BGN.\nWager: x40 in all games which is not restricted for wagering.\nMax withdrawal from bonus: 1,500 EUR / 1,500 USD / 2,250 CAD / 1,500 BGN.\n\nT&C\nWith the active bonus, bets are deducted from the real money balance first. After all real money is spent, the bets are deducted from the bonus funds balance. When the balance reaches USD 0.05 / EUR 0.05 / CAD 0.05 / BGN 0.05 or less, the bonus will be canceled and the wager will be removed.\nThe bonus amount of 100% of your withdrawal will be credited on your bonus balance on the first day of bonus activation.\nTo withdraw funds, the bonus amount of 100% from deposit must be rolled over 40 (forty) times. In case of cancellation of bonus and not fulfilling the wagering requirements all bonus funds, as well as winnings associated with bonus funds, will be void.\nAll bets made while playing slots contribute 100% to bonus wagering. Bets made in table games, live casino games, lottery, or other available games contribute 0% to bonus wagering. Bets in games that are excluded from wagering the bonus will not be counted towards bonus wagering.",
+"nocode": "Без промокода"
+}
+],
+"temp": []
+},
+"Crownslot": {
+"perm": [
+{
+"name": "WEEKLY CASHBACK",
+"amount": "up to 20%",
+"rows": [
+[
+"Min deposit",
+"Не указан"
+],
+[
+"Wager for % from dep",
+"x3 (от суммы ставок за неделю)"
+],
+[
+"Wager for FS win",
+"—"
+],
+[
+"Max bet",
+"EUR 5 / USD 5 / AUD 7.5 / CAD 7.5 / NZD 7.5 / NOK 50 / BTC 0.0002 / DOGE 62.5 / ETH 0.00835 / USDT 5 / LTC 0.075 / XRP 8.35 (стандартный лимит)"
+],
+[
+"Max withdrawal from %+FS",
+"x10 от суммы выигрыша"
+]
+],
+"terms": "BONUS DETAILS\nCashback is credited to the amount of losses for the previous week every Sunday at 23:59 (UTC). The cashback percentage depends on the VIP level you have:\nOpen Doors: 0%\nLobby Access: 1%\nGolden Foyer: 2%\nGaming Floor: 3%\nHigh Stakes Hall: 4%\nRewards Desk: 5%\nVIP Lounge: 6%\nPrivate Salon: 7%\nChampagne Terrace: 8%\nPlatinum Circle: 10%\nDiamond Vault: 12%\nRoyal Penthouse: 14%\nEmperor's Suite: 16%\nCrown Summit: 18%\nLegacy Hall: 19%\nInfinity Crown: 20%\n\nT&C\nThe total amount of received cashback cannot exceed 20% of the Player's total amount of all losses.Any abuse to obtain a cashback bonus is prohibited; in particular, the use of the opposite bets strategy in table games is prohibited (e.g., simultaneous betting on both red and black in roulette, or other similar bet types).\nFor successful withdrawal of funds gained with a cashback bonus, the Player must meet the wagering requirement for the total amount spent during the week of at least three (3) times (i.e. total wager amount equals the amount spent for the week multiplied by 3) no later than following Sunday 23:59 UTC.\nIn the case of detection of the cashback bonus rules abuse or failure to comply with the wagering requirements specified in paragraph 7 of these rules, the Casino may cancel and seize all winnings gained with an active cashback bonus, as well as to confiscate an amount equal to the amount of cashback bonus received.\nThere are limitations on the amount of winnings obtained with the cashback bonus funds: you can withdraw a maximum x10 from the winning sum.",
+"nocode": "Без промокода"
+},
+{
+"name": "FIRST DEPOSIT BONUS",
+"amount": "125% up to €1,000 + 100 FS",
+"rows": [
+[
+"Min deposit",
+"EUR/USD 20 | AUD/CAD/NZD 30 | BTC 0.00034 | USDT 20 | LTC 0.28 | ETH 0.006 | DOGE 200 | XRP 40"
+],
+[
+"Wager for % from dep",
+"x40"
+],
+[
+"Wager for FS win",
+"x40"
+],
+[
+"Max bet",
+"EUR 5 / USD 5 / AUD 7.5 / CAD 7.5 / NZD 7.5 / NOK 50 / BTC 0.0002 / DOGE 62.5 / ETH 0.00835 / USDT 5 / LTC 0.075 / XRP 8.35 (стандартный лимит)"
+],
+[
+"Max withdrawal from %+FS",
+"Cash bonus: EUR/USD 1,000 | AUD 1,500 | CAD/NZD 1,500 | NOK 10,000 | BTC 0.00960 | LTC 10 | ETH 0.3 | USDT 1,000 | DOGE 5,200 | XRP 370. FS result: EUR/USD 150 | AUD/CAD/NZD 225 | NOK 1,500 | BTC 0.00144 | LTC 1.5 | ETH 0.045 | USDT 150 | DOGE 780 | XRP 55.5"
+]
+],
+"terms": "BONUS DETAILS\nMinimum qualifying deposit: EUR/USD 20 | AUD/CAD/NZD 30 | BTC 0.00034 | USDT 20 | LTC 0.28 | ETH 0.006 | DOGE 200 | XRP 40\nMaximum bonus amount is 125% of your deposit, up to EUR/USD 1,000 | AUD/CAD/NZD 1,500 | BTC 0.0136 | USDT 1,000 | LTC 11.2 | ETH 0.24 | DOGE 8,000 | XRP 1,600\nWagering requirement: 40x the bonus amount (deposit bonus + FS result)\nBonus duration: 7 days\n\nT&C\n100 Free Spins credited over 4 days: 25 FS on activation day, then 25 FS per day for 3 days — in Sweet Rush Bonanza (Pragmatic Play), Candy Monsta (BGaming), Gates of Olympus Super Scatter (Pragmatic Play). Alternative slot: Bonanza Billion (BGaming)\nFree spins activation duration: 1 day. Free spins and results duration: 7 daysIf the cash bonus from the welcome package is cancelled, subsequent free spins packs will not be creditedMaximum win from cash bonus: EUR/USD 1,000 | AUD 1,500 | CAD/NZD 1,500 | NOK 10,000 | BTC 0.00960 | LTC 10 | ETH 0.3 | USDT 1,000 | DOGE 5,200 | XRP 370Maximum win from free spins (all series): EUR/USD 1,000 | AUD 1,500 | CAD/NZD 1,500 | NOK 10,000 | BTC 0.00960 | LTC 10 | ETH 0.3 | USDT 1,000 | DOGE 5,200 | XRP 370Maximum win from free spins result: EUR/USD 150 | AUD/CAD/NZD 225 | NOK 1,500 | BTC 0.00144 | LTC 1.5 | ETH 0.045 | USDT 150 | DOGE 780 | XRP 55.5The bonus can be claimed only once per player on their first deposit",
+"nocode": "Без промокода"
+},
+{
+"name": "HIGHROLLER FIRST DEPOSIT BONUS",
+"amount": "100% up to €5,000",
+"rows": [
+[
+"Min deposit",
+"EUR/USD 500 | AUD/CAD/NZD 750 | BTC 0.0085 | USDT 500 | LTC 7 | ETH 0.15 | DOGE 5,000 | XRP 1,000"
+],
+[
+"Wager for % from dep",
+"x40"
+],
+[
+"Wager for FS win",
+"—"
+],
+[
+"Max bet",
+"EUR/USD 5 | AUD/CAD/NZD 7.5 | NOK 50 | BTC 0.000055 | ETH 0.0023 | LTC 0.065 | DOGE 35 | XRP 2.5 | USDT 5"
+],
+[
+"Max withdrawal from %+FS",
+"EUR/USD 5,000 | AUD 7,500 | CAD/NZD 7,500 | NOK 50,000 | BTC 0.085 | LTC 70 | ETH 1.5 | USDT 5,000 | DOGE 50,000 | XRP 10,000"
+]
+],
+"terms": "BONUS DETAILS\nEnter code ROYAL1 before making a deposit to activate the bonus\nMinimum qualifying deposit: EUR/USD 500 | AUD/CAD/NZD 750 | BTC 0.0085 | USDT 500 | LTC 7 | ETH 0.15 | DOGE 5,000 | XRP 1,000\nMaximum bonus amount is 100% of your deposit, up to EUR/USD 5,000 | AUD/CAD/NZD 7,500 | BTC 0.085 | USDT 5,000 | LTC 70 | ETH 1.5 | DOGE 50,000 | XRP 10,000\nWagering requirement: 40x the bonus amount\nBonus duration: 7 days\n\nT&C\nMaximum win from Highroller bonus: EUR/USD 5,000 | AUD 7,500 | CAD/NZD 7,500 | NOK 50,000 | BTC 0.085 | LTC 70 | ETH 1.5 | USDT 5,000 | DOGE 50,000 | XRP 10,000Maximum allowed bet during wagering: EUR/USD 5 | AUD/CAD/NZD 7.5 | NOK 50 | BTC 0.000055 | ETH 0.0023 | LTC 0.065 | DOGE 35 | XRP 2.5 | USDT 5The bonus can be claimed only once per player on their first deposit",
+"code": "ROYAL1"
+},
+{
+"name": "SECOND DEPOSIT BONUS",
+"amount": "115% up to €1,200",
+"rows": [
+[
+"Min deposit",
+"EUR/USD 20 | AUD/CAD/NZD 30 | BTC 0.00034 | USDT 20 | LTC 0.28 | ETH 0.006 | DOGE 200 | XRP 40"
+],
+[
+"Wager for % from dep",
+"x40"
+],
+[
+"Wager for FS win",
+"—"
+],
+[
+"Max bet",
+"EUR/USD 5 | AUD/CAD/NZD 7.5 | NOK 50 | BTC 0.000055 | ETH 0.0023 | LTC 0.065 | DOGE 35 | XRP 2.5 | USDT 5"
+],
+[
+"Max withdrawal from %+FS",
+"EUR/USD 1,200 | AUD 1,800 | CAD/NZD 1,800 | NOK 12,000 | BTC 0.01152 | LTC 12 | ETH 0.36 | USDT 1,200 | DOGE 6,240 | XRP 444"
+]
+],
+"terms": "BONUS DETAILS\nEnter code CROWN2 before making a deposit to activate the bonus\nMinimum qualifying deposit: EUR/USD 20 | AUD/CAD/NZD 30 | BTC 0.00034 | USDT 20 | LTC 0.28 | ETH 0.006 | DOGE 200 | XRP 40\nMaximum bonus amount is 115% of your deposit, up to EUR/USD 1,200 | AUD/CAD/NZD 1,700 | BTC 0.01152 | USDT 1,200 | LTC 12 | ETH 0.36 | DOGE 6,240 | XRP 444\nWagering requirement: 40x the bonus amount\nBonus duration: 7 days\n\nT&C\nMaximum win from second deposit bonus: EUR/USD 1,200 | AUD 1,800 | CAD/NZD 1,800 | NOK 12,000 | BTC 0.01152 | LTC 12 | ETH 0.36 | USDT 1,200 | DOGE 6,240 | XRP 444Maximum allowed bet during wagering: EUR/USD 5 | AUD/CAD/NZD 7.5 | NOK 50 | BTC 0.000055 | ETH 0.0023 | LTC 0.065 | DOGE 35 | XRP 2.5 | USDT 5The bonus can be claimed only once per player on their second deposit",
+"code": "CROWN2"
+},
+{
+"name": "THIRD DEPOSIT BONUS",
+"amount": "150% up to €1,500 + 75 FS",
+"rows": [
+[
+"Min deposit",
+"EUR/USD 20 | AUD/CAD/NZD 30 | BTC 0.00034 | USDT 20 | LTC 0.28 | ETH 0.006 | DOGE 200 | XRP 40"
+],
+[
+"Wager for % from dep",
+"x40"
+],
+[
+"Wager for FS win",
+"x40"
+],
+[
+"Max bet",
+"EUR 5 / USD 5 / AUD 7.5 / CAD 7.5 / NZD 7.5 / NOK 50 / BTC 0.0002 / DOGE 62.5 / ETH 0.00835 / USDT 5 / LTC 0.075 / XRP 8.35 (стандартный лимит)"
+],
+[
+"Max withdrawal from %+FS",
+"Cash bonus: EUR/USD 1,500 | AUD/CAD/NZD 2,250 | NOK 15,000 | BTC 0.0144 | LTC 15 | ETH 0.45 | USDT 1,500 | DOGE 7,800 | XRP 555. FS result: EUR/USD 150 | AUD/CAD/NZD 225 | NOK 1,500 | BTC 0.00144 | LTC 1.5 | ETH 0.045 | USDT 150 | DOGE 780 | XRP 55.5"
+]
+],
+"terms": "BONUS DETAILS\nEnter code CROWN3 before making a deposit to activate the bonus\nMinimum qualifying deposit: EUR/USD 20 | AUD/CAD/NZD 30 | BTC 0.00034 | USDT 20 | LTC 0.28 | ETH 0.006 | DOGE 200 | XRP 40\nMaximum bonus amount is 150% of your deposit, up to EUR/USD 1,500 | AUD/CAD/NZD 2,500 | BTC 0.017 | USDT 1,500 | LTC 14 | ETH 0.3 | DOGE 10,000 | XRP 2,000\nWagering requirement: 40x the bonus amount (deposit bonus + FS result)\nBonus duration: 7 days\n\nT&C\n75 Free Spins credited over 3 days starting from activation — in Sweet Rush Bonanza (Pragmatic Play), Candy Monsta (BGaming), Gates of Olympus Super Scatter (Pragmatic Play). Alternative slot: Bonanza Billion (BGaming)\nFree spins activation duration: 1 day. Free spins and results duration: 7 daysIf the cash bonus from the welcome package is cancelled, subsequent free spins packs will not be creditedMaximum win from cash bonus: EUR/USD 1,500 | AUD/CAD/NZD 2,250 | NOK 15,000 | BTC 0.0144 | LTC 15 | ETH 0.45 | USDT 1,500 | DOGE 7,800 | XRP 555Maximum win from free spins result: EUR/USD 150 | AUD/CAD/NZD 225 | NOK 1,500 | BTC 0.00144 | LTC 1.5 | ETH 0.045 | USDT 150 | DOGE 780 | XRP 55.5The bonus can be claimed only once per player on their third deposit",
+"code": "CROWN3"
+},
+{
+"name": "WHOPPING HIGHROLLER BONUS",
+"amount": "50% Bonus up to €2,000",
+"rows": [
+[
+"Min deposit",
+"€100 / USD 100 / CAD 150 / AUD 150 / NZD 150 / NOK 1,000 / BTC 0.00155 / USDT 100 / LTC 2.04 / ETH 0.054 / DOGE 1230 / XRP 79"
+],
+[
+"Wager for % from dep",
+"x40"
+],
+[
+"Wager for FS win",
+"—"
+],
+[
+"Max bet",
+"€10 / USD 10 / CAD 15 / AUD 15 / NZD 15 / NOK 100 / BTC 0.00016 / USDT 10 / LTC 0.20 / ETH 0.005 / DOGE 123 / XRP 8"
+],
+[
+"Max withdrawal from %+FS",
+"2,000 EUR / 2,000 USD / 3,000 CAD / 3,500 AUD / 3,000 NZD / 20,000 NOK / 0.01920000 BTC / 20.00000000 LTC / 0.600000000 ETH / 2,000.00000000 USDT / 10,400.00000000 DOGE / 740.000000 XRP"
+]
+],
+"terms": "BONUS DETAILS\nThe bonus is activated only after entering the code WHOP before making a deposit.\nThe bonus amount equals 50% of the deposit, up to €2,000 / USD 2,000 / CAD 3,000 / AUD 3,000 / NZD 3,000 / NOK 20,000 / BTC 0.03100 / USDT 2000 / LTC 40.7 / ETH 1.07 / DOGE 24690 / XRP 1580.\nThe minimum qualifying deposit is €100 / USD 100 / CAD 150 / AUD 150 / NZD 150 / NOK 1,000 / BTC 0.00155 / USDT 100 / LTC 2.04 / ETH 0.054 / DOGE 1230 / XRP 79.\nThe bonus is only available to players who have made at least four deposits.\nThe bonus is available once per month per player.\nThe bonus is credited after a successful deposit with the promo code applied.\n\nT&C\nWagering must be completed within 5 days from bonus activation.\nThe wagering requirement is 40x the bonus amount.\nThe maximum allowed bet while wagering is €10 / USD 10 / CAD 15 / AUD 15 / NZD 15 / NOK 100 / BTC 0.00016 / USDT 10 / LTC 0.20 / ETH 0.005 / DOGE 123 / XRP 8.\nOnly real money bets count toward wagering requirements.\nThe casino reserves the right to modify or cancel the promotion at any time.\nGeneral Terms and Conditions apply.\nUnderage gambling is illegal. Please play responsibly.\nMaximum withdrawal from this bonus is capped at: 2,000 EUR / 2,000 USD / 3,000 CAD / 3,500 AUD / 3,000 NZD / 20,000 NOK / 0.01920000 BTC / 20.00000000 LTC / 0.600000000 ETH / 2,000.00000000 USDT / 10,400.00000000 DOGE / 740.000000 XRP.",
+"code": "WHOP"
+},
+{
+"name": "THURSDAY CASHBACK",
+"amount": "20% Cashback on Every Deposit",
+"rows": [
+[
+"Min deposit",
+"EUR 20 / USD 20 / CAD 30 / AUD 30 / NZD 30 / BTC 0.0006 / BCH 0.11 / DOGE 200 / ETH 0.01 / LTC 0.27 / USDT 20 / XRP 40 / ADA 33 / BNB 0.05 / TRX 200"
+],
+[
+"Wager for % from dep",
+"x3 (на общую сумму ставок в тот же день до 23:59 UTC)"
+],
+[
+"Wager for FS win",
+"—"
+],
+[
+"Max bet",
+"EUR 5 / USD 5 / AUD 7.5 / CAD 7.5 / NZD 7.5 / NOK 50 / BTC 0.0002 / DOGE 62.5 / ETH 0.00835 / USDT 5 / LTC 0.075 / XRP 8.35 (стандартный лимит)"
+],
+[
+"Max withdrawal from %+FS",
+"5,000 EUR / 5,000 USD / 7,500 CAD / 7,500 AUD / 7,500 NZD / 50,000 NOK / 0.04800000 BTC / 50.00000000 LTC / 1.500000000 ETH / 5,000.00000000 USDT / 26,000.00000000 DOGE / 1,850.000000 XRP"
+]
+],
+"terms": "BONUS DETAILS\nCashback is available only for deposits made on Thursdays (00:00 – 23:59 UTC).\nCashback is credited for each individual deposit that includes the promo code CASHTHU (or Cashthu / cashthu).\nThe maximum cashback percentage is 20% of the deposited amount.\nCashback will be added to the player’s account automatically after each qualifying deposit.\nMinimum qualifying deposit: EUR 20 / USD 20 / CAD 30 / AUD 30 / NZD 30 / BTC 0.0006 / BCH 0.11 / DOGE 200 / ETH 0.01 / LTC 0.27 / USDT 20 / XRP 40 / ADA 33 / BNB 0.05 / TRX 200.\n\nT&C\nCashback is available exclusively on Thursdays and applies only to deposits made with the promo code CASHTHU (or Cashthu / cashthu).\nCashback is not automatic and requires use of the promo code with each deposit.\nAny form of abuse of the cashback system is strictly prohibited. This includes opposite betting strategies in table games (e.g., betting on both red and black in roulette or similar patterns).\nTo withdraw winnings derived from cashback, the player must meet a 3x wagering requirement on the total amount wagered on the same day before 23:59 UTC.\nFailure to meet the wagering requirement or any misuse of the cashback offer may result in forfeiture of cashback and related winnings.\nCrownSlots reserves the right to modify, suspend, or cancel this offer at any time without prior notice.\nGeneral CrownSlots Terms & Conditions apply.\nMaximum win from Thursday Cashback is capped at: 5,000 EUR / 5,000 USD / 7,500 CAD / 7,500 AUD / 7,500 NZD / 50,000 NOK / 0.04800000 BTC / 50.00000000 LTC / 1.500000000 ETH / 5,000.00000000 USDT / 26,000.00000000 DOGE / 1,850.000000 XRP.",
+"code": "CASHTHU (или Cashthu / cashthu)"
+},
+{
+"name": "FRIDAY BONUS",
+"amount": "50% Bonus up to €200",
+"rows": [
+[
+"Min deposit",
+"€50 / USD 50 / CAD 75 / AUD 75 / NZD 75 / NOK 500 / BTC 0.00080 / USDT 50 / LTC 1 / ETH 0.025 / DOGE 600 / XRP 40"
+],
+[
+"Wager for % from dep",
+"x40"
+],
+[
+"Wager for FS win",
+"—"
+],
+[
+"Max bet",
+"€5 / USD 5 / CAD 10 / AUD 10 / NZD 10 / NOK 50 / BTC 0.00008 / USDT 5 / LTC 0.10 / ETH 0.003 / DOGE 62 / XRP 4"
+],
+[
+"Max withdrawal from %+FS",
+"€2,000 / USD 2,000 / CAD 3,000 / AUD 3,000 / NZD 3,000 / NOK 20,000 / BTC 0.03100 / USDT 2000 / LTC 40.7 / ETH 1.07 / DOGE 24690 / XRP 1580"
+]
+],
+"terms": "BONUS DETAILS\nThe bonus is activated only after entering the code FRIDAY50 before making a deposit.\nThe bonus is available only after completing 2 welcome bonuses.\nThe minimum qualifying deposit is €50 / USD 50 / CAD 75 / AUD 75 / NZD 75 / NOK 500 / BTC 0.00080 / USDT 50 / LTC 1 / ETH 0.025 / DOGE 600 / XRP 40.\nThe bonus amount is 50% of the deposit, up to €200 / USD 200 / CAD 300 / AUD 300 / NZD 300 / NOK 2,000 / BTC 0.00310 / USDT 200 / LTC 4.07 / ETH 0.107 / DOGE 2469 / XRP 158.\nWager: x40\nThe bonus is credited once per week during the promotional period (Friday - Sunday, UTC time).\n\nT&C\nWagering must be completed within 2 days after receiving the bonus.\nThe wagering requirement is applied to the bonus amount.\nThe maximum allowed bet while wagering is €5 / USD 5 / CAD 10 / AUD 10 / NZD 10 / NOK 50 / BTC 0.00008 / USDT 5 / LTC 0.10 / ETH 0.003 / DOGE 62 / XRP 4.\nThe maximum withdrawal from this bonus is capped at €2,000 / USD 2,000 / CAD 3,000 / AUD 3,000 / NZD 3,000 / NOK 20,000 / BTC 0.03100 / USDT 2000 / LTC 40.7 / ETH 1.07 / DOGE 24690 / XRP 1580.\nOnly real money bets count toward wagering requirements.\nThe casino reserves the right to modify or cancel the promotion at any time.\nGeneral Terms and Conditions apply.",
+"code": "FRIDAY50"
+},
+{
+"name": "WEEKLY LIVE CASHBACK",
+"amount": "10% Cashback on Weekly Live Casino Net Losses",
+"rows": [
+[
+"Min deposit",
+"EUR 30 / USD 30 / CAD 45 / AUD 45 / NZD 45 / NOK 300 (только фиатные валюты)"
+],
+[
+"Wager for % from dep",
+"Без вейджера (real money)"
+],
+[
+"Wager for FS win",
+"—"
+],
+[
+"Max bet",
+"EUR 5 / USD 5 / CAD 10 / AUD 10 / NZD 10 / NOK 50 per spin/game"
+],
+[
+"Max withdrawal from %+FS",
+"2,500 EUR / 2,500 USD / 3,750 CAD / 3,750 AUD / 3,750 NZD / 25,000 NOK"
+]
+],
+"terms": "BONUS DETAILS\nCashback is calculated based on net losses from live casino games only.\nThe promotion is valid for bets placed between Wednesday 00:00 UTC and Tuesday 23:59 UTC.\nPlayers must deposit at least EUR 30 / USD 30 / CAD 45 / AUD 45 / NZD 45 / NOK 300 to participate.\nCashback is issued if net losses reach EUR 100 / USD 100 / CAD 150 / AUD 150 / NZD 150 / NOK 1,000 or more.\nCashback amount is 10% of net losses.\nCashback is credited every Wednesday.\nOnly fiat currency deposits are eligible; cryptocurrency deposits do not qualify.\nA minimum of 4 successful lifetime deposits is required.\nCashback is credited as real money with no wagering requirement.\n\nT&C\nOnly real money bets count toward cashback calculation.\nCashback is paid only to active accounts.\nThe maximum allowed bet using cashback funds is EUR 5 / USD 5 / CAD 10 / AUD 10 / NZD 10 / NOK 50 per spin/game.\nPlayers with a withdrawal-to-deposit ratio above 70% are not eligible.\nPlayers with a high bonus rate or negative net contribution may not qualify.\nAccounts with large balances or significant wins are not eligible.\nVIP or special-status players may not be eligible; please contact your manager.\nCashback must be used within 3 days after being credited.\nThe casino reserves the right to cancel, suspend, or modify the promotion at any time.\nIn case of discrepancies, the English version of the terms prevails.\nGeneral Terms and Conditions apply.\nUnderage gambling is illegal. Please play responsibly.\nPlayers must have promotional emails and SMS enabled to receive updates.\nMaximum win from Weekly Live Cashback is capped at: 2,500 EUR / 2,500 USD / 3,750 CAD / 3,750 AUD / 3,750 NZD / 25,000 NOK.",
+"nocode": "Без промокода"
+},
+{
+"name": "BONUS CANCELLATION 100%",
+"amount": "100% up to €1,000",
+"rows": [
+[
+"Min deposit",
+"Min withdrawal: 200 EUR / AU$300 / 200 USD / 300 CAD / 300 NZD / 2,000 NOK / 200 USDT / 0.0025 BTC / 2.75 LTC / 0.13 ETH / 1,360 DOGE / 108 XRP"
+],
+[
+"Wager for % from dep",
+"x40"
+],
+[
+"Wager for FS win",
+"—"
+],
+[
+"Max bet",
+"EUR 5 / USD 5 / AUD 7.5 / CAD 7.5 / NZD 7.5 / NOK 50 / BTC 0.0002 / DOGE 62.5 / ETH 0.00835 / USDT 5 / LTC 0.075 / XRP 8.35 (стандартный лимит)"
+],
+[
+"Max withdrawal from %+FS",
+"1,000 EUR / AU$1,500 / 1,000 USD / 1,500 CAD / 1,500 NZD / 10,000 NOK / 1,000 USDT / 0.012 BTC / 13.8 LTC / 0.65 ETH / 6,800 DOGE / 540 XRP"
+]
+],
+"terms": "BONUS DETAILS\nMin withdrawal: 200 EUR / AU$300 / 200 USD / 300 CAD / 300 NZD / 2,000 NOK / 200 USDT / 0.0025 BTC / 2.75 LTC / 0.13 ETH / 1,360 DOGE / 108 XRP\nMax % bonus: 1,000 EUR / AU$1,500 / 1,000 USD / 1,500 CAD / 1,500 NZD / 10,000 NOK / 1,000 USDT / 0.012 BTC / 13.8 LTC / 0.65 ETH / 6,800 DOGE / 540 XRP\nWager: x40 in all games which is not restricted for wagering\nMax withdrawal from bonus: 1,000 EUR / AU$1,500 / 1,000 USD / 1,500 CAD / 1,500 NZD / 10,000 NOK / 1,000 USDT / 0.012 BTC / 13.8 LTC / 0.65 ETH / 6,800 DOGE / 540 XRP\nHow to activate: Select the withdrawal amount and payment method -> Choose a percentage of the withdrawal amount -> Get 100% of the withdrawal amount\n\nT&C\nWith the active bonus, bets are deducted from the real money balance first. After all real money is spent, the bets are deducted from the bonus funds balance. When the balance reaches EUR 0.05 / USD 0.05 / NZD 0.05 / CAD 0.05 or less, the bonus will be canceled and the wager will be removed.\nThe bonus amount of 100% of your withdrawal will be credited on your bonus balance on the first day of bonus activation.\nTo withdraw funds, the bonus amount of 100% from deposit must be rolled over 40 (forty) times. In case of cancellation of bonus and not fulfill the wagering requirements all bonus funds, as well as winnings associated with bonus funds, will be void.\nAll bets made while playing slots contribute 100% to bonus wagering. Bets made in table games, live casino games, lottery, or other available games contribute 0% to bonus wagering. Bets in games that excluded from wagering the bonus will not be counted towards bonus wagering.",
+"nocode": "Без промокода"
+}
+],
+"temp": []
+},
+"Gunsbet": {
+"perm": [
+{
+"name": "FIRST DEPOSIT BONUS",
+"amount": "100% up to €500 + 200 FS",
+"rows": [
+[
+"Min deposit",
+"EUR 20 / USD 22 / NOK 235 / AUD 35 / CAD 30 / NZD 40 / PLN 90 / CZK 500 / ZAR 410 / JPY 3,200 / KRW 28,500"
+],
+[
+"Wager for % from dep",
+"x40"
+],
+[
+"Wager for FS win",
+"x40"
+],
+[
+"Max bet",
+"EUR 5 / USD 5 / AUD 7.5 / CAD 7.5 / NOK 50 / PLN 22.5 / NZD 7.5 / ZAR 87.5 / JPY 600 / KRW 6,500 / BRL 25 / VND 125,000 / INR 425 / BTC 0.00015 / BCH 0.028 / LTC 0.07 / DOG 50 / XRP 10 / ETH 0.0025 / USDT 5 / ADA 8.25 / BNB 0.013 / TRX 50"
+],
+[
+"Max withdrawal from %+FS",
+"EUR 10,000 / USD 10,000 / AUD 15,000 / CAD 15,000 / NOK 100,000 / PLN 45,000 / NZD 15,000 / ZAR 175,000 / JPY 1,200,000 / KRW 13,000,000 / BRL 50,000 / VND 250,000,000 / INR 850,000 / BTC 0.3 / BCH 55 / LTC 133.4 / DOG 100,000 / XRP 20,000 / ETH 5 / USDT 10,000 / ADA 16,500 / BNB 25.5 / TRX 100,000"
+]
+],
+"terms": "BONUS DETAILS\nEnter code GUNS1 before making a deposit to activate the bonus.\nMinimum qualifying deposit: EUR 20 | USD 22 | NOK 235 | AUD 35 | CAD 30 | NZD 40 | PLN 90 | CZK 500 | ZAR 410 | JPY 3,200 | KRW 28,500.\nMaximum bonus amount is 100% of your deposit, up to EUR 500 | USD 550 | NOK 5,900 | AUD 850 | CAD 750 | NZD 920 | PLN 2,300 | CZK 12,500 | ZAR 10,500 | JPY 80,000 | KRW 706,000.\nWagering requirement: 40x the bonus amount (deposit bonus + FS result).\nBonus duration: 7 days.\n\nT&C\n200 Free Spins credited over 4 days: 50 FS per day starting from the moment of deposit — in Wild West Gold (Pragmatic Play). Alternative slot: Fruit Million (BGaming).\nFree spins activation duration: 1 day. Free spins and results duration: 7 days.\nIf the cash bonus from the welcome package is cancelled, subsequent free spins packs will not be credited.\nThe bonus can be claimed only once per player on their first deposit.\nMaximum bet during wagering is limited to EUR 5 (or currency equivalent listed above), including doubling bets after a round and bonus buy features.\nGeneral maximum win limit from bonus funds is EUR 10,000 (or currency equivalent listed above).",
+"code": "GUNS1"
+},
+{
+"name": "SECOND DEPOSIT BONUS",
+"amount": "110% up to €550 + 50 FS",
+"rows": [
+[
+"Min deposit",
+"EUR 20 / USD 22 / NOK 235 / AUD 35 / CAD 30 / NZD 40 / PLN 90 / CZK 500 / ZAR 410 / JPY 3,200 / KRW 28,500"
+],
+[
+"Wager for % from dep",
+"x40"
+],
+[
+"Wager for FS win",
+"x40"
+],
+[
+"Max bet",
+"EUR 5 / USD 5 / AUD 7.5 / CAD 7.5 / NOK 50 / PLN 22.5 / NZD 7.5 / ZAR 87.5 / JPY 600 / KRW 6,500 / BRL 25 / VND 125,000 / INR 425 / BTC 0.00015 / BCH 0.028 / LTC 0.07 / DOG 50 / XRP 10 / ETH 0.0025 / USDT 5 / ADA 8.25 / BNB 0.013 / TRX 50"
+],
+[
+"Max withdrawal from %+FS",
+"EUR 10,000 / USD 10,000 / AUD 15,000 / CAD 15,000 / NOK 100,000 / PLN 45,000 / NZD 15,000 / ZAR 175,000 / JPY 1,200,000 / KRW 13,000,000 / BRL 50,000 / VND 250,000,000 / INR 850,000 / BTC 0.3 / BCH 55 / LTC 133.4 / DOG 100,000 / XRP 20,000 / ETH 5 / USDT 10,000 / ADA 16,500 / BNB 25.5 / TRX 100,000"
+]
+],
+"terms": "BONUS DETAILS\nEnter code GUNS2 before making a deposit to activate the bonus.\nMinimum qualifying deposit: EUR 20 | USD 22 | NOK 235 | AUD 35 | CAD 30 | NZD 40 | PLN 90 | CZK 500 | ZAR 410 | JPY 3,200 | KRW 28,500.\nMaximum bonus amount is 110% of your deposit, up to EUR 550 | USD 600 | NOK 6,400 | AUD 950 | CAD 820 | NZD 1,010 | PLN 2,500 | CZK 14,000 | ZAR 11,500 | JPY 87,500 | KRW 880,000.\nWagering requirement: 40x the bonus amount (deposit bonus + FS result).\nBonus duration: 7 days.\n\nT&C\n50 Free Spins credited upon activation — in Fruit Million (BGaming).\nFree spins activation duration: 1 day. Free spins and results duration: 7 days.\nIf the cash bonus from the welcome package is cancelled, subsequent free spins packs will not be credited.\nThe bonus can be claimed only once per player on their second deposit.\nMaximum bet during wagering is limited to EUR 5 (or currency equivalent listed above), including doubling bets after a round and bonus buy features.\nGeneral maximum win limit from bonus funds is EUR 10,000 (or currency equivalent listed above).",
+"code": "GUNS2"
+},
+{
+"name": "THIRD DEPOSIT BONUS",
+"amount": "125% up to €625 + 60 FS",
+"rows": [
+[
+"Min deposit",
+"EUR 20 / USD 22 / NOK 235 / AUD 35 / CAD 30 / NZD 40 / PLN 90 / CZK 500 / ZAR 410 / JPY 3,200 / KRW 28,500"
+],
+[
+"Wager for % from dep",
+"x40"
+],
+[
+"Wager for FS win",
+"x40"
+],
+[
+"Max bet",
+"EUR 5 / USD 5 / AUD 7.5 / CAD 7.5 / NOK 50 / PLN 22.5 / NZD 7.5 / ZAR 87.5 / JPY 600 / KRW 6,500 / BRL 25 / VND 125,000 / INR 425 / BTC 0.00015 / BCH 0.028 / LTC 0.07 / DOG 50 / XRP 10 / ETH 0.0025 / USDT 5 / ADA 8.25 / BNB 0.013 / TRX 50"
+],
+[
+"Max withdrawal from %+FS",
+"EUR 10,000 / USD 10,000 / AUD 15,000 / CAD 15,000 / NOK 100,000 / PLN 45,000 / NZD 15,000 / ZAR 175,000 / JPY 1,200,000 / KRW 13,000,000 / BRL 50,000 / VND 250,000,000 / INR 850,000 / BTC 0.3 / BCH 55 / LTC 133.4 / DOG 100,000 / XRP 20,000 / ETH 5 / USDT 10,000 / ADA 16,500 / BNB 25.5 / TRX 100,000"
+]
+],
+"terms": "BONUS DETAILS\nEnter code GUNS3 before making a deposit to activate the bonus.\nMinimum qualifying deposit: EUR 20 | USD 22 | NOK 235 | AUD 35 | CAD 30 | NZD 40 | PLN 90 | CZK 500 | ZAR 410 | JPY 3,200 | KRW 28,500.\nMaximum bonus amount is 125% of your deposit, up to EUR 625 | USD 700 | NOK 7,400 | AUD 1,100 | CAD 950 | NZD 1,150 | PLN 2,800 | CZK 15,500 | ZAR 12,750 | JPY 100,000 | KRW 925,000.\nWagering requirement: 40x the bonus amount (deposit bonus + FS result).\nBonus duration: 7 days.\n\nT&C\n60 Free Spins credited upon activation — in Gates of Olympus Super Scatter (Pragmatic Play). Alternative slot: Bonanza Billion (BGaming).\nFree spins activation duration: 1 day. Free spins and results duration: 7 days.\nIf the cash bonus from the welcome package is cancelled, subsequent free spins packs will not be credited.\nThe bonus can be claimed only once per player on their third deposit.\nMaximum bet during wagering is limited to EUR 5 (or currency equivalent listed above), including doubling bets after a round and bonus buy features.\nGeneral maximum win limit from bonus funds is EUR 10,000 (or currency equivalent listed above).",
+"code": "GUNS3"
+},
+{
+"name": "WEDNESDAY FREE SPINS",
+"amount": "50 FS",
+"rows": [
+[
+"Min deposit",
+"EUR 50 / USD 55 / NOK 585 / AUD 85 / CAD 75 / NZD 95 / PLN 225 / CZK 1,250 / ZAR 1,025 / JPY 7,950 / KRW 71,000"
+],
+[
+"Wager for % from dep",
+"Нет (только фриспины)"
+],
+[
+"Wager for FS win",
+"x40"
+],
+[
+"Max bet",
+"EUR 5 / USD 5 / AUD 7.5 / CAD 7.5 / NOK 50 / PLN 22.5 / NZD 7.5 / ZAR 87.5 / JPY 600 / KRW 6,500 / BRL 25 / VND 125,000 / INR 425 / BTC 0.00015 / BCH 0.028 / LTC 0.07 / DOG 50 / XRP 10 / ETH 0.0025 / USDT 5 / ADA 8.25 / BNB 0.013 / TRX 50"
+],
+[
+"Max withdrawal from %+FS",
+"EUR 10,000 / USD 10,000 / AUD 15,000 / CAD 15,000 / NOK 100,000 / PLN 45,000 / NZD 15,000 / ZAR 175,000 / JPY 1,200,000 / KRW 13,000,000 / BRL 50,000 / VND 250,000,000 / INR 850,000 / BTC 0.3 / BCH 55 / LTC 133.4 / DOG 100,000 / XRP 20,000 / ETH 5 / USDT 10,000 / ADA 16,500 / BNB 25.5 / TRX 100,000"
+]
+],
+"terms": "BONUS DETAILS\nWednesday free spins are added for deposits made on Wednesday over 50 EUR / 55 USD / 585 NOK / 85 AUD / 75 CAD / 95 NZD / 225 PLN / 1,250 CZK / 1,025 ZAR / 7,950 JPY / 71,000 KRW.\nEnter code COWBOYFS in your profile while making a deposit.\nWagering requirement: 40 times the free spin result amount.\nFree spin activation duration is 1 day; free spins duration and free spin result duration are 7 days.\n\nT&C\nWednesday free spins are added in 3x3 Hold the Spin (Gamzix).\nCredited once on Wednesday for players who have already used the welcome package bonuses.\nMaximum bet during wagering is limited to EUR 5 (or currency equivalent listed above).\nGeneral maximum win limit from bonus funds is EUR 10,000 (or currency equivalent listed above).",
+"code": "COWBOYFS"
+},
+{
+"name": "FRIDAY RELOAD BONUS",
+"amount": "60% up to €300 + 20 FS",
+"rows": [
+[
+"Min deposit",
+"EUR 20 / USD 22 / NOK 235 / AUD 35 / CAD 30 / NZD 40 / PLN 90 / CZK 500 / ZAR 410 / JPY 3,200 / KRW 28,500"
+],
+[
+"Wager for % from dep",
+"x40"
+],
+[
+"Wager for FS win",
+"x40"
+],
+[
+"Max bet",
+"EUR 5 / USD 5 / AUD 7.5 / CAD 7.5 / NOK 50 / PLN 22.5 / NZD 7.5 / ZAR 87.5 / JPY 600 / KRW 6,500 / BRL 25 / VND 125,000 / INR 425 / BTC 0.00015 / BCH 0.028 / LTC 0.07 / DOG 50 / XRP 10 / ETH 0.0025 / USDT 5 / ADA 8.25 / BNB 0.013 / TRX 50"
+],
+[
+"Max withdrawal from %+FS",
+"EUR 1,000 / AUD 1,500 / USD 1,000 / NZD 1,500 / CAD 1,500 / NOK 10,000 / PLN 4,500 / INR 85,000 / ZAR 17,500 / KRW 30,200"
+]
+],
+"terms": "BONUS DETAILS\nMinimum deposit: 20 EUR / 22 USD / 235 NOK / 35 AUD / 30 CAD / 40 NZD / 90 PLN / 500 CZK / 410 ZAR / 3,200 JPY / 28,500 KRW.\nMaximum Friday Reload Bonus amount is 300 EUR / 320 USD / 3,650 NOK / 550 AUD / 435 CAD / 550 NZD / 1,375 PLN / 6,625 CZK / 6,675 ZAR / 44,000 JPY / 302,000 KRW.\nEnter code SALOON in your profile while making a deposit.\nWagering requirement: 40 times the bonus result amount.\nBonus duration is 7 days.\n\nT&C\nThe maximum number of winnings using Friday Reload Bonus is 1,000 EUR / 1,500 AUD / 1,000 USD / 1,500 NZD / 1,500 CAD / 10,000 NOK / 4,500 PLN / 85,000 INR / 17,500 ZAR / 30,200 KRW.\nFriday Reload bonus is credited once on Friday for players who have already used the welcome package bonuses.\nMaximum bet during wagering is limited to EUR 5 (or currency equivalent listed above).",
+"code": "SALOON"
+},
+{
+"name": "LUCKY WHEEL (Lucky Cylinder spin)",
+"amount": "Случайный приз: 5 EUR, 10 EUR, 20 EUR, 30 FS, 40 FS или 50 FS",
+"rows": [
+[
+"Min deposit",
+"EUR 40 / USD 44 / NOK 270 / AUD 70 / CAD 60 / NZD 80 / PLN 180 / CZK 1,000 / ZAR 820 / JPY 6,400 / KRW 57,000"
+],
+[
+"Wager for % from dep",
+"x35 (на выигранный денежный приз)"
+],
+[
+"Wager for FS win",
+"x35"
+],
+[
+"Max bet",
+"EUR 5 / USD 5 / AUD 7.5 / CAD 7.5 / NOK 50 / PLN 22.5 / NZD 7.5 / ZAR 87.5 / JPY 600 / KRW 6,500 / BRL 25 / VND 125,000 / INR 425 / BTC 0.00015 / BCH 0.028 / LTC 0.07 / DOG 50 / XRP 10 / ETH 0.0025 / USDT 5 / ADA 8.25 / BNB 0.013 / TRX 50"
+],
+[
+"Max withdrawal from %+FS",
+"EUR 10,000 / USD 10,000 / AUD 15,000 / CAD 15,000 / NOK 100,000 / PLN 45,000 / NZD 15,000 / ZAR 175,000 / JPY 1,200,000 / KRW 13,000,000 / BRL 50,000 / VND 250,000,000 / INR 850,000 / BTC 0.3 / BCH 55 / LTC 133.4 / DOG 100,000 / XRP 20,000 / ETH 5 / USDT 10,000 / ADA 16,500 / BNB 25.5 / TRX 100,000"
+]
+],
+"terms": "BONUS DETAILS\nMinimum deposit: 40 EUR / 44 USD / 270 NOK / 70 AUD / 60 CAD / 80 NZD / 180 PLN / 1,000 CZK / 820 ZAR / 6,400 JPY / 57,000 KRW.\nList of possible prizes: 5 EUR, 10 EUR, 20 EUR, 30 FS, 40 FS, 50 FS.\nEnter code DailyLC in your profile while making a deposit.\nWagering requirement: 35 times the bonus result amount.\nBonus duration is 3 days.\n\nT&C\nFree spins can be wagered in the slot “West Town” by BGaming.\nBonuses are credited in the player's currency according to the exchange rate.\nLucky Cylinder spin is credited daily for players who have already used the welcome package bonuses.\nMaximum bet during wagering is limited to EUR 5 (or currency equivalent listed above).\nGeneral maximum win limit from bonus funds is EUR 10,000 (or currency equivalent listed above).",
+"code": "DailyLC"
+}
+],
+"temp": []
+},
+"1RedBet": {
+"perm": [],
+"temp": []
+},
+"Beonbet": {
+"perm": [],
+"temp": []
+},
+"Slotrush": {
+"perm": [
+{
+"name": "1st Welcome Bonus",
+"amount": "100% up to €500 + 75 FS",
+"rows": [
+[
+"Min deposit",
+"20 EUR"
+],
+[
+"Wager for % from dep",
+"x40"
+],
+[
+"Wager for FS win",
+"x35"
+],
+[
+"Max bet",
+"нет данных"
+],
+[
+"Max withdrawal from %+FS",
+"x5 of the bonus amount (deposit bonus) / 125 EUR (Free Spins)"
+]
+],
+"terms": "BONUS DETAILS\nLog in to your account.\nChoose the bonus.\nMake a deposit from 20 EUR.\nReceive 100% on your deposit + 75 Free Spins. Max bonus amount: 500 EUR. Max FS bonus: 125 EUR.\n\nT&C\nThis bonus is available once per player and only on a first deposit. The bonus amount of 100% of your deposit will be credited on your bonus balance. 75 Free Spins will be credited according to the bonus terms. To withdraw funds, the bonus amount from deposit must be rolled over 40 (forty) times. Free Spins winnings must be wagered 35 (thirty-five) times. In case of cancellation of bonus and not fulfilling the wagering requirements all bonus funds, as well as winnings associated with bonus funds, will be void.",
+"nocode": "Без промокода"
+},
+{
+"name": "2ND WELCOME BONUS",
+"amount": "75% up to €1,000 + 50 FS",
+"rows": [
+[
+"Min deposit",
+"20 EUR"
+],
+[
+"Wager for % from dep",
+"x40"
+],
+[
+"Wager for FS win",
+"x35"
+],
+[
+"Max bet",
+"нет данных"
+],
+[
+"Max withdrawal from %+FS",
+"x5 of the bonus amount (deposit bonus) / 200 EUR (Free Spins)"
+]
+],
+"terms": "BONUS DETAILS\nLog in to your account.\nChoose the bonus.\nMake your second deposit from 20 EUR.\nReceive 75% on your deposit + 50 Free Spins. Max bonus amount: 1,000 EUR. Max FS bonus: 200 EUR.\n\nT&C\nThis bonus is available once per player and only on a second deposit. The bonus amount of 75% of your deposit will be credited on your bonus balance. 50 Free Spins will be credited according to the bonus terms. To withdraw funds, the bonus amount from deposit must be rolled over 40 (forty) times. Free Spins winnings must be wagered 35 (thirty-five) times. In case of cancellation of bonus and not fulfilling the wagering requirements all bonus funds, as well as winnings associated with bonus funds, will be void.",
+"nocode": "Без промокода"
+},
+{
+"name": "3RD WELCOME BONUS",
+"amount": "75% up to €1,000",
+"rows": [
+[
+"Min deposit",
+"50 EUR"
+],
+[
+"Wager for % from dep",
+"x40"
+],
+[
+"Wager for FS win",
+"нет (без фриспинов)"
+],
+[
+"Max bet",
+"нет данных"
+],
+[
+"Max withdrawal from %+FS",
+"x5 of the bonus amount"
+]
+],
+"terms": "BONUS DETAILS\nLog in to your account.\nChoose the bonus.\nMake your third deposit from 50 EUR.\nReceive 75% on your deposit. Max bonus amount: 1,000 EUR.\n\nT&C\nThis bonus is available once per player and only on a third deposit. The bonus amount of 75% of your deposit will be credited on your bonus balance. To withdraw funds, the bonus amount from deposit must be rolled over 40 (forty) times. In case of cancellation of bonus and not fulfilling the wagering requirements all bonus funds, as well as winnings associated with bonus funds, will be void.",
+"nocode": "Без промокода"
+},
+{
+"name": "4TH WELCOME BONUS",
+"amount": "100% up to €1,500 + 75 FS",
+"rows": [
+[
+"Min deposit",
+"50 EUR"
+],
+[
+"Wager for % from dep",
+"x40"
+],
+[
+"Wager for FS win",
+"x35"
+],
+[
+"Max bet",
+"нет данных"
+],
+[
+"Max withdrawal from %+FS",
+"x5 of the bonus amount (deposit bonus) / 450 EUR (Free Spins)"
+]
+],
+"terms": "BONUS DETAILS\nLog in to your account.\nChoose the bonus.\nMake your fourth deposit from 50 EUR.\nReceive 100% on your deposit + 75 Free Spins. Max bonus amount: 1,500 EUR. Max FS bonus: 450 EUR.\n\nT&C\nThis bonus is available once per player and only on a fourth deposit. The bonus amount of 100% of your deposit will be credited on your bonus balance. 75 Free Spins will be credited according to the bonus terms. To withdraw funds, the bonus amount from deposit must be rolled over 40 (forty) times. Free Spins winnings must be wagered 35 (thirty-five) times. In case of cancellation of bonus and not fulfilling the wagering requirements all bonus funds, as well as winnings associated with bonus funds, will be void.",
+"nocode": "Без промокода"
+},
+{
+"name": "THURSDAY FREESPINS",
+"amount": "50 FS / 75 FS / 100 FS",
+"rows": [
+[
+"Min deposit",
+"€30 / €40 / €50"
+],
+[
+"Wager for % from dep",
+"нет (только фриспины)"
+],
+[
+"Wager for FS win",
+"x35 in all games which are not restricted for wagering"
+],
+[
+"Max bet",
+"5 EUR"
+],
+[
+"Max withdrawal from %+FS",
+"€125 / €200 / €450"
+]
+],
+"terms": "BONUS DETAILS\nLog in to your account.\nChoose the bonus.\nMake a deposit from 30 EUR.\nReceive 50 FS/75 FS/100 FS. Max FS bonus: €125/€200/€450.\n\nT&C\nThis bonus is available for players only on Thursday. The amount of freespins will be credited on your bonus balance after deposit in accordance with the amount of deposit and chosen bonus. To withdraw funds, the bonus amount from Free Spins must be rolled over 35 (thirty five) times. In case of cancellation of bonus and not fulfilling the wagering requirements all bonus funds, as well as winnings associated with bonus funds, will be void.",
+"nocode": "Без промокода"
+}
+],
+"temp": []
+}
+};
+PROMOS.Evospin.perm.unshift({name:'FIRST DEPOSIT BONUS',amount:'125% UP TO €2,500 + 125 FS',
+   rows:[['Min dep','20 EUR / 20 USD / 30 CAD / 20 BGN'],['Wager for % from dep','x40'],['Wager for FS win','x30'],['Max bet','6.50 EUR / 7.00 USD / 10.00 CAD / 7 BGN'],['Max withdrawal from %+FS','2,650 EUR / 2,650 USD / 3,975 CAD / 2,150 BGN']],
+   terms:'This bonus available once per player and only on first deposit.\nWith the active bonus, bets are deducted from the real money balance first. After all real money is spent, the bets are deducted from the bonus funds balance.\nWhen the balance reaches USD 0.05 / EUR 0.05 / CAD 0.05 / BGN 0.05 or less, the bonus will be canceled and the wager will be removed.\nTo withdraw funds, the bonus amount of 125% from deposit must be rolled over 40 (forty) times and the bonus amount from Free Spins must be rolled over 30 (thirty) times.\nIn case of cancellation of bonus and not fulfill the wagering requirements all bonus funds, as well as winnings associated with bonus funds, will be void.\nAll bets made while playing slots contribute 100% to bonus wagering. Bets made in table games, live casino games, lottery, or other available games contribute 5% to bonus wagering.\nBets in games that excluded from wagering the bonus will not be counted towards bonus wagering.'});
+
+(function(){
+ function esc(t){return String(t==null?'':t).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+ var list=document.getElementById('prList'),bar=document.getElementById('prBrands'),q=document.getElementById('prQ');if(!list)return;
+ function match(b,f){if(!f)return true;var t=(b.name+' '+b.amount+' '+(b.code||'')+' '+(b.rows||[]).map(function(r){return r.join(' ')}).join(' ')+' '+(b.terms||'')).toLowerCase();return t.indexOf(f)>=0}
+ function card(b,tmp){return '<div class="pr-card'+(tmp?' tmp':'')+'"><div class="pr-name">'+esc(b.name)+'</div><div class="pr-amt">'+esc(b.amount)+'</div>'
+  +(b.code?'<div class="pr-code" data-code="'+esc(b.code)+'" title="Скопировать промокод">🏷️ '+esc(b.code)+'</div>':(b.nocode?'<div class="pr-code nc">⚡ '+esc(b.nocode)+'</div>':''))
+  +(b.until?'<div class="pr-row" style="margin-bottom:6px"><dt>Действует до</dt><dd>'+esc(b.until)+'</dd></div>':'')
+  +'<dl class="pr-rows">'+(b.rows||[]).map(function(r){return '<div class="pr-row"><dt>'+esc(r[0])+'</dt><dd>'+esc(r[1])+'</dd></div>'}).join('')+'</dl>'
+  +'<div class="pr-act">'+(b.terms?'<button type="button" data-t="terms">ℹ️ Info terms</button>':'')+'<button type="button" data-t="copy">📋 Копировать</button></div>'
+  +(b.terms?'<div class="pr-terms">'+esc(b.terms)+'</div>':'')+'</div>'}
+ function sec(title,arr,tmp){return '<div class="pr-sec"><div class="pr-st">'+title+' <b>'+arr.length+'</b><i></i></div>'+(arr.length?'<div class="pr-grid">'+arr.map(function(b){return card(b,tmp)}).join('')+'</div>':'<div class="pr-empty">Пока нет акций</div>')+'</div>'}
+ function render(){var f=(q.value||'').trim().toLowerCase();var h='',bh='';
+  PROMO_BRANDS.forEach(function(n){var d=PROMOS[n]||{},p=(d.perm||[]).filter(function(b){return match(b,f)}),t=(d.temp||[]).filter(function(b){return match(b,f)}),c=p.length+t.length;
+   if(f&&!c)return;var id='pr-'+n.toLowerCase();
+   bh+='<button type="button" data-go="'+id+'">'+esc(n)+'<b>'+c+'</b></button>';
+   h+='<section class="panel pr-brand" id="'+id+'"><div class="ph"><h2>🎰 '+esc(n)+'<span class="pr-cnt">'+c+' '+(c===1?'акция':c>1&&c<5?'акции':'акций')+'</span></h2></div>'+sec('📌 Постоянные акции',p,0)+sec('⏳ Временные акции',t,1)+'</section>'});
+  bar.innerHTML=bh;list.innerHTML=h||'<div class="pr-empty">Ничего не найдено</div>';
+  if(window.__clInit)window.__clInit(list)}
+ list.addEventListener('click',function(e){var c=e.target.closest('.pr-card');if(!c)return;var b=e.target.closest('button,[data-code]');if(!b)return;
+  if(b.dataset.code){navigator.clipboard&&navigator.clipboard.writeText(b.dataset.code);b.textContent='✅ Скопировано';return}
+  if(b.dataset.t==='terms'){c.classList.toggle('open');b.classList.toggle('on')}
+  if(b.dataset.t==='copy'){var pc=c.querySelector('.pr-code');var t=c.querySelector('.pr-name').textContent+'\n'+c.querySelector('.pr-amt').textContent+'\n'+(pc?'Promo code: '+pc.textContent.replace(/^\S+ /,'')+'\n':'')+[].map.call(c.querySelectorAll('.pr-rows .pr-row'),function(r){return r.querySelector('dt').textContent+': '+r.querySelector('dd').textContent}).join('\n');
+   try{navigator.clipboard.writeText(t);b.textContent='✅ Скопировано';setTimeout(function(){b.textContent='📋 Копировать'},1500)}catch(x){}}});
+ bar.addEventListener('click',function(e){var b=e.target.closest('[data-go]');if(!b)return;var el=document.getElementById(b.dataset.go);if(!el)return;try{var u='/promo/'+b.dataset.go.slice(3);if(location.pathname!==u)history.pushState({v:'promo'},'',u);routeSub=b.dataset.go.slice(3)}catch(x){}el.classList.remove('cl-off');el.scrollIntoView({behavior:'smooth',block:'start'})});
+ q.addEventListener('input',render);render();
+})();
+</script>
+<script>
 /* Сворачивание секций: клик по заголовку или по стрелке; состояние запоминается */
 (function(){var K='shifthub-collapsed',st={};try{st=JSON.parse(localStorage.getItem(K)||'{}')||{}}catch(e){}
 function save(){try{localStorage.setItem(K,JSON.stringify(st))}catch(e){}}
-document.querySelectorAll('.panel').forEach(function(p){var ph=null;for(var c=p.firstElementChild;c;c=c.nextElementSibling)if(c.classList.contains('ph')){ph=c;break}
+function init(root){(root||document).querySelectorAll('.panel').forEach(function(p){if(p.classList.contains('cl-able'))return;var ph=null;for(var c=p.firstElementChild;c;c=c.nextElementSibling)if(c.classList.contains('ph')){ph=c;break}
  if(!ph)return;var h=ph.querySelector('h2,h3');if(!h)return;var key=p.id||h.textContent.trim().slice(0,40);
  p.classList.add('cl-able');var b=document.createElement('button');b.type='button';b.className='cl-tg';b.title='Свернуть / развернуть';b.innerHTML='<i></i>';p.appendChild(b);
  function set(c,sv){p.classList.toggle('cl-off',c);b.setAttribute('aria-expanded',String(!c));if(sv){if(c)st[key]=1;else delete st[key];save()}}
  set(!!st[key]);
  b.addEventListener('click',function(e){e.stopPropagation();set(!p.classList.contains('cl-off'),true)});
  ph.addEventListener('click',function(e){if(e.target.closest('input,select,textarea,a,label,button'))return;set(!p.classList.contains('cl-off'),true)});
-});})();
+})}
+init();window.__clInit=init;
+var pl=document.getElementById('prList');if(pl)init(pl);})();
 </script>
 <script>
 /* Меню разделов: все кнопки из #nav (и будущие новые разделы) живут в выпадающем меню */
