@@ -915,6 +915,30 @@ body.menu-open .menu-veil{opacity:1;visibility:visible;transition:opacity .22s}
 @media(max-width:600px){.pr-grid{grid-template-columns:1fr}.pr-row{grid-template-columns:1fr;gap:0}.pr-row dt{font-size:11.5px}}
 
 /* ===== Шпаргалка по лимитам и валютам ===== */
+.pay-vip{padding:12px 16px 14px;border-bottom:1px solid var(--line)}
+.pay-vip .chips2{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;align-items:center}
+.pay-vip .chips2 span{font-size:11.5px;font-weight:800;color:var(--mut);margin-right:4px}
+.pay-vip .chips2 button{border:1px solid var(--line);background:var(--card);color:inherit;font:inherit;font-size:12px;font-weight:800;padding:5px 11px;border-radius:9px;cursor:pointer}
+.pay-vip .chips2 button.on{background:linear-gradient(135deg,var(--acc),var(--gold));color:#fff;border-color:transparent}
+.pay-vip .tw{overflow-x:auto}
+.pay-vip table{width:100%;min-width:520px;border-collapse:collapse;font-size:13px}
+.pay-vip th,.pay-vip td{padding:8px 10px;text-align:right;border-top:1px solid var(--line);white-space:nowrap}
+.pay-vip th{font-size:11px;font-weight:900;letter-spacing:.04em;color:var(--mut);border-top:0}
+.pay-vip th:first-child,.pay-vip td:first-child{text-align:left;font-weight:900}
+.pay-vip td{font-weight:700}
+.pay-vip .sel{background:rgba(255,61,139,.14);color:inherit}
+.pay-vip th.sel{color:var(--acc)}
+.pay-vip td.sel{font-weight:900;font-size:14px}
+.pay-vip .cu{font-size:11px;opacity:.6;margin-left:3px}
+@media(max-width:760px){.pay-vip.one th:not(:first-child):not(.sel),.pay-vip.one td:not(:first-child):not(.sel){display:none}.pay-vip.one table{min-width:0}}
+.pay-co{margin-top:12px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--card2)}
+.pay-co h4{margin:0;padding:11px 16px;font-size:13px;font-weight:900;letter-spacing:.02em;background:rgba(167,139,250,.16);border-bottom:1px solid var(--line)}
+.pay-co .r{display:grid;grid-template-columns:210px 1fr;gap:12px;padding:10px 16px;border-top:1px solid var(--line);font-size:13px;line-height:1.5}
+.pay-co .r:first-of-type{border-top:0}
+.pay-co .r b{font-weight:900}.pay-co .r .v{font-weight:600}
+.pay-co .hit{display:inline-block;font-weight:900;font-size:14px;padding:2px 10px;border-radius:8px;margin:0 8px 2px 0;background:linear-gradient(135deg,var(--acc),var(--gold));color:#fff}
+.pay-co .all{opacity:.7;font-size:12px}
+@media(max-width:760px){.pay-co .r{grid-template-columns:1fr;gap:2px}}
 .pay{margin-bottom:18px}
 .pay>.ph{align-items:flex-start;gap:14px}
 .pay-hd{flex:1;min-width:0}
@@ -3367,7 +3391,74 @@ setInterval(function(){if(raw&&!ui.adding&&!drag){renderTabs();renderSched();ren
 var PAY_COUNTRIES={DE:'🇩🇪 Германия',AT:'🇦🇹 Австрия',CA:'🇨🇦 Канада',AU:'🇦🇺 Австралия',NZ:'🇳🇿 Новая Зеландия',NO:'🇳🇴 Норвегия',FI:'🇫🇮 Финляндия',PL:'🇵🇱 Польша',CH:'🇨🇭 Швейцария',IE:'🇮🇪 Ирландия'};
 var PAY_BRANDS=['Neospin','Evospin','Crownslot','Gunsbet','1RedBet','Beonbet','Slotrush'];
 var PAY_DB={
- Neospin:{test:true,
+ '1RedBet':{
+  cashout:{
+   /* rows — свой набор строк, если он отличается от Daily/Weekly/Monthly */
+   rows:[['Min withdrawal per transaction','10000 CLP / 11 USD / 15000 ARS / 200 MXN'],
+         ['Max withdrawal per transaction','400000 CLP / 91 USD / 120000 ARS / 1600 MXN'],
+         ['Withdrawal daily limit','400000 CLP / 1000 USD / 1320000 ARS / 17600 MXN.'],
+         ['Withdrawal Monthly limit','10560000 CLP / 12000 USD / 15840000 ARS / 211200 MXN']],
+   depWager:'', hold:''
+  },
+  methods:[]
+ },
+ Slotrush:{
+  cashout:{
+   daily:'2,000 EUR/USD/CAD или эквивалент в доступных валютах',
+   weekly:'10,000 EUR/USD/CAD или эквивалент в доступных валютах',
+   monthly:'20,000 EUR/USD/CAD или эквивалент в доступных валютах',
+   depWager:'x3', hold:'', wdMin:''
+  },
+  methods:[]
+ },
+ Beonbet:{
+  cashout:{
+   /* лимиты зависят от VIP-уровня игрока */
+   vip:{cur:['EUR','GBP'],levels:['VIP 0–1','VIP 2','VIP 3','VIP 4','VIP 5'],
+    rows:[['Per transaction',[1500,1500,1500,1500,1500]],
+          ['Per Day',[1500,2000,2500,3000,4000]],
+          ['Per Week',[3000,4000,5500,7000,9000]],
+          ['Monthly',[7000,10000,12000,16000,20000]]]},
+   depWager:'x3', hold:'', wdMin:''
+  },
+  methods:[]
+ },
+ Gunsbet:{
+  cashout:{
+   daily:'€2,000, $2,000 USD, 3,000 CAD/AUD/NZD, 20,000 NOK, 40,000 ZAR, 200,000 INR (or equivalent).',
+   weekly:'€5,000, $5,000 USD, 7,500 CAD/AUD/NZD, 50,000 NOK, 100,000 ZAR, 500,000 INR (or equivalent).',
+   monthly:'€20,000, $20,000 USD, 30,000 CAD/AUD/NZD, 200,000 NOK, 400,000 ZAR, 2,000,000 INR (or equivalent). Resets on the 1st of each month.',
+   depWager:'x3', hold:'', wdMin:'', note:'All players'
+  },
+  methods:[]
+ },
+ Crownslot:{
+  cashout:{
+   daily:'EUR 1,000 / USD 1,000 / AUD 1,500 / CAD 1,500 / NZD 1,500 / NOK 10,000 or equivalent in other currencies at the EUR exchange rate.',
+   weekly:'EUR 4,000 / USD 4,000 / AUD 6,000 / CAD 6,000 / NZD 6,000 / NOK 40,000 or equivalent in other currencies at the EUR exchange rate',
+   monthly:'EUR 15,000 / USD 15,000 / AUD 25,000 / CAD 25,000 / NZD 25,000 / NOK 150,000 or equivalent in other currencies at the EUR exchange rate.',
+   depWager:'x3', hold:'', wdMin:''
+  },
+  methods:[]
+ },
+ Evospin:{
+  cashout:{
+   daily:'EUR 2000 / USD 2 000 / CAD 3 000 / BGN 2000 или эквивалент в других валютах по курсу EUR и доступных криптовалютах по курсу EUR',
+   weekly:'EUR 5 000 / USD 5 000 / CAD 7 500 / BGN 10 000 и доступные криптовалюты по курсу EUR',
+   monthly:'EUR 10 000 / USD 10 000 / CAD 15 000 / BGN 20 000 и доступные криптовалюты по курсу EUR',
+   depWager:'x3', hold:'', wdMin:''
+  },
+  methods:[]
+ },
+ Neospin:{test:true, /* test: true — методы оплаты ниже пока тестовые */
+  cashout:{
+   daily:'6,000 CAD / 4,000 EUR / 4,000 USD / 6,000 AUD / 6,000 NZD / 0.05 BTC или эквивалент в других валютах по курсу евро.',
+   weekly:'15,000 CAD / 10,000 EUR / 10,000 USD / 15,000 AUD / 15,000 NZD / 0.12 BTC / 35 BCH / 50,000 DOGE / 4.5 ETH / 81 LTC / 10,000 USDT / 4,700 XRP',
+   monthly:'30,000 EUR / 30,000 USD / 45,000 AUD / 45,000 CAD / 45,000 NZD / 0.36 BTC / 105 BCH / 150,000 DOGE / 13.4 ETH / 240 LTC / 30,000 USDT / 14,100 XRP',
+   depWager:'x3',
+   hold:'',
+   wdMin:'CAD 45 / EUR 30 or USD 30 / AUD 45 / NZD 45 / BTC 0.0012 / BCH 0.2 / DOGE 375 / ETH 0.03 / LTC 0.46 / XRP 50 / USDT 30'
+  },
   kyc:['Верификация обязательна перед первым выводом','Документ: паспорт / ID-карта / водительское удостоверение','Подтверждение адреса: выписка или счёт за коммуналку не старше 3 месяцев','Для карт — фото карты (видны первые 6 и последние 4 цифры)'],
   methods:[
    {name:'Visa / Mastercard',type:'card',countries:['*'],limits:{EUR:{dep:[20,4000],wd:[50,4000]},USD:{dep:[20,4000],wd:[50,4000]},CAD:{dep:[30,6000],wd:[75,6000]},AUD:{dep:[30,6000],wd:[75,6000]},NZD:{dep:[30,6000],wd:[75,6000]},NOK:{dep:[200,40000],wd:[500,40000]}},depTime:'Мгновенно',wdTime:'1–3 банковских дня',fee:'0%',kyc:'Фото карты перед выводом'},
@@ -3396,16 +3487,29 @@ var PAY_DB={
   var cs={};ms.forEach(function(m){(m.countries.indexOf('*')>=0?Object.keys(PAY_COUNTRIES):m.countries).forEach(function(c){cs[c]=1})});
   fill($c,[['*','Все']].concat(Object.keys(cs).sort().map(function(c){return [c,PAY_COUNTRIES[c]||c]})),$c.value||saved.c);
   var cu={};ms.filter(function(m){return okC(m,$c.value)}).forEach(function(m){Object.keys(m.limits).forEach(function(k){cu[k]=1})});
+  if(d&&d.cashout)['daily','weekly','monthly','wdMin'].concat((d&&d.cashout&&d.cashout.rows||[]).map(function(r){return r[1]})).forEach(function(k){var T=String(d.cashout[k]||k||'');(T.match(/\b[A-Z]{3,4}\b/g)||[]).forEach(function(c){cu[c]=1});if(T.indexOf('€')>=0)cu.EUR=1});
+  if(d&&d.cashout&&d.cashout.vip)d.cashout.vip.cur.forEach(function(c){cu[c]=1});
   fill($v,[['*','Все']].concat(Object.keys(cu).sort().map(function(k){return [k,k]})),$v.value||saved.v);}
  function render(){
-  try{localStorage.setItem(LS,JSON.stringify({b:$b.value,c:$c.value,v:$v.value}))}catch(e){}
+  try{localStorage.setItem(LS,JSON.stringify({b:$b.value,c:$c.value,v:$v.value,vip:payVip}))}catch(e){}
   var d=PAY_DB[$b.value];
   if(!d){out.innerHTML='<div class="pay-empty">По <b>'+esc($b.value)+'</b> данных пока нет. Ответственный сотрудник ещё не внёс лимиты.</div>';return}
   var c=$c.value,v=$v.value;
   var ms=d.methods.filter(function(m){return okC(m,c)&&(v==='*'||m.limits[v])});
-  var h=d.test?'<div class="pay-note">⚠️ Тестовые данные: это пример структуры. Не используйте эти цифры в ответах игрокам, пока не загружена реальная база.</div>':'';
+  var h='';
+  if(d.cashout){var co=d.cashout;
+   var pick=function(t){if(v==='*'||!t)return '';var N='(\\d(?:[\\d,.]|\\s(?=\\d{3}\\b))*)',T=String(t),m=T.match(new RegExp(N+'\\s*(?:[A-Z]{3,4}/)*'+v+'\\b'))||T.match(new RegExp('\\b'+v+'\\s*'+N))||(v==='EUR'?T.match(new RegExp('€\\s*'+N)):null);return m?'<span class="hit">'+esc(m[1].replace(/[,.\s]+$/,'')+' '+v)+'</span>':''};
+   var row=function(n,t,multi){var p=multi?pick(t):'';return '<div class="r"><b>'+n+'</b><div class="v">'+(p?p+'<span class="all">'+esc(t)+'</span>':(t?esc(t):'—'))+'</div></div>'};
+   h+='<div class="pay-co"><h4>💸 Cashout \\ Withdrawal Limits &amp; Wager reqs · '+esc($b.value)+(co.note?' <span style="opacity:.6;font-weight:700">('+esc(co.note)+')</span>':'')+'</h4>'
+    +(co.vip?(function(V){var lv=payVip;if(lv>=V.levels.length)lv=-1;var cur=(v!=='*'&&V.cur.indexOf(v)>=0)?v:V.cur.join('/');
+       return '<div class="pay-vip'+(lv>=0?' one':'')+'"><div class="chips2"><span>VIP-уровень игрока:</span><button type="button" data-vip="-1" class="'+(lv<0?'on':'')+'">Все</button>'+V.levels.map(function(l,i){return '<button type="button" data-vip="'+i+'" class="'+(lv===i?'on':'')+'">'+esc(l)+'</button>'}).join('')+'</div>'
+       +'<div class="tw"><table><tr><th>Лимит вывода</th>'+V.levels.map(function(l,i){return '<th class="'+(lv===i?'sel':'')+'">'+esc(l)+'</th>'}).join('')+'</tr>'
+       +V.rows.map(function(r){return '<tr><td>'+esc(r[0])+'</td>'+r[1].map(function(x,i){return '<td class="'+(lv===i?'sel':'')+'">до '+num(x).replace(/,/g,' ')+'<span class="cu">'+esc(cur)+'</span></td>'}).join('')+'</tr>'}).join('')+'</table></div></div>'})(co.vip)
+     :co.rows?co.rows.map(function(r){return row(esc(r[0]),r[1],1)}).join(''):row('Daily',co.daily,1)+row('Weekly',co.weekly,1)+row('Monthly',co.monthly,1))+row('Dep Wager',co.depWager)+row('Hold и особенности',co.hold)+(co.rows?'':row('Withdrawal limits (min)',co.wdMin,1))+'</div>'}
+  if(d.test)h+='<div class="pay-note">⚠️ Методы оплаты ниже — тестовые данные (пример структуры). Не используйте их в ответах игрокам, пока не загружена реальная база.'+(d.cashout?' Лимиты вывода выше — реальные.':'')+'</div>';
   if(d.kyc&&d.kyc.length)h+='<div class="pay-kyc"><b>🪪 Верификация · '+esc($b.value)+'</b><ul>'+d.kyc.map(function(k){return '<li>'+esc(k)+'</li>'}).join('')+'</ul></div>';
-  if(!ms.length)h+='<div class="pay-empty">Для выбранной страны и валюты подходящих методов нет.</div>';
+  if(!d.methods.length)h+='<div class="pay-empty">Методы оплаты '+esc($b.value)+' ещё не внесены.</div>';
+  else if(!ms.length)h+='<div class="pay-empty">Для выбранной страны и валюты подходящих методов нет.</div>';
   else h+='<div class="pay-grid">'+ms.map(function(m){var t=TYPE[m.type]||['💠',m.type];
    var curs=v==='*'?Object.keys(m.limits):[v];
    var tags=(m.countries.indexOf('*')>=0?'<i>🌍 Все страны</i>':m.countries.map(function(x){return '<i>'+esc(x)+'</i>'}).join(''))+(m.excl||[]).map(function(x){return '<i class="no">'+esc(x)+'</i>'}).join('');
@@ -3415,6 +3519,8 @@ var PAY_DB={
     +'<div class="pm-foot"><div><span>Зачисление депозита</span>'+esc(m.depTime||'—')+'</div><div><span>Срок вывода</span>'+esc(m.wdTime||'—')+'</div>'+(m.fee?'<div><span>Комиссия</span>'+esc(m.fee)+'</div>':'')+'</div>'
     +(m.kyc?'<div class="pm-kyc">🪪 '+esc(m.kyc)+'</div>':'')+'</div>'}).join('')+'</div>';
   out.innerHTML=h}
+ var payVip=-1;try{payVip=+(saved.vip==null?-1:saved.vip)}catch(e){}
+ out.addEventListener('click',function(e){var b=e.target.closest('[data-vip]');if(!b)return;payVip=+b.dataset.vip;render()});
  $b.addEventListener('change',function(){$c.value='*';$v.value='*';opts();render()});
  $c.addEventListener('change',function(){opts();render()});
  $v.addEventListener('change',render);
