@@ -982,12 +982,48 @@ body.theme-day .pay-badge{color:#6a4fd6}
 .mt-bar input[type=time]{width:110px}.mt-bar #mtTitle{width:170px}
 .mt-chip{display:inline-flex;align-items:center;gap:6px;padding:6px 6px 6px 11px;border-radius:10px;font-weight:800;font-size:12.5px;background:#3ea8ff;color:#06121f}
 .mt-chip button{border:0;background:rgba(0,0,0,.18);color:inherit;border-radius:7px;width:22px;height:22px;cursor:pointer;font-weight:900}
-.mt-ov{position:absolute;top:40px;bottom:0;z-index:2;pointer-events:none;border-radius:8px;border:2px solid #3ea8ff;
+.mt-ov{position:absolute;top:3px;bottom:3px;z-index:2;pointer-events:none;border-radius:8px;border:2px solid #3ea8ff;
  background:repeating-linear-gradient(135deg,rgba(62,168,255,.16) 0 8px,rgba(62,168,255,.06) 8px 16px)}
 .mt-ov span{position:absolute;bottom:-1px;left:-1px;max-width:calc(100% + 60px);white-space:nowrap;font-size:10.5px;font-weight:900;padding:2px 6px;border-radius:0 6px 0 6px;background:#3ea8ff;color:#06121f}
+.mt-who{display:flex;flex-wrap:wrap;gap:6px;align-items:center;flex-basis:100%}
+.mt-who .lb2{font-size:11.5px;font-weight:800;color:var(--mut)}
+.mt-who button{border:1px solid var(--line);background:var(--card);color:inherit;font:inherit;font-size:12px;font-weight:800;padding:5px 10px;border-radius:9px;cursor:pointer}
+.mt-who button.on{background:#3ea8ff;color:#06121f;border-color:transparent}
+.mt-list{display:flex;flex-wrap:wrap;gap:6px;flex-basis:100%}
+.rq{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:0 0 12px;padding:11px 14px;border-radius:14px;font-size:13px;font-weight:600;line-height:1.45}
+.rq.in{background:linear-gradient(135deg,rgba(255,61,139,.2),rgba(255,181,71,.16));border:1px solid rgba(255,120,120,.55);animation:rqPulse 1.6s ease-in-out infinite}
+.rq.out{background:rgba(255,255,255,.05);border:1px dashed var(--line)}
+.rq .rq-b{display:inline-flex;gap:6px;margin-left:auto}
+@keyframes rqPulse{50%{box-shadow:0 0 0 4px rgba(255,61,139,.18)}}
 .blk.clash{outline:2px dashed #ff4d6d;outline-offset:1px}
 .pill.meet{background:#3ea8ff}
 @media(max-width:760px){.mt-bar #mtTitle{width:100%}}
+
+.plan{display:inline-grid;place-items:center;min-width:22px;height:18px;padding:0 5px;margin-left:4px;border-radius:6px;font-size:10.5px;font-weight:900;color:#141414;background:#cfd3e6;flex:none}
+.plan.c-day{background:#ffb547}.plan.c-night{background:#8b5cf6;color:#fff}.plan.c-off{background:var(--line);color:var(--mut)}.plan.c-oth{background:#3ee0c5}
+.rs-today{margin:0 0 8px;font-size:13px;font-weight:700;padding:8px 12px;border-radius:10px;background:rgba(255,61,139,.12);border:1px solid rgba(255,61,139,.35)}
+.rs-today.warn{background:rgba(255,181,71,.12);border-color:rgba(255,181,71,.5)}
+.rs td.today{background:rgba(255,61,139,.16)!important;font-weight:900}
+.rs tr.me td.today{background:rgba(255,61,139,.32)!important}
+.pname .ava{position:relative}.pname .ava .plan{position:absolute;right:-7px;bottom:-6px;min-width:16px;height:14px;padding:0 3px;margin:0;font-size:9px;border-radius:5px;box-shadow:0 0 0 2px var(--bg,#120a2e)}
+#logSeg{flex-basis:100%;margin:8px 0 0!important;display:flex}
+.qf{flex-wrap:wrap}.qf button{font-size:11.5px;padding:5px 9px}
+#noteSeg{display:flex}
+.pr-fl{display:flex;flex-wrap:wrap;gap:8px;flex:1 1 420px;justify-content:flex-end}.pr-fl select{max-width:170px}
+#compactBtn{margin-left:auto;margin-right:8px}
+
+.line-sum{font-size:12.5px;font-weight:800;margin:0 0 6px;color:var(--txt)}.line-sum .ho{color:var(--acc)}
+.ho-z{position:absolute;top:40px;bottom:0;z-index:1;pointer-events:none;background:repeating-linear-gradient(45deg,rgba(255,181,71,.13) 0 6px,transparent 6px 12px)}
+.rq-badge{display:inline-block;font-size:10.5px;font-weight:900;letter-spacing:.04em;text-transform:uppercase;padding:3px 8px;border-radius:7px;background:#ff3d8b;color:#fff;margin-right:6px}
+.mb-bd{position:absolute;top:-6px;right:-6px;min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:#ff3d8b;color:#fff;font-size:11px;font-weight:900;display:grid;place-items:center;box-shadow:0 0 0 2px var(--bg,#120a2e);animation:rqPulse 1.6s infinite}
+.mt-pre{display:inline-flex;flex-wrap:wrap;gap:6px}.mt-pre button{border:1px dashed #3ea8ff;background:transparent;color:inherit;font:inherit;font-size:11.5px;font-weight:800;padding:5px 9px;border-radius:9px;cursor:pointer}
+.row.person.flash{animation:rowFlash 1.6s ease 2}
+@keyframes rowFlash{50%{box-shadow:inset 0 0 0 3px var(--acc2);background:color-mix(in srgb,var(--acc2) 22%,transparent)}}
+#aiSrc{display:flex;flex-wrap:wrap;gap:5px;padding:8px 12px;font-size:11px;border-bottom:1px solid var(--line)}
+#aiSrc .ai-src-h{font-weight:900}#aiSrc .ai-src{padding:2px 7px;border-radius:7px;background:rgba(255,255,255,.07);font-weight:600}
+.arch-btn{width:100%;margin:0 0 8px}.note.old{opacity:.6}
+footer .ver{font-weight:800;opacity:.85}
+.toast div{white-space:pre-line}
 </style>
 </head>
 <body class="theme-night">
@@ -1057,7 +1093,7 @@ body.theme-day .pay-badge{color:#6a4fd6}
  </section>
  <main class="grid">
   <section class="panel">
-   <div class="ph"><h2>📋 График смены</h2><div class="tabs" id="tabs"></div></div>
+   <div class="ph"><h2>📋 График смены</h2><button class="btn sm" id="compactBtn" type="button" title="Свернуть второстепенные блоки">🗜 Компактно</button><div class="tabs" id="tabs"></div></div>
    <div id="sched"></div>
   </section>
 
@@ -1080,6 +1116,7 @@ body.theme-day .pay-badge{color:#6a4fd6}
 
    <section class="panel">
     <div class="ph"><h2>📌 Заметки</h2><span class="count" id="ncount"></span></div>
+    <div class="seg qf" id="noteSeg" style="margin-bottom:10px"><button data-nf="all" class="on">Все</button><button data-nf="me">Мои</button><button data-nf="meet">🎥 Митинги и запросы</button><button data-nf="hot">🔴 Важное</button></div>
     <form class="nform" id="noteForm">
      <textarea class="in" id="nText" maxlength="500" placeholder="Важное для смены… Упомяни коллегу через @Имя"></textarea>
      <div class="r">
@@ -1092,7 +1129,7 @@ body.theme-day .pay-badge{color:#6a4fd6}
     <div class="notes" id="notes"></div>
    </section>
    <section class="panel">
-    <div class="ph"><h2>📜 Журнал действий</h2><div class="seg" id="logSeg" style="margin-left:auto"><button data-lf="all" class="on">Все</button><button data-lf="me">Мои</button></div></div>
+    <div class="ph" style="flex-wrap:wrap"><h2>📜 Журнал действий</h2><div class="seg qf" id="logSeg" style="margin-left:auto"><button data-lf="all" class="on">Все</button><button data-lf="me">Мои</button><button data-lf="meet">🎥 Митинги и запросы</button><button data-lf="hot">🔴 Важное</button></div></div>
     <div class="logl" id="logList"></div>
    </section>
   </aside>
@@ -1156,7 +1193,7 @@ body.theme-day .pay-badge{color:#6a4fd6}
  <div class="view" id="v-promo">
   <div class="pr-top">
    <div><h1 class="pr-h">🎁 Промокоды и акции</h1><div class="muted pr-sub">Условия бонусов по каждому казино. Нажми «Info terms», чтобы увидеть полные правила.</div></div>
-   <input class="in pr-q" id="prQ" placeholder="🔍 Поиск по бонусам…" autocomplete="off">
+   <div class="pr-fl"><input class="in pr-q" id="prQ" placeholder="🔍 Поиск: промокод, условие, x40…" autocomplete="off"><select class="in" id="prB"><option value="">Все бренды</option></select><select class="in" id="prC"><option value="">Все валюты</option></select></div>
   </div>
   <div class="pr-brands" id="prBrands"></div>
   <div id="prList"></div>
@@ -1388,7 +1425,7 @@ body.theme-day .pay-badge{color:#6a4fd6}
  <button class="btn sm" data-bt="5" data-l="Перерыв" data-e="☕">5 мин</button><button class="btn sm" data-bt="10" data-l="Перерыв" data-e="☕">10 мин</button><button class="btn sm" data-bt="15" data-l="Перерыв" data-e="☕">15 мин</button>
  <button class="btn sm" data-bt="30" data-l="Перерыв" data-e="☕">30 мин</button><button class="btn sm" data-bt="60" data-l="Обед" data-e="🍽️">60 мин</button><button class="btn sm" data-bt="x">✕</button>
 </div>
-<footer>Shift Hub · дневная тема 09:00–21:00, ночная 21:00–09:00 (время команды: GMT+3)</footer>
+<footer>Shift Hub · дневная тема 09:00–21:00, ночная 21:00–09:00 (время команды: GMT+3) · <span class="ver" title="Если после загрузки на GitHub версия старая — нажми Ctrl+F5">🏷 версия 2026.11.24 · сборка 3</span></footer>
 
 <script>
 (function(){
@@ -1404,6 +1441,7 @@ var ROLES={admin:['👑','Админ'],member:['👤','Сотрудник'],gues
 DB_URL=DB_URL.trim().replace(/\/+$/,'');
 var ONLINE=/^https:\/\/[a-z0-9.-]+\.(firebaseio\.com|firebasedatabase\.app)$/i.test(DB_URL);
 var LS='shifthub-v1';
+var SHIFTHUB_VERSION='2026.11.24 · сборка 3';try{console.info('Shift Hub',SHIFTHUB_VERSION)}catch(e){}
 var SLOTS=24;
 var SHIFTS={day:{name:'Дневная',icon:'☀️',start:9*60},night:{name:'Ночная',icon:'🌙',start:21*60}};
 var TYPES={
@@ -1448,17 +1486,29 @@ function now(){return tParts(BASE_OFF)}
 function curShift(n){return (n.mins>=540&&n.mins<1260)?'day':'night'}
 function frac(k,n){return ((n.mins+n.s/60-SHIFTS[k].start+1440)%1440)/30}
 function shiftData(k){
- var r=(raw&&raw[k])||{},pp=r.people||{},it=(r.date&&r.date!==shiftDate(k))?{}:(r.items||{});
+ var r=(raw&&raw[k])||{},pp=r.people||{},sd=shiftDate(k),okD=function(x){return x&&(x.d?x.d===sd:(!r.date||r.date===sd))},it0=r.items||{},it={};Object.keys(it0).forEach(function(key){if(okD(it0[key]))it[key]=it0[key]});
  var people=Object.keys(pp).filter(function(id){return pp[id]&&pp[id].name}).map(function(id){return {id:id,name:String(pp[id].name),o:pp[id].o||0}}).sort(function(a,b){return a.o-b.o});
  var items=Object.keys(it).map(function(key){return it[key]}).filter(function(x){return x&&TYPES[x.t]&&typeof x.s==='number'&&typeof x.l==='number'});
- var mt=(r.date&&r.date!==shiftDate(k))?{}:(r.meets||{});
- var meets=Object.keys(mt).map(function(id){var x=mt[id];return x&&typeof x.m==='number'&&typeof x.l==='number'?{id:id,m:x.m,l:x.l,title:String(x.title||'Meet'),by:x.by||''}:null}).filter(Boolean)
+ var mt0=r.meets||{},mt={};Object.keys(mt0).forEach(function(id){if(okD(mt0[id]))mt[id]=mt0[id]});
+ var meets=Object.keys(mt).map(function(id){var x=mt[id];return x&&typeof x.m==='number'&&typeof x.l==='number'?{id:id,m:x.m,l:x.l,title:String(x.title||'Meet'),by:x.by||'',who:(x.who&&typeof x.who==='object'&&Object.keys(x.who).length)?x.who:null}:null}).filter(Boolean)
   .map(function(x){x.s=((x.m-SHIFTS[k].start+1440)%1440)/30;x.e=x.s+x.l/30;return x}).filter(function(x){return x.s<SLOTS}).sort(function(a,b){return a.s-b.s});
  return {people:people,items:items,meets:meets};
 }
 /* время в минутах (пояс GMT+3) → подпись в поясе пользователя */
 function fmtM(m){m=(((m+Math.round((DISP_OFF-BASE_OFF)*60))%1440)+1440)%1440;return p2(Math.floor(m/60))+':'+p2(m%60)}
-function meetHits(k,s,l){return shiftData(k).meets.filter(function(x){return x.s<s+l&&s<x.e})}
+/* пересменка: 30 мин до и после 09:00 и 21:00 (GMT+3) */
+function handover(n){var m=n.mins;if((m>=510&&m<540)||(m>=1230&&m<1260))return 'Пересменка: скоро '+(m<1000?'дневная':'ночная')+' смена';if((m>=540&&m<570)||(m>=1260&&m<1290))return 'Пересменка: смена только началась';return ''}
+function activeNow(){
+ var n=now(),k=curShift(n),d=shiftData(k),f=frac(k,n),S=SHIFTS[k],res=[];
+ d.people.forEach(function(p){
+  d.items.forEach(function(it){if(it.p===p.id&&f>=it.s&&f<it.s+it.l){var T=TYPES[it.t];res.push({pid:p.id,name:p.name,t:it.t,emoji:T.emoji,label:T.short,c:T.c,until:fmt(S.start,it.s+it.l)})}});
+  d.meets.forEach(function(x){if(meetFor(x,p.id)&&f>=x.s&&f<x.e)res.push({pid:p.id,name:p.name,t:'meet',emoji:'🎥',label:x.title,c:'#3ea8ff',until:fmtM(x.m+x.l)})});
+ });
+ return res;
+}
+function meetFor(x,pid){return !x.who||!!x.who[pid]}
+function meetWho(k,x){if(!x.who)return 'вся смена';var nm={};shiftData(k).people.forEach(function(p){nm[p.id]=p.name});return Object.keys(x.who).map(function(id){return nm[id]||'?'}).join(', ')}
+function meetHits(k,s,l,pid){return shiftData(k).meets.filter(function(x){return meetFor(x,pid)&&x.s<s+l&&s<x.e})}
 
 /* ---------- данные ---------- */
 function setAt(path,val){
@@ -1474,7 +1524,7 @@ function patch(upd){
   if(maintBusy)return;
   var bad=Object.keys(upd).filter(function(k){var m=k.match(/^(day|night)\/items\/(.+)_(lunch|brk|out|rb)$/);
    if(m)return m[2]!==myPid(m[1]);
-   return !/^((day|night)\/date|(day|night)\/meets\/[^\/]+|log\/[^\/]+|slots\/[^\/]+\/[^\/]+|dsrec\/[^\/]+\/[^\/]+|bj\/[^\/]+\/[^\/]+|wheel|aistat\/(up|down))$/.test(k)});
+   return !/^((day|night)\/date|(day|night)\/meets\/[^\/]+|req\/[^\/]+(\/(ok|no))?|log\/[^\/]+|slots\/[^\/]+\/[^\/]+|dsrec\/[^\/]+\/[^\/]+|bj\/[^\/]+\/[^\/]+|wheel|aistat\/(up|down))$/.test(k)});
   if(bad.length){toast('👀 Режим гостя','Ты можешь менять только свою строку в графике. Остальное — только смотреть.');return}
  }
  if(!maintBusy){var lt=describe(upd);if(lt)upd['log/l'+Date.now().toString(36)+Math.random().toString(36).slice(2,5)]={by:meName()||'Кто-то',uid:ME.uid||'',txt:lt,ts:Date.now()}}
@@ -1483,8 +1533,11 @@ function patch(upd){
  if(!ONLINE){lsSet(LS,JSON.stringify(raw));return}
  setStatus('saving');
  fetch(dbu(),{method:'PATCH',body:JSON.stringify(upd)})
-  .then(function(r){if(r.status===401){refreshToken(true);throw 0}if(!r.ok)throw 0;setStatus('online')})
-  .catch(function(){setStatus('error')});
+  .then(function(r){if(r.ok){setStatus('online');return}
+   return r.json().catch(function(){return {}}).then(function(j){var er=String((j&&j.error)||'');
+    if(/permission/i.test(er)){setStatus('denied');toast('⛔ Нет прав на запись','Firebase отклонил изменение. Скорее всего, не обновлены правила базы или у тебя роль гостя.');throw 1}
+    if(r.status===401){refreshToken(true);setStatus('offline');throw 1}throw 0})})
+  .catch(function(x){if(x!==1)setStatus('error')});
 }
 function connect(){
  if(!ONLINE){
@@ -1509,16 +1562,19 @@ function connect(){
   if(presOnly)renderPresence();else renderAll();
  }
  es.addEventListener('put',onEv);es.addEventListener('patch',onEv);
- es.addEventListener('cancel',function(){setStatus('error');refreshToken(true)});
+ es.addEventListener('cancel',function(){setStatus('denied');refreshToken(true)});
  es.addEventListener('auth_revoked',function(){refreshToken(true)});
  es.onerror=function(){setStatus('offline')};
  es.onopen=function(){if(status==='offline')setStatus('online')};
  try{tcConnect()}catch(x){}
 }
+var syncAt=0;
 function setStatus(s){
  status=s;
- var map={online:['','Онлайн · видят все'],saving:['warn','Сохраняю…'],offline:['err','Нет связи…'],error:['err','Ошибка сохранения'],local:['warn','Только на этом устройстве'],loading:['warn','Загрузка…']}[s];
+ if(s==='online')syncAt=Date.now();
+ var map={online:['','✅ Синхронизировано'],saving:['warn','⏳ Сохраняю…'],offline:['err','🔄 Переподключение…'],error:['err','⚠️ Ошибка сохранения'],denied:['err','⛔ Ошибка прав'],local:['warn','💾 Только на этом устройстве'],loading:['warn','Загрузка…']}[s]||['warn',s];
  var el=$('status');el.className='status '+map[0];el.innerHTML='<span class="d"></span>'+map[1];
+ el.title={online:'Firebase: данные синхронизированы'+(syncAt?' · '+new Date(syncAt).toLocaleTimeString():''),offline:'Связь с Firebase потеряна — переподключаюсь автоматически',error:'Изменение не сохранилось. Проверь интернет и попробуй ещё раз',denied:'Firebase отклонил запись: нет прав. Проверь роль в команде и правила базы (firebase-rules.json)',saving:'Отправляю изменения в Firebase'}[s]||'';
 }
 
 /* ---------- тема ---------- */
@@ -1570,7 +1626,9 @@ function renderTop(){
  var d=shiftData(k),f=frac(k,n);
  var off=d.items.filter(function(it){return f>=it.s&&f<it.s+it.l});
  var names={};d.people.forEach(function(p){names[p.id]=p.name});
- $('offnow').innerHTML=off.length?off.filter(function(it){return names[it.p]}).map(function(it){var T=TYPES[it.t];return '<span class="pill" style="background:'+T.c+';margin:2px 4px 2px 0">'+T.emoji+' '+esc(names[it.p])+'</span>'}).join(''):'Все на месте 💪';
+ var act=activeNow(),busy={};act.forEach(function(a){busy[a.pid]=1});
+ var tot=d.people.length,nb=Object.keys(busy).length,ho=handover(n);
+ $('offnow').innerHTML='<div class="line-sum">🎧 На линии: <b>'+(tot-nb)+'</b> из '+tot+(nb?' · занято: '+nb:'')+(ho?' · <span class="ho">🔁 '+ho+'</span>':'')+'</div>'+(act.length?act.map(function(a){return '<span class="pill" title="'+esc(a.label+' до '+a.until)+'" style="background:'+a.c+';margin:2px 4px 2px 0">'+a.emoji+' '+esc(a.name)+' · '+esc(a.label)+' <small style="opacity:.75">до '+a.until+'</small></span>'}).join(''):'Все на месте 💪');
 }
 
 /* ---------- график ---------- */
@@ -1585,42 +1643,49 @@ function renderSched(){
  var n=now(),k=ui.shift||curShift(n),S=SHIFTS[k],d=shiftData(k),i,h='';
  var cnt=[];for(i=0;i<SLOTS;i++)cnt.push(0);
  d.items.forEach(function(it){for(var q=it.s;q<it.s+it.l&&q<SLOTS;q++)cnt[q]++});
+ h+=reqHtml(k);
  h+='<div class="toolbar"><span class="lbl">Что ставим</span><div class="chips">';
  ORDER.forEach(function(t){var T=TYPES[t];h+='<button class="tchip'+(ui.tool===t?' on':'')+'" style="--c:'+T.c+'" data-act="tool" data-k="'+t+'"><span class="dot" style="background:'+T.c+'"></span>'+T.emoji+' '+T.name+'</button>'});
  h+='<button class="tchip'+(ui.tool==='erase'?' on':'')+'" style="--c:#e8ecff" data-act="tool" data-k="erase">🧽 Стереть</button></div>';
  if(ui.tool!=='erase'){h+='<span class="lbl">Длительность</span><div class="seg">';[1,2,3].forEach(function(x){h+='<button class="'+(ui.dur===x?'on':'')+'" data-act="dur" data-k="'+x+'">'+durTxt(x)+'</button>'});h+='</div>'}
  h+='<div class="hint">'+(ui.tool==='erase'?'Нажми на блок, чтобы убрать его.':'Нажми на клетку в строке человека: там начнётся «'+TYPES[ui.tool].name+'» на '+durTxt(ui.dur)+'. Блок можно перетащить, а за правый край — растянуть ↔')+'</div></div>';
- var md=ui.meet||(ui.meet={t:'',l:'30',n:''});
+ var md=ui.meet||(ui.meet={t:'',l:'30',n:''});if(!md.who)md.who={};
+ var guest=ME.role==='guest',mine=myPid(k);
  h+='<div class="mt-bar"><span class="lbl">🎥 Митинг</span>';
- d.meets.forEach(function(x){h+='<span class="mt-chip">'+fmtM(x.m)+'–'+fmtM(x.m+x.l)+' · '+esc(x.title)+'<button data-act="mtdel" data-k="'+esc(x.id)+'" title="Убрать митинг">✕</button></span>'});
+ if(d.meets.length){h+='<div class="mt-list">';d.meets.forEach(function(x){var can=!guest||(x.who&&mine&&Object.keys(x.who).length===1&&x.who[mine]);
+  h+='<span class="mt-chip" title="'+esc('Поставил(а): '+(x.by||'—'))+'">'+fmtM(x.m)+'–'+fmtM(x.m+x.l)+' · '+esc(x.title)+' · 👥 '+esc(meetWho(k,x))+(can?'<button data-act="mtdel" data-k="'+esc(x.id)+'" title="Убрать митинг">✕</button>':'')+'</span>'});h+='</div>'}
  h+='<input class="in" type="time" id="mtTime" value="'+esc(md.t)+'" title="Время начала ('+offTxt(DISP_OFF)+')">'
   +'<select class="in" id="mtLen">'+[['15','15 мин'],['30','30 мин'],['45','45 мин'],['60','1 час'],['90','1.5 часа'],['120','2 часа']].map(function(o){return '<option value="'+o[0]+'"'+(md.l===o[0]?' selected':'')+'>'+o[1]+'</option>'}).join('')+'</select>'
   +'<input class="in" id="mtTitle" maxlength="40" placeholder="Название (Meet)" value="'+esc(md.n)+'">'
-  +'<button class="btn pri sm" data-act="mtadd">＋ Добавить</button></div>';
+  +'<button class="btn pri sm" data-act="mtadd">＋ Добавить</button><span class="mt-pre">'+[['Daily','15'],['Weekly','30'],['Тренинг','60']].map(function(p){return '<button data-act="mtpre" data-k="'+p[0]+'|'+p[1]+'">⚡ '+p[0]+' · '+(p[1]==='60'?'1 ч':p[1]+' мин')+'</button>'}).join('')+'</span>'
+  +(guest?'<div class="mt-who"><span class="lb2">Митинг ставится только тебе'+(mine?'':' (нет твоей строки в этой смене)')+'</span></div>'
+   :'<div class="mt-who"><span class="lb2">Кому:</span><button data-act="mtwho" data-k="*" class="'+(Object.keys(md.who).length?'':'on')+'">👥 Вся смена</button>'+d.people.map(function(p){return '<button data-act="mtwho" data-k="'+esc(p.id)+'" class="'+(md.who[p.id]?'on':'')+'">'+esc(p.name)+'</button>'}).join('')+'</div>')
+  +'</div>';
  var cur=ui.tool==='erase'?'#e8ecff':TYPES[ui.tool].c;
  h+='<div class="tl-wrap"><div class="tl" style="--c:'+cur+'"><div class="row head"><div class="tzlab">'+offTxt(DISP_OFF)+'</div>';
  for(i=0;i<SLOTS;i++){var tl=fmt(S.start,i),full=/:00$/.test(tl);h+='<div class="hcell'+(full?' full':' half')+'" style="grid-column:'+(i+2)+'">'+(cnt[i]>1?'<span class="cnt">'+cnt[i]+'👥</span>':'')+tl+'</div>'}
  h+='</div>';
  d.people.forEach(function(p,pi){
   var mineRow=!!ME.name&&p.name.toLowerCase()===ME.name.toLowerCase();
-  h+='<div class="row person'+(mineRow?' mine':'')+'"><div class="pname"><div class="ava" style="background:'+AVA[pi%AVA.length]+'">'+esc(p.name.charAt(0).toUpperCase())+'</div><span>'+esc(p.name)+'</span><button class="rm'+(ui.sureDel===p.id?' sure':'')+'" data-act="rmp" data-k="'+esc(p.id)+'">'+(ui.sureDel===p.id?'удалить?':'✕')+'</button></div>';
+  h+='<div class="row person'+(mineRow?' mine':'')+'"><div class="pname"><div class="ava" style="background:'+AVA[pi%AVA.length]+'">'+esc(p.name.charAt(0).toUpperCase())+planBadge(p.name)+'</div><span>'+esc(p.name)+'</span><button class="rm'+(ui.sureDel===p.id?' sure':'')+'" data-act="rmp" data-k="'+esc(p.id)+'">'+(ui.sureDel===p.id?'удалить?':'✕')+'</button></div>';
   for(var s=0;s<SLOTS;s++)h+='<button class="cell'+(cnt[s]>1?' busy':'')+'" style="grid-column:'+(s+2)+'" data-act="cell" data-p="'+esc(p.id)+'" data-s="'+s+'" aria-label="'+esc(p.name)+' '+fmt(S.start,s)+'"></button>';
   d.items.forEach(function(it){
    if(it.p!==p.id)return;var T=TYPES[it.t],r=fmt(S.start,it.s)+'–'+fmt(S.start,it.s+it.l);
    var bk=k+it.p+it.t+it.s+'_'+it.l,isNew=!seenBlk[bk];nowBlk[bk]=1;
-   var clash=(it.t==='lunch'||it.t==='brk')&&d.meets.some(function(x){return x.s<it.s+it.l&&it.s<x.e});
+   var clash=(it.t==='lunch'||it.t==='brk')&&d.meets.some(function(x){return meetFor(x,it.p)&&x.s<it.s+it.l&&it.s<x.e});
    h+='<div class="blk'+(it.l===1?' one':'')+(isNew?' new':'')+(clash?' clash':'')+'" style="grid-column:'+(it.s+2)+' / span '+it.l+';--c:'+T.c+'" data-act="blk" data-p="'+esc(it.p)+'" data-t="'+it.t+'" title="'+esc(T.name+' · '+r+(it.by?' · поставил(а) '+it.by:'')+(clash?' · ⚠️ пересекается с митингом':''))+'">';
    h+=it.l===1?T.emoji:'<div class="t">'+T.emoji+' '+T.short+'</div><div class="tm">'+r+'</div>';
    h+='<button class="x" data-act="del" data-p="'+esc(it.p)+'" data-t="'+it.t+'" aria-label="Убрать">✕</button><i class="rz" title="Потяни, чтобы изменить длительность"></i></div>';
   });
+  d.meets.forEach(function(x){if(!meetFor(x,p.id))return;var a=Math.max(0,x.s),b=Math.min(SLOTS,x.e);if(b<=a)return;
+   h+='<div class="mt-ov" title="'+esc('🎥 '+x.title+' '+fmtM(x.m)+'–'+fmtM(x.m+x.l))+'" style="left:calc(var(--name) + (100% - var(--name)) * '+(a/SLOTS)+');width:calc((100% - var(--name)) * '+((b-a)/SLOTS)+')"><span>🎥 '+esc(x.title)+' '+fmtM(x.m)+'</span></div>'});
   h+='</div>';
  });
- d.meets.forEach(function(x){var a=Math.max(0,x.s),b=Math.min(SLOTS,x.e);if(b<=a)return;
-  h+='<div class="mt-ov" title="'+esc('🎥 '+x.title+' '+fmtM(x.m)+'–'+fmtM(x.m+x.l))+'" style="left:calc(var(--name) + (100% - var(--name)) * '+(a/SLOTS)+');width:calc((100% - var(--name)) * '+((b-a)/SLOTS)+')"><span>🎥 '+esc(x.title)+' '+fmtM(x.m)+'</span></div>'});
+ h+='<div class="ho-z" style="left:var(--name);width:calc((100% - var(--name)) / '+SLOTS+')" title="Пересменка"></div><div class="ho-z" style="right:0;width:calc((100% - var(--name)) / '+SLOTS+')" title="Пересменка"></div>';
  if(k===curShift(n)){var f=frac(k,n);h+='<div class="now" style="left:calc(var(--name) + (100% - var(--name)) * '+(f/SLOTS)+')"></div>'}
  h+='</div></div>';
  h+=ui.adding?'<div class="addrow"><input class="in" id="newname" maxlength="24" placeholder="Имя сотрудника"><button class="btn pri" data-act="addsave">Добавить</button><button class="btn" data-act="addcancel">Отмена</button></div>'
-  :'<div class="addrow"><button class="btn" data-act="add">＋ Сотрудник в '+(k==='day'?'дневную':'ночную')+' смену</button>'+(!d.items.length&&raw[k]&&raw[k].prev?'<button class="btn pri" data-act="prev">↻ Как вчера</button>':'')+'<span class="reset-note">🔄 График очищается сам в '+fmt(S.start,SLOTS)+'</span></div>';
+  :'<div class="addrow"><button class="btn" data-act="add">＋ Сотрудник в '+(k==='day'?'дневную':'ночную')+' смену</button>'+(!d.items.length&&raw[k]&&raw[k].prev?'<button class="btn pri" data-act="prev">↻ Как вчера</button>':'')+'<button class="btn" data-act="myrow" title="Прокрутить к своей строке">👤 Моя строка</button><button class="btn" data-act="autofill" title="Обед 1 ч и перерыв 30 мин в свободное время, без пересечений и митингов">✨ Заполнить типовые слоты</button>'+'<span class="reset-note">🔄 График очищается сам в '+fmt(S.start,SLOTS)+'</span></div>';
  h+='<div class="sum"><table><tr><th></th>';
  d.people.forEach(function(p){h+='<th>'+esc(p.name)+'</th>'});
  h+='</tr>';
@@ -1628,10 +1693,10 @@ function renderSched(){
   d.people.forEach(function(p){var its=d.items.filter(function(it){return it.p===p.id&&it.t===t});
    h+='<td>'+(its.length?its.map(function(it){return '<span class="pill" style="background:'+T.c+'">'+fmt(S.start,it.s)+'–'+fmt(S.start,it.s+it.l)+'</span>'}).join(' '):'<span class="none">—</span>')+'</td>'});
   h+='</tr>'});
- if(d.meets.length){h+='<tr><td class="tp">🎥 Митинг</td>';var mp=d.meets.map(function(x){return '<span class="pill meet" title="'+esc(x.title)+'">'+fmtM(x.m)+'–'+fmtM(x.m+x.l)+'</span>'}).join(' ');
-  d.people.forEach(function(){h+='<td>'+mp+'</td>'});h+='</tr>'}
+ if(d.meets.length){h+='<tr><td class="tp">🎥 Митинг</td>';
+  d.people.forEach(function(p){var mm=d.meets.filter(function(x){return meetFor(x,p.id)});h+='<td>'+(mm.length?mm.map(function(x){return '<span class="pill meet" title="'+esc(x.title)+'">'+fmtM(x.m)+'–'+fmtM(x.m+x.l)+'</span>'}).join(' '):'<span class="none">—</span>')+'</td>'});h+='</tr>'}
  h+='</table></div>';
- $('sched').innerHTML=h;seenBlk=nowBlk;
+ $('sched').innerHTML=h;seenBlk=nowBlk;try{checkReqs()}catch(e){}
  if(ME.role==='guest'&&$('guestRow'))$('guestRow').textContent=myPid(k)?'':' ⚠️ В этой смене нет строки с именем «'+ME.name+'» — попроси админа добавить.';
  if(ui.adding){var inp=$('newname');if(inp){inp.focus();inp.onkeydown=function(e){if(e.key==='Enter')addPerson();if(e.key==='Escape'){ui.adding=false;renderSched()}}}}
 }
@@ -1658,22 +1723,75 @@ function toastAct(title,body,okText,onOk){
  $('toasts').prepend(el);setTimeout(close,10000);
  while($('toasts').children.length>4)$('toasts').lastChild.remove();
 }
-function funny(c,t,retry){
+function freeWins(k,pid,t,l,near){var d=shiftData(k),out=[];
+ for(var x=0;x+l<=SLOTS;x++){if(d.items.some(function(it){return it.s<x+l&&x<it.s+it.l&&((it.p===pid&&it.t!==t)||(it.p!==pid&&grp(it.t)===grp(t)))}))continue;if(meetHits(k,x,l,pid).length)continue;out.push(x)}
+ out.sort(function(a,b){return Math.abs(a-near)-Math.abs(b-near)});return out.slice(0,4).sort(function(a,b){return a-b}).map(function(x){return fmt(SHIFTS[k].start,x)+'–'+fmt(SHIFTS[k].start,x+l)})}
+function funny(c,t,retry,wins){
  var k=sk(),nm='кого-то';shiftData(k).people.forEach(function(p){if(p.id===c.p)nm=p.name});
  var f=FUNNY[Math.floor(Math.random()*FUNNY.length)],T=TYPES[c.t];
  var body=f[1].replace('{n}',nm).replace('{t}',T.name.toLowerCase())+' ('+T.emoji+' '+fmt(SHIFTS[k].start,c.s)+'–'+fmt(SHIFTS[k].start,c.s+c.l)+')';
- toastAct(f[0],body,'😈 Всё равно занять',retry);try{softBeep()}catch(e){}
+ if(wins&&wins.length)body+='\n🟢 Свободно рядом: '+wins.join(', ');toastAct(f[0],body,'📨 Запросить подтверждение · '+nm,retry);try{softBeep()}catch(e){}
 }
 function setItem(pid,t,s,l,force){
  var k=sk();s=Math.max(0,Math.min(SLOTS-1,s));l=Math.max(1,Math.min(6,l,SLOTS-s));
  var cf=conflicts(k,pid,t,s,l);
- if(cf.length&&!force){funny(cf[0],t,function(){setItem(pid,t,s,l,true)});return false}
- var mh=(t==='lunch'||t==='brk')?meetHits(k,s,l):[];
- if(mh.length&&force!=='meet'&&force!==true){toastAct('🎥 В это время митинг','«'+mh[0].title+'» '+fmtM(mh[0].m)+'–'+fmtM(mh[0].m+mh[0].l)+'. Поставить '+TYPES[t].name.toLowerCase()+' всё равно?','Всё равно поставить',function(){setItem(pid,t,s,l,'meet')});return false}
+ if(cf.length&&force!=='approved'){funny(cf[0],t,function(){askSwap(k,pid,t,s,l,cf[0])},freeWins(k,pid,t,l,s));return false}
+ var mh=(t==='lunch'||t==='brk')?meetHits(k,s,l,pid):[];
+ if(mh.length&&force!=='meet'&&force!=='approved'&&force!==true){toastAct('🎥 В это время митинг','«'+mh[0].title+'» '+fmtM(mh[0].m)+'–'+fmtM(mh[0].m+mh[0].l)+'. Поставить '+TYPES[t].name.toLowerCase()+' всё равно?','Всё равно поставить',function(){setItem(pid,t,s,l,'meet')});return false}
  var u={};
  shiftData(k).items.forEach(function(it){if(it.p===pid&&(it.t===t||(it.s<s+l&&s<it.s+it.l)))u[k+'/items/'+pid+'_'+it.t]=null});
- u[k+'/items/'+pid+'_'+t]={p:pid,t:t,s:s,l:l,by:meName()||''};u[k+'/date']=shiftDate(k);
+ u[k+'/items/'+pid+'_'+t]={p:pid,t:t,s:s,l:l,by:meName()||'',d:shiftDate(k)};u[k+'/date']=shiftDate(k);
  patch(u);return true;
+}
+/* ===== Запрос на пересечение: тот, чьё время уже занято, должен подтвердить ===== */
+function reqList(){var r=(raw&&raw.req)||{};return Object.keys(r).map(function(id){var x=r[id];if(!x||typeof x!=='object')return null;x=JSON.parse(JSON.stringify(x));x.id=id;return x}).filter(function(x){return x&&x.k&&TYPES[x.t]&&Date.now()-(x.ts||0)<30*60000})}
+function askSwap(k,pid,t,s,l,c){
+ var nm={};shiftData(k).people.forEach(function(p){nm[p.id]=p.name});
+ if(reqList().some(function(x){return x.k===k&&x.pid===pid&&x.t===t&&!x.ok&&!x.no})){toast('📨 Уже ждём ответа','Запрос уже отправлен — дождись ответа.');return}
+ var u={};u['req/r'+Date.now().toString(36)]={k:k,pid:pid,t:t,s:s,l:l,cp:c.p,ct:c.t,cs:c.s,cl:c.l,owner:nm[c.p]||'',who:nm[pid]||'',by:meName()||'',uid:ME.uid||'',ts:Date.now()};
+ patch(u);toast('📨 Запрос отправлен',(nm[c.p]||'Коллега')+' получит запрос. Как только подтвердит — '+TYPES[t].name.toLowerCase()+' встанет в график.');
+}
+function myReq(x){return x.uid?x.uid===ME.uid:mineName(x.by)}
+function mineName(n){return !!ME.name&&String(n||'').toLowerCase()===ME.name.toLowerCase()}
+var reqSeen={},reqDone={};
+function reqSlot(x){var S=SHIFTS[x.k];return fmt(S.start,x.s)+'–'+fmt(S.start,x.s+x.l)}
+function updReqBadge(){var n=reqList().filter(function(x){return !x.ok&&!x.no&&mineName(x.owner)}).length,b=$('menuBtn');if(!b)return;var e=b.querySelector('.mb-bd');
+ if(n){if(!e){e=document.createElement('span');e.className='mb-bd';b.appendChild(e)}e.textContent=n;e.title='Ожидает вашего ответа: '+n}else if(e)e.remove()}
+function checkReqs(){updReqBadge();
+ reqList().forEach(function(x){
+  // мне пришёл запрос
+  if(!x.ok&&!x.no&&mineName(x.owner)&&!reqSeen[x.id]){reqSeen[x.id]=1;
+   try{notify('📨 Просят твоё время',(x.by||'Коллега')+' хочет поставить '+(x.who&&x.who!==x.by?x.who+' ':'')+TYPES[x.t].name.toLowerCase()+' '+reqSlot(x)+' — пересекается с твоим временем ('+TYPES[x.ct].name.toLowerCase()+').')}catch(e){}}
+  // мой запрос подтвердили — ставлю
+  if(x.ok&&myReq(x)&&!reqDone[x.id]){reqDone[x.id]=1;var kk=ui.shift;ui.shift=x.k;var ok=setItem(x.pid,x.t,x.s,x.l,'approved');ui.shift=kk;
+   var u={};u['req/'+x.id]=null;patch(u);if(ok!==false)toast('✅ '+(x.owner||'Коллега')+' согласился(ась)',TYPES[x.t].name+' '+reqSlot(x)+' поставлен(а) в график.')}
+  if(x.no&&myReq(x)&&!reqDone[x.id]){reqDone[x.id]=1;var u2={};u2['req/'+x.id]=null;patch(u2);toast('🙅 '+(x.owner||'Коллега')+' не уступил(а)',TYPES[x.t].name+' '+reqSlot(x)+' не поставлен. Выбери другое время.')}
+ });
+}
+function reqHtml(k){
+ var h='';reqList().filter(function(x){return x.k===k}).forEach(function(x){var T=TYPES[x.t],me=mineName(x.owner),mine=myReq(x);
+  if(x.ok||x.no)return;
+  if(me)h+='<div class="rq in"><span class="rq-badge">Ожидает вашего ответа</span><b>📨 '+esc(x.by||'Коллега')+'</b> просит поставить '+(x.who&&x.who!==x.by?esc(x.who)+' ':'')+T.emoji+' '+esc(T.name.toLowerCase())+' <b>'+reqSlot(x)+'</b> — пересекается с твоим временем ('+esc(TYPES[x.ct].name.toLowerCase())+' '+fmt(SHIFTS[k].start,x.cs)+'–'+fmt(SHIFTS[k].start,x.cs+x.cl)+').<span class="rq-b"><button class="btn sm pri" data-act="rqok" data-k="'+esc(x.id)+'">✅ Разрешить</button><button class="btn sm" data-act="rqno" data-k="'+esc(x.id)+'">🙅 Отклонить</button></span></div>';
+  else if(mine)h+='<div class="rq out">⏳ Ждём, пока <b>'+esc(x.owner||'коллега')+'</b> подтвердит '+T.emoji+' '+esc(T.name.toLowerCase())+' '+(x.who&&x.who!==x.by?'для '+esc(x.who)+' ':'')+'<b>'+reqSlot(x)+'</b>.<span class="rq-b"><button class="btn sm" data-act="rqcancel" data-k="'+esc(x.id)+'">Отменить</button></span></div>';
+  else h+='<div class="rq out">⏳ '+esc(x.by||'Кто-то')+' ждёт подтверждения от '+esc(x.owner||'коллеги')+' ('+T.emoji+' '+reqSlot(x)+')</div>';
+ });
+ return h;
+}
+/* ✨ Типовые слоты: обед 1 ч ближе к середине смены, перерыв 30 мин в первой половине — только в свободное время.
+   Сотрудник заполняет свою строку; админ без своей строки — всех, у кого слотов ещё нет. */
+function autoFill(){
+ var k=sk(),d=shiftData(k),me=myPid(k),targets;
+ if(me)targets=[me];else if(ME.admin)targets=d.people.map(function(p){return p.id});else{toast('✨ Типовые слоты','В этой смене нет строки с твоим именем.');return}
+ var plan=d.items.slice(),u={},added=[],nm={};d.people.forEach(function(p){nm[p.id]=p.name});
+ function free(pid,t,s,l){if(s<0||s+l>SLOTS)return false;
+  return !plan.some(function(it){return it.s<s+l&&s<it.s+it.l&&(it.p===pid||grp(it.t)===grp(t))})&&!meetHits(k,s,l,pid).length}
+ function pick(pid,t,l,pref){for(var dlt=0;dlt<SLOTS;dlt++){var c=[pref+dlt,pref-dlt];for(var i=0;i<2;i++)if(free(pid,t,c[i],l))return c[i]}return -1}
+ targets.forEach(function(pid,ix){
+  [['lunch',2,10+ix*2],['brk',1,4+ix]].forEach(function(o){var t=o[0];if(plan.some(function(it){return it.p===pid&&it.t===t}))return;
+   var s0=pick(pid,t,o[1],o[2]);if(s0<0)return;var rec={p:pid,t:t,s:s0,l:o[1],by:meName()||'',d:shiftDate(k)};plan.push(rec);u[k+'/items/'+pid+'_'+t]=rec;
+   added.push(nm[pid]+': '+TYPES[t].name.toLowerCase()+' '+fmt(SHIFTS[k].start,s0)+'–'+fmt(SHIFTS[k].start,s0+o[1]))})});
+ if(!added.length){toast('✨ Типовые слоты','Всё уже заполнено или свободного времени без пересечений нет.');return}
+ u[k+'/date']=shiftDate(k);patch(u);toast('✨ Слоты расставлены',added.join('; '));
 }
 function place(pid,s){
  if(ui.tool==='erase')return;
@@ -1722,15 +1840,21 @@ $('sched').addEventListener('click',function(e){
  if(a==='tool'){ui.tool=k;if(k!=='erase')ui.dur=TYPES[k].len;renderSched()}
  else if(a==='dur'){ui.dur=+k;renderSched()}
  else if(a==='cell')place(t.getAttribute('data-p'),+t.getAttribute('data-s'));
- else if(a==='del'){e.stopPropagation();delItem(t.getAttribute('data-p'),t.getAttribute('data-t'))}
- else if(a==='blk'){if(ui.tool==='erase')delItem(t.getAttribute('data-p'),t.getAttribute('data-t'))}
+ else if(a==='del'){e.stopPropagation();if(confirm('Убрать «'+TYPES[t.getAttribute('data-t')].name+'» у '+pname(sk(),t.getAttribute('data-p'))+'?'))delItem(t.getAttribute('data-p'),t.getAttribute('data-t'))}
+ else if(a==='blk'){if(ui.tool==='erase'&&confirm('Стереть «'+TYPES[t.getAttribute('data-t')].name+'» у '+pname(sk(),t.getAttribute('data-p'))+'?'))delItem(t.getAttribute('data-p'),t.getAttribute('data-t'))}
  else if(a==='rmp'){if(ui.sureDel===k){ui.sureDel=null;removePerson(k)}else{ui.sureDel=k;renderSched()}}
  else if(a==='add'){ui.adding=true;renderSched()}
  else if(a==='addcancel'){ui.adding=false;renderSched()}
- else if(a==='prev'){var kk=sk(),pv=(raw[kk]&&raw[kk].prev)||{},ids={},it2={},u={};shiftData(kk).people.forEach(function(p){ids[p.id]=1});Object.keys(pv).forEach(function(key){var x=pv[key];if(x&&ids[x.p])it2[key]=x});u[kk+'/items']=it2;u[kk+'/date']=shiftDate(kk);patch(u)}
+ else if(a==='prev'){if(shiftData(sk()).items.length&&!confirm('Заменить текущий график вчерашним?'))return;var kk=sk(),pv=(raw[kk]&&raw[kk].prev)||{},ids={},it2={},u={};shiftData(kk).people.forEach(function(p){ids[p.id]=1});Object.keys(pv).forEach(function(key){var x=pv[key];if(x&&ids[x.p]){x=JSON.parse(JSON.stringify(x));x.d=shiftDate(kk);it2[key]=x}});u[kk+'/items']=it2;u[kk+'/date']=shiftDate(kk);patch(u)}
  else if(a==='addsave')addPerson();
  else if(a==='mtadd')addMeet();
- else if(a==='mtdel'){var u={};u[sk()+'/meets/'+k]=null;patch(u)}
+ else if(a==='autofill')autoFill();
+ else if(a==='mtpre'){var md2=ui.meet||(ui.meet={t:'',l:'30',n:''});var pp=k.split('|');md2.n=pp[0];md2.l=pp[1];renderSched();var ti=$('mtTime');if(ti&&!ti.value)ti.focus()}
+ else if(a==='myrow'){var r=document.querySelector('#sched .row.person.mine');if(!r){toast('👤 Моя строка','В этой смене нет строки с твоим именем'+(ME.name?' «'+ME.name+'»':'')+'.');return}r.scrollIntoView({behavior:'smooth',block:'center'});r.classList.remove('flash');void r.offsetWidth;r.classList.add('flash')}
+ else if(a==='rqok'||a==='rqno'){var x=reqList().filter(function(r){return r.id===k})[0];if(!x||!mineName(x.owner))return;var u={};u['req/'+k+'/'+(a==='rqok'?'ok':'no')]=meName()||true;patch(u);toast(a==='rqok'?'✅ Разрешено':'🙅 Отклонено',a==='rqok'?'Время уйдёт '+(x.who||x.by)+' — подвинь свой '+TYPES[x.ct].name.toLowerCase()+', если нужно.':'Коллега увидит отказ.')}
+ else if(a==='rqcancel'){var u3={};u3['req/'+k]=null;patch(u3)}
+ else if(a==='mtwho'){var md=ui.meet||(ui.meet={t:'',l:'30',n:''});md.who=md.who||{};if(k==='*')md.who={};else if(md.who[k])delete md.who[k];else md.who[k]=true;renderSched()}
+ else if(a==='mtdel'){if(!confirm('Удалить этот митинг?'))return;var u={};u[sk()+'/meets/'+k]=null;patch(u)}
 });
 $('sched').addEventListener('input',function(e){var md=ui.meet||(ui.meet={t:'',l:'30',n:''});
  if(e.target.id==='mtTime')md.t=e.target.value;else if(e.target.id==='mtLen')md.l=e.target.value;else if(e.target.id==='mtTitle')md.n=e.target.value});
@@ -1742,9 +1866,13 @@ function addMeet(){
  var dm=+v[1]*60+ +v[2],m=(((dm-Math.round((DISP_OFF-BASE_OFF)*60))%1440)+1440)%1440,l=+md.l||30;
  var st=((m-S.start+1440)%1440)/30;
  if(st>=SLOTS){toast('🎥 Митинг вне смены',fmtM(m)+' не попадает в '+S.name.toLowerCase()+' смену ('+fmt(S.start,0)+'–'+fmt(S.start,SLOTS)+'). Переключи вкладку смены.');return}
- var u={};u[k+'/meets/m'+Date.now().toString(36)]={m:m,l:l,title:(md.n||'').trim().slice(0,40)||'Meet',by:meName()||''};u[k+'/date']=shiftDate(k);
- patch(u);ui.meet={t:'',l:md.l||'30',n:''};renderSched();
- var cl=shiftData(k).items.filter(function(it){return (it.t==='lunch'||it.t==='brk')&&it.s<st+l/30&&st<it.s+it.l});
+ var who=null;
+ if(ME.role==='guest'){var mp=myPid(k);if(!mp){toast('🎥 Митинг','В этой смене нет строки с твоим именем — попроси админа добавить.');return}who={};who[mp]=true}
+ else if(md.who&&Object.keys(md.who).length)who=JSON.parse(JSON.stringify(md.who));
+ var rec={m:m,l:l,title:(md.n||'').trim().slice(0,40)||'Meet',by:meName()||'',d:shiftDate(k)};if(who)rec.who=who;
+ var u={};u[k+'/meets/m'+Date.now().toString(36)]=rec;u[k+'/date']=shiftDate(k);
+ patch(u);ui.meet={t:'',l:md.l||'30',n:'',who:md.who||{}};renderSched();
+ var cl=shiftData(k).items.filter(function(it){return (it.t==='lunch'||it.t==='brk')&&(!who||who[it.p])&&it.s<st+l/30&&st<it.s+it.l});
  if(cl.length){var nm={};shiftData(k).people.forEach(function(p){nm[p.id]=p.name});
   toast('⚠️ Митинг пересекается с перерывом',cl.map(function(it){return nm[it.p]+' — '+TYPES[it.t].name.toLowerCase()+' '+fmt(S.start,it.s)+'–'+fmt(S.start,it.s+it.l)}).join('; ')+'. Блоки подсвечены красной рамкой — их можно перетащить.')}
 }
@@ -1789,7 +1917,7 @@ function ytBarHTML(k){
   +'<button data-yc="big" data-k="'+k+'" title="Крупнее">🔳</button><button data-yc="fs" data-k="'+k+'" title="На весь экран">⛶</button>';
 }
 function ytUnmount(k){var P=YTP[k];if(P&&P.p&&P.p.destroy){try{P.p.destroy()}catch(e){}}delete YTP[k];var bar=$(k+'Bar');if(bar)bar.hidden=true;var t=$(k+'Title');if(t)t.hidden=true;ytBig(k,false)}
-function ytMount(k,id,list,auto){
+function ytMount(k,id,list,auto,quiet){
  ytUnmount(k);
  $(k).innerHTML='<div id="'+k+'_f"></div>';
  var bar=$(k+'Bar');bar.innerHTML=ytBarHTML(k);bar.hidden=false;
@@ -1799,7 +1927,7 @@ function ytMount(k,id,list,auto){
   var vars={rel:0,playsinline:1,modestbranding:1,controls:0,iv_load_policy:3,fs:0,autoplay:auto?1:0,origin:location.origin};
   if(list){vars.listType='playlist';vars.list=list}
   var p=new YT.Player(k+'_f',{width:'100%',height:'100%',videoId:id||undefined,playerVars:vars,events:{
-   onReady:function(){try{p.setVolume(+lsGet('yt-vol-'+k,'70'));if(lsGet('yt-mute-'+k,''))p.mute()}catch(e){}ytSync(k)},
+   onReady:function(){try{p.setVolume(+lsGet('yt-vol-'+k,'70'));if(lsGet('yt-mute-'+k,'')||quiet)p.mute()}catch(e){}ytSync(k)},
    onStateChange:function(){ytSync(k)},
    onError:function(e){var t=$(k+'Title');if(t){t.hidden=false;t.innerHTML='⚠️ Это видео нельзя проиграть на сайте ('+e.data+'). Нажми «↗ YouTube» или 🔄.'}}
   }});
@@ -1851,17 +1979,19 @@ function renderVideo(){
  if(key!==ui.lastVideo){
   ui.lastVideo=key;
   if(v.id||v.list){
-   ytMount('player',v.id,v.list,false);
+   ytMount('player',v.id,v.list,false,v.ts!==mine.video);
   } else {ytUnmount('player');$('player').innerHTML='<div class="empty"><div><div class="big">🎰</div><div style="font-weight:800;margin-top:8px">Вставь ссылку на YouTube</div><div style="opacity:.7;font-size:13px;margin-top:4px">Видео увидит вся смена</div></div></div>'}
  }
- $('ytMeta').innerHTML=(v.id||v.list)?'<span>Поставил(а): '+esc(v.by||'—')+'</span><span class="ytbtns"><button class="link" data-ytr="player" title="Перезапустить плеер (после входа в YouTube)">🔄</button><a class="link" href="'+esc(ytWatch(v.id,v.list))+'" target="_blank" rel="noopener" title="Открыть на YouTube">↗ YouTube</a><button class="link" id="ytClear">Убрать</button></span>':'<span>Музыка, обучение, трансляции — что угодно</span>';
+ $('ytMeta').innerHTML=(v.id||v.list)?'<span>Поставил(а): '+esc(v.by||'—')+'</span><span class="ytbtns"><button class="link" id="ytSelfMute" title="Заглушить только у себя">'+(lsGet('yt-mute-player','')?'🔇 Звук выкл. у меня':'🔈 Заглушить у себя')+'</button><button class="link" data-ytr="player" title="Перезапустить плеер (после входа в YouTube)">🔄</button><a class="link" href="'+esc(ytWatch(v.id,v.list))+'" target="_blank" rel="noopener" title="Открыть на YouTube">↗ YouTube</a><button class="link" id="ytClear">Убрать</button></span>':'<span>Музыка, обучение, трансляции — что угодно</span>';
 }
 $('ytForm').addEventListener('submit',function(e){
  e.preventDefault();var r=parseYT($('ytIn').value);
  if(!r){$('ytIn').value='';$('ytIn').placeholder='Не похоже на ссылку YouTube 🙈';return}
  $('ytIn').value='';var vts=Date.now();mine.video=vts;patch({video:{id:r.id,list:r.list,by:meName()||'Кто-то',ts:vts}});
 });
-$('ytMeta').addEventListener('click',function(e){if(e.target.id==='ytClear')patch({video:null})});
+$('ytMeta').addEventListener('click',function(e){if(e.target.id==='ytClear')patch({video:null});
+ if(e.target.id==='ytSelfMute'){var on=!lsGet('yt-mute-player','');lsSet('yt-mute-player',on?'1':'');var P=YTP.player;try{if(P&&P.p){if(on)P.p.mute();else{P.p.unMute();if(P.p.getVolume()===0)P.p.setVolume(50)}}}catch(x){}
+  e.target.textContent=on?'🔇 Звук выкл. у меня':'🔈 Заглушить у себя';toast(on?'🔇 Заглушено у тебя':'🔈 Звук включён','Остальные участники это не заметят.')}});
 
 /* ---------- Заметки ---------- */
 $('nAuthor').value=lsGet('shifthub-name','');
@@ -1877,20 +2007,29 @@ $('noteForm').addEventListener('submit',function(e){
 $('nText').addEventListener('keydown',function(e){if(e.key==='Enter'&&(e.ctrlKey||e.metaKey))$('noteForm').requestSubmit()});
 function ago(ts){var d=(Date.now()-ts)/60000;if(d<1)return 'только что';if(d<60)return Math.floor(d)+' мин назад';if(d<1440)return Math.floor(d/60)+' ч назад';
  var dt=new Date(ts);return p2(dt.getDate())+'.'+p2(dt.getMonth()+1)+' '+p2(dt.getHours())+':'+p2(dt.getMinutes())}
+var noteFilter='all';
+$('noteSeg').addEventListener('click',function(e){var b=e.target.closest('[data-nf]');if(!b)return;noteFilter=b.getAttribute('data-nf');[].forEach.call(this.children,function(x){x.classList.toggle('on',x===b)});renderNotes()});
 function renderNotes(){
  var ns=(raw&&raw.notes)||{},list=Object.keys(ns).map(function(id){var x=ns[id]||{};return {id:id,text:String(x.text||''),tag:TAGS[x.tag]?x.tag:'info',by:x.by||'',ts:+x.ts||0,pin:!!x.pin}}).filter(function(x){return x.text});
  list.sort(function(a,b){return (b.pin-a.pin)||(b.ts-a.ts)});
- $('ncount').textContent=list.length?list.length+' шт.':'';
+ var tot=list.length,mn=(ME.name||lsGet('shifthub-name','')).toLowerCase();
+ list=list.filter(function(x){if(noteFilter==='me')return (mn&&x.by.toLowerCase()===mn)||mine.notes[x.id];if(noteFilter==='meet')return /митинг|meet|созвон|звонок|запрос|📨|🎥/i.test(x.text);if(noteFilter==='hot')return x.tag==='hot'||x.pin;return true});
+ $('ncount').textContent=tot?(list.length!==tot?list.length+' из '+tot:tot+' шт.'):'';
+ var ARCH=72*3600000,old=list.filter(function(x){return !x.pin&&Date.now()-x.ts>ARCH});
+ if(!ui.noteArch)list=list.filter(function(x){return x.pin||Date.now()-x.ts<=ARCH});
+ var archBtn=old.length?'<button class="btn sm arch-btn" data-n="arch">'+(ui.noteArch?'🙈 Скрыть архив':'🗄 Архив: '+old.length+' (старше 3 дней)')+'</button>':'';
+ if(!list.length&&tot){$('notes').innerHTML='<div class="muted" style="text-align:center;padding:16px">По этому фильтру пусто</div>'+archBtn;return}
  if(!list.length){$('notes').innerHTML='<div class="muted" style="text-align:center;padding:16px">Пока пусто ✨</div>';return}
- $('notes').innerHTML=list.map(function(x){var T=TAGS[x.tag];
+ $('notes').innerHTML=archBtn+list.map(function(x){var T=TAGS[x.tag];
   var tx=esc(x.text).replace(/(^|\s)(@[\wА-Яа-яЁё]+)/g,'$1<span class="men">$2</span>');
-  return '<div class="note'+(x.pin?' pin':'')+'" style="--tc:'+T.c+'"><div class="tx">'+tx+'</div><div class="meta"><span>'+T.e+' '+T.n+'</span><span class="nby" data-profn="'+esc(x.by)+'">'+avEl(x.by,x.by,20)+' '+esc(x.by)+'</span><span>· '+ago(x.ts)+'</span><span class="sp"></span>'
+  return '<div class="note'+(x.pin?' pin':'')+(Date.now()-x.ts>ARCH&&!x.pin?' old':'')+'" style="--tc:'+T.c+'"><div class="tx">'+tx+'</div><div class="meta"><span>'+T.e+' '+T.n+'</span><span class="nby" data-profn="'+esc(x.by)+'">'+avEl(x.by,x.by,20)+' '+esc(x.by)+'</span><span>· '+ago(x.ts)+'</span><span class="sp"></span>'
    +'<button class="ic" data-n="pin" data-id="'+esc(x.id)+'" title="Закрепить">'+(x.pin?'📌':'📍')+'</button>'
    +'<button class="ic del'+(ui.sureNote===x.id?' sure':'')+'" data-n="del" data-id="'+esc(x.id)+'">'+(ui.sureNote===x.id?'удалить?':'🗑')+'</button></div></div>';
  }).join('');
 }
 $('notes').addEventListener('click',function(e){
  var b=e.target.closest('[data-n]');if(!b)return;var id=b.getAttribute('data-id'),a=b.getAttribute('data-n'),u={};
+ if(a==='arch'){ui.noteArch=!ui.noteArch;renderNotes();return}
  if(a==='pin'){u['notes/'+id+'/pin']=!(raw.notes[id]&&raw.notes[id].pin);ui.sureNote=null;patch(u)}
  else if(ui.sureNote===id){ui.sureNote=null;u['notes/'+id]=null;patch(u)}
  else{ui.sureNote=id;renderNotes()}
@@ -1919,6 +2058,14 @@ function rosterModel(r){
  if(startOk){var p=r.start.split('-'),t0=Date.UTC(+p[0],+p[1]-1,+p[2]);for(c=ds;c<w;c++){var d=new Date(t0+(c-ds)*864e5);dates[c]={d:d.getUTCDate(),m:d.getUTCMonth(),wd:d.getUTCDay(),iso:d.toISOString().slice(0,10)}}}
  return {w:w,head:hasHead?first:null,people:people,info:info,ds:ds,dates:dates,startOk:startOk};
 }
+function rosterCol(M,iso){var c,col=-1;for(c=M.ds;c<M.w;c++)if(M.dates[c]&&M.dates[c].iso===iso)col=c;
+ if(col<0&&!M.startOk&&M.head&&iso===bakuDate(0)){var td=bakuYMD().d;for(c=M.ds;c<M.head.length;c++){var mm=String(M.head[c]).match(/\d+/);if(mm&&+mm[0]===td){col=c;break}}}return col}
+function rosterRow(M,name){var nm=String(name||'').toLowerCase().trim();if(!nm)return null;var hit=null;
+ M.people.forEach(function(rw){var r0=String(rw[0]||'').toLowerCase().trim();if(!hit&&r0&&(r0===nm||r0.indexOf(nm)===0||nm.indexOf(r0)===0||r0.split(/\s+/)[0]===nm.split(/\s+/)[0]))hit=rw});return hit}
+function planOf(name,iso){var r=raw&&raw.roster,M=r&&r.text?rosterModel(r):null;if(!M)return null;var col=rosterCol(M,iso||bakuDate(0)),rw=rosterRow(M,name);if(col<0||!rw)return null;
+ var v=String(rw[col]||''),cl=cellCls(v);return {code:cl==='c-day'?'D':cl==='c-night'?'N':(cl==='c-off'||!v)?'Вых':v.slice(0,8),cls:cl||'c-off',raw:v}}
+function onShiftNow(name){var k=curShift(now()),p=planOf(name,shiftDate(k));if(!p)return null;return (k==='day'&&p.code==='D')||(k==='night'&&p.code==='N')}
+function planBadge(name){var p=planOf(name);if(!p)return '';return '<span class="plan '+p.cls+'" title="По расписанию сегодня: '+esc(p.raw||'выходной')+'">'+esc(p.code)+'</span>'}
 function cellCls(v){
  var x=v.toLowerCase().replace(/\s+/g,'');
  if(!x)return '';
@@ -1958,6 +2105,8 @@ function renderRoster(){
  h+='</table></div><div class="rs-legend"><span><i style="background:#ffb547"></i>День</span><span><i style="background:#8b5cf6"></i>Ночь</span><span><i style="background:var(--line)"></i>Выходной</span><span><i style="background:#3ea8ff"></i>Другое</span>'
   +(M.startOk?'':'<span style="color:var(--acc)">📅 Укажи первый день в «Вставить / обновить», чтобы увидеть числа</span>')
   +'<span style="margin-left:auto">Обновил(а): '+esc(r.by||'—')+' · '+ago(+r.ts||0)+'</span></div>';
+ if(todayCol>0)h=h.replace('<div class="rs-wrap">','<div class="rs-today">📅 Сегодня: <b>'+(function(){var t=bakuYMD(),dd=new Date(Date.UTC(t.y,t.m-1,t.d));return t.d+' '+MSH[t.m-1]+', '+WDS[dd.getUTCDay()]})()+'</b> — колонка подсвечена</div><div class="rs-wrap">');
+ else if(M.startOk)h=h.replace('<div class="rs-wrap">','<div class="rs-today warn">📅 Сегодняшней даты ('+bakuDate(0)+') нет в таблице — проверь «Первый день смен»</div><div class="rs-wrap">');
  $('rsView').innerHTML=h;
  if(todayCol>0){var tc=$('rsView').querySelector('th.today');if(tc&&!$('rsView').getAttribute('data-sc')){$('rsView').setAttribute('data-sc','1');var wr=$('rsView').querySelector('.rs-wrap');wr.scrollLeft=Math.max(0,tc.offsetLeft-wr.clientWidth/2)}}
  if(meRow>=0&&todayCol>0){var v2=M.people[meRow][todayCol]||'',cl2=cellCls(v2);$('rsMe').hidden=false;$('rsMe').textContent='Ты сегодня: '+(cl2==='c-day'?'☀️ День':cl2==='c-night'?'🌙 Ночь':cl2==='c-off'||!v2?'🏖 Выходной':v2)}
@@ -2157,6 +2306,7 @@ function maintain(){
   if(!r.date){u[k+'/date']=sd;any=true}
   else if(r.date!==sd){u[k+'/date']=sd;u[k+'/items']=null;if(r.meets)u[k+'/meets']=null;if(r.items&&Object.keys(r.items).length)u[k+'/prev']=r.items;any=true}
  });
+ var rq=raw.req;if(rq&&typeof rq==='object')Object.keys(rq).forEach(function(id){var x=rq[id];if(!x||Date.now()-(x.ts||0)>30*60000){u['req/'+id]=null;any=true;if(x&&!x.ok&&!x.no&&x.t&&TYPES[x.t])u['log/l'+Date.now().toString(36)+id.slice(-3)]={by:x.by||'Shift Hub',uid:x.uid||'',txt:'⌛ запрос истёк без ответа ('+(x.owner||'коллега')+'): '+TYPES[x.t].name.toLowerCase()+(x.k&&SHIFTS[x.k]?' '+reqSlot(x):''),ts:Date.now()}}});
  var sk=shiftKey();
  ['slots','bj'].forEach(function(n){var o=raw[n];if(o&&typeof o==='object')Object.keys(o).forEach(function(key){if(key!==sk){u[n+'/'+key]=null;any=true}})});
  if(!raw.tplSeeded){u.tplSeeded=true;if(!raw.tpl)u.tpl=TPL_SEED;any=true}
@@ -2645,12 +2795,14 @@ $('pwForm').addEventListener('submit',function(e){
 });
 /* журнал */
 var logFilter='all';
+$('logList').addEventListener('click',function(e){if(e.target.id==='logArch'){ui.logArch=!ui.logArch;renderLog()}});
 $('logSeg').addEventListener('click',function(e){var b=e.target.closest('[data-lf]');if(!b)return;logFilter=b.getAttribute('data-lf');[].forEach.call(this.children,function(x){x.classList.toggle('on',x===b)});renderLog()});
 function renderLog(){
  var o=(raw&&raw.log)||{},me=meName();
- var L=Object.keys(o).map(function(id){return o[id]}).filter(function(x){return x&&x.txt&&(logFilter==='all'||(ME.uid&&x.uid===ME.uid)||(!x.uid&&x.by===me))}).sort(function(a,b){return (b.ts||0)-(a.ts||0)}).slice(0,40);
- $('logList').innerHTML=L.length?L.map(function(x){var nm=String(x.by||'?'),col=AVA[Math.abs(nm.split('').reduce(function(a,c){return a+c.charCodeAt(0)},0))%AVA.length],mine=(ME.uid&&x.uid===ME.uid);
-  return '<div class="lg-r'+(mine?' me':'')+'"><span data-prof="'+esc(x.uid||uidBy(nm))+'">'+avEl(x.uid||nm,nm,26)+'</span><div><b>'+esc(nm)+'</b> '+esc(x.txt)+'<small>'+ago(x.ts||0)+'</small></div></div>'}).join(''):'<div class="muted" style="text-align:center;padding:14px;font-weight:700">Пока пусто</div>';
+ var L=Object.keys(o).map(function(id){return o[id]}).filter(function(x){if(!x||!x.txt)return false;if(logFilter==='me')return (ME.uid&&x.uid===ME.uid)||(!x.uid&&x.by===me);if(logFilter==='meet')return /🎥|📨|разрешил|отказал|митинг/i.test(x.txt);if(logFilter==='hot')return /🗑|убрал|удалил|📨|🙅|➖|🗓|⚠️|📌/.test(x.txt);return true}).sort(function(a,b){return (b.ts||0)-(a.ts||0)});
+ var oldN=L.filter(function(x){return Date.now()-(x.ts||0)>24*3600000}).length;if(!ui.logArch)L=L.filter(function(x){return Date.now()-(x.ts||0)<=24*3600000});L=L.slice(0,ui.logArch?100:40);
+ $('logList').innerHTML=(oldN?'<button class="btn sm arch-btn" id="logArch">'+(ui.logArch?'🙈 Скрыть старые':'🗄 Старые записи: '+oldN+' (старше 24 ч)')+'</button>':'')+(L.length?L.map(function(x){var nm=String(x.by||'?'),col=AVA[Math.abs(nm.split('').reduce(function(a,c){return a+c.charCodeAt(0)},0))%AVA.length],mine=(ME.uid&&x.uid===ME.uid);
+  return '<div class="lg-r'+(mine?' me':'')+'"><span data-prof="'+esc(x.uid||uidBy(nm))+'">'+avEl(x.uid||nm,nm,26)+'</span><div><b>'+esc(nm)+'</b> '+esc(x.txt)+'<small>'+ago(x.ts||0)+'</small></div></div>'}).join(''):'<div class="muted" style="text-align:center;padding:14px;font-weight:700">Пока пусто</div>');
 }
 function pname(sh,pid){var n='?';shiftData(sh).people.forEach(function(p){if(p.id===pid)n=p.name});return n}
 function describe(u){
@@ -2661,7 +2813,9 @@ function describe(u){
    if(v)out.push(T.emoji+' '+T.name+' для '+nm+': '+fmt(SHIFTS[sh].start,v.s)+'–'+fmt(SHIFTS[sh].start,v.s+v.l));
    else if(!keys.some(function(k2){return k2!==k&&u[k2]&&k2.indexOf(sh+'/items/'+pid+'_')===0}))out.push('убрал(а) «'+T.name+'» у '+nm);
   }
-  else if((m=k.match(/^(day|night)\/meets\/[^\/]+$/)))out.push(v?'🎥 митинг «'+(v.title||'Meet')+'» '+fmtM(v.m)+'–'+fmtM(v.m+v.l):'🗑 убрал(а) митинг');
+  else if((m=k.match(/^req\/[^\/]+$/))){if(v)out.push('📨 запрос отправлен → '+(v.owner||'коллеге')+': '+TYPES[v.t].name.toLowerCase()+' '+reqSlot(v))}
+  else if((m=k.match(/^req\/[^\/]+\/(ok|no)$/)))out.push(m[1]==='ok'?'✅ запрос подтверждён — разрешил(а) пересечение':'🙅 запрос отклонён — отказал(а) уступить время');
+  else if((m=k.match(/^(day|night)\/meets\/[^\/]+$/)))out.push(v?'🎥 митинг «'+(v.title||'Meet')+'» '+fmtM(v.m)+'–'+fmtM(v.m+v.l)+(v.who?' для '+Object.keys(v.who).map(function(id){return pname(m[1],id)}).join(', '):' для всей смены'):'🗑 убрал(а) митинг');
   else if((m=k.match(/^(day|night)\/items$/))){if(v)out.push('↻ вернул(а) вчерашний график ('+SHIFTS[m[1]].name.toLowerCase()+' смена)')}
   else if((m=k.match(/^(day|night)\/people\/(.+)$/)))out.push(v?'➕ добавил(а) в график: '+v.name:'➖ убрал(а) из графика: '+pname(m[1],m[2]));
   else if((m=k.match(/^notes\/[^\/]+$/)))out.push(v?'📌 заметка: «'+String(v.text||'').slice(0,70)+'»':'🗑 удалил(а) заметку');
@@ -2704,7 +2858,7 @@ function aiContext(){
   var d=shiftData(s),S=SHIFTS[s],names={};d.people.forEach(function(p){names[p.id]=p.name});
   L.push('\n'+S.name+' смена '+fmt(S.start,0)+'–'+fmt(S.start,SLOTS)+'. Люди: '+(d.people.map(function(p){return p.name}).join(', ')||'нет')+'.');
   var it=d.items.slice().sort(function(a,b){return a.s-b.s});
-  if(d.meets.length)L.push('Митинги ('+S.name.toLowerCase()+' смена, для всех): '+d.meets.map(function(x){return x.title+' '+fmtM(x.m)+'–'+fmtM(x.m+x.l)}).join('; ')+'. В это время никому не ставить обед/перерыв.');
+  if(d.meets.length)L.push('Митинги ('+S.name.toLowerCase()+' смена): '+d.meets.map(function(x){return x.title+' '+fmtM(x.m)+'–'+fmtM(x.m+x.l)+' ('+meetWho(s,x)+')'}).join('; ')+'. Участникам митинга в это время не ставить обед/перерыв.');
   L.push(it.length?it.map(function(x){return '- '+(names[x.p]||'?')+': '+TYPES[x.t].name+' '+fmt(S.start,x.s)+'–'+fmt(S.start,x.s+x.l)}).join('\n'):'- перерывы ещё не расставлены');
  });
  var d0=shiftData(k),f=frac(k,n),nm={};d0.people.forEach(function(p){nm[p.id]=p.name});
@@ -2718,6 +2872,7 @@ function aiContext(){
  if(nl.length)L.push('\nПоследние заметки команды:\n'+nl.map(function(x){return '- ['+((TAGS[x.tag]||TAGS.info).n)+(x.pin?', закреплено':'')+'] '+(x.by||'')+': '+String(x.text).slice(0,300).replace(/\n/g,' ')}).join('\n'));
  var tl=tplList().slice(0,25);
  if(tl.length)L.push('\nШаблоны ответов клиентам (используй их стиль):\n'+tl.map(function(x){return '- «'+x.title+'» ('+TPL_CATS[x.cat][0]+'): '+x.text.slice(0,350).replace(/\n/g,' ')}).join('\n'));
+ try{var an=activeNow();L.push('\nПрямо сейчас в слоте (по графику, '+offTxt(DISP_OFF)+'): '+(an.length?an.map(function(a){return a.name+' — '+a.label+' до '+a.until}).join('; '):'никого')+'.')}catch(e){}
  try{L.push(aiPayCtx())}catch(e){}
  try{L.push(aiPromoCtx())}catch(e){}
  var bl=bdList().slice(0,4);if(bl.length)L.push('\nБлижайшие дни рождения: '+bl.map(function(x){return x.name+' — '+x.d+' '+MON[x.m-1]+(x.left===0?' (сегодня!)':' (через '+x.left+' дн.)')}).join('; ')+'.');
@@ -2751,7 +2906,7 @@ function aiPromoCtx(){
 }
 var AI_SYS='Ты — дружелюбный AI-ассистент команды поддержки iGaming-проекта на сайте «Shift Hub». Помогаешь сотрудникам смены: график перерывов, кто где, заметки, ответы клиентам (депозиты, выводы, верификация, бонусы), переводы, короткие тексты. '
  +'Отвечай кратко и по делу, на языке вопроса (по умолчанию по-русски). Для ответов клиентам пиши вежливо и профессионально, без обещаний сроков и сумм, которых нет в данных, и без призывов играть больше. '
- +'Используй данные сайта ниже; если чего-то в них нет — честно скажи, не выдумывай. Не используй таблицы markdown. '
+ +'Используй ТОЛЬКО данные сайта ниже; если чего-то в них нет — честно скажи «в данных сайта этого нет», не выдумывай суммы, сроки, методы оплаты и промокоды. Не используй таблицы markdown. '
  +'Про лимиты вывода, вейджер, промокоды и бонусы отвечай по разделам «ЛИМИТЫ ВЫВОДА» и «ПРОМОКОДЫ» ниже: называй точные цифры для нужной валюты и периода (Daily/Weekly/Monthly и т.д.). Если для валюты нет отдельной суммы, но написано «или эквивалент по курсу EUR», так и скажи. Если лимиты зависят от VIP-уровня — спроси уровень или перечисли все. '
  +'Названия казино пользователи пишут с ошибками и транслитом (neospine, неоспин, evo, crown, crownslots, guns, 1red, ред бет, beon, slot rush) — сопоставляй их с Neospin, Evospin, Crownslot, Gunsbet, 1RedBet, Beonbet, Slotrush.';
 function aiPickModels(list){
@@ -2843,12 +2998,20 @@ function aiRenderPartial(){
  el.innerHTML=AI.partial?aiMd(AI.partial):'<span class="dots"><i></i><i></i><i></i></span><span class="ai-wait">думаю… '+sec+' с</span>';
  var box=aiEl('aiMsgs');box.scrollTop=box.scrollHeight;
 }
+function aiSources(){
+ var k=curShift(now()),d=shiftData(k),pb=(typeof PAY_DB!=='undefined')?PAY_DB:{},lim=Object.keys(pb).filter(function(b){return pb[b]&&pb[b].cashout}).length,
+  pm=Object.keys(pb).reduce(function(a,b){return a+((pb[b]&&pb[b].methods)||[]).length},0),pr=0;
+ if(typeof PROMOS!=='undefined')Object.keys(PROMOS).forEach(function(b){pr+=((PROMOS[b].perm||[]).length+(PROMOS[b].temp||[]).length)});
+ var it=[['📋','График и слоты',d.items.length],['🎥','Митинги',d.meets.length],['💸','Лимиты вывода',lim+' брендов'],['💳','Методы оплаты',pm||'не внесены'],['🎁','Промокоды',pr],['💬','Шаблоны',tplList().length],['📌','Заметки',Object.keys((raw&&raw.notes)||{}).length],['🗓','Расписание смен',raw&&raw.roster&&raw.roster.text?'да':'нет']];
+ return '<span class="ai-src-h">📚 Подключено:</span>'+it.map(function(x){return '<span class="ai-src">'+x[0]+' '+x[1]+': <b>'+x[2]+'</b></span>'}).join('');
+}
 function aiRender(){
  var box=aiEl('aiMsgs');if(!box)return;var key=aiKey();
  aiEl('aiSetup').hidden=!!key&&!AI.showSetup;aiEl('aiKeyDel').hidden=!key;aiEl('aiChat').hidden=!key||!!AI.showSetup;
+ try{var src=aiEl('aiSrc');if(!src){src=document.createElement('div');src.id='aiSrc';box.parentNode.insertBefore(src,box)}src.innerHTML=aiSources()}catch(e){}
  aiEl('aiModel').textContent=key?(AI.model?AI.model.replace(/^gemini-/,'Gemini '):'Gemini'):'не подключён';
  if(!key||AI.showSetup)return;
- var h=(AI.msgs.length||AI.busy)?'':'<div class="ai-hi"><div class="ai-orb"></div><b>Привет'+(meName()?', '+esc(meName()):'')+'! 👋</b><span>Я вижу график, заметки, шаблоны и расписание смен. Спрашивай!</span></div>';
+ var h=(AI.msgs.length||AI.busy)?'':'<div class="ai-hi"><div class="ai-orb"></div><b>Привет'+(meName()?', '+esc(meName()):'')+'! 👋</b><span>Я отвечаю только по данным сайта: график и слоты, митинги, лимиты вывода, методы оплаты, 38 промокодов, шаблоны, заметки и расписание смен. Спрашивай!</span></div>';
  h+=AI.msgs.map(function(m,i){
   var cls=m.role==='user'?'u':m.role==='err'?'e':'a',acts='';
   if(m.role==='model')acts='<button data-ai="copy" data-i="'+i+'" title="Скопировать">📋</button><button data-ai="retry" data-i="'+i+'" title="Повторить"'+(m.rate==='down'?' class="hl"':'')+'>🔄</button><button data-ai="up" data-i="'+i+'" title="Хороший ответ"'+(m.rate==='up'?' class="on"':'')+'>👍</button><button data-ai="down" data-i="'+i+'" title="Плохой ответ"'+(m.rate==='down'?' class="on bad"':'')+'>👎</button><button data-ai="del" data-i="'+i+'" title="Удалить">🗑</button>';
@@ -2932,7 +3095,7 @@ var VIEWN={home:'🏠 Главная',work:'🧰 Работа',fun:'🎉 Отд�
 function onBreakNow(name){
  var n=now(),k=curShift(n),d=shiftData(k),f=frac(k,n),p=null,lab='';
  d.people.forEach(function(x){if(x.name.toLowerCase()===String(name).toLowerCase())p=x});
- if(p)d.items.forEach(function(it){if(it.p===p.id&&f>=it.s&&f<it.s+it.l)lab=TYPES[it.t].emoji+' '+TYPES[it.t].short.toLowerCase()});
+ if(p)activeNow().forEach(function(a){if(a.pid===p.id&&!lab)lab=a.emoji+' '+String(a.label).toLowerCase()});
  return lab;
 }
 var presSeen=null;
@@ -2958,12 +3121,12 @@ function renderPresence(){
   var br=onBreakNow(x.n);
   var sl={lunch:'🍽️ обед',break:'☕ перерыв',off:'🔴 не на смене'}[x.ss];if(sl)return sl;
   if(x.st==='idle')return '💤 отошёл(ла)'+(br?' · '+br:'');
-  if(x.st==='bg')return '🌙 в фоне'+(br?' · '+br:'');
-  return (br?br+' · ':'')+(VIEWN[x.v]||'🏠 Главная');
+  if(x.st==='bg')return '🌙 в фоне (сайт открыт)'+(br?' · '+br:'');
+  return '💻 на сайте · '+(br?br+' · ':'')+(VIEWN[x.v]||'🏠 Главная');
  }
  var h='<span class="on-h"><i class="pulse"></i>На сайте: <b>'+on.length+'</b></span>';
  h+=on.map(function(x,i){var col=AVA[Math.abs(x.n.split('').reduce(function(a,c){return a+c.charCodeAt(0)},0))%AVA.length];
-  return '<span data-profn="'+esc(x.n)+'" class="oc'+(x.me?' me':'')+(x.st!=='on'?' away':'')+'" title="'+esc(x.n+' — '+act(x))+'"><span class="oa'+(avData(x.n).e?' emo':'')+'" style="'+avS(x.n)+'">'+avT(x.n)+'<i class="'+(x.st==='on'?'g':'y')+'"></i></span><span class="ot"><b>'+esc(x.n)+(x.me?' (ты)':'')+' '+(x.dev.m?'📱':'')+(x.dev.d?'💻':'')+'</b><small>'+esc(act(x))+'</small></span></span>'}).join('');
+  return '<span data-profn="'+esc(x.n)+'" class="oc'+(x.me?' me':'')+(x.st!=='on'?' away':'')+'" title="'+esc(x.n+' — '+act(x))+'"><span class="oa'+(avData(x.n).e?' emo':'')+'" style="'+avS(x.n)+'">'+avT(x.n)+'<i class="'+(x.st==='on'?'g':'y')+'"></i></span><span class="ot"><b>'+esc(x.n)+(x.me?' (ты)':'')+' '+(x.dev.m?'📱':'')+(x.dev.d?'💻':'')+'</b><small>'+esc(act(x))+(function(){var o=onShiftNow(x.n),pb=planOf(x.n);return pb?' · '+(o?'🟢 на смене':'⚪ не по графику')+' ('+pb.code+')':''})()+'</small></span></span>'}).join('');
  if(off.length)h+='<span class="on-sep"></span>'+off.map(function(x){return '<span class="oc off" data-profn="'+esc(x.n)+'" title="'+esc(x.n)+'">'+avEl(x.n,x.n)+'<span class="ot"><b>'+esc(x.n)+'</b><small>был(а) '+ago(Date.now()-x.age)+'</small></span></span>'}).join('');
  bar.innerHTML=h;bar.hidden=false;
 }
@@ -3458,6 +3621,11 @@ $('slOff').addEventListener('click',function(){if(this.getAttribute('data-s')){p
 })();
 
 /* ---------- запуск ---------- */
+function applyCompact(on){var keep=['sched','payRef'];document.querySelectorAll('#v-home .panel.cl-able, #v-work .panel.cl-able').forEach(function(p){if(keep.some(function(id){return p.id===id||p.querySelector('#'+id)}))return;
+  if(on){if(!p.classList.contains('cl-off')){p.classList.add('cl-off');p.setAttribute('data-cmp','1')}}else if(p.getAttribute('data-cmp')){p.classList.remove('cl-off');p.removeAttribute('data-cmp')}});
+ var b=$('compactBtn');if(b){b.classList.toggle('pri',on);b.textContent=on?'↕ Развернуть всё':'🗜 Компактно'}}
+$('compactBtn').addEventListener('click',function(e){e.stopPropagation();var on=!lsGet('shifthub-compact','');lsSet('shifthub-compact',on?'1':'');applyCompact(on)});
+setTimeout(function(){if(lsGet('shifthub-compact',''))applyCompact(true)},800);
 function renderAll(){renderTop();renderTabs();if(!ui.adding&&!drag)renderSched();renderVideo();renderNotes();renderRoster();fillMe();renderExtras();renderPresence();renderLog();if(typeof renderSS==='function')renderSS();if(typeof renderDS==='function')renderDS();checkChanges();if(typeof AI!=='undefined'&&AI.open&&!AI.busy)aiRender()}
 applyTheme();
 build3D(document.body.classList.contains('theme-day')?'day':'night');
@@ -3534,7 +3702,7 @@ var PAY_DB={
   },
   methods:[]
  },
- Neospin:{test:true, /* test: true — методы оплаты ниже пока тестовые */
+ Neospin:{
   cashout:{
    daily:'6,000 CAD / 4,000 EUR / 4,000 USD / 6,000 AUD / 6,000 NZD / 0.05 BTC или эквивалент в других валютах по курсу евро.',
    weekly:'15,000 CAD / 10,000 EUR / 10,000 USD / 15,000 AUD / 15,000 NZD / 0.12 BTC / 35 BCH / 50,000 DOGE / 4.5 ETH / 81 LTC / 10,000 USDT / 4,700 XRP',
@@ -3543,17 +3711,7 @@ var PAY_DB={
    hold:'',
    wdMin:'CAD 45 / EUR 30 or USD 30 / AUD 45 / NZD 45 / BTC 0.0012 / BCH 0.2 / DOGE 375 / ETH 0.03 / LTC 0.46 / XRP 50 / USDT 30'
   },
-  kyc:['Верификация обязательна перед первым выводом','Документ: паспорт / ID-карта / водительское удостоверение','Подтверждение адреса: выписка или счёт за коммуналку не старше 3 месяцев','Для карт — фото карты (видны первые 6 и последние 4 цифры)'],
-  methods:[
-   {name:'Visa / Mastercard',type:'card',countries:['*'],limits:{EUR:{dep:[20,4000],wd:[50,4000]},USD:{dep:[20,4000],wd:[50,4000]},CAD:{dep:[30,6000],wd:[75,6000]},AUD:{dep:[30,6000],wd:[75,6000]},NZD:{dep:[30,6000],wd:[75,6000]},NOK:{dep:[200,40000],wd:[500,40000]}},depTime:'Мгновенно',wdTime:'1–3 банковских дня',fee:'0%',kyc:'Фото карты перед выводом'},
-   {name:'Skrill',type:'ewallet',countries:['*'],excl:['CA'],limits:{EUR:{dep:[20,5000],wd:[20,5000]},USD:{dep:[20,5000],wd:[20,5000]},NOK:{dep:[200,50000],wd:[200,50000]}},depTime:'Мгновенно',wdTime:'До 24 часов',fee:'0%'},
-   {name:'Interac',type:'bank',countries:['CA'],limits:{CAD:{dep:[30,3000],wd:[45,3000]}},depTime:'Мгновенно',wdTime:'До 24 часов',fee:'0%',kyc:'Имя в Interac должно совпадать с именем в аккаунте'},
-   {name:'MiFinity',type:'ewallet',countries:['AU','NZ','CA','DE','AT'],limits:{EUR:{dep:[20,2500],wd:[20,2500]},AUD:{dep:[30,4000],wd:[30,4000]},NZD:{dep:[30,4000],wd:[30,4000]},CAD:{dep:[30,4000],wd:[30,4000]}},depTime:'Мгновенно',wdTime:'До 24 часов',fee:'0%'},
-   {name:'Neosurf',type:'voucher',countries:['AU','NZ','CA','DE','AT','PL'],limits:{EUR:{dep:[20,1000]},AUD:{dep:[30,1500]},CAD:{dep:[30,1500]},NZD:{dep:[30,1500]}},depTime:'Мгновенно',fee:'0%',kyc:'Только депозит — вывод другим методом'},
-   {name:'Bank Transfer',type:'bank',countries:['DE','AT','FI','NO','PL','CH','IE'],limits:{EUR:{dep:[50,10000],wd:[100,10000]},NOK:{dep:[500,100000],wd:[1000,100000]}},depTime:'1–3 банковских дня',wdTime:'3–5 банковских дней',fee:'0%',kyc:'Выписка с IBAN на имя игрока'},
-   {name:'Bitcoin (BTC)',type:'crypto',countries:['*'],limits:{BTC:{dep:[0.0002,1],wd:[0.0005,1]}},depTime:'После 1 подтверждения',wdTime:'До 24 часов',fee:'Комиссия сети'},
-   {name:'Tether (USDT TRC20)',type:'crypto',countries:['*'],limits:{USDT:{dep:[20,50000],wd:[30,50000]}},depTime:'После 1 подтверждения',wdTime:'До 24 часов',fee:'Комиссия сети'}
-  ]}
+  methods:[]}
 };
 (function(){
  var $b=document.getElementById('payBrand'),$c=document.getElementById('payCountry'),$v=document.getElementById('payCur'),out=document.getElementById('payOut');if(!$b)return;
@@ -4692,28 +4850,35 @@ PROMOS.Evospin.perm.unshift({name:'FIRST DEPOSIT BONUS',amount:'125% UP TO €2,
 (function(){
  function esc(t){return String(t==null?'':t).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
  var list=document.getElementById('prList'),bar=document.getElementById('prBrands'),q=document.getElementById('prQ');if(!list)return;
- function match(b,f){if(!f)return true;var t=(b.name+' '+b.amount+' '+(b.code||'')+' '+(b.rows||[]).map(function(r){return r.join(' ')}).join(' ')+' '+(b.terms||'')).toLowerCase();return t.indexOf(f)>=0}
+ var prB=document.getElementById('prB'),prC=document.getElementById('prC');
+ PROMO_BRANDS.forEach(function(n){prB.insertAdjacentHTML('beforeend','<option>'+esc(n)+'</option>')});
+ ['EUR','USD','CAD','AUD','NZD','NOK','GBP','BGN','BTC','ETH','LTC','USDT','DOGE'].forEach(function(c){prC.insertAdjacentHTML('beforeend','<option>'+c+'</option>')});
+ function curOk(b,c){if(!c)return true;var t=(b.amount+' '+(b.rows||[]).map(function(r){return r[1]}).join(' ')+' '+(b.terms||'')).toUpperCase();return t.indexOf(c)>=0||(c==='EUR'&&t.indexOf('€')>=0)||(c==='USD'&&t.indexOf('$')>=0)}
+ function match(b,f){if(!curOk(b,prC.value))return false;if(!f)return true;var t=(b.name+' '+b.amount+' '+(b.code||'')+' '+(b.rows||[]).map(function(r){return r.join(' ')}).join(' ')+' '+(b.terms||'')).toLowerCase();return t.indexOf(f)>=0}
  function card(b,tmp){return '<div class="pr-card'+(tmp?' tmp':'')+'"><div class="pr-name">'+esc(b.name)+'</div><div class="pr-amt">'+esc(b.amount)+'</div>'
   +(b.code?'<div class="pr-code" data-code="'+esc(b.code)+'" title="Скопировать промокод">🏷️ '+esc(b.code)+'</div>':(b.nocode?'<div class="pr-code nc">⚡ '+esc(b.nocode)+'</div>':''))
   +(b.until?'<div class="pr-row" style="margin-bottom:6px"><dt>Действует до</dt><dd>'+esc(b.until)+'</dd></div>':'')
   +'<dl class="pr-rows">'+(b.rows||[]).map(function(r){return '<div class="pr-row"><dt>'+esc(r[0])+'</dt><dd>'+esc(r[1])+'</dd></div>'}).join('')+'</dl>'
-  +'<div class="pr-act">'+(b.terms?'<button type="button" data-t="terms">ℹ️ Info terms</button>':'')+'<button type="button" data-t="copy">📋 Копировать</button></div>'
+  +'<div class="pr-act">'+(b.terms?'<button type="button" data-t="terms">ℹ️ Info terms</button>':'')+'<button type="button" data-t="copy">📋 Копировать</button><button type="button" data-t="reply" title="Готовый текст для клиента (EN)">💬 Ответ клиенту</button></div>'
   +(b.terms?'<div class="pr-terms">'+esc(b.terms)+'</div>':'')+'</div>'}
  function sec(title,arr,tmp){return '<div class="pr-sec"><div class="pr-st">'+title+' <b>'+arr.length+'</b><i></i></div>'+(arr.length?'<div class="pr-grid">'+arr.map(function(b){return card(b,tmp)}).join('')+'</div>':'<div class="pr-empty">Пока нет акций</div>')+'</div>'}
  function render(){var f=(q.value||'').trim().toLowerCase();var h='',bh='';
-  PROMO_BRANDS.forEach(function(n){var d=PROMOS[n]||{},p=(d.perm||[]).filter(function(b){return match(b,f)}),t=(d.temp||[]).filter(function(b){return match(b,f)}),c=p.length+t.length;
-   if(f&&!c)return;var id='pr-'+n.toLowerCase();
+  PROMO_BRANDS.forEach(function(n){if(prB.value&&n!==prB.value)return;var d=PROMOS[n]||{},p=(d.perm||[]).filter(function(b){return match(b,f)}),t=(d.temp||[]).filter(function(b){return match(b,f)}),c=p.length+t.length;
+   if((f||prC.value)&&!c)return;var id='pr-'+n.toLowerCase();
    bh+='<button type="button" data-go="'+id+'">'+esc(n)+'<b>'+c+'</b></button>';
    h+='<section class="panel pr-brand" id="'+id+'"><div class="ph"><h2>🎰 '+esc(n)+'<span class="pr-cnt">'+c+' '+(c===1?'акция':c>1&&c<5?'акции':'акций')+'</span></h2></div>'+sec('📌 Постоянные акции',p,0)+sec('⏳ Временные акции',t,1)+'</section>'});
   bar.innerHTML=bh;list.innerHTML=h||'<div class="pr-empty">Ничего не найдено</div>';
   if(window.__clInit)window.__clInit(list)}
  list.addEventListener('click',function(e){var c=e.target.closest('.pr-card');if(!c)return;var b=e.target.closest('button,[data-code]');if(!b)return;
-  if(b.dataset.code){navigator.clipboard&&navigator.clipboard.writeText(b.dataset.code);b.textContent='✅ Скопировано';return}
+  if(b.dataset.code){try{navigator.clipboard.writeText(b.dataset.code)}catch(x){}var o=b.textContent;b.textContent='✅ Скопировано';setTimeout(function(){b.textContent=o},1400);return}
   if(b.dataset.t==='terms'){c.classList.toggle('open');b.classList.toggle('on')}
+  if(b.dataset.t==='reply'){var sec2=c.closest('.pr-brand'),br=sec2?sec2.querySelector('h2').firstChild.textContent.replace(/^\S+\s/,'').trim():'',pc2=c.querySelector('.pr-code:not(.nc)'),rows=[].map.call(c.querySelectorAll('.pr-rows .pr-row'),function(r){var v=r.querySelector('dd').textContent;return v&&v!=='—'&&!/нет данных|не указан/i.test(v)?'• '+r.querySelector('dt').textContent+': '+v:''}).filter(Boolean);
+   var txt='Hello! Here are the details of the '+c.querySelector('.pr-name').textContent.trim()+(br?' at '+br:'')+':\n'+c.querySelector('.pr-amt').textContent.trim()+'\n'+(pc2?'Promo code: '+pc2.textContent.replace(/^\S+ /,'').trim()+'\n':'No promo code is needed — the bonus is credited automatically when the conditions are met.\n')+rows.join('\n')+'\nPlease note that the full bonus terms and conditions apply. Let me know if you have any other questions!';
+   try{navigator.clipboard.writeText(txt);b.textContent='✅ Скопировано';setTimeout(function(){b.textContent='💬 Ответ клиенту'},1500)}catch(x){}}
   if(b.dataset.t==='copy'){var pc=c.querySelector('.pr-code');var t=c.querySelector('.pr-name').textContent+'\n'+c.querySelector('.pr-amt').textContent+'\n'+(pc?'Promo code: '+pc.textContent.replace(/^\S+ /,'')+'\n':'')+[].map.call(c.querySelectorAll('.pr-rows .pr-row'),function(r){return r.querySelector('dt').textContent+': '+r.querySelector('dd').textContent}).join('\n');
    try{navigator.clipboard.writeText(t);b.textContent='✅ Скопировано';setTimeout(function(){b.textContent='📋 Копировать'},1500)}catch(x){}}});
  bar.addEventListener('click',function(e){var b=e.target.closest('[data-go]');if(!b)return;var el=document.getElementById(b.dataset.go);if(!el)return;try{var u='/promo/'+b.dataset.go.slice(3);if(location.pathname!==u)history.pushState({v:'promo'},'',u);routeSub=b.dataset.go.slice(3)}catch(x){}el.classList.remove('cl-off');el.scrollIntoView({behavior:'smooth',block:'start'})});
- q.addEventListener('input',render);render();
+ q.addEventListener('input',render);prB.addEventListener('change',render);prC.addEventListener('change',render);render();
 })();
 </script>
 <script>
