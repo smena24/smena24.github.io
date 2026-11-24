@@ -1034,6 +1034,14 @@ footer .ver{font-weight:800;opacity:.85}
 .rs-pop{position:fixed;z-index:95;display:flex;flex-direction:column;gap:4px;padding:6px;border-radius:14px;border:1px solid var(--line);background:var(--sticky);box-shadow:0 18px 40px rgba(0,0,0,.45)}
 .rs-pop button{border:0;background:var(--card2);color:var(--txt);font:inherit;font-size:13px;font-weight:800;text-align:left;padding:8px 12px;border-radius:9px;cursor:pointer}
 .rs-pop button:hover{background:color-mix(in srgb,var(--acc) 25%,transparent)}
+
+.abs-ov{position:absolute;top:5px;bottom:5px;left:calc(var(--name) + 2px);right:2px;z-index:5;display:flex;align-items:center;gap:10px;padding:0 14px;border-radius:13px;cursor:not-allowed;overflow:hidden;white-space:nowrap;font-size:12.5px;font-weight:700;color:#1a1a1a}
+.abs-ov.sick{background:repeating-linear-gradient(135deg,#ffd0d8 0 14px,#ffc0cb 14px 28px);box-shadow:inset 0 0 0 2px #ff5d7a}
+.abs-ov.vac{background:linear-gradient(90deg,#b9f6d6,#8fe8ff 60%,#ffe7a3);box-shadow:inset 0 0 0 2px #2fd18b}
+.abs-ov .abs-e{font-size:22px;animation:bob 2.4s ease-in-out infinite}
+.abs-ov b{font-weight:900;flex:none}.abs-ov .abs-t{overflow:hidden;text-overflow:ellipsis;opacity:.85}
+.abs-ov.vac:after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.45) 50%,transparent 70%);animation:absShine 3.5s ease-in-out infinite}
+@keyframes absShine{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
 </style>
 </head>
 <body class="theme-night">
@@ -1435,7 +1443,7 @@ footer .ver{font-weight:800;opacity:.85}
  <button class="btn sm" data-bt="5" data-l="Перерыв" data-e="☕">5 мин</button><button class="btn sm" data-bt="10" data-l="Перерыв" data-e="☕">10 мин</button><button class="btn sm" data-bt="15" data-l="Перерыв" data-e="☕">15 мин</button>
  <button class="btn sm" data-bt="30" data-l="Перерыв" data-e="☕">30 мин</button><button class="btn sm" data-bt="60" data-l="Обед" data-e="🍽️">60 мин</button><button class="btn sm" data-bt="x">✕</button>
 </div>
-<footer>Shift Hub · дневная тема 09:00–21:00, ночная 21:00–09:00 (время команды: GMT+3) · <span class="ver" title="Если после загрузки на GitHub версия старая — нажми Ctrl+F5">🏷 версия 2026.11.24 · сборка 5</span></footer>
+<footer>Shift Hub · дневная тема 09:00–21:00, ночная 21:00–09:00 (время команды: GMT+3) · <span class="ver" title="Если после загрузки на GitHub версия старая — нажми Ctrl+F5">🏷 версия 2026.11.24 · сборка 6</span></footer>
 
 <script>
 (function(){
@@ -1451,7 +1459,7 @@ var ROLES={admin:['👑','Админ'],member:['👤','Сотрудник'],gues
 DB_URL=DB_URL.trim().replace(/\/+$/,'');
 var ONLINE=/^https:\/\/[a-z0-9.-]+\.(firebaseio\.com|firebasedatabase\.app)$/i.test(DB_URL);
 var LS='shifthub-v1';
-var SHIFTHUB_VERSION='2026.11.24 · сборка 5';try{console.info('Shift Hub',SHIFTHUB_VERSION)}catch(e){}
+var SHIFTHUB_VERSION='2026.11.24 · сборка 6';try{console.info('Shift Hub',SHIFTHUB_VERSION)}catch(e){}
 var SLOTS=24;
 var SHIFTS={day:{name:'Дневная',icon:'☀️',start:9*60},night:{name:'Ночная',icon:'🌙',start:21*60}};
 var TYPES={
@@ -1508,6 +1516,13 @@ function shiftData(k){
 function fmtM(m){m=(((m+Math.round((DISP_OFF-BASE_OFF)*60))%1440)+1440)%1440;return p2(Math.floor(m/60))+':'+p2(m%60)}
 /* пересменка: 30 мин до и после 09:00 и 21:00 (GMT+3) */
 function handover(n){var m=n.mins;if((m>=510&&m<540)||(m>=1230&&m<1260))return 'Пересменка: скоро '+(m<1000?'дневная':'ночная')+' смена';if((m>=540&&m<570)||(m>=1260&&m<1290))return 'Пересменка: смена только началась';return ''}
+/* Больничный / отпуск из расписания смен → полоса на всю строку графика */
+var ABS_TXT={
+ SL:['Выздоравливай! Чай с лимоном, плед и сериальчик — тикеты подождут 🍋','Режим «Восстановление» включён. Клиенты передают привет и «get well soon» 💌','Сегодня главный бонус — здоровье. Вейджер: x0, без условий 💊','Лечимся по полной: тёплый чай, сон и никакого LiveChat 🛌','Батарейка на зарядке 🔋 — вернётся на 100%'],
+ '0':['В отпуске! Море, солнце и ни одного тикета на горизонте ☀️','Out of office: ушёл(ла) крутить барабаны отдыха — джекпот уже выпал 🎰','Режим «Не беспокоить» до конца отпуска. Даже за депозитом 🏝','Отдыхает за всю команду. Фото с пляжа ждём в чат 📸','Free spins на отдых активированы, вейджера нет 🌴']};
+function absenceOf(name,k){var p=planOf(name,shiftDate(k));if(!p||(p.code!=='SL'&&p.code!=='0'))return null;
+ var L=ABS_TXT[p.code],i=hashStr(name+shiftDate(k))%L.length,sick=p.code==='SL';
+ return {cls:sick?'sick':'vac',e:sick?'🤒':'🏖',head:sick?'Больничный (SL)':'Отпуск (0)',text:L[i],title:name+' — '+(sick?'больничный (sick leave)':'отпуск')+' по расписанию смен на '+shiftDate(k)}}
 function activeNow(){
  var n=now(),k=curShift(n),d=shiftData(k),f=frac(k,n),S=SHIFTS[k],res=[];
  d.people.forEach(function(p){
@@ -1689,6 +1704,7 @@ function renderSched(){
   });
   d.meets.forEach(function(x){if(!meetFor(x,p.id))return;var a=Math.max(0,x.s),b=Math.min(SLOTS,x.e);if(b<=a)return;
    h+='<div class="mt-ov" title="'+esc('🎥 '+x.title+' '+fmtM(x.m)+'–'+fmtM(x.m+x.l))+'" style="left:calc(var(--name) + (100% - var(--name)) * '+(a/SLOTS)+');width:calc((100% - var(--name)) * '+((b-a)/SLOTS)+')"><span>🎥 '+esc(x.title)+' '+fmtM(x.m)+'</span></div>'});
+  var ab=absenceOf(p.name,k);if(ab)h+='<div class="abs-ov '+ab.cls+'" data-act="absent" data-k="'+esc(p.name)+'" title="'+esc(ab.title)+'"><span class="abs-e">'+ab.e+'</span><b>'+esc(ab.head)+'</b><span class="abs-t">'+esc(ab.text)+'</span></div>';
   h+='</div>';
  });
  h+='<div class="ho-z" style="left:var(--name);width:calc((100% - var(--name)) / '+SLOTS+')" title="Пересменка"></div><div class="ho-z" style="right:0;width:calc((100% - var(--name)) / '+SLOTS+')" title="Пересменка"></div>';
@@ -1859,6 +1875,7 @@ $('sched').addEventListener('click',function(e){
  else if(a==='addsave')addPerson();
  else if(a==='mtadd')addMeet();
  else if(a==='autofill')autoFill();
+ else if(a==='absent'){var ab2=absenceOf(k,sk());if(ab2)toast(ab2.e+' '+k+' — '+ab2.head,'По расписанию смен '+k+' сегодня не работает. Чтобы ставить слоты, поменяй код в «Расписании смен».')}
  else if(a==='mtpre'){var md2=ui.meet||(ui.meet={t:'',l:'30',n:''});var pp=k.split('|');md2.n=pp[0];md2.l=pp[1];renderSched();var ti=$('mtTime');if(ti&&!ti.value)ti.focus()}
  else if(a==='myrow'){var r=document.querySelector('#sched .row.person.mine');if(!r){toast('👤 Моя строка','В этой смене нет строки с твоим именем'+(ME.name?' «'+ME.name+'»':'')+'.');return}r.scrollIntoView({behavior:'smooth',block:'center'});r.classList.remove('flash');void r.offsetWidth;r.classList.add('flash')}
  else if(a==='rqok'||a==='rqno'){var x=reqList().filter(function(r){return r.id===k})[0];if(!x||!mineName(x.owner))return;var u={};u['req/'+k+'/'+(a==='rqok'?'ok':'no')]=meName()||true;patch(u);toast(a==='rqok'?'✅ Разрешено':'🙅 Отклонено',a==='rqok'?'Время уйдёт '+(x.who||x.by)+' — подвинь свой '+TYPES[x.ct].name.toLowerCase()+', если нужно.':'Коллега увидит отказ.')}
