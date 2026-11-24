@@ -1443,7 +1443,7 @@ footer .ver{font-weight:800;opacity:.85}
  <button class="btn sm" data-bt="5" data-l="Перерыв" data-e="☕">5 мин</button><button class="btn sm" data-bt="10" data-l="Перерыв" data-e="☕">10 мин</button><button class="btn sm" data-bt="15" data-l="Перерыв" data-e="☕">15 мин</button>
  <button class="btn sm" data-bt="30" data-l="Перерыв" data-e="☕">30 мин</button><button class="btn sm" data-bt="60" data-l="Обед" data-e="🍽️">60 мин</button><button class="btn sm" data-bt="x">✕</button>
 </div>
-<footer>Shift Hub · дневная тема 09:00–21:00, ночная 21:00–09:00 (время команды: GMT+3) · <span class="ver" title="Если после загрузки на GitHub версия старая — нажми Ctrl+F5">🏷 версия 2026.11.24 · сборка 6</span></footer>
+<footer>Shift Hub · дневная тема 09:00–21:00, ночная 21:00–09:00 (время команды: GMT+3) · <span class="ver" title="Если после загрузки на GitHub версия старая — нажми Ctrl+F5">🏷 версия 2026.11.24 · сборка 7</span></footer>
 
 <script>
 (function(){
@@ -1459,7 +1459,7 @@ var ROLES={admin:['👑','Админ'],member:['👤','Сотрудник'],gues
 DB_URL=DB_URL.trim().replace(/\/+$/,'');
 var ONLINE=/^https:\/\/[a-z0-9.-]+\.(firebaseio\.com|firebasedatabase\.app)$/i.test(DB_URL);
 var LS='shifthub-v1';
-var SHIFTHUB_VERSION='2026.11.24 · сборка 6';try{console.info('Shift Hub',SHIFTHUB_VERSION)}catch(e){}
+var SHIFTHUB_VERSION='2026.11.24 · сборка 7';try{console.info('Shift Hub',SHIFTHUB_VERSION)}catch(e){}
 var SLOTS=24;
 var SHIFTS={day:{name:'Дневная',icon:'☀️',start:9*60},night:{name:'Ночная',icon:'🌙',start:21*60}};
 var TYPES={
@@ -2087,8 +2087,19 @@ function rosterModel(r){
 }
 function rosterCol(M,iso){var c,col=-1;for(c=M.ds;c<M.w;c++)if(M.dates[c]&&M.dates[c].iso===iso)col=c;
  if(col<0&&!M.startOk&&M.head&&iso===bakuDate(0)){var td=bakuYMD().d;for(c=M.ds;c<M.head.length;c++){var mm=String(M.head[c]).match(/\d+/);if(mm&&+mm[0]===td){col=c;break}}}return col}
-function rosterRow(M,name){var nm=String(name||'').toLowerCase().trim();if(!nm)return null;var hit=null;
- M.people.forEach(function(rw){var r0=String(rw[0]||'').toLowerCase().trim();if(!hit&&r0&&(r0===nm||r0.indexOf(nm)===0||nm.indexOf(r0)===0||r0.split(/\s+/)[0]===nm.split(/\s+/)[0]))hit=rw});return hit}
+/* сопоставление имени из графика с именем в расписании: кириллица ↔ латиница, «Артем» ↔ «Artem Danilov», «Хаям» ↔ «Khayyam Safarov (Sebastian)» */
+var TRL={'а':'a','б':'b','в':'v','г':'g','д':'d','е':'e','ё':'e','ж':'zh','з':'z','и':'i','й':'y','к':'k','л':'l','м':'m','н':'n','о':'o','п':'p','р':'r','с':'s','т':'t','у':'u','ф':'f','х':'h','ц':'ts','ч':'ch','ш':'sh','щ':'sh','ъ':'','ы':'y','ь':'','э':'e','ю':'yu','я':'ya','ә':'a','ə':'a','ö':'o','ü':'u','ğ':'g','ı':'i','ş':'sh','ç':'ch'};
+function nameKey(w){w=String(w||'').toLowerCase().replace(/[^\s]/g,function(c){return TRL[c]!=null?TRL[c]:c}).replace(/[^a-z]/g,'');
+ return w.replace(/kh/g,'h').replace(/ya/g,'ia').replace(/yu/g,'iu').replace(/y/g,'i').replace(/j/g,'i').replace(/x/g,'h').replace(/(.)\1+/g,'$1')}
+function nameWords(n){return String(n||'').toLowerCase().replace(/[()\[\],.]/g,' ').split(/\s+/).map(nameKey).filter(function(w){return w.length>=2})}
+function nameScore(a,b){var A=nameWords(a),B=nameWords(b);if(!A.length||!B.length)return 0;var best=0;
+ A.forEach(function(x,i){B.forEach(function(y,j){var sc=0;if(x===y)sc=10;else{var k=0;while(k<x.length&&k<y.length&&x[k]===y[k])k++;if(k>=4||(k>=3&&k>=Math.min(x.length,y.length)-1))sc=4+k/10}
+  if(sc&&i===0&&j===0)sc+=2;if(sc>best)best=sc})});return best}
+function rosterRow(M,name){var nm=String(name||'').trim();if(!nm)return null;
+ var map=(raw&&raw.rosterMap)||{},mk=nameKey(nm);if(map[mk]){var fx=M.people.filter(function(rw){return String(rw[0]||'').trim()===map[mk]})[0];if(fx)return fx}
+ var best=null,bs=0,tie=false;
+ M.people.forEach(function(rw){var sc=nameScore(nm,rw[0]);if(sc>bs){bs=sc;best=rw;tie=false}else if(sc&&sc===bs)tie=true});
+ return bs&&!tie?best:null}
 function planOf(name,iso){var r=raw&&raw.roster,M=r&&r.text?rosterModel(r):null;if(!M)return null;var col=rosterCol(M,iso||bakuDate(0)),rw=rosterRow(M,name);if(col<0||!rw)return null;
  var v=String(rw[col]||''),cl=cellCls(v);return {code:cl==='c-day'?'D':cl==='c-night'?'N':cl==='c-vac'?'0':cl==='c-sick'?'SL':(cl==='c-off'||!v)?'Вых':v.slice(0,8),cls:cl||'c-off',raw:v}}
 function onShiftNow(name){var k=curShift(now()),p=planOf(name,shiftDate(k));if(!p)return null;return (k==='day'&&p.code==='D')||(k==='night'&&p.code==='N')}
