@@ -1433,6 +1433,87 @@ body.ny-on.ny-day .panel,body.ny-on.ny-day .stat{box-shadow:0 18px 50px rgba(10,
 @media(max-width:640px){.stat.ny-cdw{min-width:0}.ny-cdw .cd-santa{max-width:none}.ny-cdw .cd-seg button{padding:3px 6px}}
 @media (prefers-reduced-motion:reduce){.stat.ny-cdw,.stat.ny-cdw:before{animation:none}}
 
+/* ===== 🏆 Топ-3 сотрудника ===== */
+.top3{--t3g:#ffcf4a;--t3s:#c9d3e3;--t3b:#e0915a;--t3glow:var(--acc)}
+.t3-bar0{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+.t3-mnav{display:inline-flex;align-items:center;gap:2px;padding:3px;border-radius:14px;background:var(--card2);border:1px solid var(--line)}
+.t3-mnav button{border:0;background:none;color:var(--txt);font:inherit;font-weight:900;font-size:15px;min-width:30px;height:30px;border-radius:10px;cursor:pointer}
+.t3-mnav button:hover{background:color-mix(in srgb,var(--acc) 18%,transparent)}
+.t3-mnav b{min-width:124px;text-align:center;font-size:14px}
+.t3-mnav .t3now{font-size:12px;padding:0 8px}
+.t3-mode{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;margin:0 0 6px}
+.t3-mode select{max-width:100%}
+.t3-hint{font-size:12px;color:var(--mut);font-weight:600;margin:0 0 14px;line-height:1.45}
+.t3-pod{display:grid;grid-template-columns:1fr 1.12fr 1fr;gap:14px;align-items:end;margin:6px 0 18px}
+.t3-c{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;padding:18px 12px 0;border-radius:20px 20px 14px 14px;min-width:0;
+ --mc:var(--t3s);background:linear-gradient(180deg,color-mix(in srgb,var(--mc) 16%,transparent),transparent 70%),var(--card2);border:1.5px solid color-mix(in srgb,var(--mc) 55%,var(--line));box-shadow:0 10px 28px -14px color-mix(in srgb,var(--mc) 70%,transparent);overflow:hidden}
+.t3-p1{--mc:var(--t3g);padding-top:26px;box-shadow:0 14px 36px -12px color-mix(in srgb,var(--mc) 75%,transparent),0 0 0 1px color-mix(in srgb,var(--t3glow) 25%,transparent)}
+.t3-p3{--mc:var(--t3b)}
+.t3-c.empty{opacity:.6;border-style:dashed}
+.t3-medal{position:absolute;top:8px;left:10px;font-size:24px;line-height:1;filter:drop-shadow(0 2px 4px rgba(0,0,0,.35))}
+.t3-p1 .t3-medal{font-size:30px}
+.t3-crown{position:absolute;top:6px;left:50%;width:34px;height:16px;transform:translateX(-50%);background:var(--mc);clip-path:polygon(0 100%,0 30%,22% 70%,50% 0,78% 70%,100% 30%,100% 100%);opacity:.9}
+.t3-av{position:relative;display:grid;place-items:center;flex:none;border-radius:50%;padding:3px;background:conic-gradient(from 210deg,var(--mc),color-mix(in srgb,var(--mc) 40%,#fff),var(--mc));box-shadow:0 6px 18px -6px color-mix(in srgb,var(--mc) 80%,transparent)}
+.t3-av img,.t3-av .t3-in{position:absolute;inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);border-radius:50%;object-fit:cover;object-position:center;display:grid;place-items:center;font-family:Unbounded,inherit;font-weight:800;color:#111;border:2px solid var(--sticky,#0b1736);box-sizing:border-box}
+.t3-av .t3-in.emo{font-family:inherit}
+.t3-av.ghost{width:84px;height:84px;background:var(--line)}.t3-av.ghost .t3-in{background:var(--card);color:var(--mut);font-size:30px}
+.t3-nyb{position:absolute;right:-2px;bottom:-2px;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:15px;background:var(--sticky,#101a33);border:1.5px solid var(--acc)}
+.t3-tbl .t3-av{padding:2px}.t3-tbl .t3-av img,.t3-tbl .t3-av .t3-in{inset:2px;width:calc(100% - 4px);height:calc(100% - 4px);border-width:1px}.t3-tbl .t3-nyb{display:none}
+.t3-nm{margin-top:6px;font-weight:900;font-size:15px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.t3-p1 .t3-nm{font-size:17px}
+.t3-pc{font-family:Unbounded,inherit;font-weight:800;font-size:22px;line-height:1.1;color:var(--mc)}
+.t3-p1 .t3-pc{font-size:27px}
+.t3-pc small{font-family:inherit;font-size:11px;font-weight:800;color:var(--mut)}
+.t3-gb{display:flex;gap:8px;font-size:12.5px;font-weight:800}
+.t3-gb .g,.t3-tbl .g{color:#2fd18b}.t3-gb .b,.t3-tbl .b{color:#ff6b7d}
+.t3-sub{font-size:11.5px;color:var(--mut);font-weight:700;margin-bottom:8px}
+.t3-base{align-self:stretch;margin:4px -12px 0;display:grid;place-items:center;font-family:Unbounded,inherit;font-weight:900;font-size:22px;color:color-mix(in srgb,var(--mc) 80%,var(--txt));background:linear-gradient(180deg,color-mix(in srgb,var(--mc) 26%,transparent),color-mix(in srgb,var(--mc) 10%,transparent));border-top:1px solid color-mix(in srgb,var(--mc) 45%,transparent);height:34px}
+.t3-p1 .t3-base{height:58px;font-size:28px}.t3-p2 .t3-base{height:44px}
+.t3-form{display:grid;grid-template-columns:minmax(170px,1.5fr) minmax(120px,1fr) 110px 110px auto;gap:8px;align-items:end;padding:12px;border-radius:16px;background:var(--card2);border:1px solid var(--line);margin-bottom:6px}
+.t3-form label{display:flex;flex-direction:column;gap:4px;font-size:11.5px;font-weight:800;color:var(--mut);min-width:0}
+.t3-form .in{width:100%;box-sizing:border-box}
+.t3-form #t3Other{margin-top:6px}
+.t3-prev{grid-column:1/-1;font-size:12.5px;color:var(--mut);font-weight:600}.t3-prev b{color:var(--txt)}
+.t3-tblw{overflow:auto;border-radius:14px;border:1px solid var(--line)}
+.t3-tbl{width:100%;border-collapse:collapse;font-size:13px;min-width:640px}
+.t3-tbl th{position:sticky;top:0;background:var(--sticky,var(--card2));text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);padding:8px 10px;font-weight:800}
+.t3-tbl td{padding:6px 10px;border-top:1px solid var(--line);font-weight:700;white-space:nowrap}
+.t3-tbl td.pl{font-size:16px;text-align:center;width:34px}
+.t3-tbl td.who .wn{display:flex;align-items:center;gap:8px;max-width:220px}.t3-tbl td.who .wn>span:last-child{overflow:hidden;text-overflow:ellipsis}
+.t3-tbl tr.tp1{--mc:var(--t3g)}.t3-tbl tr.tp2{--mc:var(--t3s)}.t3-tbl tr.tp3{--mc:var(--t3b)}
+.t3-tbl tr[class^="tp"] td{background:color-mix(in srgb,var(--mc) 8%,transparent)}
+.t3-tbl tr[class^="tp"] td.pl{box-shadow:inset 3px 0 0 var(--mc)}
+.t3-tbl .t3n{width:78px;padding:5px 8px}
+.t3-bar{display:inline-block;width:54px;height:6px;border-radius:9px;background:var(--line);margin-right:8px;vertical-align:middle;overflow:hidden}
+.t3-bar i{display:block;height:100%;background:linear-gradient(90deg,#ff6b7d,#ffcf4a 55%,#2fd18b);border-radius:9px}
+.t3-empty{text-align:center;padding:20px;border:1px dashed var(--line);border-radius:14px;font-weight:700;color:var(--mut)}
+.t3-note{font-size:12px;margin-top:8px}
+/* темы сайта: дневная — мягче тени, медали темнее для контраста */
+body.theme-day:not(.ny-on) .top3{--t3g:#d49a00;--t3s:#7d8ba3;--t3b:#b8642c}
+body.theme-day:not(.ny-on) .t3-av img,body.theme-day:not(.ny-on) .t3-av .t3-in{border-color:#fff}
+/* новогодние темы: акценты подиума следуют активной теме */
+body.ny-on .top3{--t3glow:var(--acc)}
+body.ny-on.ny-frost .top3{--t3g:#ffe27a;--t3s:#bfeaff;--t3b:#ffb08a}
+body.ny-on.ny-gold .top3{--t3g:#ffd35a;--t3s:#f3e6c8;--t3b:#e79a5c}
+body.ny-on.ny-glitch .top3{--t3g:#ffe14d;--t3s:#d6c8ff;--t3b:#ff8fc8}
+body.ny-on.ny-day .top3 .t3-c{background:linear-gradient(180deg,color-mix(in srgb,var(--mc) 18%,transparent),transparent 70%),color-mix(in srgb,var(--sticky) 90%,transparent)}
+body.ny-on .t3-c:after{content:"";position:absolute;left:-4px;right:-4px;top:-7px;height:14px;pointer-events:none;
+ background:radial-gradient(10px 8px at 10% 50%,#fff 98%,transparent) ,radial-gradient(14px 9px at 32% 45%,#fff 98%,transparent),radial-gradient(12px 8px at 56% 55%,#fff 98%,transparent),radial-gradient(14px 9px at 80% 45%,#fff 98%,transparent),linear-gradient(#fff,#fff) 0 0/100% 5px no-repeat;opacity:.92}
+body.ny-on .t3-c{padding-top:24px}
+body.ny-on .t3-p1{padding-top:32px}
+body.ny-on .t3-p1 .t3-crown{display:none}
+body.ny-on .t3-p1:before{content:"🎄";position:absolute;top:10px;left:50%;transform:translateX(-50%);font-size:20px}
+body.ny-on .t3-p1 .t3-medal{top:12px}
+body.ny-on.ny-glitch .t3-p1{box-shadow:0 14px 36px -12px color-mix(in srgb,var(--mc) 70%,transparent),3px 0 0 -1px #ff3df0,-3px 0 0 -1px #2ad8ff}
+@media(hover:hover){.t3-c{transition:transform .2s}.t3-c:not(.empty):hover{transform:translateY(-3px)}}
+@media(max-width:720px){.t3-form{grid-template-columns:1fr 1fr}.t3-form label:first-child{grid-column:1/-1}.t3-form .btn{grid-column:1/-1}}
+@media(max-width:560px){.t3-pod{gap:6px;grid-template-columns:1fr 1.1fr 1fr}.t3-c{padding:14px 4px 0;border-radius:16px 16px 10px 10px}.t3-p1{padding-top:22px}body.ny-on .t3-c{padding-top:20px}body.ny-on .t3-p1{padding-top:30px}
+ .t3-medal{font-size:18px;top:6px;left:6px}.t3-p1 .t3-medal{font-size:22px}
+ .t3-c .t3-av{width:62px!important;height:62px!important}.t3-p1 .t3-av{width:76px!important;height:76px!important}.t3-nyb{width:20px;height:20px;font-size:11px}
+ .t3-nm{font-size:12.5px}.t3-p1 .t3-nm{font-size:13.5px}.t3-pc{font-size:17px}.t3-p1 .t3-pc{font-size:20px}.t3-gb{font-size:10.5px;gap:4px;flex-wrap:wrap;justify-content:center}.t3-sub{font-size:10px}
+ .t3-base{margin:4px -4px 0;font-size:17px;height:26px}.t3-p1 .t3-base{height:44px;font-size:22px}.t3-p2 .t3-base{height:34px}
+ .t3-mnav b{min-width:104px}}
+
 /* ===== сборка 11: производительность ===== */
 .ny-land .l-far,.ny-land .l-f2,.ny-land .l-mid,.ny-land .l-vill,.ny-land .l-f1{transform:none!important;transition:none!important}
 .ny-land{will-change:transform;contain:strict;pointer-events:none}
@@ -1637,6 +1718,22 @@ body.ny-on.ny-day .ny-moon{animation:none!important}
   </aside>
  </main>
 
+ <section class="panel top3" id="top3">
+  <div class="ph"><h2>🏆 Топ-3 сотрудника</h2><span class="muted" style="font-size:12px;font-weight:700">по оценкам чатов · Chat Rate</span></div>
+  <div class="t3-bar0"><div class="t3-mnav"><button type="button" data-t3ym="-1" aria-label="Предыдущий месяц">‹</button><b id="t3Month"></b><button type="button" data-t3ym="1" aria-label="Следующий месяц">›</button><button type="button" class="t3now" data-t3ym="now" title="Текущий месяц">📅</button></div>
+   <div class="seg" role="tablist" aria-label="Смена"><button type="button" data-t3sh="all">Все смены</button><button type="button" data-t3sh="day">☀️ Дневная</button><button type="button" data-t3sh="night">🌙 Ночная</button></div></div>
+  <div class="t3-mode"><span class="lbl">Места определяются</span><select class="in tzsel" id="t3Mode"><option value="wilson">По % Good с учётом объёма</option><option value="net">По балансу Good − Bad</option><option value="pct">По % Good</option></select></div>
+  <div class="t3-hint" id="t3ModeHint"></div>
+  <div class="t3-form" id="t3Form">
+   <label>Сотрудник<select class="in" id="t3Who"></select><input class="in" id="t3Other" maxlength="40" placeholder="Имя сотрудника" hidden></label>
+   <label>Смена<select class="in" id="t3Sh"><option value="">— без смены —</option><option value="day">☀️ Дневная</option><option value="night">🌙 Ночная</option></select></label>
+   <label>👍 Chat Rate Good<input class="in" id="t3G" type="number" min="0" max="99999" inputmode="numeric" placeholder="0"></label>
+   <label>👎 Chat Rate Bad<input class="in" id="t3B" type="number" min="0" max="99999" inputmode="numeric" placeholder="0"></label>
+   <button class="btn pri" type="button" id="t3Save">💾 Сохранить</button>
+   <div class="t3-prev" id="t3Prev"></div>
+  </div>
+  <div id="t3Body"></div>
+ </section>
  <section class="panel roster" id="rosterPanel">
   <div class="ph"><h2>🗓 Расписание смен</h2><label class="rs-pick" id="rsPick" hidden>Это я: <select class="tzsel" id="rsMeSel"></select></label><span class="rs-me" id="rsMe" hidden></span><button class="btn" id="rsEditBtn">✏️ Вставить / обновить</button></div>
   <div class="rs-months" id="rsMonths"></div>
@@ -1942,7 +2039,7 @@ body.ny-on.ny-day .ny-moon{animation:none!important}
  <button class="btn sm" data-bt="5" data-l="Перерыв" data-e="☕">5 мин</button><button class="btn sm" data-bt="10" data-l="Перерыв" data-e="☕">10 мин</button><button class="btn sm" data-bt="15" data-l="Перерыв" data-e="☕">15 мин</button>
  <button class="btn sm" data-bt="30" data-l="Перерыв" data-e="☕">30 мин</button><button class="btn sm" data-bt="60" data-l="Обед" data-e="🍽️">60 мин</button><button class="btn sm" data-bt="x">✕</button>
 </div>
-<footer>Shift Hub · дневная смена 08:00–20:00, ночная 20:00–08:00 (время команды: GMT+3) · <span class="ver" title="Если после загрузки на GitHub версия старая — нажми Ctrl+F5">🏷 версия 2026.11.25 · сборка 12 · New Year</span></footer>
+<footer>Shift Hub · дневная смена 08:00–20:00, ночная 20:00–08:00 (время команды: GMT+3) · <span class="ver" title="Если после загрузки на GitHub версия старая — нажми Ctrl+F5">🏷 версия 2026.11.25 · сборка 14 · New Year</span></footer>
 
 <script>
 (function(){
@@ -1958,7 +2055,7 @@ var ROLES={admin:['👑','Админ'],member:['👤','Сотрудник'],gues
 DB_URL=DB_URL.trim().replace(/\/+$/,'');
 var ONLINE=/^https:\/\/[a-z0-9.-]+\.(firebaseio\.com|firebasedatabase\.app)$/i.test(DB_URL);
 var LS='shifthub-v1';
-var SHIFTHUB_VERSION='2026.11.25 · сборка 12 · New Year';try{console.info('Shift Hub',SHIFTHUB_VERSION)}catch(e){}
+var SHIFTHUB_VERSION='2026.11.25 · сборка 14 · New Year';try{console.info('Shift Hub',SHIFTHUB_VERSION)}catch(e){}
 var SLOTS=24;
 var SHIFTS={day:{name:'Дневная',icon:'☀️',start:8*60},night:{name:'Ночная',icon:'🌙',start:20*60}};
 var TYPES={
@@ -3325,9 +3422,10 @@ function renderTeam(){
   var isSup=x.email===ADMIN_EMAIL.toLowerCase(),r=isSup?'admin':(x.role||'member');
   var sel=isSup?'<span class="badge">👑 главный админ</span>':'<select class="tzsel rsel r-'+r+'" data-role="'+esc(x.uid)+'">'+Object.keys(ROLES).map(function(k){return '<option value="'+k+'"'+(k===r?' selected':'')+'>'+ROLES[k][0]+' '+ROLES[k][1]+'</option>'}).join('')+'</select>';
   return '<div class="tmr"><span data-prof="'+esc(x.uid)+'">'+avEl(x.uid,x.name,36)+'</span><div><b>'+esc(x.name)+(x.uid===ME.uid?' (ты)':'')+'</b><small>'+esc(x.email)+'</small></div><span class="sp"></span>'+sel
-   +(x.uid!==ME.uid&&!isSup?'<button class="ic" data-tm="'+esc(x.uid)+'">🗑</button>':'')+'</div>'}).join(''):'<div class="muted" style="text-align:center;padding:16px;font-weight:700">Пока никого. Добавь сотрудников слева 👈</div>';
+   +(ME.sup&&x.uid!==ME.uid?'<button class="ic" data-avfor="'+esc(x.uid)+'" title="Сменить фото / аватар">📷</button>':'')+(x.uid!==ME.uid&&!isSup?'<button class="ic" data-tm="'+esc(x.uid)+'">🗑</button>':'')+'</div>'}).join(''):'<div class="muted" style="text-align:center;padding:16px;font-weight:700">Пока никого. Добавь сотрудников слева 👈</div>';
 }
 var tmSure=null;
+$('tmList').addEventListener('click',function(e){var b=e.target.closest('[data-avfor]');if(b){e.stopPropagation();openAvPicker(b.getAttribute('data-avfor'))}});
 $('tmList').addEventListener('change',function(e){var sl=e.target.closest('[data-role]');if(!sl)return;var uid=sl.getAttribute('data-role'),r=sl.value,nm=(TEAM[uid]||{}).name||'';
  if(uid===ME.uid&&r!=='admin'&&!ME.sup&&!confirmSelfDemote(sl))return;
  fetch(DB_URL+'/team/'+encodeURIComponent(uid)+'/role.json?auth='+encodeURIComponent(tok),{method:'PUT',body:JSON.stringify(r)})
@@ -3418,6 +3516,9 @@ function describe(u){
   else if((m=k.match(/^links\/.+$/)))out.push(v?'🔗 добавил(а) ссылку «'+(v.title||'')+'»':'🗑 удалил(а) ссылку');
   else if(k==='video')out.push(v?'🎬 включил(а) видео':'🎬 убрал(а) видео');
   else if(k==='roster'){if(!keys.some(function(k2){return /^rosters\//.test(k2)}))out.push(v?'🗓 обновил(а) расписание смен':'🗓 очистил(а) расписание')}
+  else if((m=k.match(/^top\/(\d{4}-\d{2})\/[^\/]+\/g$/))){var tx=u[k.replace(/\/g$/,'/n')]||'';out.push('🏆 статистика чатов'+(tx?' — '+tx:'')+': 👍 '+v+(u[k.replace(/\/g$/,'/b')]!=null?' · 👎 '+u[k.replace(/\/g$/,'/b')]:'')+' ('+ymName(m[1])+')')}
+  else if((m=k.match(/^top\/(\d{4}-\d{2})\/[^\/]+$/))&&v===null)out.push('🏆 удалил(а) запись из статистики чатов ('+ymName(m[1])+')');
+  else if(k==='topmode')out.push('🏆 места в Топ-3 теперь: '+((T3MODES[v]||{}).n||v).toLowerCase());
   else if((m=k.match(/^rosters\/(\d{4}-\d{2})$/)))out.push(v?'🗓 обновил(а) расписание смен — '+ymName(m[1]):'🗓 удалил(а) расписание — '+ymName(m[1]));
   else if(k==='wheel'&&v)out.push('🎡 колесо: '+(v.purpose||'')+' → '+((v.names||[])[v.winner]||'?'));
   else if((m=k.match(/^bdays\/.+$/)))out.push(v?'🎂 день рождения: '+v.name+' — '+v.d+' '+MON[v.m-1]:'🗑 удалил(а) день рождения');
@@ -3897,7 +3998,7 @@ function renderProfile(){
   if(col>0)M.people.forEach(function(rw){var a=String(rw[0]||'').toLowerCase();if(a.indexOf(nm.toLowerCase())>=0||(t.email&&String(rw[1]||'').toLowerCase()===t.email)){var v=rw[col]||'',cl=cellCls(v);today=cl==='c-day'?'☀️ Дневная':cl==='c-night'?'🌙 Ночная':(!v||cl==='c-off')?'🏖 Выходной':v}})}
  var bd=bdList().filter(function(x){return x.name.toLowerCase()===nm.toLowerCase()})[0];
  var h='<div class="pc-cover"><span class="pc-chip1">🎰</span><span class="pc-chip2">🃏</span><span class="pc-chip3">💎</span></div>';
- h+='<div class="pc-avw"><div class="pc-av '+(d.a||'')+(d.e?' emo':'')+'" style="'+d.s+'">'+d.t+'</div>'+(function(){var b='';try{b=NYBD.emo(uid,nm)}catch(e){}return b?'<i class="nyb-b" title="Новогодний бейджик">'+b+'</i>':''})()+'<i class="pc-dot '+(on?'on':'')+'"></i>'+(own?'<button class="pc-avbtn" id="pcAvBtn" title="Сменить аватар">🎭</button>':'')+'</div>';
+ h+='<div class="pc-avw"><div class="pc-av '+(d.a||'')+(d.e?' emo':'')+'" style="'+d.s+'">'+d.t+'</div>'+(function(){var b='';try{b=NYBD.emo(uid,nm)}catch(e){}return b?'<i class="nyb-b" title="Новогодний бейджик">'+b+'</i>':''})()+'<i class="pc-dot '+(on?'on':'')+'"></i>'+(own?'<button class="pc-avbtn" id="pcAvBtn" title="Сменить аватар">🎭</button>':(ME.sup&&uid?'<button class="pc-avbtn" id="pcAvBtn" data-avu="'+esc(uid)+'" title="Сменить фото сотрудника (главный админ)">📷</button>':''))+'</div>';
  h+='<h2 class="pc-name">'+esc(nm)+(function(){var b='';try{b=NYBD.emo(uid,nm)}catch(e){}return b?'<span class="nyb-name">'+b+'</span>':''})()+'</h2><div class="pc-role"><span class="badge">'+(ROLEN[role]||'')+(own&&ME.sup?' · главный':'')+'</span> <span class="'+(on?'pc-on':'pc-off')+'">'+(on?'● онлайн':'○ не в сети')+'</span></div>';
  if(own&&prof.editBio)h+='<form id="pcBioForm" class="pc-biof"><textarea class="in" id="pcBio" maxlength="160" placeholder="Пара слов о себе: хобби, любимый кофе, девиз смены…">'+esc(t.bio||'')+'</textarea><div class="r"><button class="btn pri sm">Сохранить</button><button type="button" class="btn sm" id="pcBioCancel">Отмена</button></div></form>';
  else h+='<div class="pc-bio'+(own?' own':'')+'" '+(own?'id="pcBioEdit" title="Нажми, чтобы изменить"':'')+'>'+(t.bio?esc(t.bio):(own?'✏️ Напиши пару слов о себе…':'<span class="muted">Пока ничего о себе не рассказал(а)</span>'))+'</div>';
@@ -3921,7 +4022,7 @@ function renderProfile(){
  renderFeed();
 }
 $('pcCard').addEventListener('click',function(e){
- if(e.target.closest('#pcAvBtn'))openAvPicker();
+ if(e.target.closest('#pcAvBtn'))openAvPicker(e.target.closest('#pcAvBtn').getAttribute('data-avu')||'');
  else if(e.target.closest('#pcBioEdit')){prof.editBio=true;renderProfile();var ta=$('pcBio');if(ta)ta.focus()}
  else if(e.target.closest('#pcBioCancel')){prof.editBio=false;renderProfile()}
  else if(e.target.closest('#pcBack'))openProfile(ME.uid);
@@ -3951,11 +4052,13 @@ function changeEmail(em){
  }).catch(function(){msg.textContent='Нет связи'});
 }
 /* выбор аватара */
-function openAvPicker(){
- var cur=(TEAM[ME.uid]||{}).av||'';
- var h='<div class="avm-box"><div class="ph"><h2>🎭 Выбери аватар</h2><button class="btn sm" data-avx="1" style="margin-left:auto">✕</button></div><div class="avgrid">';
+var AVT='';
+function openAvPicker(target){
+ AVT=(target&&ME.sup&&TEAM[target])?target:ME.uid;var other=AVT!==ME.uid,tn=(TEAM[AVT]||{}).name||'';
+ var cur=(TEAM[AVT]||{}).av||'';
+ var h='<div class="avm-box"><div class="ph"><h2>'+(other?'📷 Фото: '+esc(tn):'🎭 Выбери аватар')+'</h2><button class="btn sm" data-avx="1" style="margin-left:auto">✕</button></div><div class="avgrid">';
  AVATARS.forEach(function(A,i){h+='<button class="avo '+AVANIM[i%AVANIM.length]+(cur==='e:'+i?' sel':'')+'" data-av="e:'+i+'" style="background:linear-gradient(135deg,'+A[1]+','+A[2]+')">'+A[0]+'</button>'});
- h+='</div><div class="r" style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap"><label class="btn pri" style="cursor:pointer">📷 Своё фото<input type="file" id="avFile" accept="image/*" hidden></label><button class="btn" data-av="rnd">🎲 Случайный</button><button class="btn" data-av="">↺ Буква</button></div><div class="pwmsg" id="avMsg"></div></div>';
+ h+='</div><div class="r" style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap"><label class="btn pri" style="cursor:pointer">📷 '+(other?'Загрузить фото':'Своё фото')+'<input type="file" id="avFile" accept="image/*" hidden></label><button class="btn" data-av="rnd">🎲 Случайный</button><button class="btn" data-av="">↺ Буква</button></div><div class="pwmsg" id="avMsg"></div>'+(other?'<div class="muted" style="font-size:12px;margin-top:8px">👑 Ты меняешь аватар сотрудника как главный админ. Он увидит новое фото сразу.</div>':'')+'</div>';
  var m=$('avModal');m.innerHTML=h;m.hidden=false;
  $('avFile').onchange=function(){var f=this.files&&this.files[0];if(!f)return;$('avMsg').className='pwmsg';$('avMsg').textContent='Обрабатываю фото…';
   shrinkImage(f,256,.82,true).then(function(r){saveAv(r.data)}).catch(function(){$('avMsg').textContent='Не получилось прочитать фото'})};
@@ -3967,9 +4070,12 @@ $('avModal').addEventListener('click',function(e){
  saveAv(v);
 });
 function saveAv(v){
- fbReq('team/'+ME.uid+'/av',v?'PUT':'DELETE',v||undefined).then(function(){
-  TEAM[ME.uid]=TEAM[ME.uid]||{name:ME.name,email:ME.email};if(v)TEAM[ME.uid].av=v;else delete TEAM[ME.uid].av;
-  $('avModal').hidden=true;applyMe();renderProfile();renderPresence();renderLog();renderNotes();toast('🎭 Новый аватар!','Его видят все в команде');confetti(60);
+ var tu=AVT||ME.uid,other=tu!==ME.uid;if(other&&!ME.sup)return;
+ fbReq('team/'+tu+'/av',v?'PUT':'DELETE',v||undefined).then(function(){
+  TEAM[tu]=TEAM[tu]||(other?{}:{name:ME.name,email:ME.email});if(v)TEAM[tu].av=v;else delete TEAM[tu].av;
+  $('avModal').hidden=true;applyMe();renderProfile();renderPresence();renderLog();renderNotes();try{if($('tmList'))renderTeam()}catch(e){}try{renderTop3(true)}catch(e){}
+  if(other){var nm=(TEAM[tu]||{}).name||'сотрудник';toast('📷 Фото обновлено',nm+' — видят все в команде');patch(logOnly('📷 главный админ сменил(а) аватар: '+nm))}
+  else{toast('🎭 Новый аватар!','Его видят все в команде');confetti(60)}
  }).catch(function(){$('avMsg')&&($('avMsg').textContent='Не сохранилось — обнови правила базы (Rules)')});
 }
 /* сжатие фото */
@@ -4584,6 +4690,80 @@ var NYSKY=(function(){
  document.addEventListener('visibilitychange',function(){if(!document.hidden)wake()});
 })();
 
+/* ================= 🏆 ТОП-3 СОТРУДНИКА (статистика чатов) ================= */
+var T3={ym:(function(){var v=lsGet('shifthub-t3ym','');return /^\d{4}-\d{2}$/.test(v)?v:bakuDate(0).slice(0,7)})(),sh:lsGet('shifthub-t3sh','all')||'all',local:{},wt:0,sig:''};
+var T3MODES={wilson:{n:'По % Good с учётом объёма',d:'Нижняя граница доверительного интервала (Уилсон, 95%) — 100% на 3 чатах не обгонит 97% на 300.'},net:{n:'По балансу Good − Bad',d:'Чем больше хороших оценок сверх плохих, тем выше.'},pct:{n:'По % Good',d:'Только доля хороших оценок, объём не учитывается.'}};
+function t3Mode(){var m=raw&&raw.topmode;return T3MODES[m]?m:(T3MODES[lsGet('shifthub-t3mode','')]?lsGet('shifthub-t3mode',''):'wilson')}
+function t3Wilson(g,n){if(!n)return 0;var z=1.96,p=g/n,z2=z*z;return (p+z2/(2*n)-z*Math.sqrt((p*(1-p)+z2/(4*n))/n))/(1+z2/n)}
+function t3Data(){var o={};try{o=JSON.parse(lsGet('shifthub-top-cache','{}'))||{}}catch(e){}var srv=raw&&raw.top;if(srv&&typeof srv==='object')o=srv;
+ var M=Object.assign({},o[T3.ym]||{});Object.keys(T3.local).forEach(function(k){if(k.indexOf(T3.ym+'/')===0){var id=k.slice(8);if(T3.local[k]===null)delete M[id];else M[id]=Object.assign({},M[id]||{},T3.local[k])}});return M}
+function t3Rows(){var M=t3Data(),by={};Object.keys(M).forEach(function(id){var x=M[id];if(!x||!x.n)return;var sh=x.sh||'';if(T3.sh!=='all'&&sh!==T3.sh)return;
+  var key=T3.sh==='all'?String(x.n).toLowerCase():id;var r=by[key]||(by[key]={n:x.n,u:x.u||'',g:0,b:0,ids:[],sh:T3.sh==='all'?'':sh,ts:0});r.g+=Math.max(0,+x.g||0);r.b+=Math.max(0,+x.b||0);r.ids.push(id);r.ts=Math.max(r.ts,+x.ts||0);if(x.u)r.u=x.u});
+ var mode=t3Mode();var L=Object.keys(by).map(function(k){var r=by[k];r.t=r.g+r.b;r.p=r.t?r.g/r.t:0;r.net=r.g-r.b;r.w=t3Wilson(r.g,r.t);r.s=mode==='net'?r.net:mode==='pct'?r.p:r.w;return r});
+ L.sort(function(a,b){return (b.s-a.s)||(b.t-a.t)||(b.g-a.g)||(a.b-b.b)||String(a.n).localeCompare(String(b.n),'ru')});
+ var place=0;L.forEach(function(r,i){var prev=L[i-1];if(!prev||prev.s!==r.s||prev.t!==r.t||prev.g!==r.g||prev.b!==r.b)place=i+1;r.pl=place});return L}
+function t3Idx(r,mode){mode=mode||t3Mode();return mode==='net'?(r.net>0?'+':'')+r.net:mode==='pct'?(r.p*100).toFixed(1)+'%':(r.w*100).toFixed(1)}
+function t3Pct(r){return r.t?(r.p*100).toFixed(r.p===1||r.p===0?0:1)+'%':'—'}
+function t3Av(r,size){var d=avData(r.u||r.n,r.n),bd='';try{bd=NYBD.emo(r.u||r.n,r.n)}catch(e){}
+ return '<span class="t3-av" style="width:'+size+'px;height:'+size+'px">'+(d.p?'<img alt="" src="'+esc(String(d.s).match(/url\('([^']+)'\)/)[1])+'" loading="lazy">':'<span class="t3-in'+(d.e?' emo':'')+'" style="'+d.s+';font-size:'+Math.round(size*(d.e?.5:.42))+'px">'+d.t+'</span>')+(bd?'<i class="t3-nyb">'+bd+'</i>':'')+'</span>'}
+function t3Names(){var set={},out=[];function add(n,u){n=String(n||'').trim();if(!n)return;var k=n.toLowerCase();if(set[k])return;set[k]=1;out.push([n,u||''])}
+ Object.keys(TEAM||{}).forEach(function(u){var t=TEAM[u];if(t&&t.name&&t.role!=='guest')add(t.name,u)});
+ try{var E=rsAll()[T3.ym]||rsAll()[bakuDate(0).slice(0,7)];if(E){var M=rosterModel(E.r);if(M)M.rows.forEach(function(rw){add(rw.name)})}}catch(e){}
+ return out.sort(function(a,b){return a[0].localeCompare(b[0],'ru')})}
+function t3PodHtml(L,mode){
+ var top=L.slice(0,3),order=[1,0,2],medal=['🥇','🥈','🥉'],lbl=['1 место','2 место','3 место'];
+ return '<div class="t3-pod">'+order.map(function(i){var r=top[i];if(!r)return '<div class="t3-c t3-p'+(i+1)+' empty"><div class="t3-medal">'+medal[i]+'</div><span class="t3-av ghost"><span class="t3-in">?</span></span><div class="t3-nm">Свободно</div><div class="t3-sub">'+lbl[i]+'</div><div class="t3-base">'+(i+1)+'</div></div>';
+  return '<div class="t3-c t3-p'+(i+1)+'"><div class="t3-medal" title="'+lbl[i]+'">'+medal[i]+'</div>'+(i===0?'<div class="t3-crown" aria-hidden="true"></div>':'')+t3Av(r,i===0?104:84)+'<div class="t3-nm">'+esc(r.n)+'</div><div class="t3-pc">'+t3Pct(r)+' <small>Good</small></div><div class="t3-gb"><span class="g">👍 '+r.g+'</span><span class="b">👎 '+r.b+'</span></div><div class="t3-sub">'+lbl[i]+(r.pl!==i+1?' · делит '+r.pl+' место':'')+' · индекс '+t3Idx(r,mode)+'</div><div class="t3-base">'+(i+1)+'</div></div>'}).join('')+'</div>';
+}
+function renderTop3(force){var box=$('t3Body');if(!box)return;var ae=document.activeElement;if(!force&&ae&&box.contains(ae)&&/INPUT|SELECT/.test(ae.tagName)&&ae.closest('.t3-tbl'))return;
+ var L=t3Rows(),mode=t3Mode(),guest=ME.role==='guest',sig=JSON.stringify([T3.ym,T3.sh,mode,L.map(function(r){return [r.n,r.g,r.b,r.u]}),ME.role,!!document.body.classList.contains('ny-on')]);
+ $('t3Month').innerHTML=ymName(T3.ym);[].forEach.call(document.querySelectorAll('[data-t3sh]'),function(b){b.classList.toggle('on',b.getAttribute('data-t3sh')===T3.sh)});
+ var ms=$('t3Mode');if(ms&&ms.value!==mode)ms.value=mode;$('t3ModeHint').textContent=T3MODES[mode].d+' При равенстве: больше оценок → больше Good → меньше Bad.';
+ if(!force&&sig===T3.sig)return;T3.sig=sig;
+ var pod=t3PodHtml(L,mode),medal=['🥇','🥈','🥉'];
+ var tb='';if(L.length){tb='<div class="t3-tblw"><table class="t3-tbl"><thead><tr><th>#</th><th>Сотрудник</th>'+(T3.sh==='all'?'':'<th>Смена</th>')+'<th>Good</th><th>Bad</th><th>Всего</th><th>% Good</th><th>Баланс</th><th>Индекс</th><th></th></tr></thead><tbody>'+L.map(function(r){var ed=!guest&&r.ids.length===1;
+   return '<tr class="'+(r.pl<=3?'tp'+r.pl:'')+'"><td class="pl">'+(r.pl<=3?medal[r.pl-1]:r.pl)+'</td><td class="who"><span class="wn">'+t3Av(r,30)+'<span>'+esc(r.n)+'</span></span></td>'+(T3.sh==='all'?'':'<td>'+(r.sh==='day'?'☀️':r.sh==='night'?'🌙':'—')+'</td>')
+    +'<td>'+(ed?'<input class="in t3n" type="number" min="0" max="99999" inputmode="numeric" data-t3id="'+esc(r.ids[0])+'" data-f="g" value="'+r.g+'">':'<b class="g">'+r.g+'</b>')+'</td><td>'+(ed?'<input class="in t3n" type="number" min="0" max="99999" inputmode="numeric" data-t3id="'+esc(r.ids[0])+'" data-f="b" value="'+r.b+'">':'<b class="b">'+r.b+'</b>')+'</td>'
+    +'<td>'+r.t+'</td><td><span class="t3-bar"><i style="width:'+(r.p*100).toFixed(1)+'%"></i></span>'+t3Pct(r)+'</td><td class="'+(r.net>=0?'g':'b')+'">'+(r.net>0?'+':'')+r.net+'</td><td><b>'+t3Idx(r,mode)+'</b></td><td>'+(guest?'':(r.ids.length===1?'<button class="btn sm t3-del" type="button" data-t3del="'+esc(r.ids[0])+'" title="Удалить запись">🗑</button>':'<span class="muted" title="Сумма за обе смены — правь в фильтре «Дневная» / «Ночная»">Σ</span>'))+'</td></tr>'}).join('')+'</tbody></table></div>'
+  +(T3.sh==='all'&&L.some(function(r){return r.ids.length>1})?'<div class="muted t3-note">Σ — сумма за дневные и ночные смены. Чтобы поправить цифры такой строки, выбери фильтр «☀️ Дневная» или «🌙 Ночная».</div>':'')}
+ else tb='<div class="t3-empty">За '+ymName(T3.ym).toLowerCase()+' статистики пока нет.'+(guest?'':' Добавь первого сотрудника в форме выше — места определятся сами ✨')+'</div>';
+ box.innerHTML=pod+tb;$('t3Form').hidden=guest;
+ var sel=$('t3Who'),cur=sel.value,opts='<option value="">— выбери сотрудника —</option>'+t3Names().map(function(x){return '<option value="'+esc(x[0])+'" data-u="'+esc(x[1])+'">'+esc(x[0])+'</option>'}).join('')+'<option value="__other">✍️ Другое имя…</option>';
+ if(sel.getAttribute('data-o')!==opts){sel.innerHTML=opts;sel.setAttribute('data-o',opts);sel.value=cur}}
+function t3Prev(){var g=Math.max(0,+$('t3G').value||0),b=Math.max(0,+$('t3B').value||0),t=g+b;$('t3Prev').innerHTML=t?'Всего <b>'+t+'</b> · <b>'+(g/t*100).toFixed(1)+'%</b> Good · баланс <b>'+(g-b>0?'+':'')+(g-b)+'</b> · индекс <b>'+t3Idx({g:g,b:b,t:t,p:g/t,net:g-b,w:t3Wilson(g,t)})+'</b>':'Введи Good и Bad — посчитаю сразу'}
+function t3Key(n,sh){return 'p'+hashStr(String(n).toLowerCase().trim())+'_'+(sh||'all')}
+function t3Write(path,val){T3.local[path]=val;try{var c={};try{c=JSON.parse(lsGet('shifthub-top-cache','{}'))||{}}catch(e){}var ym=path.slice(0,7),id=path.slice(8);c[ym]=c[ym]||{};if(val===null)delete c[ym][id];else c[ym][id]=Object.assign({},c[ym][id]||{},val);lsSet('shifthub-top-cache',JSON.stringify(c))}catch(e){}
+ var u={};if(val===null)u['top/'+path]=null;else Object.keys(val).forEach(function(k){u['top/'+path+'/'+k]=val[k]});patch(u)}
+function t3Save(){if(ME.role==='guest')return;var sel=$('t3Who'),n=sel.value==='__other'?$('t3Other').value.trim():sel.value,u='';if(sel.value!=='__other'){var o=sel.options[sel.selectedIndex];u=o?o.getAttribute('data-u')||'':''}
+ if(!n){toast('👤 Выбери сотрудника','Из списка команды или впиши имя');return}if(n.length>40)n=n.slice(0,40);
+ var g=Math.round(+$('t3G').value),b=Math.round(+$('t3B').value);if(!(g>=0)||!(b>=0)||$('t3G').value===''||$('t3B').value===''){toast('🔢 Введи числа','Chat Rate Good и Bad — целые числа от 0');return}
+ g=Math.min(g,99999);b=Math.min(b,99999);var sh=$('t3Sh').value,id=t3Key(n,sh),before=t3Rows().slice(0,3).map(function(r){return r.n});
+ t3Write(T3.ym+'/'+id,{n:n,u:u,g:g,b:b,sh:sh,by:meName()||'Кто-то',ts:Date.now()});
+ if(T3.sh!=='all'&&T3.sh!==sh){T3.sh='all';lsSet('shifthub-t3sh','all')}
+ renderTop3(true);$('t3G').value='';$('t3B').value='';t3Prev();
+ var L=t3Rows(),me=L.filter(function(r){return r.n===n})[0];if(me&&me.pl<=3&&before.indexOf(n)<0){try{NYFX.at(document.querySelector('.t3-p'+Math.min(me.pl,3)+' .t3-av'),30)}catch(e){}toast('🏆 '+n+' — '+me.pl+' место!','Топ-3 за '+ymName(T3.ym).toLowerCase()+' обновлён')}else toast('✅ Сохранено',n+': 👍 '+g+' · 👎 '+b)}
+(function(){var root=$('top3');if(!root)return;
+ root.addEventListener('click',function(e){var t;
+  if((t=e.target.closest('[data-t3ym]'))){T3.ym=t.getAttribute('data-t3ym')==='now'?bakuDate(0).slice(0,7):ymAdd(T3.ym,+t.getAttribute('data-t3ym'));lsSet('shifthub-t3ym',T3.ym);renderTop3(true);return}
+  if((t=e.target.closest('[data-t3sh]'))){T3.sh=t.getAttribute('data-t3sh');lsSet('shifthub-t3sh',T3.sh);renderTop3(true);return}
+  if((t=e.target.closest('[data-t3del]'))){var id=t.getAttribute('data-t3del'),x=t3Data()[id];if(!x)return;if(!confirm('Удалить статистику «'+x.n+'» за '+ymName(T3.ym).toLowerCase()+'?'))return;t3Write(T3.ym+'/'+id,null);renderTop3(true);return}
+  if(e.target.closest('#t3Save'))t3Save()});
+ root.addEventListener('change',function(e){var t=e.target;
+  if(t.id==='t3Mode'){lsSet('shifthub-t3mode',t.value);if(ME.role!=='guest')patch({topmode:t.value});else if(raw)raw.topmode=t.value;renderTop3(true);return}
+  if(t.id==='t3Who'){$('t3Other').hidden=t.value!=='__other';if(t.value==='__other')$('t3Other').focus();var x=null,M=t3Data(),sh=$('t3Sh').value;if(t.value&&t.value!=='__other')x=M[t3Key(t.value,sh)];if(x){$('t3G').value=x.g;$('t3B').value=x.b;t3Prev()}return}
+  if(t.classList.contains('t3n')){t3Commit(t);renderTop3(true)}});
+ root.addEventListener('input',function(e){var t=e.target;if(t.id==='t3G'||t.id==='t3B'){t3Prev();return}
+  if(t.classList.contains('t3n')){clearTimeout(T3.wt);T3.wt=setTimeout(function(){t3Commit(t,true)},650);t3Live(t)}});
+ root.addEventListener('keydown',function(e){if(e.key==='Enter'&&(e.target.id==='t3G'||e.target.id==='t3B'||e.target.id==='t3Other')){e.preventDefault();t3Save()}});
+ t3Prev();
+})();
+function t3Commit(t,quiet){var id=t.getAttribute('data-t3id'),f=t.getAttribute('data-f'),v=Math.max(0,Math.min(99999,Math.round(+t.value||0))),x=t3Data()[id];if(!x||+x[f]===v)return;var up={ts:Date.now(),by:meName()||'Кто-то'};up[f]=v;t3Write(T3.ym+'/'+id,up)}
+function t3Live(t){/* мгновенный пересчёт строки и подиума, фокус остаётся в поле */
+ var id=t.getAttribute('data-t3id'),f=t.getAttribute('data-f'),v=Math.max(0,Math.min(99999,Math.round(+t.value||0))),k=T3.ym+'/'+id;T3.local[k]=Object.assign({},T3.local[k]||{});T3.local[k][f]=v;
+ var tr=t.closest('tr'),x=t3Data()[id];if(tr&&x){var g=+x.g||0,b=+x.b||0,n=g+b,c=tr.children,o=T3.sh==='all'?0:1,r={g:g,b:b,t:n,p:n?g/n:0,net:g-b,w:t3Wilson(g,n)};
+  c[4+o].textContent=n;c[5+o].innerHTML='<span class="t3-bar"><i style="width:'+(r.p*100).toFixed(1)+'%"></i></span>'+t3Pct(r);c[6+o].textContent=(r.net>0?'+':'')+r.net;c[6+o].className=r.net>=0?'g':'b';c[7+o].innerHTML='<b>'+t3Idx(r)+'</b>'}
+ var pod=document.querySelector('#t3Body .t3-pod');if(pod){var tmp=document.createElement('div');tmp.innerHTML=t3PodHtml(t3Rows(),t3Mode());pod.replaceWith(tmp.firstChild)}T3.sig=''}
+
 /* ================= 🎅 САНТА-АССИСТЕНТ ================= */
 var NYS=(function(){
  var on=lsGet('ny-santa','1')==='1',last=0,hideT=0,el=document.getElementById('nySanta');
@@ -4664,7 +4844,7 @@ var NYM=(function(){
  return {play:play,stop:stop,toggle:toggle,jingle:jingle,get playing(){return playing}};
 })();
 
-function renderAll(){renderTop();renderTabs();if(!ui.adding&&!drag)renderSched();renderVideo();renderNotes();renderRoster();fillMe();renderExtras();renderPresence();renderLog();if(typeof renderSS==='function')renderSS();if(typeof renderDS==='function')renderDS();checkChanges();if(typeof AI!=='undefined'&&AI.open&&!AI.busy)aiRender()}
+function renderAll(){renderTop();try{renderTop3()}catch(e){}renderTabs();if(!ui.adding&&!drag)renderSched();renderVideo();renderNotes();renderRoster();fillMe();renderExtras();renderPresence();renderLog();if(typeof renderSS==='function')renderSS();if(typeof renderDS==='function')renderDS();checkChanges();if(typeof AI!=='undefined'&&AI.open&&!AI.busy)aiRender()}
 applyTheme();
 build3D(document.body.classList.contains('theme-day')?'day':'night');
 renderVideo();
