@@ -1514,6 +1514,37 @@ body.ny-on.ny-glitch .t3-p1{box-shadow:0 14px 36px -12px color-mix(in srgb,var(-
  .t3-base{margin:4px -4px 0;font-size:17px;height:26px}.t3-p1 .t3-base{height:44px;font-size:22px}.t3-p2 .t3-base{height:34px}
  .t3-mnav b{min-width:104px}}
 
+
+/* ===== Топ-3 в шапке ===== */
+.brandcol{display:flex;flex-direction:column;gap:14px;min-width:0;align-self:stretch;justify-content:flex-start}
+.t3-hd{position:relative;padding:10px 12px 0;border-radius:18px;background:color-mix(in srgb,var(--sticky,#0b1736) 70%,transparent);border:1px solid var(--line);max-width:640px;cursor:pointer}
+.t3-hd .hd{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin-bottom:6px}
+.t3-hd .hd span{letter-spacing:0;text-transform:none;font-weight:700}
+.t3-hd .t3-pod{margin:0;gap:10px}
+.t3-hd .t3-c{padding:14px 6px 0;border-radius:14px 14px 10px 10px}
+.t3-hd .t3-p1{padding-top:18px}
+body.ny-on .t3-hd .t3-c{padding-top:16px}body.ny-on .t3-hd .t3-p1{padding-top:24px}
+body.ny-on .t3-hd .t3-p1:before{top:5px;font-size:14px}
+.t3-hd .t3-medal{font-size:16px;top:5px;left:6px}.t3-hd .t3-p1 .t3-medal{font-size:19px}
+.t3-hd .t3-crown{width:22px;height:10px;top:4px}
+.t3-hd .t3-av{width:46px!important;height:46px!important;padding:2px}.t3-hd .t3-p1 .t3-av{width:58px!important;height:58px!important}
+.t3-hd .t3-av img,.t3-hd .t3-av .t3-in{inset:2px;width:calc(100% - 4px);height:calc(100% - 4px);border-width:1.5px}
+.t3-hd .t3-av .t3-in{font-size:20px!important}.t3-hd .t3-p1 .t3-av .t3-in{font-size:25px!important}
+.t3-hd .t3-nyb{width:17px;height:17px;font-size:10px;right:-3px;bottom:-3px}
+.t3-hd .t3-nm{font-size:12.5px;margin-top:3px}.t3-hd .t3-p1 .t3-nm{font-size:13.5px}
+.t3-hd .t3-pc{font-size:15px}.t3-hd .t3-p1 .t3-pc{font-size:18px}.t3-hd .t3-pc small{font-size:9.5px}
+.t3-hd .t3-gb{font-size:10.5px;gap:6px}.t3-hd .t3-sub{display:none}
+.t3-hd .t3-base{margin:5px -6px 0;height:18px;font-size:12px}.t3-hd .t3-p1 .t3-base{height:28px;font-size:15px}.t3-hd .t3-p2 .t3-base{height:22px}
+.t3-hd:hover{border-color:color-mix(in srgb,var(--acc) 50%,var(--line))}
+@media(max-width:560px){.t3-hd{padding:8px 8px 0}.t3-hd .t3-pod{gap:5px}.t3-hd .t3-av{width:40px!important;height:40px!important}.t3-hd .t3-p1 .t3-av{width:50px!important;height:50px!important}.t3-hd .t3-nm{font-size:11px}.t3-hd .t3-pc{font-size:13px}.t3-hd .t3-p1 .t3-pc{font-size:15px}.t3-hd .t3-gb{font-size:9.5px}}
+
+
+/* сборка 17: часовой пояс в профиле, фото в графике */
+.pi-tz b{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.pi-tz .tz-note{grid-column:1/-1;display:block;font-style:normal;font-size:11.5px;color:var(--mut);font-weight:700;margin-top:4px;width:100%}
+.ava.ph{background-size:cover!important;background-position:center!important;color:transparent}
+.ava.emo{font-size:16px;font-family:inherit}
+
 /* ===== сборка 11: производительность ===== */
 .ny-land .l-far,.ny-land .l-f2,.ny-land .l-mid,.ny-land .l-vill,.ny-land .l-f1{transform:none!important;transition:none!important}
 .ny-land{will-change:transform;contain:strict;pointer-events:none}
@@ -1626,11 +1657,12 @@ body.ny-on.ny-day .ny-moon{animation:none!important}
 <div class="wrap">
  <div id="nyGarland" aria-hidden="true"></div>
  <header class="top">
-  <div class="brand">
+  <div class="brandcol"><div class="brand">
    <button class="menu-btn" id="menuBtn" type="button" aria-label="Меню разделов" aria-expanded="false" aria-controls="nav"><span class="hb"><i></i><i></i><i></i></span><span class="mb-l" id="menuLbl">Меню</span></button>
    <div class="logo"><div class="chip" style="--c:#ff3d8b"><div class="l"></div><div class="l e"></div><div class="l e"></div><div class="l"></div><b>24/7</b></div></div>
    <div><h1>SHIFT HUB</h1><div class="sub" id="sub">iGaming Support</div></div>
   </div>
+  <div class="t3-hd top3" id="t3Hd" hidden></div></div>
   <div class="stats">
    <div class="stat ny-cd ny-cdw"><div class="cd-top"><small id="nyCdLbl">🎄 До Нового 2027</small><span class="cd-seg" role="tablist" aria-label="Режим счётчика"><button type="button" data-cdm="ny" class="on" title="До Нового года">🎄 НГ</button><button type="button" data-cdm="shift" title="До конца смены">⏱ Смена</button></span></div><b id="nyCd">--:--:--</b><div class="muted" id="nyCdSub">по времени команды (GMT+3)</div><div class="cd-santa" id="nyCdSanta">🎅 <span>Хо-хо-хо!</span></div></div>
    <div class="stat"><small>🌍 Моё время <select class="tzsel" id="tzSel" title="Выбери свой часовой пояс"></select></small><b id="clock">--:--</b><span class="muted" id="left"></span></div>
@@ -2039,7 +2071,7 @@ body.ny-on.ny-day .ny-moon{animation:none!important}
  <button class="btn sm" data-bt="5" data-l="Перерыв" data-e="☕">5 мин</button><button class="btn sm" data-bt="10" data-l="Перерыв" data-e="☕">10 мин</button><button class="btn sm" data-bt="15" data-l="Перерыв" data-e="☕">15 мин</button>
  <button class="btn sm" data-bt="30" data-l="Перерыв" data-e="☕">30 мин</button><button class="btn sm" data-bt="60" data-l="Обед" data-e="🍽️">60 мин</button><button class="btn sm" data-bt="x">✕</button>
 </div>
-<footer>Shift Hub · дневная смена 08:00–20:00, ночная 20:00–08:00 (время команды: GMT+3) · <span class="ver" title="Если после загрузки на GitHub версия старая — нажми Ctrl+F5">🏷 версия 2026.11.25 · сборка 15 · New Year</span></footer>
+<footer>Shift Hub · дневная смена 08:00–20:00, ночная 20:00–08:00 (время команды: GMT+3) · <span class="ver" title="Если после загрузки на GitHub версия старая — нажми Ctrl+F5">🏷 версия 2026.11.25 · сборка 17 · New Year</span></footer>
 
 <script>
 (function(){
@@ -2055,7 +2087,7 @@ var ROLES={admin:['👑','Админ'],member:['👤','Сотрудник'],gues
 DB_URL=DB_URL.trim().replace(/\/+$/,'');
 var ONLINE=/^https:\/\/[a-z0-9.-]+\.(firebaseio\.com|firebasedatabase\.app)$/i.test(DB_URL);
 var LS='shifthub-v1';
-var SHIFTHUB_VERSION='2026.11.25 · сборка 15 · New Year';try{console.info('Shift Hub',SHIFTHUB_VERSION)}catch(e){}
+var SHIFTHUB_VERSION='2026.11.25 · сборка 17 · New Year';try{console.info('Shift Hub',SHIFTHUB_VERSION)}catch(e){}
 var SLOTS=24;
 var SHIFTS={day:{name:'Дневная',icon:'☀️',start:8*60},night:{name:'Ночная',icon:'🌙',start:20*60}};
 var TYPES={
@@ -2090,7 +2122,7 @@ var SLACK_ON=false; // Slack отложен: поставь true, чтобы в�
 if(!SLACK_ON)document.body.classList.add('noslack');
  // основное время команды: GMT+3
 var TZ_LIST=[[-8,'Лос-Анджелес'],[-5,'Нью-Йорк'],[-4,'Сантьяго'],[-3,'Сан-Паулу, Буэнос-Айрес'],[-1,'Азоры'],[0,'Лондон, Лиссабон'],[1,'Берлин, Париж, Варшава'],[2,'Киев, Афины'],[3,'Москва, Стамбул — команда'],[3.5,'Тегеран'],[4,'Баку, Дубай, Тбилиси'],[4.5,'Кабул'],[5,'Ташкент, Карачи'],[5.5,'Дели'],[6,'Алматы, Бишкек'],[7,'Бангкок'],[8,'Пекин, Сингапур'],[9,'Токио, Сеул'],[10,'Сидней']];
-var DISP_OFF=parseFloat(lsGet('shifthub-gmt','3'));if(isNaN(DISP_OFF))DISP_OFF=3;
+var DISP_OFF=(function(){var v=lsGet('shifthub-gmt','');if(v===''){var d=-new Date().getTimezoneOffset()/60;if(isNaN(d)||d<-12||d>14)d=3;lsSet('shifthub-gmt',String(d));lsSet('shifthub-gmt-auto','1');return d}var f=parseFloat(v);return isNaN(f)?3:f})();
 function offTxt(o){var a=Math.abs(o),h=Math.floor(a),m=Math.round((a-h)*60);return 'GMT'+(o<0?'−':'+')+h+(m?':'+p2(m):'')}
 function tParts(off){var d=new Date(Date.now()+off*3600000);return {h:d.getUTCHours(),m:d.getUTCMinutes(),s:d.getUTCSeconds(),mins:d.getUTCHours()*60+d.getUTCMinutes(),wd:d.getUTCDay(),d:d.getUTCDate()}}
 function dispNow(){return tParts(DISP_OFF)}
@@ -2288,7 +2320,7 @@ function renderSched(){
  h+='</div>';
  d.people.forEach(function(p,pi){
   var mineRow=!!ME.name&&p.name.toLowerCase()===ME.name.toLowerCase();
-  h+='<div class="row person'+(mineRow?' mine':'')+'"><div class="pname"><div class="ava" style="background:'+AVA[pi%AVA.length]+'">'+esc(p.name.charAt(0).toUpperCase())+planBadge(p.name)+'</div><span>'+esc(p.name)+'</span><button class="rm'+(ui.sureDel===p.id?' sure':'')+'" data-act="rmp" data-k="'+esc(p.id)+'">'+(ui.sureDel===p.id?'удалить?':'✕')+'</button></div>';
+  h+='<div class="row person'+(mineRow?' mine':'')+'"><div class="pname">'+(function(){var d=avData(p.name,p.name),has=d.p||d.e;return '<div class="ava'+(d.e?' emo':'')+(d.p?' ph':'')+'" style="'+(has?d.s:'background:'+AVA[pi%AVA.length])+'">'+(has?d.t:esc(p.name.charAt(0).toUpperCase()))+planBadge(p.name)+'</div>'})()+'<i hidden></i><span>'+esc(p.name)+'</span><button class="rm'+(ui.sureDel===p.id?' sure':'')+'" data-act="rmp" data-k="'+esc(p.id)+'">'+(ui.sureDel===p.id?'удалить?':'✕')+'</button></div>';
   for(var s=0;s<SLOTS;s++)h+='<button class="cell'+(cnt[s]>1?' busy':'')+'" style="grid-column:'+(s+2)+'" data-act="cell" data-p="'+esc(p.id)+'" data-s="'+s+'" aria-label="'+esc(p.name)+' '+fmt(S.start,s)+'"></button>';
   d.items.forEach(function(it){
    if(it.p!==p.id)return;var T=TYPES[it.t],r=fmt(S.start,it.s)+'–'+fmt(S.start,it.s+it.l);
@@ -2629,7 +2661,7 @@ $('noteForm').addEventListener('submit',function(e){
 });
 $('nText').addEventListener('keydown',function(e){if(e.key==='Enter'&&(e.ctrlKey||e.metaKey))$('noteForm').requestSubmit()});
 function ago(ts){var d=(Date.now()-ts)/60000;if(d<1)return 'только что';if(d<60)return Math.floor(d)+' мин назад';if(d<1440)return Math.floor(d/60)+' ч назад';
- var dt=new Date(ts);return p2(dt.getDate())+'.'+p2(dt.getMonth()+1)+' '+p2(dt.getHours())+':'+p2(dt.getMinutes())}
+ var dt=new Date(+ts+DISP_OFF*3600000);return p2(dt.getUTCDate())+'.'+p2(dt.getUTCMonth()+1)+' '+p2(dt.getUTCHours())+':'+p2(dt.getUTCMinutes())}
 var noteFilter='all';
 $('noteSeg').addEventListener('click',function(e){var b=e.target.closest('[data-nf]');if(!b)return;noteFilter=b.getAttribute('data-nf');[].forEach.call(this.children,function(x){x.classList.toggle('on',x===b)});renderNotes()});
 function renderNotes(){
@@ -3983,6 +4015,8 @@ var ROLEN={admin:'👑 Админ',member:'👤 Сотрудник',guest:'👀 
 function openProfile(uid){prof.uid=uid||ME.uid;prof.tab=prof.uid===ME.uid?'all':'user';setView('profile');renderProfile();loadFeed()}
 document.addEventListener('click',function(e){var b=e.target.closest('[data-prof],[data-profn]');if(!b)return;var u=b.getAttribute('data-prof')||uidBy(b.getAttribute('data-profn'));if(!u)return;e.preventDefault();$('userMenu').hidden=true;openProfile(u)});
 function isOnline(name){var P=(raw&&raw.presence)||{},t=Date.now()+srvOff,on=false;Object.keys(P).forEach(function(id){var x=P[id];if(x&&String(x.n||'').toLowerCase()===String(name).toLowerCase()&&typeof x.ts==='number'&&t-x.ts<ONLINE_MS)on=true});return on}
+document.addEventListener('change',function(e){if(e.target&&e.target.id==='pcTz')setTz(e.target.value,true)});
+document.addEventListener('click',function(e){if(e.target.closest&&e.target.closest('#pcTzAuto'))setTz(tzDetect(),true)});
 function renderProfile(){
  if(document.body.getAttribute('data-view')!=='profile')return;
  var uid=prof.uid||ME.uid,t=TEAM[uid]||(uid===ME.uid?{name:ME.name||'Админ',email:ME.email,role:ME.role}:null);
@@ -4010,7 +4044,8 @@ function renderProfile(){
  h+=row('☕','Перерывы ('+SHIFTS[k].name.toLowerCase()+')',brs.length?esc(brs.join('  ')):'—');
  h+=row('🎂','День рождения',bd?bd.d+' '+MON[bd.m-1]+(bd.left===0?' 🎉 сегодня!':' · через '+bd.left+' дн.'):'—');
  h+=row('📅','В команде с',t.ts?new Date(t.ts).toLocaleDateString('ru-RU',{day:'numeric',month:'long',year:'numeric'}):'—');
- if(own)h+=row('🌍','Мой часовой пояс',offTxt(DISP_OFF));
+ if(own)h+='<div class="pi pi-tz"><span>🌍</span><small>Мой часовой пояс</small><b><select class="tzsel" id="pcTz" title="Время на сайте будет показано в этом поясе">'+tzOpts(DISP_OFF)+'</select> <button type="button" class="btn sm" id="pcTzAuto" title="Взять пояс из настроек компьютера/телефона">📍 Авто ('+offTxt(tzDetect())+')</button></b><em class="tz-note">Смены команды: ☀️ '+fmtM(480)+'–'+fmtM(1200)+' · 🌙 '+fmtM(1200)+'–'+fmtM(480)+' в твоём времени'+(DISP_OFF!==BASE_OFF?' (база — GMT+3: 08:00–20:00 / 20:00–08:00)':'')+'</em></div>';
+ else if(typeof t.tz==='number'){var _o=tParts(t.tz);h+=row('🌍','Часовой пояс',offTxt(t.tz)+' · у него(неё) сейчас '+p2(Math.floor(_o.mins/60))+':'+p2(_o.mins%60))}
  h+='</div>';
  if(own){
   h+='<details class="pc-sec"><summary>✉️ Сменить почту</summary>'+(ME.sup?'<div class="muted" style="font-size:12.5px;font-weight:700;margin-top:8px">Ты главный админ: если сменить почту, сайт перестанет считать тебя главным. Сначала напиши мне — поменяю в файле сайта.</div>':'<form id="emForm" class="pwf" style="margin-top:8px"><input class="in" id="emNew" type="email" placeholder="Новая почта" required><button class="btn pri">Сменить почту</button><div class="pwmsg" id="emMsg"></div></form>')+'</details>';
@@ -4313,12 +4348,24 @@ $('slForm').addEventListener('submit',function(e){e.preventDefault();var u=$('sl
 $('slTest').addEventListener('click',function(){slackSend('✅ Shift Hub подключён к каналу ('+(meName()||'admin')+')').then(function(){$('slMsg').className='pwmsg ok';$('slMsg').textContent='📨 Отправлено — проверь канал в Slack'},function(){$('slMsg').className='pwmsg';$('slMsg').textContent='Сначала сохрани Webhook'})});
 $('slOff').addEventListener('click',function(){if(this.getAttribute('data-s')){patch({'cfg/slackHook':null});this.removeAttribute('data-s');this.textContent='Отключить';renderSS()}else{this.setAttribute('data-s','1');this.textContent='Точно отключить?'}});
 
-/* ---------- Часовой пояс ---------- */
+/* ---------- Часовой пояс: база смен GMT+3, показ — в поясе пользователя ---------- */
+function tzOpts(sel){var opts=TZ_LIST.slice();if(!TZ_LIST.some(function(x){return x[0]===DISP_OFF}))opts.push([DISP_OFF,'']);opts.sort(function(a,b){return a[0]-b[0]});
+ return opts.map(function(x){return '<option value="'+x[0]+'"'+(x[0]===sel?' selected':'')+'>'+offTxt(x[0])+(x[1]?' · '+x[1]:'')+'</option>'}).join('')}
+function setTz(v,save,quiet){v=parseFloat(v);if(isNaN(v))return;var ch=v!==DISP_OFF;DISP_OFF=v;lsSet('shifthub-gmt',String(v));lsSet('shifthub-gmt-auto','');
+ var a=$('tzSel');if(a){a.innerHTML=tzOpts(v);a.value=String(v)}
+ if(save&&ME.uid){TEAM[ME.uid]=TEAM[ME.uid]||{};TEAM[ME.uid].tz=v;fbReq('team/'+ME.uid+'/tz','PUT',v).catch(function(){})}
+ if(ch){try{renderTop()}catch(e){}try{renderAll()}catch(e){}try{renderClocks()}catch(e){}try{renderProfile()}catch(e){}}
+ if(!quiet&&ch)toast('🌍 Время: '+offTxt(v),'Часы, смены и график теперь в твоём поясе. Смены команды — по-прежнему 08:00–20:00 / 20:00–08:00 GMT+3')}
+var tzSynced=false;
+function tzSync(){if(tzSynced||!ME.uid||!TEAM[ME.uid])return;tzSynced=true;var t=TEAM[ME.uid].tz;
+ if(typeof t==='number'&&!isNaN(t)){if(t!==DISP_OFF)setTz(t,false,true)}else fbReq('team/'+ME.uid+'/tz','PUT',DISP_OFF).then(function(){TEAM[ME.uid].tz=DISP_OFF}).catch(function(){})}
+setInterval(tzSync,1500);
+function tzDetect(){var d=-new Date().getTimezoneOffset()/60;return (isNaN(d)||d<-12||d>14)?3:d}
 (function(){
  var opts=TZ_LIST.slice();if(!TZ_LIST.some(function(x){return x[0]===DISP_OFF}))opts.push([DISP_OFF,'']);
  opts.sort(function(a,b){return a[0]-b[0]});
  $('tzSel').innerHTML=opts.map(function(x){return '<option value="'+x[0]+'"'+(x[0]===DISP_OFF?' selected':'')+'>'+offTxt(x[0])+(x[1]?' · '+x[1]:'')+'</option>'}).join('');
- $('tzSel').addEventListener('change',function(){DISP_OFF=parseFloat(this.value);lsSet('shifthub-gmt',String(DISP_OFF));renderTop();renderAll();renderClocks();toast('🌍 Время: '+offTxt(DISP_OFF),'Все часы и график теперь в твоём поясе')});
+ $('tzSel').addEventListener('change',function(){setTz(this.value,true)});
 })();
 
 /* ---------- запуск ---------- */
@@ -4715,7 +4762,7 @@ function t3PodHtml(L,mode){
  return '<div class="t3-pod">'+order.map(function(i){var r=top[i];if(!r)return '<div class="t3-c t3-p'+(i+1)+' empty"><div class="t3-medal">'+medal[i]+'</div><span class="t3-av ghost"><span class="t3-in">?</span></span><div class="t3-nm">Свободно</div><div class="t3-sub">'+lbl[i]+'</div><div class="t3-base">'+(i+1)+'</div></div>';
   return '<div class="t3-c t3-p'+(i+1)+'"><div class="t3-medal" title="'+lbl[i]+'">'+medal[i]+'</div>'+(i===0?'<div class="t3-crown" aria-hidden="true"></div>':'')+t3Av(r,i===0?104:84)+'<div class="t3-nm">'+esc(r.n)+'</div><div class="t3-pc">'+t3Pct(r)+' <small>Good</small></div><div class="t3-gb"><span class="g">👍 '+r.g+'</span><span class="b">👎 '+r.b+'</span></div><div class="t3-sub">'+lbl[i]+(r.pl!==i+1?' · делит '+r.pl+' место':'')+' · индекс '+t3Idx(r,mode)+'</div><div class="t3-base">'+(i+1)+'</div></div>'}).join('')+'</div>';
 }
-function renderTop3(force){var box=$('t3Body');if(!box)return;var ae=document.activeElement;if(!force&&ae&&box.contains(ae)&&/INPUT|SELECT/.test(ae.tagName)&&ae.closest('.t3-tbl'))return;
+function renderTop3(force){try{t3Hd()}catch(e){}var box=$('t3Body');if(!box)return;var ae=document.activeElement;if(!force&&ae&&box.contains(ae)&&/INPUT|SELECT/.test(ae.tagName)&&ae.closest('.t3-tbl'))return;
  var L=t3Rows(),mode=t3Mode(),guest=ME.role==='guest',sig=JSON.stringify([T3.ym,T3.sh,mode,L.map(function(r){return [r.n,r.g,r.b,r.u]}),ME.role,!!document.body.classList.contains('ny-on')]);
  $('t3Month').innerHTML=ymName(T3.ym);[].forEach.call(document.querySelectorAll('[data-t3sh]'),function(b){b.classList.toggle('on',b.getAttribute('data-t3sh')===T3.sh)});
  var ms=$('t3Mode');if(ms&&ms.value!==mode)ms.value=mode;$('t3ModeHint').textContent=T3MODES[mode].d+' При равенстве: больше оценок → больше Good → меньше Bad.';
@@ -4758,11 +4805,16 @@ function t3Save(){if(ME.role==='guest')return;var sel=$('t3Who'),n=sel.value==='
  t3Prev();
 })();
 function t3Commit(t,quiet){var id=t.getAttribute('data-t3id'),f=t.getAttribute('data-f'),v=Math.max(0,Math.min(99999,Math.round(+t.value||0))),x=t3Data()[id];if(!x||+x[f]===v)return;var up={ts:Date.now(),by:meName()||'Кто-то'};up[f]=v;t3Write(T3.ym+'/'+id,up)}
+
+function t3Hd(){var el=$('t3Hd');if(!el)return;var oy=T3.ym,os=T3.sh,cur=bakuDate(0).slice(0,7),L;T3.ym=cur;T3.sh='all';try{L=t3Rows()}finally{T3.ym=oy;T3.sh=os}
+ if(!L.length){el.hidden=true;el.innerHTML='';return}var html='<div class="hd">🏆 Топ-3 сотрудника <span>'+ymName(cur)+' · Chat Rate</span></div>'+t3PodHtml(L,t3Mode());
+ if(el.getAttribute('data-h')!==html){el.innerHTML=html;el.setAttribute('data-h',html)}el.hidden=false}
+document.addEventListener('click',function(e){if(e.target.closest('#t3Hd')){try{setView('home')}catch(x){}var p=$('top3');if(p){T3.ym=bakuDate(0).slice(0,7);T3.sh='all';renderTop3(true);setTimeout(function(){p.scrollIntoView({behavior:'smooth',block:'start'})},60)}}});
 function t3Live(t){/* мгновенный пересчёт строки и подиума, фокус остаётся в поле */
  var id=t.getAttribute('data-t3id'),f=t.getAttribute('data-f'),v=Math.max(0,Math.min(99999,Math.round(+t.value||0))),k=T3.ym+'/'+id;T3.local[k]=Object.assign({},T3.local[k]||{});T3.local[k][f]=v;
  var tr=t.closest('tr'),x=t3Data()[id];if(tr&&x){var g=+x.g||0,b=+x.b||0,n=g+b,c=tr.children,o=T3.sh==='all'?0:1,r={g:g,b:b,t:n,p:n?g/n:0,net:g-b,w:t3Wilson(g,n)};
   c[4+o].textContent=n;c[5+o].innerHTML='<span class="t3-bar"><i style="width:'+(r.p*100).toFixed(1)+'%"></i></span>'+t3Pct(r);c[6+o].textContent=(r.net>0?'+':'')+r.net;c[6+o].className=r.net>=0?'g':'b';c[7+o].innerHTML='<b>'+t3Idx(r)+'</b>'}
- var pod=document.querySelector('#t3Body .t3-pod');if(pod){var tmp=document.createElement('div');tmp.innerHTML=t3PodHtml(t3Rows(),t3Mode());pod.replaceWith(tmp.firstChild)}T3.sig=''}
+ var pod=document.querySelector('#t3Body .t3-pod');if(pod){var tmp=document.createElement('div');tmp.innerHTML=t3PodHtml(t3Rows(),t3Mode());pod.replaceWith(tmp.firstChild)}T3.sig='';try{t3Hd()}catch(e){}}
 
 /* ================= 🎅 САНТА-АССИСТЕНТ ================= */
 var NYS=(function(){
