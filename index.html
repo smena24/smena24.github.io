@@ -2071,7 +2071,7 @@ body.ny-on.ny-day .ny-moon{animation:none!important}
  <button class="btn sm" data-bt="5" data-l="Перерыв" data-e="☕">5 мин</button><button class="btn sm" data-bt="10" data-l="Перерыв" data-e="☕">10 мин</button><button class="btn sm" data-bt="15" data-l="Перерыв" data-e="☕">15 мин</button>
  <button class="btn sm" data-bt="30" data-l="Перерыв" data-e="☕">30 мин</button><button class="btn sm" data-bt="60" data-l="Обед" data-e="🍽️">60 мин</button><button class="btn sm" data-bt="x">✕</button>
 </div>
-<footer>Shift Hub · дневная смена 08:00–20:00, ночная 20:00–08:00 (время команды: GMT+3) · <span class="ver" title="Если после загрузки на GitHub версия старая — нажми Ctrl+F5">🏷 версия 2026.11.25 · сборка 17 · New Year</span></footer>
+<footer>Shift Hub · дневная смена 08:00–20:00, ночная 20:00–08:00 (время команды: GMT+3) · <span class="ver" title="Если после загрузки на GitHub версия старая — нажми Ctrl+F5">🏷 версия 2026.11.25 · сборка 19 · New Year</span></footer>
 
 <script>
 (function(){
@@ -2087,7 +2087,7 @@ var ROLES={admin:['👑','Админ'],member:['👤','Сотрудник'],gues
 DB_URL=DB_URL.trim().replace(/\/+$/,'');
 var ONLINE=/^https:\/\/[a-z0-9.-]+\.(firebaseio\.com|firebasedatabase\.app)$/i.test(DB_URL);
 var LS='shifthub-v1';
-var SHIFTHUB_VERSION='2026.11.25 · сборка 17 · New Year';try{console.info('Shift Hub',SHIFTHUB_VERSION)}catch(e){}
+var SHIFTHUB_VERSION='2026.11.25 · сборка 19 · New Year';try{console.info('Shift Hub',SHIFTHUB_VERSION)}catch(e){}
 var SLOTS=24;
 var SHIFTS={day:{name:'Дневная',icon:'☀️',start:8*60},night:{name:'Ночная',icon:'🌙',start:20*60}};
 var TYPES={
@@ -3010,7 +3010,9 @@ function goView(v,push){
 }
 $('nav').addEventListener('click',function(e){var b=e.target.closest('[data-view]');if(!b)return;routeSub='';goView(b.getAttribute('data-view'));try{scrollTo({top:0,behavior:'smooth'})}catch(x){}});
 addEventListener('popstate',function(){goView(parseRoute(),false)});
-goView(parseRoute(),false);
+var pendTeam=parseRoute()==='team';goView(parseRoute(),false);
+/* /admin открывается до входа: когда станет ясно, что это админ — переключим на админ-панель */
+(function(){if(!pendTeam)return;var n=0,t=setInterval(function(){n++;if(ME.uid&&(ME.admin||ME.role)){clearInterval(t);if(ME.admin&&document.body.getAttribute('data-view')==='home')goView('team',false)}if(n>40)clearInterval(t)},300)})();
 
 /* ================= АВТООЧИСТКА + ОБСЛУЖИВАНИЕ ================= */
 var TPL_CATS={dep:['💰 Депозиты','#21e6a1'],wd:['💸 Выводы','#3ea8ff'],kyc:['🪪 Верификация','#a78bfa'],bonus:['🎁 Бонусы','#ffb547'],acc:['👤 Аккаунт','#ff9cc0'],other:['📝 Другое','#9aa3c7']};
@@ -3549,6 +3551,7 @@ function describe(u){
   else if(k==='video')out.push(v?'🎬 включил(а) видео':'🎬 убрал(а) видео');
   else if(k==='roster'){if(!keys.some(function(k2){return /^rosters\//.test(k2)}))out.push(v?'🗓 обновил(а) расписание смен':'🗓 очистил(а) расписание')}
   else if((m=k.match(/^top\/(\d{4}-\d{2})\/[^\/]+\/g$/))){var tx=u[k.replace(/\/g$/,'/n')]||'';out.push('🏆 статистика чатов'+(tx?' — '+tx:'')+': 👍 '+v+(u[k.replace(/\/g$/,'/b')]!=null?' · 👎 '+u[k.replace(/\/g$/,'/b')]:'')+' ('+ymName(m[1])+')')}
+  else if((m=k.match(/^top\/(\d{4}-\d{2})\/[^\/]+\/b$/))&&u[k.replace(/\/b$/,'/g')]==null)out.push('🏆 статистика чатов: 👎 '+v+' ('+ymName(m[1])+')');
   else if((m=k.match(/^top\/(\d{4}-\d{2})\/[^\/]+$/))&&v===null)out.push('🏆 удалил(а) запись из статистики чатов ('+ymName(m[1])+')');
   else if(k==='topmode')out.push('🏆 места в Топ-3 теперь: '+((T3MODES[v]||{}).n||v).toLowerCase());
   else if((m=k.match(/^rosters\/(\d{4}-\d{2})$/)))out.push(v?'🗓 обновил(а) расписание смен — '+ymName(m[1]):'🗓 удалил(а) расписание — '+ymName(m[1]));
@@ -3870,9 +3873,15 @@ var AVANIM=['wob','jel','bnc','spn','swg'];
 function hashStr(s){return Math.abs(String(s||'').split('').reduce(function(a,c){return (a*31+c.charCodeAt(0))|0},7))}
 function teamBy(k){
  if(!k)return null;if(TEAM[k])return TEAM[k];
- var lk=String(k).toLowerCase(),f=null;Object.keys(TEAM).forEach(function(u){var x=TEAM[u];if(x&&String(x.name||'').toLowerCase()===lk)f=x});return f;
+ var lk=String(k).toLowerCase().trim(),f=null;Object.keys(TEAM).forEach(function(u){var x=TEAM[u];if(x&&String(x.name||'').toLowerCase().trim()===lk)f=x});if(f)return f;
+ /* имя в графике/расписании может отличаться от имени в профиле: «Артем» ↔ «Artem Danilov», «Хаям» ↔ «Khayyam» */
+ var sig=Object.keys(TEAM).map(function(u){return u+':'+((TEAM[u]||{}).name||'')}).join('|');if(TB_SIG!==sig){TB_SIG=sig;TB_C={}}
+ if(TB_C[lk]!==undefined)return TB_C[lk]?TEAM[TB_C[lk]]||null:null;
+ var best='',bs=0,tie=false;Object.keys(TEAM).forEach(function(u){var x=TEAM[u];if(!x||!x.name)return;var sc=0;try{sc=nameScore(k,x.name)}catch(e){}if(sc>bs){bs=sc;best=u;tie=false}else if(sc&&sc===bs)tie=true});
+ TB_C[lk]=(bs>=6&&!tie)?best:'';return TB_C[lk]?TEAM[best]:null;
 }
-function uidBy(k){if(!k)return '';if(TEAM[k])return k;var lk=String(k).toLowerCase(),f='';Object.keys(TEAM).forEach(function(u){if(String((TEAM[u]||{}).name||'').toLowerCase()===lk)f=u});return f}
+var TB_SIG='',TB_C={};
+function uidBy(k){if(!k)return '';if(TEAM[k])return k;var lk=String(k).toLowerCase(),f='';Object.keys(TEAM).forEach(function(u){if(String((TEAM[u]||{}).name||'').toLowerCase()===lk)f=u});if(f)return f;var t=teamBy(k);if(t)Object.keys(TEAM).forEach(function(u){if(TEAM[u]===t)f=u});return f}
 function avData(k,nameFallback){
  var t=teamBy(k),av=t&&t.av,nm=(t&&t.name)||nameFallback||k||'?';
  if(av&&/^e:\d+$/.test(av)){var A=AVATARS[+av.slice(2)]||AVATARS[0];return {s:'background:linear-gradient(135deg,'+A[1]+','+A[2]+')',t:A[0],e:1,a:AVANIM[(+av.slice(2))%AVANIM.length]}}
@@ -4668,7 +4677,7 @@ var NYBD=(function(){
  var K=[['','✕','Без бейджа'],['snow','❄️','Снежинка'],['tree','🎄','Ёлочка'],['gift','🎁','Подарок'],['deer','🦌','Олень']],E={};K.forEach(function(k){if(k[0])E[k[0]]=k[1]});
  function isMe(uid,t){try{var mn=String(meName()||'').toLowerCase();return !!(ME&&((ME.uid&&uid===ME.uid)||(mn&&t&&String(t.name||'').toLowerCase()===mn)))}catch(e){return false}}
  function key(uid){var t=TEAM&&TEAM[uid];if(t&&t.nyb!=null)return t.nyb;if(isMe(uid,t))return lsGet('ny-badge','');return ''}
- function find(k,n){if(TEAM&&TEAM[k])return k;var nm=String(n||k||'').toLowerCase();if(!nm||!TEAM)return '';for(var u in TEAM){if(TEAM[u]&&String(TEAM[u].name||'').toLowerCase()===nm)return u}
+ function find(k,n){if(TEAM&&TEAM[k])return k;try{var fu=uidBy(n||k);if(fu)return fu}catch(e){}var nm=String(n||k||'').toLowerCase();if(!nm||!TEAM)return '';for(var u in TEAM){if(TEAM[u]&&String(TEAM[u].name||'').toLowerCase()===nm)return u}
   if(ME&&ME.uid&&String(ME.name||'').toLowerCase()===nm)return ME.uid;return ''}
  function emo(k,n){var u=find(k,n);if(u)return E[key(u)]||'';try{var mn=String(meName()||'').toLowerCase();if(mn&&String(n||k||'').toLowerCase()===mn)return E[lsGet('ny-badge','')]||''}catch(e){}return ''}
  function giftOk(){if(lsGet('ny-gift','')==='1')return true;try{var W=WT&&WT.W(),me=ME&&ME.uid;if(W&&me)for(var i in W)if(W[i]&&W[i].uid===me){lsSet('ny-gift','1');return true}}catch(e){}return false}
@@ -4743,7 +4752,7 @@ var T3MODES={wilson:{n:'По % Good с учётом объёма',d:'Нижня�
 function t3Mode(){var m=raw&&raw.topmode;return T3MODES[m]?m:(T3MODES[lsGet('shifthub-t3mode','')]?lsGet('shifthub-t3mode',''):'wilson')}
 function t3Wilson(g,n){if(!n)return 0;var z=1.96,p=g/n,z2=z*z;return (p+z2/(2*n)-z*Math.sqrt((p*(1-p)+z2/(4*n))/n))/(1+z2/n)}
 function t3Data(){var o={};try{o=JSON.parse(lsGet('shifthub-top-cache','{}'))||{}}catch(e){}var srv=raw&&raw.top;if(srv&&typeof srv==='object')o=srv;
- var M=Object.assign({},o[T3.ym]||{});Object.keys(T3.local).forEach(function(k){if(k.indexOf(T3.ym+'/')===0){var id=k.slice(8);if(T3.local[k]===null)delete M[id];else M[id]=Object.assign({},M[id]||{},T3.local[k])}});return M}
+ var M=Object.assign({},o[T3.ym]||{});var nowT=Date.now();Object.keys(T3.local).forEach(function(k){var v=T3.local[k];if(v&&v._t&&nowT-v._t>15000){delete T3.local[k];return}if(v===null&&T3.localDel&&nowT-(T3.localDel[k]||0)>15000){delete T3.local[k];return}if(k.indexOf(T3.ym+'/')===0){var id=k.slice(8);if(v===null)delete M[id];else{var c=Object.assign({},v);delete c._t;M[id]=Object.assign({},M[id]||{},c)}}});return M}
 function t3Rows(){var M=t3Data(),by={};Object.keys(M).forEach(function(id){var x=M[id];if(!x||!x.n)return;var sh=x.sh||'';if(T3.sh!=='all'&&sh!==T3.sh)return;
   var key=T3.sh==='all'?String(x.n).toLowerCase():id;var r=by[key]||(by[key]={n:x.n,u:x.u||'',g:0,b:0,ids:[],sh:T3.sh==='all'?'':sh,ts:0});r.g+=Math.max(0,+x.g||0);r.b+=Math.max(0,+x.b||0);r.ids.push(id);r.ts=Math.max(r.ts,+x.ts||0);if(x.u)r.u=x.u});
  var mode=t3Mode();var L=Object.keys(by).map(function(k){var r=by[k];r.t=r.g+r.b;r.p=r.t?r.g/r.t:0;r.net=r.g-r.b;r.w=t3Wilson(r.g,r.t);r.s=mode==='net'?r.net:mode==='pct'?r.p:r.w;return r});
@@ -4779,7 +4788,7 @@ function renderTop3(force){try{t3Hd()}catch(e){}var box=$('t3Body');if(!box)retu
  if(sel.getAttribute('data-o')!==opts){sel.innerHTML=opts;sel.setAttribute('data-o',opts);sel.value=cur}}
 function t3Prev(){var g=Math.max(0,+$('t3G').value||0),b=Math.max(0,+$('t3B').value||0),t=g+b;$('t3Prev').innerHTML=t?'Всего <b>'+t+'</b> · <b>'+(g/t*100).toFixed(1)+'%</b> Good · баланс <b>'+(g-b>0?'+':'')+(g-b)+'</b> · индекс <b>'+t3Idx({g:g,b:b,t:t,p:g/t,net:g-b,w:t3Wilson(g,t)})+'</b>':'Введи Good и Bad — посчитаю сразу'}
 function t3Key(n,sh){return 'p'+hashStr(String(n).toLowerCase().trim())+'_'+(sh||'all')}
-function t3Write(path,val){T3.local[path]=val;try{var c={};try{c=JSON.parse(lsGet('shifthub-top-cache','{}'))||{}}catch(e){}var ym=path.slice(0,7),id=path.slice(8);c[ym]=c[ym]||{};if(val===null)delete c[ym][id];else c[ym][id]=Object.assign({},c[ym][id]||{},val);lsSet('shifthub-top-cache',JSON.stringify(c))}catch(e){}
+function t3Write(path,val){if(val===null){T3.local[path]=null;T3.localDel=T3.localDel||{};T3.localDel[path]=Date.now()}else T3.local[path]=Object.assign({},T3.local[path]||{},val,{_t:Date.now()});try{var c={};try{c=JSON.parse(lsGet('shifthub-top-cache','{}'))||{}}catch(e){}var ym=path.slice(0,7),id=path.slice(8);c[ym]=c[ym]||{};if(val===null)delete c[ym][id];else c[ym][id]=Object.assign({},c[ym][id]||{},val);lsSet('shifthub-top-cache',JSON.stringify(c))}catch(e){}
  var u={};if(val===null)u['top/'+path]=null;else Object.keys(val).forEach(function(k){u['top/'+path+'/'+k]=val[k]});patch(u)}
 function t3Save(){if(ME.role==='guest')return;var sel=$('t3Who'),n=sel.value==='__other'?$('t3Other').value.trim():sel.value,u='';if(sel.value!=='__other'){var o=sel.options[sel.selectedIndex];u=o?o.getAttribute('data-u')||'':''}
  if(!n){toast('👤 Выбери сотрудника','Из списка команды или впиши имя');return}if(n.length>40)n=n.slice(0,40);
@@ -4811,7 +4820,7 @@ function t3Hd(){var el=$('t3Hd');if(!el)return;var oy=T3.ym,os=T3.sh,cur=bakuDat
  if(el.getAttribute('data-h')!==html){el.innerHTML=html;el.setAttribute('data-h',html)}el.hidden=false}
 document.addEventListener('click',function(e){if(e.target.closest('#t3Hd')){try{setView('home')}catch(x){}var p=$('top3');if(p){T3.ym=bakuDate(0).slice(0,7);T3.sh='all';renderTop3(true);setTimeout(function(){p.scrollIntoView({behavior:'smooth',block:'start'})},60)}}});
 function t3Live(t){/* мгновенный пересчёт строки и подиума, фокус остаётся в поле */
- var id=t.getAttribute('data-t3id'),f=t.getAttribute('data-f'),v=Math.max(0,Math.min(99999,Math.round(+t.value||0))),k=T3.ym+'/'+id;T3.local[k]=Object.assign({},T3.local[k]||{});T3.local[k][f]=v;
+ var id=t.getAttribute('data-t3id'),f=t.getAttribute('data-f'),v=Math.max(0,Math.min(99999,Math.round(+t.value||0))),k=T3.ym+'/'+id;T3.local[k]=Object.assign({},T3.local[k]||{});T3.local[k][f]=v;T3.local[k]._t=Date.now();
  var tr=t.closest('tr'),x=t3Data()[id];if(tr&&x){var g=+x.g||0,b=+x.b||0,n=g+b,c=tr.children,o=T3.sh==='all'?0:1,r={g:g,b:b,t:n,p:n?g/n:0,net:g-b,w:t3Wilson(g,n)};
   c[4+o].textContent=n;c[5+o].innerHTML='<span class="t3-bar"><i style="width:'+(r.p*100).toFixed(1)+'%"></i></span>'+t3Pct(r);c[6+o].textContent=(r.net>0?'+':'')+r.net;c[6+o].className=r.net>=0?'g':'b';c[7+o].innerHTML='<b>'+t3Idx(r)+'</b>'}
  var pod=document.querySelector('#t3Body .t3-pod');if(pod){var tmp=document.createElement('div');tmp.innerHTML=t3PodHtml(t3Rows(),t3Mode());pod.replaceWith(tmp.firstChild)}T3.sig='';try{t3Hd()}catch(e){}}
