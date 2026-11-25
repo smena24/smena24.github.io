@@ -2039,7 +2039,7 @@ body.ny-on.ny-day .ny-moon{animation:none!important}
  <button class="btn sm" data-bt="5" data-l="Перерыв" data-e="☕">5 мин</button><button class="btn sm" data-bt="10" data-l="Перерыв" data-e="☕">10 мин</button><button class="btn sm" data-bt="15" data-l="Перерыв" data-e="☕">15 мин</button>
  <button class="btn sm" data-bt="30" data-l="Перерыв" data-e="☕">30 мин</button><button class="btn sm" data-bt="60" data-l="Обед" data-e="🍽️">60 мин</button><button class="btn sm" data-bt="x">✕</button>
 </div>
-<footer>Shift Hub · дневная смена 08:00–20:00, ночная 20:00–08:00 (время команды: GMT+3) · <span class="ver" title="Если после загрузки на GitHub версия старая — нажми Ctrl+F5">🏷 версия 2026.11.25 · сборка 14 · New Year</span></footer>
+<footer>Shift Hub · дневная смена 08:00–20:00, ночная 20:00–08:00 (время команды: GMT+3) · <span class="ver" title="Если после загрузки на GitHub версия старая — нажми Ctrl+F5">🏷 версия 2026.11.25 · сборка 15 · New Year</span></footer>
 
 <script>
 (function(){
@@ -2055,7 +2055,7 @@ var ROLES={admin:['👑','Админ'],member:['👤','Сотрудник'],gues
 DB_URL=DB_URL.trim().replace(/\/+$/,'');
 var ONLINE=/^https:\/\/[a-z0-9.-]+\.(firebaseio\.com|firebasedatabase\.app)$/i.test(DB_URL);
 var LS='shifthub-v1';
-var SHIFTHUB_VERSION='2026.11.25 · сборка 14 · New Year';try{console.info('Shift Hub',SHIFTHUB_VERSION)}catch(e){}
+var SHIFTHUB_VERSION='2026.11.25 · сборка 15 · New Year';try{console.info('Shift Hub',SHIFTHUB_VERSION)}catch(e){}
 var SLOTS=24;
 var SHIFTS={day:{name:'Дневная',icon:'☀️',start:8*60},night:{name:'Ночная',icon:'🌙',start:20*60}};
 var TYPES={
@@ -4828,10 +4828,19 @@ var NYM=(function(){
    if(inBar===1||inBar===3){var c2=CHN[CH[bar]];c2.forEach(function(n){pluck(N[n],t,B*.7,.035,'sine')})}
    step++;next+=B/2}
   timer=setTimeout(schedule,60)}
- function play(){if(!ctx())return;playing=true;step=0;next=AC.currentTime+.08;schedule();if(btn){btn.classList.add('on');btn.title='Выключить музыку'}lsSet('ny-music','1')}
- function stop(){playing=false;clearTimeout(timer);if(btn){btn.classList.remove('on');btn.title='Включить новогоднюю музыку'}lsSet('ny-music','')}
+ /* основная музыка — файл audio/jingle-bells.mp3; если его нет на сайте — встроенная мелодия */
+ var MP3='audio/jingle-bells.mp3',au=null,useSynth=false;
+ function auEl(){if(au)return au;au=new Audio();au.src=MP3;au.loop=true;au.preload='auto';au.volume=Math.max(0,Math.min(1,vol));
+  au.addEventListener('error',function(){if(useSynth)return;useSynth=true;if(playing){playing=false;play()}});return au}
+ function synthPlay(){if(!ctx())return false;step=0;next=AC.currentTime+.08;schedule();return true}
+ function onUI(){if(btn){btn.classList.add('on');btn.title='Выключить музыку'}lsSet('ny-music','1')}
+ function play(){if(playing)return;playing=true;onUI();
+  if(useSynth){if(!synthPlay()){playing=false}return}
+  var a=auEl();a.volume=Math.max(0,Math.min(1,vol));var p=a.play();
+  if(p&&p.catch)p.catch(function(err){if(err&&err.name==='NotAllowedError'){playing=false;if(btn)btn.classList.remove('on');renderOpt();return}useSynth=true;if(playing&&!synthPlay())playing=false})}
+ function stop(){playing=false;clearTimeout(timer);if(au)try{au.pause()}catch(e){}if(btn){btn.classList.remove('on');btn.title='Включить новогоднюю музыку'}lsSet('ny-music','')}
  function toggle(){if(playing)stop();else play();renderOpt();try{NYS.music(playing?'on':'off')}catch(e){}}
- function setVol(v){vol=v;lsSet('ny-vol',String(v));if(master)master.gain.setTargetAtTime(v,AC.currentTime,.05)}
+ function setVol(v){vol=v;lsSet('ny-vol',String(v));if(au)au.volume=Math.max(0,Math.min(1,v));if(master)master.gain.setTargetAtTime(v,AC.currentTime,.05)}
  function jingle(){if(!lsGet('ny-santa-snd','1'))return;if(!ctx())return;var t=AC.currentTime+.02;['E5','G4','C5'].forEach(function(n,i){bell(N[n]||N.E5,t+i*.09,.8,.08)});for(var i=0;i<4;i++)sleigh(t+i*.07,.06)}
  function renderOpt(){var c=document.getElementById('nyMus');if(c)c.checked=playing;var v=document.getElementById('nyVol');if(v)v.value=vol}
  if(btn)btn.addEventListener('click',toggle);
@@ -4839,7 +4848,7 @@ var NYM=(function(){
  document.addEventListener('input',function(e){if(e.target.id==='nyVol'){setVol(+e.target.value);try{NYS.music('vol',+e.target.value)}catch(x){}}});
  /* браузер не даёт играть звук без клика — если музыка была включена, продолжим после первого клика */
  if(lsGet('ny-music','')){var once=function(){document.removeEventListener('pointerdown',once,true);if(document.body.classList.contains('ny-on')&&!playing)play()};document.addEventListener('pointerdown',once,true)}
- document.addEventListener('visibilitychange',function(){if(!AC)return;if(document.hidden&&playing)AC.suspend();else if(!document.hidden&&playing)AC.resume()});
+ document.addEventListener('visibilitychange',function(){if(au&&!useSynth){if(document.hidden&&playing)au.pause();else if(!document.hidden&&playing)au.play().catch(function(){})}if(!AC)return;if(document.hidden&&playing)AC.suspend();else if(!document.hidden&&playing)AC.resume()});
  setTimeout(renderOpt,500);
  return {play:play,stop:stop,toggle:toggle,jingle:jingle,get playing(){return playing}};
 })();
